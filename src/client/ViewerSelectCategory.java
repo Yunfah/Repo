@@ -1,5 +1,8 @@
 package client;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,21 +10,52 @@ import javax.swing.*;
 
 public class ViewerSelectCategory extends JPanel {
 	private JButton btnRandom = new JButton("Random");
-	private JButton btnCategory1; //change button names when categories have been identified;
-	private JButton btnCategory2;
-	private JButton btnCategory3;
-	private JLabel lblCategory = new JLabel("CATEGORY");
+	private JButton btnCategory1 = new JButton("Cat. 1"); //change button names when categories have been identified.
+	private JButton btnCategory2 = new JButton("Cat. 2");
+	private JButton btnCategory3 = new JButton("Cat. 3");
+	private JLabel lblCategory = new JLabel("CATEGORY", SwingConstants.CENTER);
+	private JPanel pnlButtons = new JPanel();
+	
+	private ButtonListener listener = new ButtonListener();
 	
 	public ViewerSelectCategory() {
 		setPreferredSize(new Dimension(1200,800));
+		setLayout(new BorderLayout());
 		
+		lblCategory.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 80));
 		
+		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.Y_AXIS));
+		pnlButtons.add(Box.createRigidArea(new Dimension(0,150)));
+		pnlButtons.add(btnRandom);
+		pnlButtons.add(Box.createRigidArea(new Dimension(140,50)));
+		pnlButtons.add(btnCategory1);
+		pnlButtons.add(Box.createRigidArea(new Dimension(0,50)));
+		pnlButtons.add(btnCategory2);
+		pnlButtons.add(Box.createRigidArea(new Dimension(0,50)));
+		pnlButtons.add(btnCategory3);
+		
+		add(lblCategory, BorderLayout.NORTH);
+		add(pnlButtons, BorderLayout.CENTER);
+		
+		btnRandom.addActionListener(listener);
+		btnCategory1.addActionListener(listener);
+		btnCategory2.addActionListener(listener);
+		btnCategory3.addActionListener(listener);
 	}
 	
 
 	
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnRandom) {
+				
+			} else if (e.getSource() == btnCategory1) {
+				
+			} else if (e.getSource() == btnCategory2) {
+				
+			} else if (e.getSource() == btnCategory3) {
+				
+			}
 			
 		}
 	}
