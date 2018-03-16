@@ -24,14 +24,14 @@ public class ViewerSelectCategory extends JPanel {
 		
 		lblCategory.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 80));
 		
-		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.Y_AXIS));
-		pnlButtons.add(Box.createRigidArea(new Dimension(0,150)));
+		pnlButtons.setLayout(null);
+		btnRandom.setBounds(450, 50, 300, 100);
+		btnCategory1.setBounds(450, 200, 300, 100);
+		btnCategory2.setBounds(450, 350, 300, 100);
+		btnCategory3.setBounds(450, 500, 300, 100);
 		pnlButtons.add(btnRandom);
-		pnlButtons.add(Box.createRigidArea(new Dimension(140,50)));
 		pnlButtons.add(btnCategory1);
-		pnlButtons.add(Box.createRigidArea(new Dimension(0,50)));
 		pnlButtons.add(btnCategory2);
-		pnlButtons.add(Box.createRigidArea(new Dimension(0,50)));
 		pnlButtons.add(btnCategory3);
 		
 		add(lblCategory, BorderLayout.NORTH);

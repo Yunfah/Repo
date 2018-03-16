@@ -22,8 +22,13 @@ public class Controller {
 		this.modeChosen = mode;
 	}
 
+	public void setCategory(String filename) {
+		//Read words from filename, put them in a list and 
+		//choose a random word (from the list) for the player to guess.
+	}
+	
 	/**
-	 * Uppdaterar vilken panel som visas i spelfönstret.
+	 * Updates which panel is shown in the game window. 
 	 */
 	private void showUI() {
 		JPanel panel = null;
