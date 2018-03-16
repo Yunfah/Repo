@@ -12,7 +12,6 @@ import java.util.Random;
 import javax.swing.*;
 
 public class ViewerSelectDifficulty extends JPanel implements ActionListener, MouseListener {
-	private JPanel mainPanel = new JPanel(new BorderLayout());
 	private JLabel title = new JLabel("DIFFICULTY    ");
 	private JButton btnBack = new JButton("<-- BACK");
 	private JButton btnEz = new JButton("EZ");
@@ -87,13 +86,12 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		return panel;
 	}
 	
-	public boolean activateEE() {
+	public void activateEE() {
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
 		btnEE.setFont(btnfont);
 		btnEE.setText("Xtreme");
 		btnEE.setForeground(Color.WHITE);
 		eeActivated = true;
-		return eeActivated;
 	}
 	
 	public Color randomColor() {
