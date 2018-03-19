@@ -16,15 +16,23 @@ public class ViewerSelectMode extends JPanel {
 		setLayout(new BorderLayout());
 		
 		lblHeader.setFont(new Font("Sans Serif", Font.PLAIN, 80));
+		btnSingle.setFont(new Font("Sans Serif", Font.PLAIN, 40));
+		btnMulti.setFont(new Font("Sans Serif", Font.PLAIN, 40));
+
 		add(lblHeader, BorderLayout.NORTH);
 		add(pnlButtons, BorderLayout.CENTER);
 		
+// Flowlayout 		
+//		btnSingle.setPreferredSize(new Dimension (300,150) );
+//		btnMulti.setPreferredSize(new Dimension (300,150) );
+//		pnlButtons.setLayout(new FlowLayout());
 		
-//		pnlButtons.setLayout(new GridLayout(2,1,100,30));
-		btnSingle.setPreferredSize(new Dimension (300,150) );
-		btnMulti.setPreferredSize(new Dimension (300,150) );
-		pnlButtons.setLayout(new FlowLayout());
-		pnlButtons.setPreferredSize(new Dimension (800,400));
+		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.Y_AXIS));
+		btnSingle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		pnlButtons.add(Box.createRigidArea(new Dimension(100,150)));
+		btnMulti.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+//		pnlButtons.setPreferredSize(new Dimension (800,400));
 		pnlButtons.add(btnSingle);
 		pnlButtons.add(btnMulti);
 		
