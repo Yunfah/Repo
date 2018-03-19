@@ -69,6 +69,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		btnDS.setForeground(Color.RED);
 		btnEz.setHorizontalAlignment(JButton.CENTER);
 		btnDS.setHorizontalAlignment(JButton.CENTER);
+		
 		panel.add(btnEz, BorderLayout.NORTH);
 		panel.add(btnDS, BorderLayout.SOUTH);
 		
@@ -81,6 +82,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.setPreferredSize(new Dimension(1200, 200));
 		btnEE.setPreferredSize(new Dimension(150, 50));
 		btnEE.setBorderPainted(false);
+		
 		panel.add(btnEE, BorderLayout.EAST);
 		
 		return panel;
