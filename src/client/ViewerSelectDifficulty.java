@@ -47,7 +47,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		btnBack.setPreferredSize(new Dimension(200, 100));
 		btnBack.setFont(btnfont);
 		btnBack.setForeground(Color.WHITE);
-		btnEE.setContentAreaFilled(false);
+		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
 		
 		panel.add(btnBack, BorderLayout.WEST);
