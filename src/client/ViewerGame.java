@@ -90,7 +90,7 @@ public class ViewerGame extends JPanel {
     private static void createAndShowGui() {
         ViewerGame mainPanel = new ViewerGame();
 
-        JFrame frame = new JFrame("LayoutFoo");
+        JFrame frame = new JFrame("Hangman");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(mainPanel);
         frame.pack();
