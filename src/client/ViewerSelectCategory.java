@@ -33,7 +33,6 @@ public class ViewerSelectCategory extends JPanel {
 		btnCategory1.addActionListener(listener);
 		btnCategory2.addActionListener(listener);
 		btnCategory3.addActionListener(listener);
-		
 		btnBack.addMouseListener(new BackListener());
 	}
 	
