@@ -27,6 +27,12 @@ public class Controller {
 		//choose a random word (from the list) for the player to guess.
 	}
 	
+	public void setDifficulty(int difficulty) {
+		case 1 :
+		case 2 : 
+		case 3 :
+	}
+	
 	/**
 	 * Updates which panel is shown in the game window. 
 	 */
