@@ -18,7 +18,7 @@ public class ViewerSelectCategory extends JPanel {
 	private JButton btnCategory3 = new JButton("Cat. 3");
 	private JButton btnBack = new JButton("<-- BACK");
 	
-	private JLabel lblCategory = new JLabel("CATEGORY", SwingConstants.CENTER);
+	private JLabel lblCategory = new JLabel("CATEGORY    ", SwingConstants.CENTER);
 	
 	private ButtonListener listener = new ButtonListener();
 	
@@ -61,7 +61,7 @@ public class ViewerSelectCategory extends JPanel {
 	
 	private JPanel pnlNorth() {
 		JPanel panel = new JPanel();
-		Font btnFont = new Font("SansSerif", Font.BOLD, 30);	
+		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 
 		panel.setBackground(Color.DARK_GRAY);
 		panel.setLayout(new BorderLayout());
@@ -73,7 +73,8 @@ public class ViewerSelectCategory extends JPanel {
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
 		
-		lblCategory.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 80));
+		lblCategory.setFont(new Font("SansSerif", Font.PLAIN, 125));
+		lblCategory.setForeground(Color.WHITE);
 		
 		return panel;
 	}
@@ -90,35 +91,27 @@ public class ViewerSelectCategory extends JPanel {
 				
 			} else if (e.getSource() == btnCategory3) {
 				
-			}
-			
+			} else if (e.getSource() == btnBack) {
+				
+			}		
 		}
 	}
 	
 	private class BackListener implements MouseListener {
-
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
-		}
-
+		public void mouseClicked(MouseEvent arg0) {}
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			btnBack.setForeground(Color.RED);
 		}
-
 		@Override
 		public void mouseExited(MouseEvent arg0) {
 			btnBack.setForeground(Color.WHITE);
 		}
-
 		@Override
-		public void mousePressed(MouseEvent arg0) {
-		}
-
+		public void mousePressed(MouseEvent arg0) {}
 		@Override
-		public void mouseReleased(MouseEvent arg0) {
-		}
-		
+		public void mouseReleased(MouseEvent arg0) {}
 	}
 
 	public static void main(String[] args) {
