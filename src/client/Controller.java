@@ -8,16 +8,20 @@ public class Controller {
 	private ViewerSelectCategory viewerSelectCategory;
 	private ViewerSelectDifficulty viewerSelectDifficulty;
 	private ViewerSelectMode viewerSelectMode;
-	
-	private int currentViewer;
+
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
 	public static final int MULTIPLAYER = 2;
+	
+	private int difficulty;
+	public static final int EZ = 1;
+	public static final int DARK_SOULS = 2;
+	public static final int XTREME = 3;
 
 	public Controller() {
 
 	}
-	
+
 	public void setMode(int mode) {
 		this.modeChosen = mode;
 	}
@@ -26,43 +30,17 @@ public class Controller {
 		//Read words from filename, put them in a list and 
 		//choose a random word (from the list) for the player to guess.
 	}
-	
+
 	public void setDifficulty(int difficulty) {
-		case 1 :
-		case 2 : 
-		case 3 :
-	}
-	
-	/**
-	 * Updates which panel is shown in the game window. 
-	 */
-	private void showUI() {
-		JPanel panel = null;
-		if (modeChosen == SINGLE_PLAYER) {
-			switch (currentViewer) {
-			case 1 : panel = viewerSelectMode;
-			break;
-			case 2 : panel = viewerSelectDifficulty;
-			break;
-			case 3 : panel = viewerSelectCategory;
-			break;
-			case 4 : panel = viewerGame;
-			}
-		} else if (modeChosen == MULTIPLAYER ) {
-			switch (currentViewer) {
-			case 1 : panel = viewerSelectMode;
-			break;
-			case 2 : panel = viewerGame;
-			break;
-			}
+		switch (difficulty) {
+		case 1 : difficulty = EZ;
+		break;
+		case 2 : difficulty = DARK_SOULS;
+		break;
+		case 3 : difficulty = XTREME;
+		break;
 		}
-		
-		JFrame frame = new JFrame("Hangman");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+
 	}
 
 }
