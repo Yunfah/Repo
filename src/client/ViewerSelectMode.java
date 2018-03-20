@@ -55,6 +55,10 @@ public class ViewerSelectMode extends JPanel {
 		return bPanel;
 	}
 	
+	public void addListener(ContinueListener listener) {
+		listeners.add(listener);
+	}
+	
 	private class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {

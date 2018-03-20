@@ -32,10 +32,6 @@ public class StartGame extends JFrame implements ContinueListener {
 		this.getContentPane().add(cards);
 		setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		new StartGame();
-	}
 
 	@Override
 	public void nextPanel() {
@@ -46,5 +42,8 @@ public class StartGame extends JFrame implements ContinueListener {
 	public void goBack() {
 		// TODO Auto-generated method stub		
 	}
-
+	
+	public static void main(String[] args) {
+		new StartGame();
+	}
 }

@@ -80,7 +80,9 @@ public class ViewerSelectCategory extends JPanel {
 		return panel;
 	}
 	
-
+	public void addListener(ContinueListener listener) {
+		listeners.add(listener);
+	}
 	
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {

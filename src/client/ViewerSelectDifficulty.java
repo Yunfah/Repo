@@ -107,6 +107,10 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		
 		return randomColor;
 	}
+
+	public void addListener(ContinueListener listener) {
+		listeners.add(listener);
+	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBack) {
