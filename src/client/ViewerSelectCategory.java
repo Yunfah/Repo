@@ -87,15 +87,24 @@ public class ViewerSelectCategory extends JPanel {
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
-				
+				for (ContinueListener l : listeners)
+					l.nextPanel();
+				//Ge ett slumpvalt ord av alla ord som finns
 			} else if (e.getSource() == btnCategory1) {
-				
+				for (ContinueListener l : listeners)
+					l.nextPanel();
+				//ge ett ord från denna kategori
 			} else if (e.getSource() == btnCategory2) {
-				
+				for (ContinueListener l : listeners)
+					l.nextPanel();
+				//ge ett ord från denna kategori
 			} else if (e.getSource() == btnCategory3) {
-				
+				for (ContinueListener l : listeners)
+					l.nextPanel();
+				//ge ett ord från denna kategori
 			} else if (e.getSource() == btnBack) {
-				
+				for (ContinueListener l : listeners)
+					l.goBack();
 			}		
 		}
 	}

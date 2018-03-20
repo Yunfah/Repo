@@ -91,7 +91,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		return panel;
 	}
 	
-	public void activateEE() {
+	private void activateEE() {
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
 		btnEE.setFont(btnfont);
 		btnEE.setText("Xtreme");
@@ -114,16 +114,24 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBack) {
-			//gå till föregående jpanel
+			for (ContinueListener l : listeners) {
+				l.goBack();
+			}
 		}
 		if(e.getSource()==btnEz) {
+			for (ContinueListener l : listeners)
+				l.nextPanel();
 			//sätt difficulty till easy
 		}
 		if(e.getSource()==btnDS) {
+			for (ContinueListener l : listeners)
+				l.nextPanel();
 			//sätt difficulty till hard
 		}
 		if(e.getSource()==btnEE) {
 			if(eeActivated==true) {
+				for (ContinueListener l : listeners)
+					l.nextPanel();
 				//sätt difficulty till xtreme
 			}
 			activateEE();

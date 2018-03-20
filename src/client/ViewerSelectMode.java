@@ -8,11 +8,12 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 public class ViewerSelectMode extends JPanel {
-	private JPanel pnlButtons = new JPanel();
+//	private JPanel pnlButtons = new JPanel();
 	private JLabel lblHeader = new JLabel("Hangman", SwingConstants.CENTER);
 
 	private JButton btnSingle = new JButton("Singleplayer");
 	private JButton btnMulti = new JButton(" Multiplayer ");
+	private ButtonListener listener = new ButtonListener();
 	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
 
 	
@@ -23,7 +24,6 @@ public class ViewerSelectMode extends JPanel {
 		
 		add(titlePanel(), BorderLayout.NORTH);
 		add(buttonPanel(), BorderLayout.CENTER);
-		
 		
 	}
 	
@@ -49,6 +49,9 @@ public class ViewerSelectMode extends JPanel {
 		btnSingle.setFont(new Font ("Sans Serif", Font.PLAIN, 30));
 		btnMulti.setFont(new Font ("Sans Serif", Font.PLAIN, 30));
 		
+		btnSingle.addActionListener(listener);
+		btnMulti.addActionListener(listener);
+		
 		bPanel.add(btnSingle);
 		bPanel.add(btnMulti);
 		
@@ -60,9 +63,14 @@ public class ViewerSelectMode extends JPanel {
 	}
 	
 	private class ButtonListener implements ActionListener {
-
+		
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			if (e.getSource() == btnSingle) {
+				for (ContinueListener l : listeners)
+					l.nextPanel();
+			} else if (e.getSource() == btnMulti) {
+				//koppla upp mot server
+			}
 			
 		}
 		
