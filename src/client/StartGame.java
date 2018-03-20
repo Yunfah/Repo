@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class StartGame extends JFrame {
+public class StartGame extends JFrame implements ContinueListener {
 	private JPanel cards = new JPanel(new CardLayout());
 	
 	public StartGame() {
@@ -35,6 +35,16 @@ public class StartGame extends JFrame {
 	
 	public static void main(String[] args) {
 		new StartGame();
+	}
+
+	@Override
+	public void nextPanel() {
+		// TODO Auto-generated method stub	
+	}
+
+	@Override
+	public void goBack() {
+		// TODO Auto-generated method stub		
 	}
 
 }

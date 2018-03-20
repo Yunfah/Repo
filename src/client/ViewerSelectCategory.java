@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
@@ -21,6 +22,7 @@ public class ViewerSelectCategory extends JPanel {
 	private JLabel lblCategory = new JLabel("CATEGORY    ", SwingConstants.CENTER);
 	
 	private ButtonListener listener = new ButtonListener();
+	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
 	
 	public ViewerSelectCategory() {
 		setPreferredSize(new Dimension(1200,800));

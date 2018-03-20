@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 import java.util.Random;
 import javax.swing.*;
 
@@ -18,6 +19,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private JButton btnEE = new JButton();
 	private boolean eeActivated = false;
 	private Random rand = new Random();
+	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
 	
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));

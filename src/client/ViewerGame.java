@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class ViewerGame extends JPanel {
     // using a List of JButtons to hold my collection
     private List<JButton> letterButtons = new ArrayList<>();
     private DrawingPanel drawingPanel = new DrawingPanel();
+	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
 
     public ViewerGame() {
         JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));

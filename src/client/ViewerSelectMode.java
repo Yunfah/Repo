@@ -3,6 +3,8 @@ package client;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+
 import javax.swing.*;
 
 public class ViewerSelectMode extends JPanel {
@@ -11,6 +13,7 @@ public class ViewerSelectMode extends JPanel {
 
 	private JButton btnSingle = new JButton("Singleplayer");
 	private JButton btnMulti = new JButton(" Multiplayer ");
+	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
 
 	
 	public ViewerSelectMode() {
