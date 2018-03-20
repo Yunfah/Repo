@@ -12,6 +12,7 @@ public class StartGame extends JFrame implements ContinueListener {
 
 	public StartGame() {
 		setSize(new Dimension(1200, 800));
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Hangman");
 		setResizable(false);
