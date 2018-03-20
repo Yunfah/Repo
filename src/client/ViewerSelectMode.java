@@ -8,13 +8,11 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 public class ViewerSelectMode extends JPanel {
-//	private JPanel pnlButtons = new JPanel();
 	private JLabel lblHeader = new JLabel("Hangman", SwingConstants.CENTER);
-
 	private JButton btnSingle = new JButton("Singleplayer");
 	private JButton btnMulti = new JButton(" Multiplayer ");
 	private ButtonListener listener = new ButtonListener();
-	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
+	private ContinueListener continueListener;
 
 	
 	public ViewerSelectMode() {
@@ -58,18 +56,18 @@ public class ViewerSelectMode extends JPanel {
 		return bPanel;
 	}
 	
-	public void addListener(ContinueListener listener) {
-		listeners.add(listener);
+	public void setListener(ContinueListener listener) {
+		continueListener = listener;
 	}
 	
 	private class ButtonListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnSingle) {
-				for (ContinueListener l : listeners)
-					l.nextPanel();
+				continueListener.nextPanel();
 			} else if (e.getSource() == btnMulti) {
 				//koppla upp mot server
+				System.out.println("multiplayer chosen");
 			}
 			
 		}

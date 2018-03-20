@@ -5,37 +5,44 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 public class StartGame extends JFrame implements ContinueListener {
-	private JPanel cards = new JPanel(new CardLayout());
-	CardLayout cardLayout = (CardLayout)cards.getLayout();
-	private String currentCard = "cardMode";
+	CardLayout cardLayout = new CardLayout();
+	private JPanel cards = new JPanel(cardLayout);
+
+	private String currentCard;
 
 	public StartGame() {
 		setSize(new Dimension(1200, 800));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Hangman");
 		setResizable(false);
+
 		setupCards();
+		currentCard = "cardMode";
+		cardLayout.show(cards, currentCard);
 		getContentPane().add(cards);
+		this.pack();
 		setVisible(true);
+
 	}
 
 	private void setupCards() {
 		ViewerSelectMode selectMode = new ViewerSelectMode();
-		selectMode.addListener(this);
+		selectMode.setListener(this);
 		JPanel cardMode = new JPanel();
 		cardMode.add(selectMode);
 
 		ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
-		selectMode.addListener(this);
+		selectDifficulty.setListener(this);
 		JPanel cardDifficulty = new JPanel();
 		cardDifficulty.add(selectDifficulty);
 
 		ViewerSelectCategory selectCategory = new ViewerSelectCategory();
-		selectMode.addListener(this);
+		selectCategory.setListener(this);
 		JPanel cardCategory = new JPanel();
 		cardCategory.add(selectCategory);
 
 		ViewerGame game = new ViewerGame();
-		selectMode.addListener(this);
+		game.setListener(this);
 		JPanel cardGame = new JPanel();
 		cardGame.add(game);
 
@@ -47,32 +54,28 @@ public class StartGame extends JFrame implements ContinueListener {
 
 	@Override
 	public void nextPanel() {
-		switch (currentCard) {
-		case "cardMode" : 
-			cardLayout.show(cards, "cardDifficulty");
+		if (currentCard.equals("cardMode")) {
 			currentCard = "cardDifficulty";
-			break;
-		case "cardDifficulty" : 
-			cardLayout.show(cards, "cardCategory");
+		} else if (currentCard.equals("cardDifficulty")) {
 			currentCard = "cardCategory";
-			break;
-		case "cardCategory" : 
-			cardLayout.show(cards, "cardGame");
+		} else if (currentCard.equals("cardCategory")) {
 			currentCard = "cardGame";
-			break;
 		}
+		
+		cardLayout.show(cards, currentCard);
 	}
 
 	@Override
 	public void goBack() {
-		switch (currentCard) {
-		case "cardGame" : cardLayout.show(cards, "cardCategory");
-		break;
-		case "cardCategory" : cardLayout.show(cards, "cardDifficulty");
-		break;
-		case "cardDifficulty" : cardLayout.show(cards, "cardMode");
-		break;
+		if (currentCard.equals("cardGame")) {
+			currentCard = "cardCategory";
+		} else if (currentCard.equals("cardCategory")) {
+			currentCard = "cardDifficulty";
+		} else if (currentCard.equals("cardDifficulty")) {
+			currentCard = "cardMode";
 		}
+		
+		cardLayout.show(cards, currentCard);
 	}
 
 	public static void main(String[] args) {

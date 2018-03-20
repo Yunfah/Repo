@@ -19,7 +19,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private JButton btnEE = new JButton();
 	private boolean eeActivated = false;
 	private Random rand = new Random();
-	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
+	private ContinueListener continueListener;
 	
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -108,30 +108,25 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		return randomColor;
 	}
 
-	public void addListener(ContinueListener listener) {
-		listeners.add(listener);
+	public void setListener(ContinueListener listener) {
+		continueListener = listener;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBack) {
-			for (ContinueListener l : listeners) {
-				l.goBack();
-			}
+			continueListener.goBack();
 		}
 		if(e.getSource()==btnEz) {
-			for (ContinueListener l : listeners)
-				l.nextPanel();
+			continueListener.nextPanel();
 			//sätt difficulty till easy
 		}
 		if(e.getSource()==btnDS) {
-			for (ContinueListener l : listeners)
-				l.nextPanel();
+			continueListener.nextPanel();
 			//sätt difficulty till hard
 		}
 		if(e.getSource()==btnEE) {
 			if(eeActivated==true) {
-				for (ContinueListener l : listeners)
-					l.nextPanel();
+				continueListener.nextPanel();
 				//sätt difficulty till xtreme
 			}
 			activateEE();

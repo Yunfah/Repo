@@ -20,7 +20,7 @@ public class ViewerGame extends JPanel {
     // using a List of JButtons to hold my collection
     private List<JButton> letterButtons = new ArrayList<>();
     private DrawingPanel drawingPanel = new DrawingPanel();
-	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
+	private ContinueListener continueListener;
 
     public ViewerGame() {
         JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));
@@ -51,6 +51,10 @@ public class ViewerGame extends JPanel {
         setLayout(new BorderLayout(3, 3));
         add(drawingPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.PAGE_END);
+    }
+    
+    public void setListener(ContinueListener listener) {
+    	continueListener = listener;
     }
 
     private class ButtonListener implements ActionListener {

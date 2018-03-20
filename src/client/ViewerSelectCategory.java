@@ -22,7 +22,7 @@ public class ViewerSelectCategory extends JPanel {
 	private JLabel lblCategory = new JLabel("CATEGORY    ", SwingConstants.CENTER);
 	
 	private ButtonListener listener = new ButtonListener();
-	private LinkedList<ContinueListener> listeners = new LinkedList<ContinueListener>();
+	private ContinueListener continueListener;
 	
 	public ViewerSelectCategory() {
 		setPreferredSize(new Dimension(1200,800));
@@ -80,31 +80,26 @@ public class ViewerSelectCategory extends JPanel {
 		return panel;
 	}
 	
-	public void addListener(ContinueListener listener) {
-		listeners.add(listener);
+	public void setListener(ContinueListener listener) {
+		continueListener = listener;
 	}
 	
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
-				for (ContinueListener l : listeners)
-					l.nextPanel();
+				continueListener.nextPanel();
 				//Ge ett slumpvalt ord av alla ord som finns
 			} else if (e.getSource() == btnCategory1) {
-				for (ContinueListener l : listeners)
-					l.nextPanel();
+				continueListener.nextPanel();
 				//ge ett ord från denna kategori
 			} else if (e.getSource() == btnCategory2) {
-				for (ContinueListener l : listeners)
-					l.nextPanel();
+				continueListener.nextPanel();
 				//ge ett ord från denna kategori
 			} else if (e.getSource() == btnCategory3) {
-				for (ContinueListener l : listeners)
-					l.nextPanel();
+				continueListener.nextPanel();
 				//ge ett ord från denna kategori
 			} else if (e.getSource() == btnBack) {
-				for (ContinueListener l : listeners)
-					l.goBack();
+				continueListener.goBack();
 			}		
 		}
 	}
