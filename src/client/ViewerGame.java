@@ -113,6 +113,14 @@ public class ViewerGame extends JPanel {
 	public void setWord(String choosenWord, int length) {
 		// TODO Auto-generated method stub
 		// The method should get the word and the length of the words
+		// and display the word together with lines to show how long it is. 
+	}
+	
+	public int displayLife () {
+		// TODO: display life count in the GUI
+		// Method to show how many tries the player have left. Should show in the window. 
+		
+		return 0;
 	}
 }
 

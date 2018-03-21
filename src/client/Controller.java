@@ -25,6 +25,10 @@ public class Controller {
 	public static final int EZ = 1;
 	public static final int DARK_SOULS = 2;
 	public static final int XTREME = 3;
+	
+	private int ezLife = 10;
+	private int dsLife = 5;
+	private int xtreamLife = 3;
 
 	public Controller() {
 		
