@@ -22,6 +22,22 @@ public class Controller {
 		
 
 	}
+	
+	public void setViewerGame(ViewerGame viewer) {
+		viewerGame = viewer;
+	}
+	
+	public void setViewerSelectCategory(ViewerSelectCategory viewer) {
+		viewerSelectCategory = viewer;
+	}
+	
+	public void setViewerSelectDifficulty(ViewerSelectDifficulty viewer) {
+		viewerSelectDifficulty = viewer;
+	}
+	
+	public void setViewerSelectMode(ViewerSelectMode viewer) {
+		viewerSelectMode = viewer;
+	}
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
