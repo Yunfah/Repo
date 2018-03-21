@@ -1,6 +1,5 @@
 package simple_Hangman;
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
