@@ -1,5 +1,11 @@
 package client;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -8,6 +14,7 @@ public class Controller {
 	private ViewerSelectCategory viewerSelectCategory;
 	private ViewerSelectDifficulty viewerSelectDifficulty;
 	private ViewerSelectMode viewerSelectMode;
+	private ArrayList<String> list = new ArrayList<String>();
 
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
@@ -44,7 +51,17 @@ public class Controller {
 		//if multiplayer -> connect to server
 	}
 
-	public void setCategory(String filename) {
+	public void setCategory(String filename) throws IOException {
+		list.clear();
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
+			String word = br.readLine();
+			while(word != null) {
+				list.add(word);
+				word = br.readLine();
+			}
+			
+			
+		}
 		//Read words from filename, put them in a list and 
 		//choose a random word (from the list) for the player to guess.
 		//viewerGame.setWord(String word);
