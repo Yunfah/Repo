@@ -23,6 +23,7 @@ public class ViewerSelectCategory extends JPanel {
 	
 	private ButtonListener listener = new ButtonListener();
 	private ContinueListener continueListener;
+	private Controller controller;
 	
 	public ViewerSelectCategory() {
 		setPreferredSize(new Dimension(1200,800));
@@ -83,6 +84,10 @@ public class ViewerSelectCategory extends JPanel {
 	
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
+	}
+	
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 	
 	private class ButtonListener implements ActionListener {

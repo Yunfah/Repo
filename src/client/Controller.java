@@ -19,6 +19,7 @@ public class Controller {
 	public static final int XTREME = 3;
 
 	public Controller() {
+		
 
 	}
 
@@ -29,6 +30,8 @@ public class Controller {
 	public void setCategory(String filename) {
 		//Read words from filename, put them in a list and 
 		//choose a random word (from the list) for the player to guess.
+		
+		
 	}
 
 	public void setDifficulty(int difficulty) {

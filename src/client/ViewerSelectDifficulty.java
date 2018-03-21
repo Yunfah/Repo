@@ -20,6 +20,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private boolean eeActivated = false;
 	private Random rand = new Random();
 	private ContinueListener continueListener;
+	private Controller controller;
 	
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -110,6 +111,10 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
+	}
+	
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 	
 	public void actionPerformed(ActionEvent e) {

@@ -7,10 +7,16 @@ import javax.swing.*;
 public class StartGame extends JFrame implements ContinueListener {
 	CardLayout cardLayout = new CardLayout();
 	private JPanel cards = new JPanel(cardLayout);
-
 	private String currentCard;
+	
+	private Controller controller;
+	private ViewerSelectMode selectMode = new ViewerSelectMode();
+	private ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
+	private ViewerSelectCategory selectCategory = new ViewerSelectCategory();
+	private ViewerGame game = new ViewerGame();
 
-	public StartGame() {
+	public StartGame(Controller controller) {
+		this.controller = controller;
 		setSize(new Dimension(1200, 800));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -26,22 +32,22 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 
 	private void setupCards() {
-		ViewerSelectMode selectMode = new ViewerSelectMode();
+		selectMode.setController(controller);
 		selectMode.setListener(this);
 		JPanel cardMode = new JPanel();
 		cardMode.add(selectMode);
 
-		ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
+		selectDifficulty.setController(controller);
 		selectDifficulty.setListener(this);
 		JPanel cardDifficulty = new JPanel();
 		cardDifficulty.add(selectDifficulty);
 
-		ViewerSelectCategory selectCategory = new ViewerSelectCategory();
+		selectCategory.setController(controller);
 		selectCategory.setListener(this);
 		JPanel cardCategory = new JPanel();
 		cardCategory.add(selectCategory);
 
-		ViewerGame game = new ViewerGame();
+		game.setController(controller);
 		game.setListener(this);
 		JPanel cardGame = new JPanel();
 		cardGame.add(game);
@@ -81,7 +87,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new StartGame();
+				new StartGame(new Controller());
 			}	
 		});
 	}
