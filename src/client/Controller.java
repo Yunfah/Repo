@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -52,6 +53,7 @@ public class Controller {
 	}
 
 	public void setCategory(String filename) throws IOException {
+		Random rand = new Random();
 		list.clear();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
 			String word = br.readLine();
@@ -59,7 +61,8 @@ public class Controller {
 				list.add(word);
 				word = br.readLine();
 			}
-			
+			int index = rand.nextInt(list.size());
+			viewerGame.setWord(list.get(index));
 			
 		}
 		//Read words from filename, put them in a list and 
