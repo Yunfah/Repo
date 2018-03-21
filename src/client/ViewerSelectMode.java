@@ -13,7 +13,7 @@ public class ViewerSelectMode extends JPanel {
 	private JButton btnMulti = new JButton(" Multiplayer ");
 	private ButtonListener listener = new ButtonListener();
 	private ContinueListener continueListener;
-
+	private Controller controller;
 	
 	public ViewerSelectMode() {
 		setPreferredSize(new Dimension (1200,800));
@@ -60,13 +60,18 @@ public class ViewerSelectMode extends JPanel {
 		continueListener = listener;
 	}
 	
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
 	private class ButtonListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnSingle) {
 				continueListener.nextPanel();
+				controller.setMode(Controller.SINGLE_PLAYER);
 			} else if (e.getSource() == btnMulti) {
-				//koppla upp mot server
+				controller.setMode(Controller.MULTIPLAYER);
 				System.out.println("multiplayer chosen");
 			}
 			

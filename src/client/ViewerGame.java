@@ -21,6 +21,7 @@ public class ViewerGame extends JPanel {
     private List<JButton> letterButtons = new ArrayList<>();
     private DrawingPanel drawingPanel = new DrawingPanel();
 	private ContinueListener continueListener;
+	private Controller controller;
 
     public ViewerGame() {
         JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));
@@ -56,6 +57,10 @@ public class ViewerGame extends JPanel {
     public void setListener(ContinueListener listener) {
     	continueListener = listener;
     }
+    
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
 
     private class ButtonListener implements ActionListener {
         @Override

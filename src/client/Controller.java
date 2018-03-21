@@ -19,16 +19,36 @@ public class Controller {
 	public static final int XTREME = 3;
 
 	public Controller() {
+		
 
+	}
+	
+	public void setViewerGame(ViewerGame viewer) {
+		viewerGame = viewer;
+	}
+	
+	public void setViewerSelectCategory(ViewerSelectCategory viewer) {
+		viewerSelectCategory = viewer;
+	}
+	
+	public void setViewerSelectDifficulty(ViewerSelectDifficulty viewer) {
+		viewerSelectDifficulty = viewer;
+	}
+	
+	public void setViewerSelectMode(ViewerSelectMode viewer) {
+		viewerSelectMode = viewer;
 	}
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
+		//if multiplayer -> connect to server
 	}
 
 	public void setCategory(String filename) {
 		//Read words from filename, put them in a list and 
 		//choose a random word (from the list) for the player to guess.
+		//viewerGame.setWord(String word);
+		
 	}
 
 	public void setDifficulty(int difficulty) {

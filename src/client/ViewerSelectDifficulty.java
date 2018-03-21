@@ -19,6 +19,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private boolean eeActivated = false;
 	private Random rand = new Random();
 	private ContinueListener continueListener;
+	private Controller controller;
 	
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -111,22 +112,26 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		continueListener = listener;
 	}
 	
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBack) {
 			continueListener.goBack();
 		}
 		if(e.getSource()==btnEz) {
 			continueListener.nextPanel();
-			//sätt difficulty till easy
+			controller.setDifficulty(Controller.EZ);
 		}
 		if(e.getSource()==btnDS) {
 			continueListener.nextPanel();
-			//sätt difficulty till hard
+			controller.setDifficulty(Controller.DARK_SOULS);
 		}
 		if(e.getSource()==btnEE) {
 			if(eeActivated==true) {
 				continueListener.nextPanel();
-				//sätt difficulty till xtreme
+				controller.setDifficulty(Controller.XTREME);
 			}
 			activateEE();
 		}
