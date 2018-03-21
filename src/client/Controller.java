@@ -1,5 +1,12 @@
 package client;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -8,6 +15,7 @@ public class Controller {
 	private ViewerSelectCategory viewerSelectCategory;
 	private ViewerSelectDifficulty viewerSelectDifficulty;
 	private ViewerSelectMode viewerSelectMode;
+	private ArrayList<String> list = new ArrayList<String>();
 
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
@@ -19,16 +27,45 @@ public class Controller {
 	public static final int XTREME = 3;
 
 	public Controller() {
+		
 
+	}
+	
+	public void setViewerGame(ViewerGame viewer) {
+		viewerGame = viewer;
+	}
+	
+	public void setViewerSelectCategory(ViewerSelectCategory viewer) {
+		viewerSelectCategory = viewer;
+	}
+	
+	public void setViewerSelectDifficulty(ViewerSelectDifficulty viewer) {
+		viewerSelectDifficulty = viewer;
+	}
+	
+	public void setViewerSelectMode(ViewerSelectMode viewer) {
+		viewerSelectMode = viewer;
 	}
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
+		//if multiplayer -> connect to server
 	}
 
 	public void setCategory(String filename) {
-		//Read words from filename, put them in a list and 
-		//choose a random word (from the list) for the player to guess.
+		Random rand = new Random();
+		list.clear();
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
+			String word = br.readLine();
+			while(word != null) {
+				list.add(word);
+				word = br.readLine();
+			}
+			int index = rand.nextInt(list.size());
+			String choosenWord = list.get(index).toUpperCase();
+			viewerGame.setWord(choosenWord, choosenWord.length());
+			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame	
+		}catch (IOException e ) {}
 	}
 
 	public void setDifficulty(int difficulty) {
@@ -40,7 +77,5 @@ public class Controller {
 		case 3 : difficulty = XTREME;
 		break;
 		}
-
 	}
-
 }
