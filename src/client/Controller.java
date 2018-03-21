@@ -62,12 +62,11 @@ public class Controller {
 				word = br.readLine();
 			}
 			int index = rand.nextInt(list.size());
-			viewerGame.setWord(list.get(index));
+			String choosenWord = list.get(index);
+			viewerGame.setWord(choosenWord, choosenWord.length());
+			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame
 			
 		}
-		//Read words from filename, put them in a list and 
-		//choose a random word (from the list) for the player to guess.
-		//viewerGame.setWord(String word);
 		
 	}
 
