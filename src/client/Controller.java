@@ -62,7 +62,7 @@ public class Controller {
 				word = br.readLine();
 			}
 			int index = rand.nextInt(list.size());
-			String choosenWord = list.get(index);
+			String choosenWord = list.get(index).toUpperCase();
 			viewerGame.setWord(choosenWord, choosenWord.length());
 			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame	
 		}catch (IOException e ) {}
@@ -77,7 +77,5 @@ public class Controller {
 		case 3 : difficulty = XTREME;
 		break;
 		}
-
 	}
-
 }
