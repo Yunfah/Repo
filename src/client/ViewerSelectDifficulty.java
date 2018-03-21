@@ -123,16 +123,16 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		}
 		if(e.getSource()==btnEz) {
 			continueListener.nextPanel();
-			//sätt difficulty till easy
+			controller.setDifficulty(Controller.EZ);
 		}
 		if(e.getSource()==btnDS) {
 			continueListener.nextPanel();
-			//sätt difficulty till hard
+			controller.setDifficulty(Controller.DARK_SOULS);
 		}
 		if(e.getSource()==btnEE) {
 			if(eeActivated==true) {
 				continueListener.nextPanel();
-				//sätt difficulty till xtreme
+				controller.setDifficulty(Controller.XTREME);
 			}
 			activateEE();
 		}

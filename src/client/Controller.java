@@ -25,12 +25,13 @@ public class Controller {
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
+		//if multiplayer -> connect to server
 	}
 
 	public void setCategory(String filename) {
 		//Read words from filename, put them in a list and 
 		//choose a random word (from the list) for the player to guess.
-		
+		//viewerGame.setWord(String word);
 		
 	}
 

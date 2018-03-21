@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class ViewerSelectCategory extends JPanel {
 	private JButton btnRandom = new JButton("Random");
-	private JButton btnCategory1 = new JButton("Cat. 1"); //change button names when categories have been identified.
+	private JButton btnCities = new JButton("Cities"); //change button names when categories have been identified.
 	private JButton btnCategory2 = new JButton("Cat. 2");
 	private JButton btnCategory3 = new JButton("Cat. 3");
 	private JButton btnBack = new JButton("<-- BACK");
@@ -33,7 +33,7 @@ public class ViewerSelectCategory extends JPanel {
 		add(pnlButtons(), BorderLayout.CENTER);
 		
 		btnRandom.addActionListener(listener);
-		btnCategory1.addActionListener(listener);
+		btnCities.addActionListener(listener);
 		btnCategory2.addActionListener(listener);
 		btnCategory3.addActionListener(listener);
 		btnBack.addActionListener(listener);
@@ -45,17 +45,17 @@ public class ViewerSelectCategory extends JPanel {
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 		
 		btnRandom.setBounds(450, 50, 300, 100);
-		btnCategory1.setBounds(450, 200, 300, 100);
+		btnCities.setBounds(450, 200, 300, 100);
 		btnCategory2.setBounds(450, 350, 300, 100);
 		btnCategory3.setBounds(450, 500, 300, 100);
 		btnRandom.setFont(btnFont);
-		btnCategory1.setFont(btnFont);
+		btnCities.setFont(btnFont);
 		btnCategory2.setFont(btnFont);
 		btnCategory3.setFont(btnFont);	
 		
 		panel.setBackground(Color.DARK_GRAY);
 		panel.add(btnRandom);
-		panel.add(btnCategory1);
+		panel.add(btnCities);
 		panel.add(btnCategory2);
 		panel.add(btnCategory3);
 		
@@ -95,9 +95,9 @@ public class ViewerSelectCategory extends JPanel {
 			if (e.getSource() == btnRandom) {
 				continueListener.nextPanel();
 				//Ge ett slumpvalt ord av alla ord som finns
-			} else if (e.getSource() == btnCategory1) {
+			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
-				//ge ett ord från denna kategori
+				controller.setCategory("files/Cities.txt");
 			} else if (e.getSource() == btnCategory2) {
 				continueListener.nextPanel();
 				//ge ett ord från denna kategori
