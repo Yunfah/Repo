@@ -51,6 +51,11 @@ public class StartGame extends JFrame implements ContinueListener {
 		game.setListener(this);
 		JPanel cardGame = new JPanel();
 		cardGame.add(game);
+		
+		controller.setViewerGame(game);
+		controller.setViewerSelectCategory(selectCategory);
+		controller.setViewerSelectDifficulty(selectDifficulty);
+		controller.setViewerSelectMode(selectMode);
 
 		cards.add(cardMode, "cardMode");
 		cards.add(cardDifficulty, "cardDifficulty");
