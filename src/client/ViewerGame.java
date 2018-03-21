@@ -1,14 +1,7 @@
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -122,6 +115,7 @@ class DrawingPanel extends JPanel {
     private static final int PREF_W = 500;
     private static final int PREF_H = PREF_W;
     private int wrongLetterCount = 0;
+    private String message;
 
     public DrawingPanel() {
         setBorder(BorderFactory.createTitledBorder("Hang Man"));
@@ -138,8 +132,11 @@ class DrawingPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        ((Graphics2D)g).setStroke(new BasicStroke(3));
+        if (message != null) {
+            g.setColor(Color.RED);
+            g.drawString(message, 30, 40);
 
-        // TODO: draw hangman here based on wrong letter count!
     }
 
     public void incrementWrongLetterCount() {
