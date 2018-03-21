@@ -35,6 +35,7 @@ public class ViewerSelectCategory extends JPanel {
 		btnCategory1.addActionListener(listener);
 		btnCategory2.addActionListener(listener);
 		btnCategory3.addActionListener(listener);
+		btnBack.addActionListener(listener);
 		btnBack.addMouseListener(new BackListener());
 	}
 	
@@ -121,6 +122,7 @@ public class ViewerSelectCategory extends JPanel {
 		public void mouseReleased(MouseEvent arg0) {}
 	}
 
+	//Test method for this viewer class
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Test of category window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

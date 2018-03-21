@@ -23,7 +23,6 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		this.pack();
 		setVisible(true);
-
 	}
 
 	private void setupCards() {
