@@ -52,7 +52,7 @@ public class Controller {
 		//if multiplayer -> connect to server
 	}
 
-	public void setCategory(String filename) throws IOException {
+	public void setCategory(String filename) {
 		Random rand = new Random();
 		list.clear();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
@@ -64,10 +64,8 @@ public class Controller {
 			int index = rand.nextInt(list.size());
 			String choosenWord = list.get(index);
 			viewerGame.setWord(choosenWord, choosenWord.length());
-			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame
-			
-		}
-		
+			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame	
+		}catch (IOException e ) {}
 	}
 
 	public void setDifficulty(int difficulty) {
