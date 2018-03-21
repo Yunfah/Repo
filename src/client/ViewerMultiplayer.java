@@ -1,4 +1,7 @@
 package client;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.*; 
 
 /**
@@ -7,5 +10,18 @@ import javax.swing.*;
  *
  */
 public class ViewerMultiplayer extends JPanel {
+	private ContinueListener continueListener;
+	
+	public ViewerMultiplayer() {
+		setPreferredSize(new Dimension(1200, 800));
+		setLayout(new BorderLayout());
+		
+		
+		
+	}
+	
+	public void setListener(ContinueListener listener) {
+		continueListener = listener;
+	}
 
 }
