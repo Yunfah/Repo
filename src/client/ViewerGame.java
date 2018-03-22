@@ -122,11 +122,15 @@ public class ViewerGame extends JPanel {
 
 		drawingPanel.setWord(chosenWord);
 	}
+	
+	public void setCategory(String category) {
+		drawingPanel.setCategory(category);
+	}
 
 	public int displayLife () {
 		// TODO: display life count in the GUI
 		// Method to show how many tries the player have left. Should show in the window. 
-
+		
 		return 0;
 	}
 }
@@ -135,7 +139,7 @@ class DrawingPanel extends JPanel {
 	private static final int PREF_W = 1200;
 	private static final int PREF_H = 500;
 	private int wrongLetterCount = 0;
-	private String word; 
+	private String word, category;
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
@@ -154,12 +158,15 @@ class DrawingPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		((Graphics2D)g).setStroke(new BasicStroke(3));
+		g.setFont(new Font("SansSerif", Font.BOLD, 30));
 		if (word != null) {
 			g.setColor(Color.RED);
-			g.setFont(new Font("SansSerif", Font.BOLD, 30));
 			int width = g.getFontMetrics().stringWidth(word);
 			g.drawString(word, 600-width/2, 300);
 		}
+		g.setColor(Color.BLUE);
+		int w = g.getFontMetrics().stringWidth("CATEGORY");
+		g.drawString(category, 600-w/2, 50);
 	} 
 
 	//HOW DO WE GET A GRAPHICS OBJECT TO USE???
@@ -193,6 +200,10 @@ class DrawingPanel extends JPanel {
 
 	public void setWord(String word) {
 		this.word = word;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public void incrementWrongLetterCount() {
