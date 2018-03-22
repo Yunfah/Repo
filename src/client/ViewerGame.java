@@ -131,7 +131,7 @@ class DrawingPanel extends JPanel {
 	private static final int PREF_W = 1200;
 	private static final int PREF_H = 800;
 	private int wrongLetterCount = 0;
-	private String message = "BLABLABLA";
+	private String message = "BLABLABLA"; 
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
