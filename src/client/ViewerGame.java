@@ -45,7 +45,7 @@ public class ViewerGame extends JPanel {
 		setLayout(new BorderLayout(3, 3));
 		add(drawingPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
-		
+
 	}
 	
 
@@ -128,10 +128,8 @@ public class ViewerGame extends JPanel {
 }
 
 class DrawingPanel extends JPanel {
-	private static final int PREF_W = 1200;
-	private static final int PREF_H = 800;
 	private int wrongLetterCount = 0;
-	private String message = "BLABLABLA"; 
+	private String word = "BLABLABLA"; 
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
@@ -139,23 +137,19 @@ class DrawingPanel extends JPanel {
 	}
 
 	@Override
-	public Dimension getPreferredSize() {
-		if (isPreferredSizeSet()) {
-			return super.getPreferredSize();
-		}
-		return new Dimension(PREF_W, PREF_H);
-	}
-
-	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		((Graphics2D)g).setStroke(new BasicStroke(3));
-		if (message != null) {
+		if (word != null) {
 			g.setColor(Color.RED);
-			g.drawString(message, 30, 40);
+			g.drawString(word, 30, 40);
 
 		}
-	}   
+	} 
+	
+	public void setWord(String word) {
+		this.word = word;
+	}
 
 	public void incrementWrongLetterCount() {
 		wrongLetterCount++;
