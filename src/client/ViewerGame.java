@@ -17,6 +17,7 @@ public class ViewerGame extends JPanel {
 	private Controller controller;
 
 	public ViewerGame() {
+		setPreferredSize(new Dimension(1200, 800));
 		JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));
 		letterButtonPanel.setBorder(BorderFactory.createTitledBorder("Letters"));
 		ButtonListener buttonListener = new ButtonListener();
@@ -33,19 +34,21 @@ public class ViewerGame extends JPanel {
 		specialBtnsPanel.add(new JButton(new ResetAction("Reset", KeyEvent.VK_R)));
 		specialBtnsPanel.add(new JButton(new ExitAction("Exit", KeyEvent.VK_X)));
 
-
 		// JPanel to hold non-drawing JPanels. It uses BoxLayout
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
 		bottomPanel.add(letterButtonPanel);
 		bottomPanel.add(specialBtnsPanel);
-
+		
 		// set layout and border of main JPanel and add other JPanels to it
 		setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 		setLayout(new BorderLayout(3, 3));
 		add(drawingPanel, BorderLayout.CENTER);
-		add(bottomPanel, BorderLayout.PAGE_END);
+		add(bottomPanel, BorderLayout.SOUTH);
+		
 	}
+	
+
 
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -98,8 +101,8 @@ public class ViewerGame extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(mainPanel);
 		frame.pack();
-		frame.setLocationByPlatform(true);
 		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 	}
 
 	public static void main(String[] args) {
@@ -112,7 +115,7 @@ public class ViewerGame extends JPanel {
 
 	public void setWord(String choosenWord, int length) {
 		// TODO Auto-generated method stub
-		// The method should get the word and the length of the words
+		// The method should get the word and the length of the word,
 		// and display the word together with lines to show how long it is. 
 	}
 	
@@ -125,13 +128,14 @@ public class ViewerGame extends JPanel {
 }
 
 class DrawingPanel extends JPanel {
-	private static final int PREF_W = 500;
-	private static final int PREF_H = PREF_W;
+	private static final int PREF_W = 1200;
+	private static final int PREF_H = 800;
 	private int wrongLetterCount = 0;
-	private String message;
+	private String message = "BLABLABLA";
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
+		setBackground(Color.WHITE);
 	}
 
 	@Override

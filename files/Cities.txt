@@ -1,10 +1,10 @@
 New York
-Chicago 
+Chicago
 Stockholm
-London 
-Seoul 
-Tokyo 
-New Mexico 
-San Fransisco 
+London
+Seoul
+Tokyo
+New Mexico
+San Fransisco
 Malmoe
-Helsinki 
+Helsinki
