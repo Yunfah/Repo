@@ -39,15 +39,17 @@ public class ViewerGame extends JPanel {
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
 		bottomPanel.add(letterButtonPanel);
 		bottomPanel.add(specialBtnsPanel);
-		
+
 		// set layout and border of main JPanel and add other JPanels to it
 		setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 		setLayout(new BorderLayout(3, 3));
 		add(drawingPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
 
+		//		Graphics g = drawingPanel.getGraphics();
+		//		drawingPanel.paintNext(g, 0);
 	}
-	
+
 
 
 	public void setListener(ContinueListener listener) {
@@ -113,16 +115,18 @@ public class ViewerGame extends JPanel {
 		});
 	}
 
-	public void setWord(String choosenWord, int length) {
+	public void setWord(String chosenWord, int length) {
 		// TODO Auto-generated method stub
 		// The method should get the word and the length of the word,
 		// and display the word together with lines to show how long it is. 
+
+		drawingPanel.setWord(chosenWord);
 	}
-	
+
 	public int displayLife () {
 		// TODO: display life count in the GUI
 		// Method to show how many tries the player have left. Should show in the window. 
-		
+
 		return 0;
 	}
 }
@@ -131,7 +135,7 @@ class DrawingPanel extends JPanel {
 	private static final int PREF_W = 1200;
 	private static final int PREF_H = 500;
 	private int wrongLetterCount = 0;
-	private String word = "BLABLABLA------"; 
+	private String word; 
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
@@ -155,10 +159,38 @@ class DrawingPanel extends JPanel {
 			g.setFont(new Font("SansSerif", Font.BOLD, 30));
 			int width = g.getFontMetrics().stringWidth(word);
 			g.drawString(word, 600-width/2, 300);
-
 		}
 	} 
-	
+
+	//HOW DO WE GET A GRAPHICS OBJECT TO USE???
+	public void paintNext(Graphics g, int wrongLetterCount) {
+		super.paintComponent(g);
+		switch (wrongLetterCount) {
+		case 0 : g.drawArc(100, 450, 100, 100, 50, 50); //rita halvcirkel (kulle)
+		break;
+		case 1 : int i;//rita streck mitt upp från halvcirkeln
+		break;
+		case 2 : int q; //rita streck till höger ut från strecket i case 1.
+		break;
+		case 3 : int bla; //rita snett streck mellan strecken från case 1 & 2.
+		break;
+		case 4 : int ble; //rita litet streck ner från strecket i case 2.
+		break;
+		case 5 : int blo; //rita gubbens huvud.
+		break;
+		case 6 : int meh; // rita gubbens kropp.
+		break; 
+		case 7 : int ma; // rita vänster arm.
+		break;
+		case 8 : int m; //rita höger arm.
+		break;
+		case 9 : int t; //rita vänster ben.
+		break;
+		case 10 : int r; //rita höger arm.
+		break;
+		}
+	}
+
 	public void setWord(String word) {
 		this.word = word;
 	}
