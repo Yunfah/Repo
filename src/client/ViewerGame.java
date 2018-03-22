@@ -128,12 +128,22 @@ public class ViewerGame extends JPanel {
 }
 
 class DrawingPanel extends JPanel {
+	private static final int PREF_W = 1200;
+	private static final int PREF_H = 500;
 	private int wrongLetterCount = 0;
-	private String word = "BLABLABLA"; 
+	private String word = "BLABLABLA------"; 
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
 		setBackground(Color.WHITE);
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		if (isPreferredSizeSet()) {
+			return super.getPreferredSize();
+		}
+		return new Dimension(PREF_W, PREF_H);
 	}
 
 	@Override
@@ -142,7 +152,9 @@ class DrawingPanel extends JPanel {
 		((Graphics2D)g).setStroke(new BasicStroke(3));
 		if (word != null) {
 			g.setColor(Color.RED);
-			g.drawString(word, 30, 40);
+			g.setFont(new Font("SansSerif", Font.BOLD, 30));
+			int width = g.getFontMetrics().stringWidth(word);
+			g.drawString(word, 600-width/2, 300);
 
 		}
 	} 
