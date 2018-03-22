@@ -28,7 +28,7 @@ public class Controller {
 	
 	private int ezLife = 10;
 	private int dsLife = 5;
-	private int xtreamLife = 3;
+	private int xtremeLife = 3;
 
 	public Controller() {
 		
@@ -75,13 +75,14 @@ public class Controller {
 	}
 
 	public void setDifficulty(int difficulty) {
-		switch (difficulty) {
-		case 1 : difficulty = EZ;
-		break;
-		case 2 : difficulty = DARK_SOULS;
-		break;
-		case 3 : difficulty = XTREME;
-		break;
+		if (difficulty == EZ) {
+			this.difficulty = ezLife;
+		} else if (difficulty == DARK_SOULS) {
+			this.difficulty = dsLife;
+		} else if (difficulty == XTREME) {
+			this.difficulty = xtremeLife;
+		} else {
+			//INVALID DIFFICULTY
 		}
 	}
 }
