@@ -56,23 +56,23 @@ public class Controller {
 		//if multiplayer -> connect to server
 	}
 
-	public void setCategory(String filename, String category) {
-		Random rand = new Random();
-		list.clear();
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
-			String word = br.readLine();
-			while(word != null) {
-				list.add(word);
-				word = br.readLine();
-			}
-			int index = rand.nextInt(list.size());
-			String choosenWord = list.get(index).toUpperCase();
-			
-			viewerGame.setWord(choosenWord, choosenWord.length());
-			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame	
-			viewerGame.setCategory(category);
-		}catch (IOException e ) {}
-	}
+//	public void setCategory(String filename, String category) {
+//		Random rand = new Random();
+//		list.clear();
+//		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
+//			String word = br.readLine();
+//			while(word != null) {
+//				list.add(word);
+//				word = br.readLine();
+//			}
+//			int index = rand.nextInt(list.size());
+//			String choosenWord = list.get(index).toUpperCase();
+//			
+//			viewerGame.setWord(choosenWord, choosenWord.length());
+//			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame	
+//			viewerGame.setCategory(category);
+//		}catch (IOException e ) {}
+//	}
 
 	public void setDifficulty(int difficulty) {
 		if (difficulty == EZ) {

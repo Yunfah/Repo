@@ -65,6 +65,8 @@ public class ViewerGame extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Button pressed: " + e.getActionCommand());
 			((AbstractButton) e.getSource()).setEnabled(false);
+			drawingPanel.addToTest(e.getActionCommand());
+			drawingPanel.repaint();
 		}
 	}
 
@@ -139,7 +141,9 @@ class DrawingPanel extends JPanel {
 	private static final int PREF_W = 1200;
 	private static final int PREF_H = 500;
 	private int wrongLetterCount = 0;
-	private String word, category;
+	private String word = "BLABLABA";
+	private String category = "HEJ";
+	private String test = "A";
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
@@ -152,6 +156,11 @@ class DrawingPanel extends JPanel {
 			return super.getPreferredSize();
 		}
 		return new Dimension(PREF_W, PREF_H);
+	}
+	
+	public void addToTest(String s) {
+		test += s;
+//		repaint();
 	}
 
 	@Override
@@ -166,36 +175,49 @@ class DrawingPanel extends JPanel {
 		}
 		g.setColor(Color.BLUE);
 		int w = g.getFontMetrics().stringWidth("CATEGORY");
+		g.drawString(test, 600-w/2, 150);
 		g.drawString(category, 600-w/2, 50);
+		paintNext(g, 0);	//0 ska vara antalet felgissade bokstäver
+		//rita här och kalla repaint för att anropa denna
 	} 
 
-	//HOW DO WE GET A GRAPHICS OBJECT TO USE???
 	public void paintNext(Graphics g, int wrongLetterCount) {
-		super.paintComponent(g);
-		switch (wrongLetterCount) {
-		case 0 : g.drawArc(100, 450, 100, 100, 50, 50); //rita halvcirkel (kulle)
-		break;
-		case 1 : int i;//rita streck mitt upp från halvcirkeln
-		break;
-		case 2 : int q; //rita streck till höger ut från strecket i case 1.
-		break;
-		case 3 : int bla; //rita snett streck mellan strecken från case 1 & 2.
-		break;
-		case 4 : int ble; //rita litet streck ner från strecket i case 2.
-		break;
-		case 5 : int blo; //rita gubbens huvud.
-		break;
-		case 6 : int meh; // rita gubbens kropp.
-		break; 
-		case 7 : int ma; // rita vänster arm.
-		break;
-		case 8 : int m; //rita höger arm.
-		break;
-		case 9 : int t; //rita vänster ben.
-		break;
-		case 10 : int r; //rita höger arm.
-		break;
-		}
+//		switch (wrongLetterCount) {
+//		case 0 : g.drawArc(100, 450, 200, 200, 0, 180); //rita halvcirkel (kulle)
+//		break;
+//		case 1 : g.drawLine(150, 250, 150, 100); //rita streck mitt upp från halvcirkeln
+//		break;
+//		case 2 : g.drawLine(150, 250, 250, 250); //rita streck till höger ut från strecket i case 1.
+//		break;
+//		case 3 : int bla; //rita snett streck mellan strecken från case 1 & 2.
+//		break;
+//		case 4 : int ble; //rita litet streck ner från strecket i case 2.
+//		break;
+//		case 5 : int blo; //rita gubbens huvud.
+//		break;
+//		case 6 : int meh; // rita gubbens kropp.
+//		break; 
+//		case 7 : int ma; // rita vänster arm.
+//		break;
+//		case 8 : int m; //rita höger arm.
+//		break;
+//		case 9 : int t; //rita vänster ben.
+//		break;
+//		case 10 : int r; //rita höger arm.
+//		break;
+//		}
+		g.drawArc(100, 450, 200, 200, 0, 180);
+		g.drawLine(200, 450, 200, 100);
+		g.drawLine(200, 100, 400, 100);
+		g.drawLine(200, 150, 250, 100);
+		g.drawLine(400, 100, 400, 150);
+		g.drawOval(375, 150, 50, 50);
+		g.drawLine(400, 200, 400, 330);
+		g.drawLine(400, 230, 360, 300);
+		g.drawLine(400, 230, 440, 300);
+		
+		g.drawLine(400, 330, 360, 390);
+		g.drawLine(400, 330, 440, 390);
 	}
 
 	public void setWord(String word) {

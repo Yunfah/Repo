@@ -98,11 +98,11 @@ public class ViewerSelectCategory extends JPanel {
 				
 			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Cities.txt", "CITIES");
+//				controller.setCategory("files/Cities.txt", "CITIES");
 				
 			} else if (e.getSource() == btnAnimals) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Animals.txt", "ANIMALS");
+//				controller.setCategory("files/Animals.txt", "ANIMALS");
 				
 			} else if (e.getSource() == btnCategory3) {
 				continueListener.nextPanel();
