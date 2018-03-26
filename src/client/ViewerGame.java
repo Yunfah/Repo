@@ -141,7 +141,7 @@ class DrawingPanel extends JPanel {
 	private static final int PREF_W = 1200;
 	private static final int PREF_H = 500;
 	private int wrongLetterCount = 0;
-	private String word = "BLABLABA";
+	private String word = "Hippopotamus";
 	private String category = "HEJ";
 	private String test = "A";
 
@@ -175,35 +175,36 @@ class DrawingPanel extends JPanel {
 		}
 		g.setColor(Color.BLUE);
 		int w = g.getFontMetrics().stringWidth("CATEGORY");
-		g.drawString(test, 600-w/2, 150);
+		g.drawString(test, 600-w/2, 150);	//category
 		g.drawString(category, 600-w/2, 50);
-		paintNext(g, 0);	//0 ska vara antalet felgissade bokstäver
-		//rita här och kalla repaint för att anropa denna
+		paintNext(g, 0);	//0 ska vara antalet felgissade bokstï¿½ver
+		drawWordLines(g, word.length());
+		//rita hï¿½r och kalla repaint fï¿½r att anropa denna
 	} 
 
 	public void paintNext(Graphics g, int wrongLetterCount) {
 //		switch (wrongLetterCount) {
 //		case 0 : g.drawArc(100, 450, 200, 200, 0, 180); //rita halvcirkel (kulle)
 //		break;
-//		case 1 : g.drawLine(150, 250, 150, 100); //rita streck mitt upp från halvcirkeln
+//		case 1 : g.drawLine(150, 250, 150, 100); //rita streck mitt upp frï¿½n halvcirkeln
 //		break;
-//		case 2 : g.drawLine(150, 250, 250, 250); //rita streck till höger ut från strecket i case 1.
+//		case 2 : g.drawLine(150, 250, 250, 250); //rita streck till hï¿½ger ut frï¿½n strecket i case 1.
 //		break;
-//		case 3 : int bla; //rita snett streck mellan strecken från case 1 & 2.
+//		case 3 : int bla; //rita snett streck mellan strecken frï¿½n case 1 & 2.
 //		break;
-//		case 4 : int ble; //rita litet streck ner från strecket i case 2.
+//		case 4 : int ble; //rita litet streck ner frï¿½n strecket i case 2.
 //		break;
 //		case 5 : int blo; //rita gubbens huvud.
 //		break;
 //		case 6 : int meh; // rita gubbens kropp.
 //		break; 
-//		case 7 : int ma; // rita vänster arm.
+//		case 7 : int ma; // rita vï¿½nster arm.
 //		break;
-//		case 8 : int m; //rita höger arm.
+//		case 8 : int m; //rita hï¿½ger arm.
 //		break;
-//		case 9 : int t; //rita vänster ben.
+//		case 9 : int t; //rita vï¿½nster ben.
 //		break;
-//		case 10 : int r; //rita höger arm.
+//		case 10 : int r; //rita hï¿½ger arm.
 //		break;
 //		}
 		g.drawArc(100, 450, 200, 200, 0, 180);
@@ -218,6 +219,19 @@ class DrawingPanel extends JPanel {
 		
 		g.drawLine(400, 330, 360, 390);
 		g.drawLine(400, 330, 440, 390);
+	}
+	
+	public void drawWordLines(Graphics g, int length) {
+		g.setColor(Color.BLACK);
+		int x1 = 550;
+		int x2 = 550+30;
+		int y = 500;
+		for (int i = 0; i < length; i++) {
+			g.drawLine(x1, y, x2, y);
+			x1 += 45;
+			x2 += 45;
+		}
+		
 	}
 
 	public void setWord(String word) {
