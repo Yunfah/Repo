@@ -180,26 +180,107 @@ class DrawingPanel extends JPanel {
 		switch (wrongLetterCount) {
 		case 0 : g.drawArc(100, 450, 200, 200, 0, 180); //rita halvcirkel (kulle)
 		break;
-		case 1 : g.drawLine(200, 450, 200, 100); //rita streck mitt upp fr�n halvcirkeln
+		case 1 : {
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);
+		} //rita streck mitt upp fr�n halvcirkeln
 		break;
-		case 2 : g.drawLine(200, 100, 400, 100); //rita streck till h�ger ut fr�n strecket i case 1.
+		case 2 : {
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100); //rita streck till h�ger ut fr�n strecket i case 1.
+		}
 		break;
-		case 3 : g.drawLine(200, 150, 250, 100); //rita snett streck mellan strecken fr�n case 1 & 2.
+		case 3 : {
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);
+		}//rita snett streck mellan strecken fr�n case 1 & 2.
 		break;
-		case 4 : g.drawLine(400, 100, 400, 150); //rita litet streck ner fr�n strecket i case 2.
+		case 4 : {
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);//rita litet streck ner fr�n strecket i case 2.
+		}
 		break;
-		case 5 : g.drawOval(375, 150, 50, 50); //rita gubbens huvud.
+		case 5 : {
+			g.drawOval(375, 150, 50, 50);
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);//rita gubbens huvud.
+		}
 		break;
-		case 6 : g.drawLine(400, 200, 400, 330); // rita gubbens kropp.
+		case 6 : {
+			g.drawLine(400, 200, 400, 330);
+			g.drawOval(375, 150, 50, 50);
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);// rita gubbens kropp.
+		}
 		break; 
-		case 7 : g.drawLine(400, 230, 360, 300); // rita v�nster arm.
+		case 7 : {
+			g.drawLine(400, 230, 360, 300);
+			g.drawLine(400, 200, 400, 330);
+			g.drawOval(375, 150, 50, 50);
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);// rita v�nster arm.
+		}
 		break;
-		case 8 : g.drawLine(400, 230, 440, 300); //rita h�ger arm.
+		case 8 : {
+			g.drawLine(400, 230, 440, 300);
+			g.drawLine(400, 230, 360, 300);
+			g.drawLine(400, 200, 400, 330);
+			g.drawOval(375, 150, 50, 50);
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
+		}
 		break;
-		case 9 : g.drawLine(400, 330, 360, 390); //rita v�nster ben.
+		case 9 : {
+			g.drawLine(400, 330, 360, 390);
+			g.drawLine(400, 230, 440, 300);
+			g.drawLine(400, 230, 360, 300);
+			g.drawLine(400, 200, 400, 330);
+			g.drawOval(375, 150, 50, 50);
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);//rita v�nster ben.
+		}
 		break;
-		case 10 : g.drawLine(400, 330, 440, 390); //rita h�ger arm.
+		case 10 : {
+			g.drawLine(400, 330, 440, 390);
+			g.drawLine(400, 330, 360, 390);
+			g.drawLine(400, 230, 440, 300);
+			g.drawLine(400, 230, 360, 300);
+			g.drawLine(400, 200, 400, 330);
+			g.drawOval(375, 150, 50, 50);
+			g.drawLine(400, 100, 400, 150);
+			g.drawLine(200, 150, 250, 100);
+			g.drawLine(200, 100, 400, 100);
+			g.drawArc(100, 450, 200, 200, 0, 180);
+			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
+		}
 		break;
+		case 11:  {
+			g.setFont(new Font("SansSerif", Font.BOLD, 30));
+
+			g.drawString("Bull läge", 200, 300);
+			}
+			break;
 		}
 		
 	}
