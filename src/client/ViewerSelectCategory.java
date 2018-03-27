@@ -94,19 +94,19 @@ public class ViewerSelectCategory extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
 				continueListener.nextPanel();
-				//Ge ett slumpvalt ord av alla ord som finns
+				//controller.setCategory("files/Random.txt", "Random");
 				
 			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
-//				controller.setCategory("files/Cities.txt", "CITIES");
+				controller.setCategory("files/Cities.txt", "CITIES");
 				
 			} else if (e.getSource() == btnAnimals) {
 				continueListener.nextPanel();
-//				controller.setCategory("files/Animals.txt", "ANIMALS");
+				controller.setCategory("files/Animals.txt", "ANIMALS");
 				
 			} else if (e.getSource() == btnCategory3) {
 				continueListener.nextPanel();
-				//ge ett ord från denna kategori
+				//ge ett ord frï¿½n denna kategori
 				
 			} else if (e.getSource() == btnBack) {
 				continueListener.goBack();
