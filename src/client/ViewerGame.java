@@ -116,7 +116,7 @@ public class ViewerGame extends JPanel {
 	}
 	
 	public void setDifficulty(int difficulty) {
-		drawingPanel.setWrongLetterCount(int difficulty);
+		drawingPanel.setWrongLetterCount(difficulty);
 	}
 
 	public int displayLife () {
