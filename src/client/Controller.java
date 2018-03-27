@@ -17,8 +17,8 @@ public class Controller {
 	private ViewerSelectMode viewerSelectMode;
 	private ArrayList<String> list = new ArrayList<String>();
 
-	private String wordToGuess;
-	private String encodedWord;
+	private String wordToGuess = "";
+	private String encodedWord = "";
 	
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
@@ -59,16 +59,17 @@ public class Controller {
 	
 	public void checkLetter(char letter) {
 		String s = String.valueOf(letter);
+		String encodedWordProgress = "";
 		if (wordToGuess.contains(s)) {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
 					
 				}
+				viewerGame.setWord(encodedWordProgress);
 			}
 		} else {
-			
+			//Increment wrongLetterCount in viewerGame and show incorrect letter
 		}
-		
 	}
 
 	public void setCategory(String filename, String category) {

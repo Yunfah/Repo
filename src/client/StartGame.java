@@ -22,13 +22,13 @@ public class StartGame extends JFrame implements ContinueListener {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Hangman");
 		setResizable(false);
-
+		
 		setupCards();
 		currentCard = "cardMode";
 		cardLayout.show(cards, currentCard);
 		getContentPane().add(cards);
-		this.pack();
 		setVisible(true);
+		this.pack();
 	}
 
 	private void setupCards() {

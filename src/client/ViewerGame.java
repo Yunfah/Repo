@@ -45,9 +45,6 @@ public class ViewerGame extends JPanel {
 		setLayout(new BorderLayout(3, 3));
 		add(drawingPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
-
-		//		Graphics g = drawingPanel.getGraphics();
-		//		drawingPanel.paintNext(g, 0);
 	}
 
 
@@ -67,8 +64,6 @@ public class ViewerGame extends JPanel {
 			((AbstractButton) e.getSource()).setEnabled(false);
 			controller.checkLetter(e.getActionCommand().charAt(0));
 			drawingPanel.repaint();
-			drawingPanel.incrementWrongLetterCount();	//Ska sättas i controller.checkLetter senare.
-			
 		}
 	}
 
@@ -100,16 +95,28 @@ public class ViewerGame extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the current progress of the word to guess.
+	 * @param encodedWord A word encoded as '-' for each unguessed letter.
+	 */
 	public void setWord(String encodedWord) {
 		drawingPanel.setWord(encodedWord);
 	}
-	
+
 	/**
 	 * Puts the name of the category at the top of the window
 	 * @param category The name of the chosen category
 	 */
 	public void setCategory(String category) {
 		drawingPanel.setCategory(category);
+	}
+	
+	public void incrementWrongLetterCount() {
+		drawingPanel.incrementWrongLetterCount();
+	}
+	
+	public void setDifficulty(int difficulty) {
+		drawingPanel.setWrongLetterCount(difficulty);
 	}
 
 	public int displayLife () {
@@ -131,6 +138,7 @@ class DrawingPanel extends JPanel {
 		setBackground(Color.WHITE);
 	}
 
+
 	@Override
 	public Dimension getPreferredSize() {
 		if (isPreferredSizeSet()) {
@@ -144,19 +152,20 @@ class DrawingPanel extends JPanel {
 		super.paintComponent(g);
 		((Graphics2D)g).setStroke(new BasicStroke(3));
 		g.setFont(new Font("SansSerif", Font.BOLD, 30));
-		
+
 		if (word != null) {
 			g.setColor(Color.RED);
 			int width = g.getFontMetrics().stringWidth(word);
 			g.drawString(word, 600-width/2, 300);
 		}
-		
+
 		g.setColor(Color.BLUE);
 		int w = g.getFontMetrics().stringWidth(category);
 		g.drawString(category, 600-w/2, 50);
 		paintNext(g, wrongLetterCount);	
 		drawWordLines(g, word.length());
-		
+		drawWord(g, word);
+
 		//rita h�r och kalla repaint f�r att anropa denna
 	} 
 
@@ -260,14 +269,11 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
 		}
 		break;
-		case 11:  {
-			g.setFont(new Font("SansSerif", Font.BOLD, 30));
-
-			g.drawString("Bull läge", 200, 300);
-			}
-			break;
 		}
-		
+		if (wrongLetterCount >= 11) {
+			g.setFont(new Font("SansSerif", Font.BOLD, 30));
+			g.drawString("Bull läge", 200, 300);
+		}
 	}
 
 	/**
@@ -287,22 +293,45 @@ class DrawingPanel extends JPanel {
 			x2 += 45;
 		}
 	}
-	
+
 	/**
 	 * Draws the correctly guessed letters of the word.
 	 * @param g
 	 * @param word
 	 */
 	public void drawWord(Graphics g, String word) {
-		
+		g.setFont(new Font("SansSerif", Font.BOLD, 30));
+		int x = 560;
+		int y = 480;
+		//TESTA TRANSFORMERA STRING WORD TILL CHAR[]
+		for (int i = 0; i < word.length(); i++) {
+			if (word.charAt(i) == '-') {
+				g.setColor(Color.WHITE);
+				String letter = String.valueOf(word.charAt(i));
+				g.drawString(letter, x, y);
+			} else {
+				g.setColor(Color.BLACK);
+				String letter = String.valueOf(word.charAt(i));
+				g.drawString(letter, x, y);
+			}
+			x += 50;
+		}
 	}
 
 	public void setWord(String word) {
 		this.word = word;
 	}
-	
+
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	/**
+	 * Should only be used at the start of a round.
+	 * @param difficulty How many "lives" the player ..........
+	 */
+	public void setWrongLetterCount(int difficulty) {
+		wrongLetterCount = difficulty;
 	}
 
 	public void incrementWrongLetterCount() {
