@@ -1,0 +1,25 @@
+dog
+cat
+mouse
+horse
+hippopotamus
+zebra
+lion
+monkey
+gorilla
+snake
+frog
+turtle
+lizard
+baboon
+pterodactyl
+New York
+Chicago
+Stockholm
+London
+Seoul
+Tokyo
+New Mexico
+San Fransisco
+Malmoe
+Helsinki
