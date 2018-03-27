@@ -67,7 +67,8 @@ public class ViewerGame extends JPanel {
 			((AbstractButton) e.getSource()).setEnabled(false);
 			controller.checkLetter(e.getActionCommand().charAt(0));
 			drawingPanel.repaint();
-			drawingPanel.incrementWrongLetterCount();
+			drawingPanel.incrementWrongLetterCount();	//Ska sättas i controller.checkLetter senare.
+			
 		}
 	}
 
@@ -99,37 +100,21 @@ public class ViewerGame extends JPanel {
 		}
 	}
 
-//	private static void createAndShowGui() {
-//		ViewerGame mainPanel = new ViewerGame();
-//
-//		JFrame frame = new JFrame("Hangman");
-//		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//		frame.getContentPane().add(mainPanel);
-//		frame.pack();
-//		frame.setVisible(true);
-//		frame.setLocationRelativeTo(null);
-//	}
-//
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				createAndShowGui();
-//			}
-//		});
-//	}
-
-	public void setWord(String chosenWord, int length) {
-		drawingPanel.setWord(chosenWord);
+	public void setWord(String encodedWord) {
+		drawingPanel.setWord(encodedWord);
 	}
 	
+	/**
+	 * Puts the name of the category at the top of the window
+	 * @param category The name of the chosen category
+	 */
 	public void setCategory(String category) {
 		drawingPanel.setCategory(category);
 	}
 
 	public int displayLife () {
 		// TODO: display life count in the GUI
-		// Method to show how many tries the player have left. Should show in the window. 
-		
+		// Method to show how many tries the player have left. Should show in the window. 		
 		return 0;
 	}
 }
@@ -284,7 +269,13 @@ class DrawingPanel extends JPanel {
 		}
 		
 	}
-	
+
+	/**
+	 * Draws the same amount of lines as letters in the word 
+	 * to guess.
+	 * @param g
+	 * @param length
+	 */
 	public void drawWordLines(Graphics g, int length) {
 		g.setColor(Color.BLACK);
 		int x1 = 550;
@@ -295,6 +286,15 @@ class DrawingPanel extends JPanel {
 			x1 += 45;
 			x2 += 45;
 		}
+	}
+	
+	/**
+	 * Draws the correctly guessed letters of the word.
+	 * @param g
+	 * @param word
+	 */
+	public void drawWord(Graphics g, String word) {
+		
 	}
 
 	public void setWord(String word) {

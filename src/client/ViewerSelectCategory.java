@@ -94,7 +94,7 @@ public class ViewerSelectCategory extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Random.txt", "Random");
+				controller.setCategory("files/Random.txt", "RANDOM");
 				
 			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
@@ -140,6 +140,5 @@ public class ViewerSelectCategory extends JPanel {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-
 	}
 }

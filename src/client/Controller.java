@@ -85,9 +85,7 @@ public class Controller {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				encodedWord += "-";
 			}
-			
-			viewerGame.setWord(wordToGuess, wordToGuess.length());
-			//chosenWord är själva ordet, chosenWord.length är mängden streck som ska ritas upp i ViewerGame	
+			viewerGame.setWord(encodedWord);
 			viewerGame.setCategory(category);
 		}catch (IOException e ) {}
 	}
