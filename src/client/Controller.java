@@ -18,6 +18,7 @@ public class Controller {
 	private ArrayList<String> list = new ArrayList<String>();
 
 	private String wordToGuess;
+	private String encodedWord;
 	
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
@@ -81,6 +82,9 @@ public class Controller {
 			}
 			int index = rand.nextInt(list.size());
 			wordToGuess = list.get(index).toUpperCase();
+			for (int i = 0; i < wordToGuess.length(); i++) {
+				encodedWord += "-";
+			}
 			
 			viewerGame.setWord(wordToGuess, wordToGuess.length());
 			//chosenWord är själva ordet, chosenWord.length är mängden streck som ska ritas upp i ViewerGame	
