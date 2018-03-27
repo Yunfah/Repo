@@ -13,4 +13,13 @@ turtle
 lizard
 baboon
 pterodactyl
-wolf 
+New York
+Chicago
+Stockholm
+London
+Seoul
+Tokyo
+New Mexico
+San Fransisco
+Malmoe
+Helsinki

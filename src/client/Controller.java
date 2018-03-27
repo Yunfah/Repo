@@ -17,6 +17,9 @@ public class Controller {
 	private ViewerSelectMode viewerSelectMode;
 	private ArrayList<String> list = new ArrayList<String>();
 
+	private String wordToGuess;
+	private String encodedWord;
+	
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
 	public static final int MULTIPLAYER = 2;
@@ -31,8 +34,6 @@ public class Controller {
 	private int xtremeLife = 3;
 
 	public Controller() {
-		
-
 	}
 	
 	public void setViewerGame(ViewerGame viewer) {
@@ -55,24 +56,41 @@ public class Controller {
 		this.modeChosen = mode;
 		//if multiplayer -> connect to server
 	}
+	
+	public void checkLetter(char letter) {
+		String s = String.valueOf(letter);
+		if (wordToGuess.contains(s)) {
+			for (int i = 0; i < wordToGuess.length(); i++) {
+				if (wordToGuess.charAt(i) == letter) {
+					
+				}
+			}
+		} else {
+			
+		}
+		
+	}
 
-//	public void setCategory(String filename, String category) {
-//		Random rand = new Random();
-//		list.clear();
-//		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
-//			String word = br.readLine();
-//			while(word != null) {
-//				list.add(word);
-//				word = br.readLine();
-//			}
-//			int index = rand.nextInt(list.size());
-//			String choosenWord = list.get(index).toUpperCase();
-//			
-//			viewerGame.setWord(choosenWord, choosenWord.length());
-//			//choosenWord är själva ordet, choosenWord.length är mängden streck som ska ritas upp i VGame	
-//			viewerGame.setCategory(category);
-//		}catch (IOException e ) {}
-//	}
+	public void setCategory(String filename, String category) {
+		Random rand = new Random();
+		list.clear();
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
+			String word = br.readLine();
+			while(word != null) {
+				list.add(word);
+				word = br.readLine();
+			}
+			int index = rand.nextInt(list.size());
+			wordToGuess = list.get(index).toUpperCase();
+			for (int i = 0; i < wordToGuess.length(); i++) {
+				encodedWord += "-";
+			}
+			
+			viewerGame.setWord(wordToGuess, wordToGuess.length());
+			//chosenWord är själva ordet, chosenWord.length är mängden streck som ska ritas upp i ViewerGame	
+			viewerGame.setCategory(category);
+		}catch (IOException e ) {}
+	}
 
 	public void setDifficulty(int difficulty) {
 		if (difficulty == EZ) {
@@ -84,5 +102,10 @@ public class Controller {
 		} else {
 			//INVALID DIFFICULTY
 		}
+	}
+	
+	public static void main(String[] args) {
+		Controller test = new Controller();
+		test.setCategory("files/Cities.txt", "Städer");
 	}
 }
