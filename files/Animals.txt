@@ -13,3 +13,4 @@ turtle
 lizard
 baboon
 pterodactyl
+wolf
