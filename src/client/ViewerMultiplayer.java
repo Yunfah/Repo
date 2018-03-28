@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -76,6 +78,24 @@ public class ViewerMultiplayer extends JPanel {
 	
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
+	}
+	
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource() == btnG1) {
+				//Do this
+			} else if (e.getSource() == btnG2) {
+				//Do this
+			} else if (e.getSource() == btnG3) {
+				//Do this
+			} else if(e.getSource() == btnBack) {
+				//Do this
+			}
+		}
+		
 	}
 	
 	private class BackListener implements MouseListener {
