@@ -21,8 +21,7 @@ public class ViewerSelectMode extends JPanel {
 		setBackground(Color.DARK_GRAY);
 		
 		add(titlePanel(), BorderLayout.NORTH);
-		add(buttonPanel(), BorderLayout.CENTER);
-		
+		add(buttonPanel(), BorderLayout.CENTER);	
 	}
 	
 	private JPanel titlePanel() {
@@ -41,6 +40,7 @@ public class ViewerSelectMode extends JPanel {
 	private JPanel buttonPanel() {
 		JPanel bPanel = new JPanel(null);
 		bPanel.setBackground(Color.DARK_GRAY);
+				
 		btnSingle.setBounds(450, 50, 300, 100);
 		btnMulti.setBounds(450, 200, 300, 100);
 			
@@ -78,7 +78,6 @@ public class ViewerSelectMode extends JPanel {
 		}
 		
 	}
-	
 	
 	public static void main (String [] args) {
 		JFrame frame = new JFrame ("Hangman");
