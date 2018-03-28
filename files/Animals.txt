@@ -48,4 +48,4 @@ butterfly
 bulbul
 chimpanzee
 ox
-
+yamma

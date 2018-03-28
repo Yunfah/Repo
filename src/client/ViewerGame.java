@@ -120,6 +120,9 @@ public class ViewerGame extends JPanel {
 		drawingPanel.setWrongLetterCount(difficulty);
 	}
 
+	public void setWin() {
+		
+	}
 	public int displayLife () {
 		// TODO: display life count in the GUI
 		// Method to show how many tries the player have left. Should show in the window. 		
@@ -161,7 +164,7 @@ class DrawingPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		((Graphics2D)g).setStroke(new BasicStroke(3));
-		g.setFont(new Font("SansSerif", Font.BOLD, 30));
+		g.setFont(new Font("SansSerif", Font.BOLD, 40));
 
 		g.setColor(Color.BLUE);
 		int w = g.getFontMetrics().stringWidth(category);
@@ -280,6 +283,7 @@ class DrawingPanel extends JPanel {
 		break;
 		}
 		if (wrongLetterCount > 10) { //Detta ska inte kunna hända - knapparna ska dimmas vid förlust
+			
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
 			g.drawString("Bull läge", 400, 300);

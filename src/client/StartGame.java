@@ -75,6 +75,11 @@ public class StartGame extends JFrame implements ContinueListener {
 		
 		cardLayout.show(cards, currentCard);
 	}
+	
+	@Override
+	public void skipToGame() {
+		cardLayout.show(cards, "cardGame");
+	}
 
 	@Override
 	public void goBack() {

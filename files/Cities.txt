@@ -48,6 +48,7 @@ Atlanta
 Oslo
 Cleveland
 Liverpool
-
-
-
+Kabul
+Beijing
+Gothenburg
+Gotham
