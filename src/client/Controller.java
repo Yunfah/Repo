@@ -75,7 +75,7 @@ public class Controller {
 				correctLetters++;
 		}
 		if (correctLetters == wordToGuess.length()) {
-			//Visa vinst i viewerGame
+			viewerGame.setWin(true);
 		}
 			
 	}

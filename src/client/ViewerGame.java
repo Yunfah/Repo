@@ -67,6 +67,7 @@ public class ViewerGame extends JPanel {
 			public void mousePressed(MouseEvent arg0) {}
 			public void mouseReleased(MouseEvent arg0) {}
 		});
+		btnBack.addActionListener(new BackSaveListener());
 		
 		btnSave.setBounds(700, 20, 100, 50);
 		rbShowWord.setBounds(1040, 10, 150, 30);
@@ -91,10 +92,9 @@ public class ViewerGame extends JPanel {
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
-				
-				
+				continueListener.goBack();
 			} else if (e.getSource() == btnSave) {
-				
+				//fixa
 				
 			}
 		}
@@ -165,6 +165,8 @@ public class ViewerGame extends JPanel {
 	}
 
 	public void setWin(boolean win) {
+		for (JButton btn : letterButtons)
+			btn.setEnabled(false);
 		drawingPanel.setWin(win);
 	}
 	
@@ -181,6 +183,7 @@ public class ViewerGame extends JPanel {
 			newWord[i] = '-';
 		drawingPanel.setWrongLetterCount(controller.getDifficulty());
 		drawingPanel.setWord(newWord);
+		drawingPanel.setWin(false);
 		controller.setEncodedWord(newWord);
 	}
 }
@@ -191,7 +194,7 @@ class DrawingPanel extends JPanel {
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;
-	private boolean win = false;
+	private boolean win = false;	//Represents if the word has been completely guessed or not?
 
 	public DrawingPanel() {
 		setLayout(null);
@@ -222,8 +225,9 @@ class DrawingPanel extends JPanel {
 		drawWord(g, word);				//Paints the progress of the word
 		
 		if (win) {
+			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.CYAN);
-			g.drawString("YOU WIN", 500, 500);
+			g.drawString("YOU WIN", 500, 400);
 		}
 		//rita h�r och kalla repaint f�r att anropa denna
 	} 
