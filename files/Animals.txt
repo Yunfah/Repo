@@ -49,3 +49,24 @@ bulbul
 chimpanzee
 ox
 yamma
+sloth
+koala
+parrot
+whale
+anteater
+octopus
+black widow
+panther
+tyrannosaurus rex
+alligator
+peacock
+cock
+hen
+chicken
+sheep
+goat
+dolphin
+shark
+donkey
+echidna
+hedgehog
