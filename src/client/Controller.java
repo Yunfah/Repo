@@ -53,25 +53,42 @@ public class Controller {
 
 	public void checkLetter(char letter) {
 		String s = String.valueOf(letter);	//String representation of the char parameter
+//		int correctLetters = 0;
 		if (wordToGuess.contains(s)) {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
 					encodedWord[i] = letter;
 				}
 			}
-		}else {
+		} else {
 			viewerGame.incrementWrongLetterCount();
 		}
 		viewerGame.setWord(encodedWord);
-		//Increment wrongLetterCount in viewerGame and show incorrect letter
+		//show incorrect letter in viewerGame
+		checkWin();
 	}
-
-
+	
+	private void checkWin() {
+		int correctLetters = 0;
+		for (int i = 0; i < encodedWord.length; i++) {
+			if (encodedWord[i] != '-')
+				correctLetters++;
+		}
+		if (correctLetters == wordToGuess.length()) {
+			//Visa vinst i viewerGame
+		}
+			
+	}
 
 	public void setEncodedWord(char[] encodedWord) {
 		this.encodedWord = encodedWord;
 	}
 
+	/**
+	 * Reads a word from the given category and sets it up in the game window.
+	 * @param filename The category-file to read a word from.
+	 * @param category The name of the category.
+	 */
 	public void setCategory(String filename, String category) {
 		Random rand = new Random();
 		list.clear();
