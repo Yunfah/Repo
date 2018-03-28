@@ -9,12 +9,16 @@ import java.util.List;
 import javax.swing.*;
 
 public class ViewerGame extends JPanel {
-
 	// using a List of JButtons to hold my collection
 	private List<JButton> letterButtons = new ArrayList<>();
 	private DrawingPanel drawingPanel = new DrawingPanel();
 	private ContinueListener continueListener;
 	private Controller controller;
+	private JButton btnBack = new JButton("<-- BACK");
+	private JButton btnSave = new JButton("Save");
+	private ButtonGroup rbGroup = new ButtonGroup();
+	private JRadioButton rbShowWord = new JRadioButton("Show word on loss");
+	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
 
 	public ViewerGame() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -27,8 +31,8 @@ public class ViewerGame extends JPanel {
 			button.addActionListener(buttonListener);
 			letterButtons.add(button); // add JButton to List<JButton>
 			letterButtonPanel.add(button);  // and add to GridLayout-using JPanel
-		}
-
+		}	
+		setupTopOptions();
 		// JPanel to hold non-letter JButtons
 		JPanel specialBtnsPanel = new JPanel(new GridLayout(1, 0, 3, 3));
 		specialBtnsPanel.add(new JButton(new ResetAction("Reset", KeyEvent.VK_R)));
@@ -46,6 +50,35 @@ public class ViewerGame extends JPanel {
 		add(drawingPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
+	
+	private void setupTopOptions() {
+		btnBack.setBounds(10, 20, 170, 50);
+		btnBack.setBackground(Color.WHITE);
+		btnBack.setFont(new Font("SansSerif", Font.BOLD, 30));
+		btnBack.setBorderPainted(false);
+		btnBack.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent arg0) {
+				btnBack.setForeground(Color.RED);
+			}
+			public void mouseExited(MouseEvent arg0) {
+				btnBack.setForeground(Color.BLACK);
+			}
+			public void mousePressed(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {}
+		});
+		
+		btnSave.setBounds(700, 20, 100, 50);
+		rbShowWord.setBounds(1040, 10, 150, 30);
+		rbHideWord.setBounds(1040, 40, 150, 30);
+		
+		drawingPanel.add(btnBack);
+		drawingPanel.add(btnSave);
+		drawingPanel.add(rbShowWord);
+		drawingPanel.add(rbHideWord);
+		rbGroup.add(rbHideWord);
+		rbGroup.add(rbShowWord);
+	}
 
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -53,6 +86,18 @@ public class ViewerGame extends JPanel {
 
 	public void setController(Controller controller) {
 		this.controller = controller;
+	}
+	
+	private class BackSaveListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnBack) {
+				
+				
+			} else if (e.getSource() == btnSave) {
+				
+				
+			}
+		}
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -62,8 +107,7 @@ public class ViewerGame extends JPanel {
 			((AbstractButton) e.getSource()).setEnabled(false);
 
 			controller.checkLetter(e.getActionCommand().charAt(0));
-
-//			drawingPanel.repaint();
+			drawingPanel.repaint();
 		}
 	}
 
@@ -120,9 +164,10 @@ public class ViewerGame extends JPanel {
 		drawingPanel.setWrongLetterCount(difficulty);
 	}
 
-	public void setWin() {
-		
+	public void setWin(boolean win) {
+		drawingPanel.setWin(win);
 	}
+	
 	public int displayLife () {
 		// TODO: display life count in the GUI
 		// Method to show how many tries the player have left. Should show in the window. 		
@@ -146,8 +191,10 @@ class DrawingPanel extends JPanel {
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;
+	private boolean win = false;
 
 	public DrawingPanel() {
+		setLayout(null);
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
 		setBackground(Color.WHITE);
 	}
@@ -171,9 +218,13 @@ class DrawingPanel extends JPanel {
 		g.drawString(category, 600-w/2, 50);
 
 		paintNext(g, wrongLetterCount);	//Paints the hanged man based on guessed progress
-		drawWordLines(g, word, word.length);	//Paints the same amount of lines as letters in the word
+		drawWordLines(g, word);	//Paints the same amount of lines as letters in the word
 		drawWord(g, word);				//Paints the progress of the word
-
+		
+		if (win) {
+			g.setColor(Color.CYAN);
+			g.drawString("YOU WIN", 500, 500);
+		}
 		//rita h�r och kalla repaint f�r att anropa denna
 	} 
 
@@ -296,13 +347,13 @@ class DrawingPanel extends JPanel {
 	 * @param g Graphics object to draw with.
 	 * @param length The amount of letters in the word.
 	 */
-	public void drawWordLines(Graphics g, char[] word, int length) {
+	public void drawWordLines(Graphics g, char[] word) {
 		g.setColor(Color.BLACK);
 		int x1 = 550;
 		int x2 = x1+30;
 		int y = 500;
 		
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < word.length; i++) {
 			if (word[i] == ' ') {
 				g.setColor(Color.WHITE);
 				g.drawLine(x1, y, x2, y);
@@ -368,6 +419,10 @@ class DrawingPanel extends JPanel {
 	
 	public int getWrong() {
 		return wrongLetterCount;
+	}
+	
+	public void setWin(boolean win) {
+		this.win = win;
 	}
 
 	public void incrementWrongLetterCount() {
