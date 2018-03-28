@@ -16,7 +16,7 @@ public class ViewerSelectCategory extends JPanel {
 	private JButton btnRandom = new JButton("Random");
 	private JButton btnCities = new JButton("Cities"); //change button names when categories have been identified.
 	private JButton btnAnimals = new JButton("Animals");
-	private JButton btnCategory3 = new JButton("Cat. 3");
+	private JButton btnBrands = new JButton("Brands");
 	private JButton btnBack = new JButton("<-- BACK");
 
 	private JLabel lblCategory = new JLabel("CATEGORY    ", SwingConstants.CENTER);
@@ -35,7 +35,7 @@ public class ViewerSelectCategory extends JPanel {
 		btnRandom.addActionListener(listener);
 		btnCities.addActionListener(listener);
 		btnAnimals.addActionListener(listener);
-		btnCategory3.addActionListener(listener);
+		btnBrands.addActionListener(listener);
 		btnBack.addActionListener(listener);
 		btnBack.addMouseListener(new BackListener());
 	}
@@ -47,17 +47,17 @@ public class ViewerSelectCategory extends JPanel {
 		btnRandom.setBounds(450, 50, 300, 100);
 		btnCities.setBounds(450, 200, 300, 100);
 		btnAnimals.setBounds(450, 350, 300, 100);
-		btnCategory3.setBounds(450, 500, 300, 100);
+		btnBrands.setBounds(450, 500, 300, 100);
 		btnRandom.setFont(btnFont);
 		btnCities.setFont(btnFont);
 		btnAnimals.setFont(btnFont);
-		btnCategory3.setFont(btnFont);	
+		btnBrands.setFont(btnFont);	
 
 		panel.setBackground(Color.DARK_GRAY);
 		panel.add(btnRandom);
 		panel.add(btnCities);
 		panel.add(btnAnimals);
-		panel.add(btnCategory3);
+		panel.add(btnBrands);
 
 		return panel;
 	}
@@ -104,9 +104,9 @@ public class ViewerSelectCategory extends JPanel {
 				continueListener.nextPanel();
 				controller.setCategory("files/Animals.txt", "ANIMALS");
 				
-			} else if (e.getSource() == btnCategory3) {
+			} else if (e.getSource() == btnBrands) {
 				continueListener.nextPanel();
-				//ge ett ord fr�n denna kategori
+				controller.setCategory("files/Brands.txt", "BRANDS");
 				
 			} else if (e.getSource() == btnBack) {
 				continueListener.goBack();
