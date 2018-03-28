@@ -6,4 +6,42 @@ adidas
 nike
 instagram
 facebook
-
+youtube
+puma
+apple
+huawei
+volvo
+opel
+saab
+bmw
+mercedes benz
+coca cola
+pepsi
+fila
+kfc
+burger king
+prada
+fendi
+microsoft
+linux
+sony
+google
+lg
+asus
+nvidia
+intel
+amd
+razer
+h&m
+yves rocher
+calvin klein
+ferrari
+hugo boss
+hermes
+chanel
+armani
+tesla
+lamborghini
+adobe
+philips
+braum
