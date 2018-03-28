@@ -18,36 +18,30 @@ public class Controller {
 	private ArrayList<String> list = new ArrayList<String>();
 
 	private String wordToGuess = "";
-	private String encodedWord = "";
-	
+	private char[] encodedWord = null;
+
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
 	public static final int MULTIPLAYER = 2;
-	
-	private int difficulty;
-	public static final int EZ = 1;
-	public static final int DARK_SOULS = 2;
-	public static final int XTREME = 3;
-	
-	private int ezLife = 10;
-	private int dsLife = 5;
-	private int xtremeLife = 3;
 
-	public Controller() {
-	}
-	
+	//Represents what handicap (difficulty) the player starts with
+	private int difficulty;
+	public static final int EZ = 0;
+	public static final int DARK_SOULS = 4;
+	public static final int XTREME = 7;
+
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
 	}
-	
+
 	public void setViewerSelectCategory(ViewerSelectCategory viewer) {
 		viewerSelectCategory = viewer;
 	}
-	
+
 	public void setViewerSelectDifficulty(ViewerSelectDifficulty viewer) {
 		viewerSelectDifficulty = viewer;
 	}
-	
+
 	public void setViewerSelectMode(ViewerSelectMode viewer) {
 		viewerSelectMode = viewer;
 	}
@@ -56,20 +50,26 @@ public class Controller {
 		this.modeChosen = mode;
 		//if multiplayer -> connect to server
 	}
-	
+
 	public void checkLetter(char letter) {
-		String s = String.valueOf(letter);
-		String encodedWordProgress = "";
+		String s = String.valueOf(letter);	//String representation of the char parameter
 		if (wordToGuess.contains(s)) {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
-					
+					encodedWord[i] = letter;
 				}
-				viewerGame.setWord(encodedWordProgress);
 			}
-		} else {
-			//Increment wrongLetterCount in viewerGame and show incorrect letter
+		}else {
+			viewerGame.incrementWrongLetterCount();
 		}
+		viewerGame.setWord(encodedWord);
+		//Increment wrongLetterCount in viewerGame and show incorrect letter
+	}
+
+
+
+	public void setEncodedWord(char[] encodedWord) {
+		this.encodedWord = encodedWord;
 	}
 
 	public void setCategory(String filename, String category) {
@@ -83,28 +83,35 @@ public class Controller {
 			}
 			int index = rand.nextInt(list.size());
 			wordToGuess = list.get(index).toUpperCase();
+
+			//Sets the word to a char[] filled with '-' for each letter.
+			encodedWord = new char[wordToGuess.length()];
 			for (int i = 0; i < wordToGuess.length(); i++) {
-				encodedWord += "-";
+				encodedWord[i] = '-';
+				System.out.print(encodedWord[i]);
 			}
+			System.out.println();
 			viewerGame.setWord(encodedWord);
 			viewerGame.setCategory(category);
 		}catch (IOException e ) {}
 	}
 
+	public int getDifficulty() {
+		return difficulty;
+	}
+
 	public void setDifficulty(int difficulty) {
 		if (difficulty == EZ) {
-			this.difficulty = ezLife;
+			this.difficulty = EZ;
+			viewerGame.setDifficulty(EZ);
 		} else if (difficulty == DARK_SOULS) {
-			this.difficulty = dsLife;
+			this.difficulty = DARK_SOULS;
+			viewerGame.setDifficulty(DARK_SOULS);
 		} else if (difficulty == XTREME) {
-			this.difficulty = xtremeLife;
+			this.difficulty = XTREME;
+			viewerGame.setDifficulty(XTREME);
 		} else {
-			//INVALID DIFFICULTY
+			System.out.println("Somehow an invalid difficulty was entered.");
 		}
-	}
-	
-	public static void main(String[] args) {
-		Controller test = new Controller();
-		test.setCategory("files/Cities.txt", "Städer");
 	}
 }

@@ -47,8 +47,6 @@ public class ViewerGame extends JPanel {
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
-
-
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
@@ -60,10 +58,12 @@ public class ViewerGame extends JPanel {
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Button pressed: " + e.getActionCommand());
+			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrong());
 			((AbstractButton) e.getSource()).setEnabled(false);
+
 			controller.checkLetter(e.getActionCommand().charAt(0));
-			drawingPanel.repaint();
+
+//			drawingPanel.repaint();
 		}
 	}
 
@@ -78,6 +78,7 @@ public class ViewerGame extends JPanel {
 			for (JButton button : letterButtons) {
 				button.setEnabled(true);
 			}
+			reset();
 		}
 	}
 
@@ -99,7 +100,7 @@ public class ViewerGame extends JPanel {
 	 * Sets the current progress of the word to guess.
 	 * @param encodedWord A word encoded as '-' for each unguessed letter.
 	 */
-	public void setWord(String encodedWord) {
+	public void setWord(char[] encodedWord) {
 		drawingPanel.setWord(encodedWord);
 	}
 
@@ -110,11 +111,11 @@ public class ViewerGame extends JPanel {
 	public void setCategory(String category) {
 		drawingPanel.setCategory(category);
 	}
-	
+
 	public void incrementWrongLetterCount() {
 		drawingPanel.incrementWrongLetterCount();
 	}
-	
+
 	public void setDifficulty(int difficulty) {
 		drawingPanel.setWrongLetterCount(difficulty);
 	}
@@ -124,20 +125,29 @@ public class ViewerGame extends JPanel {
 		// Method to show how many tries the player have left. Should show in the window. 		
 		return 0;
 	}
+	
+	public void reset() {
+		int length = drawingPanel.getWord().length;
+		char[] newWord = new char[length];
+		for (int i = 0; i < length; i++)
+			newWord[i] = '-';
+		drawingPanel.setWrongLetterCount(controller.getDifficulty());
+		drawingPanel.setWord(newWord);
+		controller.setEncodedWord(newWord);
+	}
 }
 
 class DrawingPanel extends JPanel {
 	private static final int PREF_W = 1200;
 	private static final int PREF_H = 500;
-	private int wrongLetterCount = 0;
-	private String word;
+	private int wrongLetterCount = -1;
+	private char[] word;
 	private String category;
 
 	public DrawingPanel() {
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
 		setBackground(Color.WHITE);
 	}
-
 
 	@Override
 	public Dimension getPreferredSize() {
@@ -153,18 +163,13 @@ class DrawingPanel extends JPanel {
 		((Graphics2D)g).setStroke(new BasicStroke(3));
 		g.setFont(new Font("SansSerif", Font.BOLD, 30));
 
-		if (word != null) {
-			g.setColor(Color.RED);
-			int width = g.getFontMetrics().stringWidth(word);
-			g.drawString(word, 600-width/2, 300);
-		}
-
 		g.setColor(Color.BLUE);
 		int w = g.getFontMetrics().stringWidth(category);
 		g.drawString(category, 600-w/2, 50);
-		paintNext(g, wrongLetterCount);	
-		drawWordLines(g, word.length());
-		drawWord(g, word);
+
+		paintNext(g, wrongLetterCount);	//Paints the hanged man based on guessed progress
+		drawWordLines(g, word, word.length);	//Paints the same amount of lines as letters in the word
+		drawWord(g, word);				//Paints the progress of the word
 
 		//rita h�r och kalla repaint f�r att anropa denna
 	} 
@@ -267,30 +272,44 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
 			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
+			
+			g.setFont(new Font("SansSerif", Font.BOLD, 80));
+			g.setColor(Color.RED);
+			g.drawString("Bull läge", 600, 300);
 		}
 		break;
 		}
-		if (wrongLetterCount >= 11) {
-			g.setFont(new Font("SansSerif", Font.BOLD, 30));
-			g.drawString("Bull läge", 200, 300);
+		if (wrongLetterCount > 10) { //Detta ska inte kunna hända - knapparna ska dimmas vid förlust
+			g.setFont(new Font("SansSerif", Font.BOLD, 80));
+			g.setColor(Color.RED);
+			g.drawString("Bull läge", 400, 300);
 		}
 	}
 
 	/**
 	 * Draws the same amount of lines as letters in the word 
 	 * to guess.
-	 * @param g
-	 * @param length
+	 * @param g Graphics object to draw with.
+	 * @param length The amount of letters in the word.
 	 */
-	public void drawWordLines(Graphics g, int length) {
+	public void drawWordLines(Graphics g, char[] word, int length) {
 		g.setColor(Color.BLACK);
 		int x1 = 550;
-		int x2 = 550+30;
+		int x2 = x1+30;
 		int y = 500;
+		
 		for (int i = 0; i < length; i++) {
-			g.drawLine(x1, y, x2, y);
-			x1 += 45;
-			x2 += 45;
+			if (word[i] == ' ') {
+				g.setColor(Color.WHITE);
+				g.drawLine(x1, y, x2, y);
+				x1 += 45;
+				x2 += 45;
+				g.setColor(Color.BLACK);
+			} else {
+				g.drawLine(x1, y, x2, y);
+				x1 += 45;
+				x2 += 45;
+			}
 		}
 	}
 
@@ -299,48 +318,56 @@ class DrawingPanel extends JPanel {
 	 * @param g
 	 * @param word
 	 */
-	public void drawWord(Graphics g, String word) {
+	public void drawWord(Graphics g, char[] word) {
 		g.setFont(new Font("SansSerif", Font.BOLD, 30));
-		int x = 560;
-		int y = 480;
-		//TESTA TRANSFORMERA STRING WORD TILL CHAR[]
-		for (int i = 0; i < word.length(); i++) {
-			if (word.charAt(i) == '-') {
+		int x = 555;
+		int y = 490;
+		for (int i = 0; i < word.length; i++) {
+			if (word[i] == '-') {
 				g.setColor(Color.WHITE);
-				String letter = String.valueOf(word.charAt(i));
+				String letter = String.valueOf(word[i]);
 				g.drawString(letter, x, y);
+			} else if (word[i] == ' ') {
+				g.setColor(Color.WHITE);
+				String space = String.valueOf(word[i]);
+				g.drawString(space, x, y);
 			} else {
 				g.setColor(Color.BLACK);
-				String letter = String.valueOf(word.charAt(i));
+				String letter = String.valueOf(word[i]);
 				g.drawString(letter, x, y);
 			}
-			x += 50;
+			x += 45;
 		}
 	}
 
-	public void setWord(String word) {
+	public void setWord(char[] word) {
 		this.word = word;
+		repaint();
+	}
+	
+	public char[] getWord() {
+		return word;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
+
 	/**
 	 * Should only be used at the start of a round.
-	 * @param difficulty How many "lives" the player ..........
+	 * @param difficulty The handicap that the player starts with.
 	 */
 	public void setWrongLetterCount(int difficulty) {
 		wrongLetterCount = difficulty;
+		repaint();
+	}
+	
+	public int getWrong() {
+		return wrongLetterCount;
 	}
 
 	public void incrementWrongLetterCount() {
 		wrongLetterCount++;
-		repaint();
-	}
-
-	public void reset() {
-		wrongLetterCount = 0;
 		repaint();
 	}
 }
