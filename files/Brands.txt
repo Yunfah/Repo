@@ -45,3 +45,61 @@ lamborghini
 adobe
 philips
 braum
+riot games
+valve
+blizzard
+everest
+marshall
+yamaha
+ducati
+kawasaki
+suzuki
+toyota
+subaru
+hyundai
+kia
+nissan
+infiniti
+sega
+nintendo
+playstation
+xbox
+levis
+vans
+converse
+logitech
+steelseries
+spotify
+whatsapp
+hewlett packard
+electrolux
+bosch
+grundig
+telefunken
+ikea
+media markt
+walmart
+lenovo
+blue
+atari
+new balance
+lotus
+aston martin
+bugatti
+chevrolet
+rolex
+cadillac
+seiko
+rado
+breitling
+louis vuitton
+cartoon network
+netflix
+hbo
+beats
+monster
+red bull
+fujitsu
+siemens
+nokia
+dolce & gabbana
