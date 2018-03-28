@@ -18,7 +18,7 @@ import javax.swing.*;
  */
 public class ViewerMultiplayer extends JPanel {
 	private ContinueListener continueListener;
-
+	private ButtonListener listener = new ButtonListener();
 	
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
 	private JButton btnG1 = new JButton("Turnbased Co-op");
@@ -34,6 +34,7 @@ public class ViewerMultiplayer extends JPanel {
 		add(buttonPanel(), BorderLayout.CENTER);
 		
 		btnBack.addMouseListener(new BackListener());
+		btnBack.addActionListener(listener);
 	}
 	
 	private JPanel titlePanel() {
@@ -93,6 +94,7 @@ public class ViewerMultiplayer extends JPanel {
 				//Do this
 			} else if(e.getSource() == btnBack) {
 				//Do this
+				continueListener.goBack();
 			}
 		}
 		
