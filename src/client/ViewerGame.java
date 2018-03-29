@@ -92,6 +92,7 @@ public class ViewerGame extends JPanel {
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
+				reset();
 				continueListener.goBack();
 			} else if (e.getSource() == btnSave) {
 				//fixa
@@ -177,6 +178,8 @@ public class ViewerGame extends JPanel {
 	}
 	
 	public void reset() {
+		for (JButton btn : letterButtons)
+			btn.setEnabled(true);
 		int length = drawingPanel.getWord().length;
 		char[] newWord = new char[length];
 		for (int i = 0; i < length; i++)
