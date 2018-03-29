@@ -15,6 +15,9 @@ public class Controller {
 	private ViewerSelectCategory viewerSelectCategory;
 	private ViewerSelectDifficulty viewerSelectDifficulty;
 	private ViewerSelectMode viewerSelectMode;
+	private ViewerUsername viewerUsername;
+	private ViewerMultiplayer viewerMultiplayer;
+	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> list = new ArrayList<String>();
 
 	private String wordToGuess = "";
@@ -45,11 +48,24 @@ public class Controller {
 	public void setViewerSelectMode(ViewerSelectMode viewer) {
 		viewerSelectMode = viewer;
 	}
+	
+	public void setViewerUsername(ViewerUsername viewer) {
+		viewerUsername = viewer;
+	}
+	
+	public void setViewerMultiplayer(ViewerMultiplayer viewer) {
+		viewerMultiplayer = viewer;
+	}
+	
+	public void setViewerOnlineList(ViewerOnlineList viewer) {
+		viewerOnlineList = viewer; 
+	}
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
 		//if multiplayer -> connect to server
 	}
+	
 
 	public void checkLetter(char letter) {
 		String s = String.valueOf(letter);	//String representation of the char parameter

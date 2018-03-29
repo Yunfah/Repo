@@ -19,7 +19,7 @@ import javax.swing.*;
 public class ViewerMultiplayer extends JPanel {
 	private ContinueListener continueListener;
 	private ButtonListener listener = new ButtonListener();
-	
+	private Controller controller;
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
 	private JButton btnG1 = new JButton("Turnbased Co-op");
 	private JButton btnG2 = new JButton("1 Writes, 1 Guesses");
@@ -35,6 +35,10 @@ public class ViewerMultiplayer extends JPanel {
 		
 		btnBack.addMouseListener(new BackListener());
 		btnBack.addActionListener(listener);
+	}
+	
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 	
 	private JPanel titlePanel() {
@@ -94,7 +98,7 @@ public class ViewerMultiplayer extends JPanel {
 				//Do this
 			} else if(e.getSource() == btnBack) {
 				//Do this
-				continueListener.goBack();
+				continueListener.goBackMP();
 			}
 		}
 		

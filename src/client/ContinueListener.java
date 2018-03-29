@@ -7,4 +7,8 @@ public interface ContinueListener {
 	public void skipToGame();
 	
 	public void goBack();
+	
+	public void goBackMP();
+	
+	public void nextPanelMP();
 }

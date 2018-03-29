@@ -14,6 +14,9 @@ public class StartGame extends JFrame implements ContinueListener {
 	private ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
 	private ViewerSelectCategory selectCategory = new ViewerSelectCategory();
 	private ViewerGame game = new ViewerGame();
+	private ViewerUsername userName = new ViewerUsername();
+	private ViewerMultiplayer multiplayer = new ViewerMultiplayer();
+	private ViewerOnlineList onlineList = new ViewerOnlineList();
 
 	public StartGame(Controller controller) {
 		this.controller = controller;
@@ -52,15 +55,37 @@ public class StartGame extends JFrame implements ContinueListener {
 		JPanel cardGame = new JPanel();
 		cardGame.add(game);
 		
+		userName.setController(controller);
+		userName.setListener(this);
+		JPanel cardUserName = new JPanel();
+		cardUserName.add(userName);
+		
+		multiplayer.setController(controller);
+		multiplayer.setListener(this);
+		JPanel cardMultiplayer = new JPanel();
+		cardMultiplayer.add(multiplayer);
+		
+		onlineList.setController(controller);
+		onlineList.setListener(this);
+		JPanel cardOnlineList = new JPanel();
+		cardOnlineList.add(onlineList);
+		
 		controller.setViewerGame(game);
 		controller.setViewerSelectCategory(selectCategory);
 		controller.setViewerSelectDifficulty(selectDifficulty);
 		controller.setViewerSelectMode(selectMode);
+		controller.setViewerUsername(userName);
+		controller.setViewerMultiplayer(multiplayer);
+		controller.setViewerOnlineList(onlineList);
 
 		cards.add(cardMode, "cardMode");
 		cards.add(cardDifficulty, "cardDifficulty");
 		cards.add(cardCategory, "cardCategory");
 		cards.add(cardGame, "cardGame");
+		cards.add(cardUserName, "cardUserName");
+		cards.add(cardMultiplayer, "cardMultiplayer");
+		cards.add(cardOnlineList, "cardOnlineList");
+
 	}
 
 	@Override
@@ -100,5 +125,27 @@ public class StartGame extends JFrame implements ContinueListener {
 				new StartGame(new Controller());
 			}	
 		});
+	}
+
+	@Override
+	public void goBackMP() { 
+		if (currentCard.equals("cardOnlineList")) {
+			currentCard = "cardMultiplayer";
+	 	}else if (currentCard.equals("cardMultiplayer")) {
+			currentCard = "cardMode";
+		} else if (currentCard.equals("cardUserName")) {
+			currentCard = "cardMode";
+		}
+		cardLayout.show(cards, currentCard);
+	}
+
+	@Override
+	public void nextPanelMP() {
+		if (currentCard.equals("cardMode")) {
+			currentCard = "cardUserName";
+		} else if (currentCard.equals("cardUserName")) {
+			currentCard = "cardOnlineList";
+		}
+		cardLayout.show(cards, currentCard);
 	}
 }
