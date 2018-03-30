@@ -119,14 +119,6 @@ public class StartGame extends JFrame implements ContinueListener {
 		cardLayout.show(cards, currentCard);
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new StartGame(new Controller());
-			}	
-		});
-	}
-
 	@Override
 	public void goBackMP() { 
 		if (currentCard.equals("cardOnlineList")) {
@@ -149,5 +141,13 @@ public class StartGame extends JFrame implements ContinueListener {
 			currentCard = "cardOnlineList";
 		}
 		cardLayout.show(cards, currentCard);
+	}
+	
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new StartGame(new Controller());
+			}	
+		});
 	}
 }
