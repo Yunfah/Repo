@@ -12,9 +12,6 @@ import javax.swing.JPanel;
 
 public class Controller {
 	private ViewerGame viewerGame;
-	private ViewerSelectCategory viewerSelectCategory;
-	private ViewerSelectDifficulty viewerSelectDifficulty;
-	private ViewerSelectMode viewerSelectMode;
 	private ViewerUsername viewerUsername;
 	private ViewerMultiplayerMode viewerMultiplayer;
 	private ViewerOnlineList viewerOnlineList;
@@ -37,26 +34,14 @@ public class Controller {
 		viewerGame = viewer;
 	}
 
-	public void setViewerSelectCategory(ViewerSelectCategory viewer) {
-		viewerSelectCategory = viewer;
-	}
-
-	public void setViewerSelectDifficulty(ViewerSelectDifficulty viewer) {
-		viewerSelectDifficulty = viewer;
-	}
-
-	public void setViewerSelectMode(ViewerSelectMode viewer) {
-		viewerSelectMode = viewer;
-	}
-	
 	public void setViewerUsername(ViewerUsername viewer) {
 		viewerUsername = viewer;
 	}
-	
+
 	public void setViewerMultiplayer(ViewerMultiplayerMode viewer) {
 		viewerMultiplayer = viewer;
 	}
-	
+
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
 		viewerOnlineList = viewer; 
 	}
@@ -65,11 +50,15 @@ public class Controller {
 		this.modeChosen = mode;
 		//if multiplayer -> connect to server
 	}
-	
 
+	/**
+	 * Checks if the given letter exists in the word. If so,
+	 * shows the correctly guessed letter in all dedicated spots
+	 * in the game window.
+	 * @param letter The letter guessed.
+	 */
 	public void checkLetter(char letter) {
 		String s = String.valueOf(letter);	//String representation of the char parameter
-//		int correctLetters = 0;
 		if (wordToGuess.contains(s)) {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
@@ -80,20 +69,25 @@ public class Controller {
 			viewerGame.incrementWrongLetterCount();
 		}
 		viewerGame.setWord(encodedWord);
-		//show incorrect letter in viewerGame
 		checkWin();
 	}
-	
+
+	/**
+	 * Checks if all letters of the word have been guessed. If so,
+	 * sets up a victory message in the game window. 
+	 */
 	private void checkWin() {
 		int correctLetters = 0;
 		for (int i = 0; i < encodedWord.length; i++) {
 			if (encodedWord[i] != '-')
 				correctLetters++;
 		}
-		if (correctLetters == wordToGuess.length()) {
+		if (correctLetters == wordToGuess.length()) 
 			viewerGame.setWin(true);
-		}
-			
+	}
+	
+	public void saveGameProgress() {
+		//Ta parametrar för ett WordProgress-objekt och spara till textfil som objekt. max 15 st. 
 	}
 
 	public void setEncodedWord(char[] encodedWord) {
@@ -120,7 +114,11 @@ public class Controller {
 			//Sets the word to a char[] filled with '-' for each letter.
 			encodedWord = new char[wordToGuess.length()];
 			for (int i = 0; i < wordToGuess.length(); i++) {
-				encodedWord[i] = '-';
+				if (wordToGuess.charAt(i) == ' ') {
+					encodedWord[i] = ' ';
+				} else {
+					encodedWord[i] = '-';
+				}
 				System.out.print(encodedWord[i]);
 			}
 			System.out.println();

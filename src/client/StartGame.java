@@ -71,9 +71,6 @@ public class StartGame extends JFrame implements ContinueListener {
 		cardOnlineList.add(onlineList);
 		
 		controller.setViewerGame(game);
-		controller.setViewerSelectCategory(selectCategory);
-		controller.setViewerSelectDifficulty(selectDifficulty);
-		controller.setViewerSelectMode(selectMode);
 		controller.setViewerUsername(userName);
 		controller.setViewerMultiplayer(multiplayer);
 		controller.setViewerOnlineList(onlineList);

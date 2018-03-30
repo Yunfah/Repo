@@ -50,12 +50,33 @@ public class ViewerGame extends JPanel {
 		add(drawingPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
-	
-	private void setupTopOptions() {
+
+	private void setupTopOptions() {	
 		btnBack.setBounds(10, 20, 200, 50);
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setFont(new Font("SansSerif", Font.BOLD, 30));
 		btnBack.setBorderPainted(false);
+		btnSave.setBounds(935, 10, 100, 60); 
+		btnSave.setEnabled(false);
+		btnSave.setFont(new Font("SansSerif", Font.BOLD, 20));
+		setupTopListeners();
+		
+		rbShowWord.setBounds(1040, 10, 150, 30);
+		rbShowWord.setSelected(true);
+		rbShowWord.setBackground(Color.PINK);
+		rbHideWord.setBounds(1040, 40, 150, 30);
+		rbHideWord.setBackground(Color.PINK);
+
+		drawingPanel.add(btnBack);
+		drawingPanel.add(btnSave);
+		drawingPanel.add(rbShowWord);
+		drawingPanel.add(rbHideWord);
+		rbGroup.add(rbHideWord);
+		rbGroup.add(rbShowWord);
+	}
+	
+	private void setupTopListeners() {
+		BackSaveListener backSaveListener = new BackSaveListener();
 		btnBack.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent arg0) {}
 			public void mouseEntered(MouseEvent arg0) {
@@ -67,18 +88,20 @@ public class ViewerGame extends JPanel {
 			public void mousePressed(MouseEvent arg0) {}
 			public void mouseReleased(MouseEvent arg0) {}
 		});
-		btnBack.addActionListener(new BackSaveListener());
+		btnBack.addActionListener(backSaveListener);
 		
-		btnSave.setBounds(700, 20, 100, 50);
-		rbShowWord.setBounds(1040, 10, 150, 30);
-		rbHideWord.setBounds(1040, 40, 150, 30);
-		
-		drawingPanel.add(btnBack);
-		drawingPanel.add(btnSave);
-		drawingPanel.add(rbShowWord);
-		drawingPanel.add(rbHideWord);
-		rbGroup.add(rbHideWord);
-		rbGroup.add(rbShowWord);
+		btnSave.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent arg0) {
+				btnSave.setForeground(Color.GREEN);
+			}
+			public void mouseExited(MouseEvent arg0) {
+				btnSave.setForeground(Color.BLACK);
+			}
+			public void mousePressed(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {}
+		});
+		btnSave.addActionListener(backSaveListener);
 	}
 
 	public void setListener(ContinueListener listener) {
@@ -88,15 +111,14 @@ public class ViewerGame extends JPanel {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-	
+
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
 				reset();
 				continueListener.goBack();
 			} else if (e.getSource() == btnSave) {
-				//fixa
-				
+				//MÅSTE FIXAS
 			}
 		}
 	}
@@ -104,10 +126,16 @@ public class ViewerGame extends JPanel {
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrong());
+			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrongLetterCount());
 			((AbstractButton) e.getSource()).setEnabled(false);
-
+			
+			btnSave.setEnabled(true);
 			controller.checkLetter(e.getActionCommand().charAt(0));
+			if (drawingPanel.getWrongLetterCount() == 10) {
+				for(JButton btn : letterButtons)
+					btn.setEnabled(false);
+				btnSave.setEnabled(false);
+			}
 			drawingPanel.repaint();
 		}
 	}
@@ -168,18 +196,20 @@ public class ViewerGame extends JPanel {
 	public void setWin(boolean win) {
 		for (JButton btn : letterButtons)
 			btn.setEnabled(false);
-		drawingPanel.setWin(win);
+		btnSave.setEnabled(false);
+		drawingPanel.setWin(win);	
 	}
-	
+
 	public int displayLife () {
 		// TODO: display life count in the GUI
 		// Method to show how many tries the player have left. Should show in the window. 		
 		return 0;
 	}
-	
+
 	public void reset() {
 		for (JButton btn : letterButtons)
 			btn.setEnabled(true);
+		btnSave.setEnabled(false);
 		int length = drawingPanel.getWord().length;
 		char[] newWord = new char[length];
 		for (int i = 0; i < length; i++)
@@ -192,8 +222,6 @@ public class ViewerGame extends JPanel {
 }
 
 class DrawingPanel extends JPanel {
-	private static final int PREF_W = 1200;
-	private static final int PREF_H = 500;
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;
@@ -203,14 +231,6 @@ class DrawingPanel extends JPanel {
 		setLayout(null);
 		setBorder(BorderFactory.createTitledBorder("Hang Man"));
 		setBackground(Color.WHITE);
-	}
-
-	@Override
-	public Dimension getPreferredSize() {
-		if (isPreferredSizeSet()) {
-			return super.getPreferredSize();
-		}
-		return new Dimension(PREF_W, PREF_H);
 	}
 
 	@Override
@@ -226,13 +246,12 @@ class DrawingPanel extends JPanel {
 		paintNext(g, wrongLetterCount);	//Paints the hanged man based on guessed progress
 		drawWordLines(g, word);	//Paints the same amount of lines as letters in the word
 		drawWord(g, word);				//Paints the progress of the word
-		
+
 		if (win) {
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.CYAN);
 			g.drawString("YOU WIN", 500, 400);
-		}
-		//rita h�r och kalla repaint f�r att anropa denna
+		} 	
 	} 
 
 	public void paintNext(Graphics g, int wrongLetterCount) {
@@ -333,7 +352,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
 			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
-			
+
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
 			g.drawString("Bull läge", 600, 300);
@@ -341,7 +360,7 @@ class DrawingPanel extends JPanel {
 		break;
 		}
 		if (wrongLetterCount > 10) { //Detta ska inte kunna hända - knapparna ska dimmas vid förlust
-			
+
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
 			g.drawString("Bull läge", 400, 300);
@@ -359,7 +378,7 @@ class DrawingPanel extends JPanel {
 		int x1 = 550;
 		int x2 = x1+30;
 		int y = 500;
-		
+
 		for (int i = 0; i < word.length; i++) {
 			if (word[i] == ' ') {
 				g.setColor(Color.WHITE);
@@ -402,32 +421,46 @@ class DrawingPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the current progress of the word to guess.
+	 * @param word Current progress of the word.
+	 */
 	public void setWord(char[] word) {
 		this.word = word;
 		repaint();
 	}
-	
+
 	public char[] getWord() {
 		return word;
 	}
 
+	/**
+	 * Sets the name of the current category.
+	 * @param category The name of the current category. 
+	 */
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
 	/**
+	 * Sets the wrongLetterCount to a custom number.
 	 * Should only be used at the start of a round.
 	 * @param difficulty The handicap that the player starts with.
 	 */
 	public void setWrongLetterCount(int difficulty) {
-		wrongLetterCount = difficulty;
-		repaint();
+		if (difficulty > 10) {
+			System.out.println("INVALID NUMBER");
+		} else {
+			wrongLetterCount = difficulty;
+			repaint();
+		}
+
 	}
-	
-	public int getWrong() {
+
+	public int getWrongLetterCount() {
 		return wrongLetterCount;
 	}
-	
+
 	public void setWin(boolean win) {
 		this.win = win;
 	}
