@@ -99,14 +99,16 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btnBack) {
-			continueListener.goBackMP();
-		}
+		
 		if(e.getSource()==btnNext) {
 			continueListener.nextPanelMP();
 		//	controller.connect(txt.getText());
 			//Skickar iväg username till servern
+		
+		if(e.getSource()==btnBack) {
+			continueListener.goBackMP();
 		}
+}
 	}
 		
 	public void mousePressed(MouseEvent e) {}
