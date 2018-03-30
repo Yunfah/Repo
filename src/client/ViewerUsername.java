@@ -31,7 +31,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	private Font subtitleFont = new Font("SansSerif", Font.BOLD, 25);
 	private ContinueListener continueListener;
 	private Controller controller;
-	
+
 	public ViewerUsername() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(null);
@@ -41,26 +41,27 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
-		
+		btnBack.addActionListener(this);
+
 		title.setBounds(250, 100, 700, 100);
 		title.setFont(titleFont);
 		title.setForeground(Color.WHITE);
 		title.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		subtitle.setBounds(250, 200, 700, 50);
 		subtitle.setFont(subtitleFont);
 		subtitle.setForeground(Color.WHITE);
 		subtitle.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		name.setBounds(75, 350, 350, 75);
 		name.setFont(titleFont);
 		name.setForeground(Color.WHITE);
 		name.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		txt.setBounds(425, 350, 350, 75);
 		txt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		txt.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		btnNext.setBounds(825, 350, 200, 75);
 		btnNext.setFont(btnFont);
 		btnNext.setEnabled(false);
@@ -68,10 +69,10 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		ImageIcon icon = new ImageIcon("files/Hangman GIF.gif");
 		image.setBounds(500, 475 ,400,300);
 		image.setIcon(icon);
-		
+
 		txt.getDocument().addDocumentListener(this);
 		btnBack.addMouseListener(this);
-		
+
 		add(image);
 		add(title);
 		add(subtitle);
@@ -80,15 +81,15 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		add(txt);
 		add(btnNext);
 	}
-	
+
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
-	
+
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-	
+
 	public void checkLogIn() {
 		String username = txt.getText();
 		if(username.length() > 0) {
@@ -97,20 +98,17 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setEnabled(false);
 		}
 	}
-	
-	public void actionPerformed(ActionEvent e) {
-		
+
+	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
 			continueListener.nextPanelMP();
-		//	controller.connect(txt.getText());
+			//	controller.connect(txt.getText());
 			//Skickar iväg username till servern
-		
-		if(e.getSource()==btnBack) {
+		} else if(e.getSource()==btnBack) {
 			continueListener.goBackMP();
 		}
-}
 	}
-		
+
 	public void mousePressed(MouseEvent e) {}
 
 	public void mouseReleased(MouseEvent e) {}
@@ -128,20 +126,20 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	}
 
 	public void mouseClicked(MouseEvent e) {}
-	
+
 	public void insertUpdate(DocumentEvent e) {
 		checkLogIn();
-    }
-	
-    public void removeUpdate(DocumentEvent e) {
-    	checkLogIn();
-    }
-    
-    public void changedUpdate(DocumentEvent e) {
-    	checkLogIn();
-    }
-	
-	
+	}
+
+	public void removeUpdate(DocumentEvent e) {
+		checkLogIn();
+	}
+
+	public void changedUpdate(DocumentEvent e) {
+		checkLogIn();
+	}
+
+
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Test of username window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

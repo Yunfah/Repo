@@ -52,7 +52,7 @@ public class ViewerGame extends JPanel {
 	}
 	
 	private void setupTopOptions() {
-		btnBack.setBounds(10, 20, 170, 50);
+		btnBack.setBounds(10, 20, 200, 50);
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setFont(new Font("SansSerif", Font.BOLD, 30));
 		btnBack.setBorderPainted(false);

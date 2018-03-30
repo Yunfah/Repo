@@ -16,7 +16,7 @@ import javax.swing.*;
  * so that they can play together.
  *
  */
-public class ViewerMultiplayer extends JPanel {
+public class ViewerMultiplayerMode extends JPanel {
 	private ContinueListener continueListener;
 	private ButtonListener listener = new ButtonListener();
 	private Controller controller;
@@ -27,7 +27,7 @@ public class ViewerMultiplayer extends JPanel {
 	private JButton btnBack = new JButton("<-- Back");
 	
 	
-	public ViewerMultiplayer() {
+	public ViewerMultiplayerMode() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(new BorderLayout());
 		add(titlePanel(), BorderLayout.NORTH);
@@ -124,7 +124,7 @@ public class ViewerMultiplayer extends JPanel {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Test of Multiplayer window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewerMultiplayer());
+		frame.add(new ViewerMultiplayerMode());
 		frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);

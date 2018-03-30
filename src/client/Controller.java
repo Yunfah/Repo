@@ -16,7 +16,7 @@ public class Controller {
 	private ViewerSelectDifficulty viewerSelectDifficulty;
 	private ViewerSelectMode viewerSelectMode;
 	private ViewerUsername viewerUsername;
-	private ViewerMultiplayer viewerMultiplayer;
+	private ViewerMultiplayerMode viewerMultiplayer;
 	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> list = new ArrayList<String>();
 
@@ -53,7 +53,7 @@ public class Controller {
 		viewerUsername = viewer;
 	}
 	
-	public void setViewerMultiplayer(ViewerMultiplayer viewer) {
+	public void setViewerMultiplayer(ViewerMultiplayerMode viewer) {
 		viewerMultiplayer = viewer;
 	}
 	

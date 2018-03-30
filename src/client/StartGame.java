@@ -15,7 +15,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	private ViewerSelectCategory selectCategory = new ViewerSelectCategory();
 	private ViewerGame game = new ViewerGame();
 	private ViewerUsername userName = new ViewerUsername();
-	private ViewerMultiplayer multiplayer = new ViewerMultiplayer();
+	private ViewerMultiplayerMode multiplayer = new ViewerMultiplayerMode();
 	private ViewerOnlineList onlineList = new ViewerOnlineList();
 
 	public StartGame(Controller controller) {
