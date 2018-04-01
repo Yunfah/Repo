@@ -118,7 +118,7 @@ public class ViewerGame extends JPanel {
 				reset();
 				continueListener.goBack();
 			} else if (e.getSource() == btnSave) {
-				//MÅSTE FIXAS
+				controller.saveGameProgress();
 			}
 		}
 	}
@@ -187,6 +187,10 @@ public class ViewerGame extends JPanel {
 
 	public void incrementWrongLetterCount() {
 		drawingPanel.incrementWrongLetterCount();
+	}
+	
+	public int getWrongLetterCount() {
+		return drawingPanel.getWrongLetterCount();
 	}
 
 	public void setDifficulty(int difficulty) {

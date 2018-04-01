@@ -1,9 +1,15 @@
 package client;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -87,7 +93,52 @@ public class Controller {
 	}
 	
 	public void saveGameProgress() {
+		ArrayList<WordProgress> saveList = new ArrayList<WordProgress>();
+		int wrongGuesses = viewerGame.getWrongLetterCount();
+		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses);
+		
+		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(	//Check amount of save files.
+				new FileInputStream("files/saveFiles.dat")))) {
+			
+			WordProgress progress = (WordProgress)ois.readObject();
+			while(progress != null) {
+				saveList.add(progress);
+				progress = (WordProgress)ois.readObject();
+			}
+			
+			if (saveList.size() >= 15) {
+				saveList.remove(0);
+				saveList.add(14, newSave);
+			} else {
+				saveList.add(newSave);
+			}
+			
+		} catch (FileNotFoundException e1) {
+			System.out.println("File not found while trying to read.");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Could not cast object to WordProgress.");
+		}
+		
 		//Ta parametrar för ett WordProgress-objekt och spara till textfil som objekt. max 15 st. 
+		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
+				new FileOutputStream("files/saveFiles.dat", false)))) {
+			
+			for (WordProgress prog : saveList) {
+				oos.writeObject(prog);
+			}
+			oos.flush();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadSaveFile(int index) {
+		//Load savefile nr index and set up a single player game from it.
 	}
 
 	public void setEncodedWord(char[] encodedWord) {

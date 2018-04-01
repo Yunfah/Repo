@@ -82,7 +82,6 @@ public class StartGame extends JFrame implements ContinueListener {
 		cards.add(cardUserName, "cardUserName");
 		cards.add(cardMultiplayer, "cardMultiplayer");
 		cards.add(cardOnlineList, "cardOnlineList");
-
 	}
 
 	@Override
