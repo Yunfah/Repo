@@ -14,8 +14,10 @@ public class Client extends Thread {
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	private Controller controller;
+	private String username;
 
-	public Client(String ip, int port) {
+	public Client(String username, String ip, int port) {
+		this.username = username;
 		try {
 			socket = new Socket(ip, port);
 			oos = new ObjectOutputStream(socket.getOutputStream());
@@ -28,6 +30,9 @@ public class Client extends Thread {
 		this.controller = controller;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
 
 	public void run() {
 		Client client = null;

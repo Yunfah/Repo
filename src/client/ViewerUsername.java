@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -65,7 +66,8 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		btnNext.setBounds(825, 350, 200, 75);
 		btnNext.setFont(btnFont);
 		btnNext.setEnabled(false);
-
+		btnNext.addActionListener(this);
+		
 		ImageIcon icon = new ImageIcon("files/Hangman GIF.gif");
 		image.setBounds(500, 475 ,400,300);
 		image.setIcon(icon);
@@ -101,9 +103,14 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
+			
+			String ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+			int port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+			Client client = new Client (txt.getText(), ip, port);
+			//Skickar iväg klienten till servern
+			controller.connect(client);
+
 			continueListener.nextPanelMP();
-			//	controller.connect(txt.getText());
-			//Skickar iväg username till servern
 		} else if(e.getSource()==btnBack) {
 			continueListener.goBackMP();
 		}

@@ -11,7 +11,7 @@ import java.util.Random;
 import javax.swing.*;
 
 public class ViewerSelectDifficulty extends JPanel implements ActionListener, MouseListener {
-	private JLabel title = new JLabel("DIFFICULTY    ");
+	private JLabel title = new JLabel("DIFFICULTY    ", SwingConstants.CENTER);
 	private JButton btnBack = new JButton("<-- BACK");
 	private JButton btnEz = new JButton("EZ");
 	private JButton btnDS = new JButton("DARK SOULS");

@@ -44,7 +44,7 @@ public class Controller {
 		viewerUsername = viewer;
 	}
 
-	public void setViewerMultiplayer(ViewerMultiplayerMode viewer) {
+	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
 		viewerMultiplayer = viewer;
 	}
 
@@ -195,5 +195,9 @@ public class Controller {
 		} else {
 			System.out.println("Somehow an invalid difficulty was entered.");
 		}
+	}
+	
+	public void connect(Client client) {
+		
 	}
 }

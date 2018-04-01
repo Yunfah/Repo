@@ -52,7 +52,7 @@ public class ViewerGame extends JPanel {
 	}
 
 	private void setupTopOptions() {	
-		btnBack.setBounds(10, 20, 200, 50);
+		btnBack.setBounds(10, 20, 200, 75);
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setFont(new Font("SansSerif", Font.BOLD, 30));
 		btnBack.setBorderPainted(false);
@@ -60,7 +60,7 @@ public class ViewerGame extends JPanel {
 		btnSave.setEnabled(false);
 		btnSave.setFont(new Font("SansSerif", Font.BOLD, 20));
 		setupTopListeners();
-		
+
 		rbShowWord.setBounds(1040, 10, 150, 30);
 		rbShowWord.setSelected(true);
 		rbShowWord.setBackground(Color.PINK);
@@ -74,7 +74,7 @@ public class ViewerGame extends JPanel {
 		rbGroup.add(rbHideWord);
 		rbGroup.add(rbShowWord);
 	}
-	
+
 	private void setupTopListeners() {
 		BackSaveListener backSaveListener = new BackSaveListener();
 		btnBack.addMouseListener(new MouseListener() {
@@ -89,7 +89,7 @@ public class ViewerGame extends JPanel {
 			public void mouseReleased(MouseEvent arg0) {}
 		});
 		btnBack.addActionListener(backSaveListener);
-		
+
 		btnSave.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent arg0) {}
 			public void mouseEntered(MouseEvent arg0) {
@@ -128,7 +128,7 @@ public class ViewerGame extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrongLetterCount());
 			((AbstractButton) e.getSource()).setEnabled(false);
-			
+
 			btnSave.setEnabled(true);
 			controller.checkLetter(e.getActionCommand().charAt(0));
 			if (drawingPanel.getWrongLetterCount() == 10) {
@@ -188,7 +188,11 @@ public class ViewerGame extends JPanel {
 	public void incrementWrongLetterCount() {
 		drawingPanel.incrementWrongLetterCount();
 	}
-	
+
+	/**
+	 * Returns amount of mistakes the player has made. 
+	 * @return Amount of mistakes made. 
+	 */
 	public int getWrongLetterCount() {
 		return drawingPanel.getWrongLetterCount();
 	}
@@ -210,6 +214,10 @@ public class ViewerGame extends JPanel {
 		return 0;
 	}
 
+	/**
+	 * Resets all progress for the current word. Restarts
+	 * the game with the same settings and same word.
+	 */
 	public void reset() {
 		for (JButton btn : letterButtons)
 			btn.setEnabled(true);
@@ -229,7 +237,7 @@ class DrawingPanel extends JPanel {
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;
-	private boolean win = false;	//Represents if the word has been completely guessed or not?
+	private boolean win = false;	//Represents if the word has been completely guessed or not
 
 	public DrawingPanel() {
 		setLayout(null);
@@ -245,19 +253,25 @@ class DrawingPanel extends JPanel {
 
 		g.setColor(Color.BLUE);
 		int w = g.getFontMetrics().stringWidth(category);
-		g.drawString(category, 600-w/2, 50);
+		g.drawString(category, 600-w/2, 70);
 
-		paintNext(g, wrongLetterCount);	//Paints the hanged man based on guessed progress
-		drawWordLines(g, word);	//Paints the same amount of lines as letters in the word
-		drawWord(g, word);				//Paints the progress of the word
+		paintNext(g, wrongLetterCount);	
+		drawWordLines(g, word);	
+		drawWord(g, word);
 
 		if (win) {
-			g.setFont(new Font("SansSerif", Font.BOLD, 80));
+			g.setFont(new Font("SansSerif", Font.BOLD, 50));
 			g.setColor(Color.CYAN);
 			g.drawString("YOU WIN", 500, 400);
 		} 	
 	} 
 
+	/**
+	 * Paints the hanged man based on the progress made on the 
+	 * word to guess.
+	 * @param g Graphics object to draw with. 
+	 * @param wrongLetterCount Amount of incorrect guesses the player has made. 
+	 */
 	public void paintNext(Graphics g, int wrongLetterCount) {
 		g.setColor(Color.BLACK);
 		switch (wrongLetterCount) {
@@ -363,12 +377,6 @@ class DrawingPanel extends JPanel {
 		}
 		break;
 		}
-		if (wrongLetterCount > 10) { //Detta ska inte kunna hända - knapparna ska dimmas vid förlust
-
-			g.setFont(new Font("SansSerif", Font.BOLD, 80));
-			g.setColor(Color.RED);
-			g.drawString("Bull läge", 400, 300);
-		}
 	}
 
 	/**
@@ -399,7 +407,7 @@ class DrawingPanel extends JPanel {
 	}
 
 	/**
-	 * Draws the correctly guessed letters of the word.
+	 * Draws the correctly guessed letters (the progress) of the word.
 	 * @param g
 	 * @param word
 	 */
@@ -458,7 +466,6 @@ class DrawingPanel extends JPanel {
 			wrongLetterCount = difficulty;
 			repaint();
 		}
-
 	}
 
 	public int getWrongLetterCount() {

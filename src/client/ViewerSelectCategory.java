@@ -72,6 +72,7 @@ public class ViewerSelectCategory extends JPanel {
 		panel.add(btnBack, BorderLayout.WEST);
 
 		btnBack.setFont(btnFont);
+		btnBack.setPreferredSize(new Dimension(200,100));
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);

@@ -37,10 +37,6 @@ public class ViewerMultiplayerMode extends JPanel {
 		btnBack.addActionListener(listener);
 	}
 	
-	public void setController(Controller controller) {
-		this.controller = controller;
-	}
-	
 	private JPanel titlePanel() {
 		JPanel panel = new JPanel (new BorderLayout());
 		panel.setPreferredSize(new Dimension(1200, 200));
@@ -81,43 +77,38 @@ public class ViewerMultiplayerMode extends JPanel {
 		return panel;
 	}
 	
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
 	
 	private class ButtonListener implements ActionListener {
-
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			if(e.getSource() == btnG1) {
-				//Do this
+				//Set game mode to turn based co-op.
 			} else if (e.getSource() == btnG2) {
-				//Do this
+				//set game mode to 1 writes, 1 guesses (prompt player to enter a word).
 			} else if (e.getSource() == btnG3) {
-				//Do this
+				//set game mode to 1v1 (both players get the same word.
 			} else if(e.getSource() == btnBack) {
-				//Do this
+				//Go back to username-screen. 
 				continueListener.goBackMP();
 			}
 		}
-		
 	}
 	
 	private class BackListener implements MouseListener {
-		@Override
 		public void mouseClicked(MouseEvent arg0) {}
-		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			btnBack.setForeground(Color.RED);
 		}
-		@Override
 		public void mouseExited(MouseEvent arg0) {
 			btnBack.setForeground(Color.WHITE);
 		}
-		@Override
 		public void mousePressed(MouseEvent arg0) {}
-		@Override
 		public void mouseReleased(MouseEvent arg0) {}
 	}
 	

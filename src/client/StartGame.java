@@ -15,7 +15,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	private ViewerSelectCategory selectCategory = new ViewerSelectCategory();
 	private ViewerGame game = new ViewerGame();
 	private ViewerUsername userName = new ViewerUsername();
-	private ViewerMultiplayerMode multiplayer = new ViewerMultiplayerMode();
+	private ViewerMultiplayerMode multiplayerMode = new ViewerMultiplayerMode();
 	private ViewerOnlineList onlineList = new ViewerOnlineList();
 
 	public StartGame(Controller controller) {
@@ -60,10 +60,10 @@ public class StartGame extends JFrame implements ContinueListener {
 		JPanel cardUserName = new JPanel();
 		cardUserName.add(userName);
 		
-		multiplayer.setController(controller);
-		multiplayer.setListener(this);
+		multiplayerMode.setController(controller);
+		multiplayerMode.setListener(this);
 		JPanel cardMultiplayer = new JPanel();
-		cardMultiplayer.add(multiplayer);
+		cardMultiplayer.add(multiplayerMode);
 		
 		onlineList.setController(controller);
 		onlineList.setListener(this);
@@ -72,7 +72,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		
 		controller.setViewerGame(game);
 		controller.setViewerUsername(userName);
-		controller.setViewerMultiplayer(multiplayer);
+		controller.setViewerMultiplayerMode(multiplayerMode);
 		controller.setViewerOnlineList(onlineList);
 
 		cards.add(cardMode, "cardMode");
@@ -80,7 +80,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		cards.add(cardCategory, "cardCategory");
 		cards.add(cardGame, "cardGame");
 		cards.add(cardUserName, "cardUserName");
-		cards.add(cardMultiplayer, "cardMultiplayer");
+		cards.add(cardMultiplayer, "cardMultiplayerMode");
 		cards.add(cardOnlineList, "cardOnlineList");
 	}
 
@@ -92,8 +92,7 @@ public class StartGame extends JFrame implements ContinueListener {
 			currentCard = "cardCategory";
 		} else if (currentCard.equals("cardCategory")) {
 			currentCard = "cardGame";
-		}
-		
+		}	
 		cardLayout.show(cards, currentCard);
 	}
 	
@@ -111,15 +110,14 @@ public class StartGame extends JFrame implements ContinueListener {
 		} else if (currentCard.equals("cardDifficulty")) {
 			currentCard = "cardMode";
 		}
-		
 		cardLayout.show(cards, currentCard);
 	}
 
 	@Override
 	public void goBackMP() { 
 		if (currentCard.equals("cardOnlineList")) {
-			currentCard = "cardMultiplayer";
-	 	} else if (currentCard.equals("cardMultiplayer")) {
+			currentCard = "cardMultiplayerMode";
+	 	} else if (currentCard.equals("cardMultiplayerMode")) {
 			currentCard = "cardMode";
 		} else if (currentCard.equals("cardUserName")) {
 			currentCard = "cardMode";
@@ -132,8 +130,8 @@ public class StartGame extends JFrame implements ContinueListener {
 		if (currentCard.equals("cardMode")) {
 			currentCard = "cardUserName";
 		} else if (currentCard.equals("cardUserName")) {
-			currentCard = "cardMultiplayer";
-		} else if (currentCard.equals("cardMultiplayer")) {
+			currentCard = "cardMultiplayerMode";
+		} else if (currentCard.equals("cardMultiplayerMode")) {
 			currentCard = "cardOnlineList";
 		}
 		cardLayout.show(cards, currentCard);

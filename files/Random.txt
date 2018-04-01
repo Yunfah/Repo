@@ -13,6 +13,188 @@ turtle
 lizard
 baboon
 pterodactyl
+wolf 
+python
+penguin
+possum
+ostrich
+flamingo
+dragonfly
+tarantula
+yak
+owl
+wombat
+warthog
+vulture
+turkey
+tortoise
+squirrel
+raccoon
+nutcracker
+crocodile
+mongoose
+lizard
+lemur
+hyena
+hedgehog
+grizzlybear
+fox
+emu
+duck
+dabchick
+cougar
+cheetah
+butterfly
+bulbul
+chimpanzee
+ox
+yamma
+sloth
+koala
+parrot
+whale
+anteater
+octopus
+black widow
+panther
+tyrannosaurus rex
+alligator
+peacock
+cock
+hen
+chicken
+sheep
+goat
+dolphin
+shark
+donkey
+echidna
+hedgehog
+mcdonalds
+samsung
+twitter
+gucci
+adidas
+nike
+instagram
+facebook
+youtube
+puma
+apple
+huawei
+volvo
+opel
+saab
+bmw
+mercedes benz
+coca cola
+pepsi
+fila
+kfc
+burger king
+prada
+fendi
+microsoft
+linux
+sony
+google
+lg
+asus
+nvidia
+intel
+amd
+razer
+h&m
+yves rocher
+calvin klein
+ferrari
+hugo boss
+hermes
+chanel
+armani
+tesla
+lamborghini
+adobe
+philips
+braum
+riot games
+valve
+blizzard
+everest
+marshall
+yamaha
+ducati
+kawasaki
+suzuki
+toyota
+subaru
+hyundai
+kia
+nissan
+infiniti
+sega
+nintendo
+playstation
+xbox
+levis
+vans
+converse
+logitech
+steelseries
+spotify
+whatsapp
+hewlett packard
+electrolux
+bosch
+grundig
+telefunken
+ikea
+media markt
+walmart
+lenovo
+blue
+atari
+new balance
+lotus
+aston martin
+bugatti
+chevrolet
+rolex
+cadillac
+seiko
+rado
+breitling
+louis vuitton
+cartoon network
+netflix
+hbo
+beats
+monster
+red bull
+fujitsu
+siemens
+nokia
+dolce & gabbana
+versace
+maybelline
+clinique
+nyx
+isadora
+elisabeth arden
+esacada
+dkny
+koenigsegg
+audi
+yves saint laurent
+paco rabanne
+lumine
+daniel wellington
+peak performance
+burberry
+mulberry
+cos
+ferrero
+absolut
 New York
 Chicago
 Stockholm
@@ -23,3 +205,47 @@ New Mexico
 San Fransisco
 Malmoe
 Helsinki
+Istanbul
+Moscow
+Baghdad
+Johannesburg
+Pyongyang
+Madrid
+Shanghai
+Kinshasa
+Lahore
+Ahmedabad
+Bangkok
+Hanoi
+Vienna
+Sarajevo
+Zagreb
+Copenhagen
+Tallinn
+Paris
+Berlin
+Budapest
+Luxembourg city
+Amsterdam
+Warsaw
+Bucharest
+Bratislava
+Ankara
+Ljubljana
+Quito
+Montevideo
+Caracas
+Esloev
+Ouagadougou
+Cairo
+Tripoli
+Philadelphia
+Washington
+Atlanta
+Oslo
+Cleveland
+Liverpool
+Kabul
+Beijing
+Gothenburg
+Gotham
