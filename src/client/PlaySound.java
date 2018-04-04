@@ -12,19 +12,16 @@ public class PlaySound extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
+       // https://stackoverflow.com/questions/22490064/how-to-use-javafx-mediaplayer-correctly
 
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-       try {
+    public void start(Stage primaryStage) {
            Media hit = new Media(new File("files/elevator.mp3").toURI().toString());
            MediaPlayer mediaPlayer = new MediaPlayer(hit);
            mediaPlayer.play();
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
+
 
     }
 }
