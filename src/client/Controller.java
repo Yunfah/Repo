@@ -92,13 +92,20 @@ public class Controller {
 			viewerGame.setWin(true);
 	}
 	
+	public void setWordGuessed() {
+		for (int i = 0; i < wordToGuess.length(); i++) {
+			encodedWord[i] = wordToGuess.charAt(i);
+		}
+		viewerGame.setWord(encodedWord);
+	}
+	
 	public void saveGameProgress() {
 		ArrayList<WordProgress> saveList = new ArrayList<WordProgress>();
 		int wrongGuesses = viewerGame.getWrongLetterCount();
 		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses);
 		
 		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(	//Check amount of save files.
-				new FileInputStream("files/saveFiles.dat")))) {
+				new FileInputStream("files/SaveFiles.dat")))) {
 			
 			WordProgress progress = (WordProgress)ois.readObject();
 			while(progress != null) {
@@ -123,7 +130,7 @@ public class Controller {
 		
 		//Ta parametrar för ett WordProgress-objekt och spara till textfil som objekt. max 15 st. 
 		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
-				new FileOutputStream("files/saveFiles.dat", false)))) {
+				new FileOutputStream("files/SaveFiles.dat", false)))) {
 			
 			for (WordProgress prog : saveList) {
 				oos.writeObject(prog);
