@@ -92,6 +92,13 @@ public class Controller {
 			viewerGame.setWin(true);
 	}
 	
+	public void setWordGuessed() {
+		for (int i = 0; i < wordToGuess.length(); i++) {
+			encodedWord[i] = wordToGuess.charAt(i);
+		}
+		viewerGame.setWord(encodedWord);
+	}
+	
 	public void saveGameProgress() {
 		ArrayList<WordProgress> saveList = new ArrayList<WordProgress>();
 		int wrongGuesses = viewerGame.getWrongLetterCount();

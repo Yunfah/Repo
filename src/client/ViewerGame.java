@@ -3,7 +3,6 @@ package client;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.*;
@@ -128,13 +127,14 @@ public class ViewerGame extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrongLetterCount());
 			((AbstractButton) e.getSource()).setEnabled(false);
-
 			btnSave.setEnabled(true);
-			controller.checkLetter(e.getActionCommand().charAt(0));
+			controller.checkLetter(e.getActionCommand().charAt(0));			
 			if (drawingPanel.getWrongLetterCount() == 10) {
 				for(JButton btn : letterButtons)
 					btn.setEnabled(false);
 				btnSave.setEnabled(false);
+				if (rbShowWord.isSelected())
+					controller.setWordGuessed();
 			}
 			drawingPanel.repaint();
 		}
