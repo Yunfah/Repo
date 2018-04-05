@@ -44,7 +44,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	public JPanel titlePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setPreferredSize(new Dimension(1200, 200));
-		panel.setBounds(0, 0, 1200, 200);
+		panel.setBounds(0, 0, 1200, 150);
 		Font titlefont = new Font("SansSerif", Font.PLAIN, 125);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
 		panel.setBackground(Color.DARK_GRAY);
@@ -69,7 +69,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
 		panel.setBackground(Color.DARK_GRAY);
 		btnEz.setBounds(450, 0, 300, 100);
-		btnDS.setBounds(450, 175, 300, 100);
+		btnDS.setBounds(450, 150, 300, 100);
 		btnEz.setFont(btnfont);
 		btnDS.setFont(btnfont);
 		btnEz.setForeground(Color.GREEN);
@@ -88,7 +88,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.setBackground(Color.DARK_GRAY);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
 		panel.setBounds(0, 600, 1200, 200);
-		btnLoadGame.setBounds(450, 75, 300, 75);
+		btnLoadGame.setBounds(450, 50, 300, 100);
 		btnLoadGame.setFont(btnfont);
 		btnEE.setBounds(1050, 100, 150, 100);
 		btnEE.setContentAreaFilled(false);
