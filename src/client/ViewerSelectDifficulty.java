@@ -11,11 +11,12 @@ import java.util.Random;
 import javax.swing.*;
 
 public class ViewerSelectDifficulty extends JPanel implements ActionListener, MouseListener {
-	private JLabel title = new JLabel("DIFFICULTY    ", SwingConstants.CENTER);
+	private JLabel title = new JLabel("DIFFICULTY     ", SwingConstants.CENTER);
 	private JButton btnBack = new JButton("<-- BACK");
 	private JButton btnEz = new JButton("EZ");
 	private JButton btnDS = new JButton("DARK SOULS");
 	private JButton btnEE = new JButton();
+	private JButton btnLoadGame = new JButton("Load latest saved game");
 	private boolean eeActivated = false;
 	private Random rand = new Random();
 	private ContinueListener continueListener;
@@ -23,23 +24,27 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));
+		setLayout(null);
 		setBackground(Color.DARK_GRAY);
 		
 		btnBack.addMouseListener(this);
 		btnBack.addActionListener(this);
 		btnEz.addActionListener(this);
 		btnDS.addActionListener(this);
+		btnLoadGame.addActionListener(this);
+		btnLoadGame.addMouseListener(this);
 		btnEE.addActionListener(this);
 		btnEE.addMouseListener(this);
 		
-		add(titlePanel(), BorderLayout.NORTH);
-		add(btnPanel(), BorderLayout.CENTER);
-		add(bottomPanel(), BorderLayout.SOUTH);
+		add(titlePanel());
+		add(btnPanel());
+		add(bottomPanel());
 	}
 	
 	public JPanel titlePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setPreferredSize(new Dimension(1200, 200));
+		panel.setBounds(0, 0, 1200, 200);
 		Font titlefont = new Font("SansSerif", Font.PLAIN, 125);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
 		panel.setBackground(Color.DARK_GRAY);
@@ -59,12 +64,12 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	}
 	
 	public JPanel btnPanel() {
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.setPreferredSize(new Dimension(350, 400));
+		JPanel panel = new JPanel(null);
+		panel.setBounds(0, 200, 1200, 400);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
 		panel.setBackground(Color.DARK_GRAY);
-		btnEz.setPreferredSize(new Dimension(300,150));
-		btnDS.setPreferredSize(new Dimension(300,150));
+		btnEz.setBounds(400, 0, 350, 150);
+		btnDS.setBounds(400, 225, 350, 150);
 		btnEz.setFont(btnfont);
 		btnDS.setFont(btnfont);
 		btnEz.setForeground(Color.GREEN);
@@ -72,21 +77,25 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		btnEz.setHorizontalAlignment(JButton.CENTER);
 		btnDS.setHorizontalAlignment(JButton.CENTER);
 		
-		panel.add(btnEz, BorderLayout.NORTH);
-		panel.add(btnDS, BorderLayout.SOUTH);
+		panel.add(btnEz);
+		panel.add(btnDS);
 		
 		return panel;
 	}
 	
 	public JPanel bottomPanel() {
-		JPanel panel = new JPanel(new BorderLayout());
+		JPanel panel = new JPanel(null);
 		panel.setBackground(Color.DARK_GRAY);
-		panel.setPreferredSize(new Dimension(1200, 200));
-		btnEE.setPreferredSize(new Dimension(150, 50));
+		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
+		panel.setBounds(0, 600, 1200, 200);
+		btnLoadGame.setBounds(400, 75, 350, 75);
+		btnLoadGame.setFont(btnfont);
+		btnEE.setBounds(1050, 100, 150, 100);
 		btnEE.setContentAreaFilled(false);
 		btnEE.setBorderPainted(false);
 		
-		panel.add(btnEE, BorderLayout.EAST);
+		panel.add(btnEE);
+		panel.add(btnLoadGame);
 		
 		return panel;
 	}
@@ -136,6 +145,9 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			}
 			activateEE();
 		}
+		if(e.getSource()==btnLoadGame) {
+			
+		}
 	}
 		
 	public void mousePressed(MouseEvent e) {}
@@ -151,6 +163,9 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 				btnEE.setForeground(randomColor());
 			}
 		}
+		if(e.getComponent()==btnLoadGame) {
+			btnLoadGame.setForeground(Color.RED);
+		}
 	}
 
 	public void mouseExited(MouseEvent e) {
@@ -161,6 +176,9 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			if(eeActivated==true) {
 				btnEE.setForeground(randomColor());
 			}
+		}
+		if(e.getComponent()==btnLoadGame) {
+			btnLoadGame.setForeground(Color.BLACK);
 		}
 	}
 
