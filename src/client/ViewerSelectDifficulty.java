@@ -11,7 +11,7 @@ import java.util.Random;
 import javax.swing.*;
 
 public class ViewerSelectDifficulty extends JPanel implements ActionListener, MouseListener {
-	private JLabel title = new JLabel("DIFFICULTY     ", SwingConstants.CENTER);
+	private JLabel title = new JLabel("DIFFICULTY    ", SwingConstants.CENTER);
 	private JButton btnBack = new JButton("<-- BACK");
 	private JButton btnEz = new JButton("EZ");
 	private JButton btnDS = new JButton("DARK SOULS");
@@ -68,8 +68,8 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.setBounds(0, 200, 1200, 400);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
 		panel.setBackground(Color.DARK_GRAY);
-		btnEz.setBounds(400, 0, 350, 150);
-		btnDS.setBounds(400, 225, 350, 150);
+		btnEz.setBounds(450, 0, 300, 100);
+		btnDS.setBounds(450, 175, 300, 100);
 		btnEz.setFont(btnfont);
 		btnDS.setFont(btnfont);
 		btnEz.setForeground(Color.GREEN);
@@ -88,7 +88,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.setBackground(Color.DARK_GRAY);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
 		panel.setBounds(0, 600, 1200, 200);
-		btnLoadGame.setBounds(400, 75, 350, 75);
+		btnLoadGame.setBounds(450, 75, 300, 75);
 		btnLoadGame.setFont(btnfont);
 		btnEE.setBounds(1050, 100, 150, 100);
 		btnEE.setContentAreaFilled(false);
