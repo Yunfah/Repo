@@ -3,7 +3,6 @@ package client;
 import java.applet.*;
 import java.io.File;
 import java.net.*;
-import java.util.Timer;
 
 public class PlaySound extends Thread {
 	private AudioClip sound;
@@ -17,10 +16,10 @@ public class PlaySound extends Thread {
 	}
 	public void playDuel() {
 		try{
-		File file = new File("files/duel.wav");
-		sound =  Applet.newAudioClip(file.toURI().toURL());
-	} catch(MalformedURLException e) {}
-	sound.loop();
+			File file = new File("files/duel.wav");
+			sound =  Applet.newAudioClip(file.toURI().toURL());
+		} catch(MalformedURLException e) {}
+		sound.loop();
 
 	}
 	public void stopLoop() {
