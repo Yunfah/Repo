@@ -99,42 +99,18 @@ public class Controller {
 		viewerGame.setWord(encodedWord);
 	}
 	
-	public void saveGameProgress() {
-		ArrayList<WordProgress> saveList = new ArrayList<WordProgress>();
+	/**
+	 * Saves the current progress. Only one save file
+	 * can exist at a time.
+	 */
+	public void saveGameProgress() {	//TEST THIS METHOD PLEASE
 		int wrongGuesses = viewerGame.getWrongLetterCount();
 		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses);
-		
-		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(	//Check amount of save files.
-				new FileInputStream("files/SaveFiles.dat")))) {
-			
-			WordProgress progress = (WordProgress)ois.readObject();
-			while(progress != null) {
-				saveList.add(progress);
-				progress = (WordProgress)ois.readObject();
-			}
-			
-			if (saveList.size() >= 15) {
-				saveList.remove(0);
-				saveList.add(14, newSave);
-			} else {
-				saveList.add(newSave);
-			}
-			
-		} catch (FileNotFoundException e1) {
-			System.out.println("File not found while trying to read.");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Could not cast object to WordProgress.");
-		}
-		
-		//Ta parametrar för ett WordProgress-objekt och spara till textfil som objekt. max 15 st. 
+		 
 		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
 				new FileOutputStream("files/SaveFiles.dat", false)))) {
 			
-			for (WordProgress prog : saveList) {
-				oos.writeObject(prog);
-			}
+			oos.writeObject(newSave);
 			oos.flush();
 			
 		} catch (FileNotFoundException e) {
@@ -144,7 +120,7 @@ public class Controller {
 		}
 	}
 	
-	public void loadSaveFile(int index) {
+	public void loadSaveFile(int index) {	//TEST THIS METHOD PLEASE
 		//Load savefile nr index and set up a single player game from it.
 	}
 

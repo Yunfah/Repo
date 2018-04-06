@@ -36,7 +36,5 @@ public class PlaySound extends Thread {
 		t1.playDuel();
 		Thread.sleep(5000);
 		t1.stopLoop();
-
-
 	}
 }
