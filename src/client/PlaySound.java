@@ -10,14 +10,14 @@ public class PlaySound extends Thread {
 
 	public void playElevatorLoop() {
 		try{
-			File file = new File("/Users/yammasarwari/git/Repo/Repo/files/elevator.wav");
+			File file = new File("files/elevator.wav");
 			sound =  Applet.newAudioClip(file.toURI().toURL());
 		} catch(MalformedURLException e) {}
 		sound.loop();
 	}
 	public void playDuel() {
 		try{
-		File file = new File("/Users/yammasarwari/git/Repo/Repo/files/duel.wav");
+		File file = new File("files/duel.wav");
 		sound =  Applet.newAudioClip(file.toURI().toURL());
 	} catch(MalformedURLException e) {}
 	sound.loop();
