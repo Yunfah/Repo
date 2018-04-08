@@ -17,6 +17,7 @@ public class ServerUI extends JFrame {
 	private JLabel lblCurrentPort = new JLabel("Port: ");
 	private JButton btnConfirm = new JButton("Confirm");
 	private JPanel panel = new JPanel();
+	private Listener listener = new Listener();
 	
 	public ServerUI() {
 		setSize(new Dimension(400, 300));
@@ -53,6 +54,7 @@ public class ServerUI extends JFrame {
 		panel.add(lblServer);
 		
 		btnConfirm.setBounds(alignementX+200, 55, 100, 30);
+		btnConfirm.addActionListener(listener);
 		panel.add(btnConfirm);
 		
 		
@@ -72,12 +74,20 @@ public class ServerUI extends JFrame {
 	
 	private class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
 			int port = (Integer.parseInt(tfPort.getText()));
-			try (Socket portTest = new Socket("localhost", port)) {
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			
+			//Check if port is available
+			try (Socket portTest = new Socket("localhost", port)) {	//port unavailable
+				tfPort.setText("");
+				System.out.println(portTest);
+				JOptionPane.showMessageDialog(null, "Port unavailable");
+			} catch (IOException e1) {	//Port is available
+				tfPort.setEnabled(false);
+				lblCurrentPort.setText(lblCurrentPort.getText() + port);
+				Server server = new Server(port);
 			}
+			
 		}
 		
 	}

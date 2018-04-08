@@ -92,6 +92,10 @@ public class Controller {
 			viewerGame.setWin(true);
 	}
 	
+	/**
+	 * Sets the word to as if it has been completely guessed
+	 * and shows it in the game window.
+	 */
 	public void setWordGuessed() {
 		for (int i = 0; i < wordToGuess.length(); i++) {
 			encodedWord[i] = wordToGuess.charAt(i);
@@ -101,29 +105,55 @@ public class Controller {
 	
 	/**
 	 * Saves the current progress. Only one save file
-	 * can exist at a time.
+	 * may exist at a time.
 	 */
 	public void saveGameProgress() {	//TEST THIS METHOD PLEASE
 		int wrongGuesses = viewerGame.getWrongLetterCount();
 		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses);
 		 
 		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
-				new FileOutputStream("files/SaveFiles.dat", false)))) {
+				new FileOutputStream("files/SaveFile.dat", false)))) {
 			
 			oos.writeObject(newSave);
 			oos.flush();
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found.");
+			System.out.println("File not found while saving.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void loadSaveFile(int index) {	//TEST THIS METHOD PLEASE
-		//Load savefile nr index and set up a single player game from it.
+	/**
+	 * Loads the latest save file and sets up a game from it.
+	 */
+	public void loadSaveFile() {	//TEST THIS METHOD PLEASE
+		//Load savefile and set up a single player game from it.
+		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(
+				new FileInputStream("files/SaveFile.dat")))) {
+			
+			WordProgress progress = (WordProgress)ois.readObject();
+			String word = progress.getWordToGuess();
+			char[] encoded = progress.getWordProgress();
+			int mistakes = progress.getWrongLetterCount();
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found while loading.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * Sets the encoded word to the given encoded word. 
+	 * Should be used to change the progress of how much
+	 * has been guessed. 
+	 * @param encodedWord
+	 */
 	public void setEncodedWord(char[] encodedWord) {
 		this.encodedWord = encodedWord;
 	}
@@ -143,24 +173,30 @@ public class Controller {
 				word = br.readLine();
 			}
 			int index = rand.nextInt(list.size());
-			wordToGuess = list.get(index).toUpperCase();
-
-			//Sets the word to a char[] filled with '-' for each letter.
-			encodedWord = new char[wordToGuess.length()];
-			for (int i = 0; i < wordToGuess.length(); i++) {
-				if (wordToGuess.charAt(i) == ' ') {
-					encodedWord[i] = ' ';
-				} else {
-					encodedWord[i] = '-';
-				}
-				System.out.print(encodedWord[i]);
-			}
-			System.out.println();
-			viewerGame.setWord(encodedWord);
+			setWordToGuess(list.get(index));	
 			viewerGame.setCategory(category);
-		}catch (IOException e ) {}
+		} catch (IOException e ) {}
 	}
-
+	
+	public void setWordToGuess(String word) {
+		wordToGuess = word.toUpperCase();
+		setEncodedWordFromString(wordToGuess);
+	}
+	
+	private void setEncodedWordFromString(String word) {
+		word.toUpperCase();
+		encodedWord = new char[word.length()];
+		for (int i = 0; i < wordToGuess.length(); i++) {
+			if (wordToGuess.charAt(i) == ' ') {
+				encodedWord[i] = ' ';
+			} else {
+				encodedWord[i] = '-';
+			}
+			System.out.print(encodedWord[i]);
+		}
+		viewerGame.setWord(encodedWord);
+	}
+	
 	public int getDifficulty() {
 		return difficulty;
 	}
@@ -181,6 +217,10 @@ public class Controller {
 	}
 	
 	public void connect(Client client) {
+		
+	}
+	
+	public static void main(String[] args) {
 		
 	}
 }
