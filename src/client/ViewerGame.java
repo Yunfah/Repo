@@ -1,5 +1,7 @@
 package client;
 
+import com.sun.java.swing.action.NewAction;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -35,7 +37,9 @@ public class ViewerGame extends JPanel {
 		// JPanel to hold non-letter JButtons
 		JPanel specialBtnsPanel = new JPanel(new GridLayout(1, 0, 3, 3));
 		specialBtnsPanel.add(new JButton(new ResetAction("Reset", KeyEvent.VK_R)));
+		specialBtnsPanel.add(new JButton(new NewWordAction("New Word", KeyEvent.VK_N)));
 		specialBtnsPanel.add(new JButton(new ExitAction("Exit", KeyEvent.VK_X)));
+
 
 		// JPanel to hold non-drawing JPanels. It uses BoxLayout
 		JPanel bottomPanel = new JPanel();
@@ -154,6 +158,18 @@ public class ViewerGame extends JPanel {
 			reset();
 		}
 	}
+	private class NewWordAction extends AbstractAction {
+		public NewWordAction(String name, int mnemonic) {
+			super(name);
+			putValue(MNEMONIC_KEY, mnemonic);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			reset();
+			// GÖR DET HÄR 
+		}
+	}
 
 	private class ExitAction extends AbstractAction {
 		public ExitAction(String name, int mnemonic) {
@@ -168,6 +184,7 @@ public class ViewerGame extends JPanel {
 			win.dispose();
 		}
 	}
+
 
 	/**
 	 * Sets the current progress of the word to guess.
