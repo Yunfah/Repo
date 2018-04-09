@@ -171,7 +171,10 @@ public class ViewerGame extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			reset();
+			for (JButton button : letterButtons) {
+				button.setEnabled(true);
+			}
+			resetNewWord();
 			// GÖR DET HÄR
 		}
 	}
@@ -265,6 +268,14 @@ public class ViewerGame extends JPanel {
 		drawingPanel.setWin(false);
 		controller.setEncodedWord(resetWord);
 	}
+	public void resetNewWord() {
+		for (JButton btn : letterButtons)
+			btn.setEnabled(true);
+		btnSave.setEnabled(false);
+		controller.resetCategoryWord();
+		drawingPanel.setWrongLetterCount(controller.getDifficulty());
+		drawingPanel.setWin(false);
+	}
 }
 
 class DrawingPanel extends JPanel {
@@ -296,7 +307,7 @@ class DrawingPanel extends JPanel {
 		if (win) {
 			g.setFont(new Font("SansSerif", Font.BOLD, 50));
 			g.setColor(Color.CYAN);
-			g.drawString("YOU WIN", 500, 400);
+			g.drawString("Inte Bull läge", 500, 400);
 		} 	
 	} 
 

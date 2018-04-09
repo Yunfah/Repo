@@ -5,7 +5,7 @@ London
 Seoul
 Tokyo
 New Mexico
-San Fransisco
+San Francisco
 Malmoe
 Helsinki
 Istanbul
@@ -28,7 +28,6 @@ Tallinn
 Paris
 Berlin
 Budapest
-Luxembourg city
 Amsterdam
 Warsaw
 Bucharest
