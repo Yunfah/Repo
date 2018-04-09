@@ -1,7 +1,5 @@
 package client;
 
-import com.sun.java.swing.action.NewAction;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -147,7 +145,6 @@ public class ViewerGame extends JPanel {
 				if (rbShowWord.isSelected())
 					controller.setWordGuessed();
 			}
-			
 			drawingPanel.repaint();
 		}
 	}
