@@ -1,9 +1,5 @@
 package client;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0130f28269dc8a4c1f21e90a759d9d6a82921638
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -175,7 +171,10 @@ public class ViewerGame extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			reset();
+			for (JButton button : letterButtons) {
+				button.setEnabled(true);
+			}
+			resetNewWord();
 			// GÖR DET HÄR
 		}
 	}
@@ -268,6 +267,14 @@ public class ViewerGame extends JPanel {
 		drawingPanel.setWord(resetWord);
 		drawingPanel.setWin(false);
 		controller.setEncodedWord(resetWord);
+	}
+	public void resetNewWord() {
+		for (JButton btn : letterButtons)
+			btn.setEnabled(true);
+		btnSave.setEnabled(false);
+		controller.resetCategoryWord();
+		drawingPanel.setWrongLetterCount(controller.getDifficulty());
+		drawingPanel.setWin(false);
 	}
 }
 

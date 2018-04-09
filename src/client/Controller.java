@@ -182,6 +182,13 @@ public class Controller {
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
 	}
+
+	public void resetCategoryWord() {
+		Random rand = new Random();
+		int index = rand.nextInt(list.size());
+		setWordToGuess(list.get(index));
+
+	}
 	
 	private void setEncodedWordFromString(String word) {
 		word.toUpperCase();

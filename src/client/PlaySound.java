@@ -27,7 +27,7 @@ public class PlaySound {
 		sound.stop();
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		PlaySound t1 = new PlaySound();
 		t1.playElevatorLoop();
 

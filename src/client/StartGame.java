@@ -8,7 +8,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	CardLayout cardLayout = new CardLayout();
 	private JPanel cards = new JPanel(cardLayout);
 	private String currentCard;
-	private PlaySound playSound;
 	private Controller controller;
 	private ViewerSelectMode selectMode = new ViewerSelectMode();
 	private ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
@@ -25,14 +24,13 @@ public class StartGame extends JFrame implements ContinueListener {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Hangman");
 		setResizable(false);
-		
 		setupCards();
 		currentCard = "cardMode";
 		cardLayout.show(cards, currentCard);
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
-		playSound.playElevatorLoop();
+		new PlaySound().playElevatorLoop();
 	}
 
 	private void setupCards() {

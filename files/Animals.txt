@@ -57,7 +57,6 @@ anteater
 octopus
 black widow
 panther
-tyrannosaurus rex
 alligator
 peacock
 cock
