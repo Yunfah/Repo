@@ -24,7 +24,7 @@ public class Controller {
 	private ArrayList<String> list = new ArrayList<String>();
 
 	private String wordToGuess = "";
-	private char[] encodedWord = null;
+	private char[] encodedWord = null; 
 
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
