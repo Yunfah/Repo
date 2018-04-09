@@ -8,7 +8,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	CardLayout cardLayout = new CardLayout();
 	private JPanel cards = new JPanel(cardLayout);
 	private String currentCard;
-	
+	private PlaySound playSound;
 	private Controller controller;
 	private ViewerSelectMode selectMode = new ViewerSelectMode();
 	private ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
@@ -32,6 +32,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
+		playSound.playElevatorLoop();
 	}
 
 	private void setupCards() {

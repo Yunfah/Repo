@@ -5,7 +5,7 @@ import java.io.File;
 import java.net.*;
 import java.util.Timer;
 
-public class PlaySound extends Thread {
+public class PlaySound {
 	private AudioClip sound;
 
 	public void playElevatorLoop() {
@@ -30,12 +30,6 @@ public class PlaySound extends Thread {
 	public static void main(String[] args) throws InterruptedException {
 		PlaySound t1 = new PlaySound();
 		t1.playElevatorLoop();
-		Thread.sleep(10000);
-		t1.stopLoop();
-		Thread.sleep(5000);
-		t1.playDuel();
-		Thread.sleep(5000);
-		t1.stopLoop();
 
 
 	}
