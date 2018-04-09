@@ -307,7 +307,7 @@ class DrawingPanel extends JPanel {
 		if (win) {
 			g.setFont(new Font("SansSerif", Font.BOLD, 50));
 			g.setColor(Color.CYAN);
-			g.drawString("YOU WIN", 500, 400);
+			g.drawString("Inte Bull läge", 500, 400);
 		} 	
 	} 
 
