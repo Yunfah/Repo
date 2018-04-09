@@ -1,5 +1,9 @@
 package client;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0130f28269dc8a4c1f21e90a759d9d6a82921638
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -172,7 +176,7 @@ public class ViewerGame extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			reset();
-			// GÖR DET HÄR 
+			// GÖR DET HÄR
 		}
 	}
 
