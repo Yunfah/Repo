@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.*;
 
 public class ViewerGame extends JPanel {
-	// using a List of JButtons to hold my collection
 	private List<JButton> letterButtons = new ArrayList<>();
 	private DrawingPanel drawingPanel = new DrawingPanel();
 	private ContinueListener continueListener;
@@ -20,18 +19,23 @@ public class ViewerGame extends JPanel {
 	private ButtonGroup rbGroup = new ButtonGroup();
 	private JRadioButton rbShowWord = new JRadioButton("Show word on loss");
 	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
+	
+	private boolean[] buttonEnabled = new boolean[26];
 
 	public ViewerGame() {
 		setPreferredSize(new Dimension(1200, 800));
 		JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));
 		letterButtonPanel.setBorder(BorderFactory.createTitledBorder("Letters"));
 		ButtonListener buttonListener = new ButtonListener();
+		int counter = 0;
 		for (char c = 'A'; c <= 'Z'; c++) {
 			String text = String.valueOf(c);
 			JButton button = new JButton(text);
 			button.addActionListener(buttonListener);
 			letterButtons.add(button); // add JButton to List<JButton>
 			letterButtonPanel.add(button);  // and add to GridLayout-using JPanel
+			buttonEnabled[counter] = true;
+			counter++;
 		}	
 		setupTopOptions();
 		// JPanel to hold non-letter JButtons
@@ -131,8 +135,11 @@ public class ViewerGame extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrongLetterCount());
 			((AbstractButton) e.getSource()).setEnabled(false);
+			int indexOfLetter = letterButtons.indexOf(e.getSource());
+			buttonEnabled[indexOfLetter] = false;
 			btnSave.setEnabled(true);
 			controller.checkLetter(e.getActionCommand().charAt(0));			
+			
 			if (drawingPanel.getWrongLetterCount() == 10) {
 				for(JButton btn : letterButtons)
 					btn.setEnabled(false);
@@ -140,6 +147,7 @@ public class ViewerGame extends JPanel {
 				if (rbShowWord.isSelected())
 					controller.setWordGuessed();
 			}
+			
 			drawingPanel.repaint();
 		}
 	}
@@ -182,6 +190,18 @@ public class ViewerGame extends JPanel {
 			Component component = (Component) e.getSource();
 			Window win = SwingUtilities.getWindowAncestor(component);
 			win.dispose();
+		}
+	}
+	
+	public void setTurn(boolean myTurn) {
+		if (myTurn == true) {
+			for (int i = 0; i < buttonEnabled.length; i++) {
+				letterButtons.get(i).setEnabled(buttonEnabled[i]);
+			}
+		} else if (myTurn == false) {
+			for (JButton btn : letterButtons) {
+				btn.setEnabled(false);
+			}
 		}
 	}
 
@@ -240,13 +260,13 @@ public class ViewerGame extends JPanel {
 			btn.setEnabled(true);
 		btnSave.setEnabled(false);
 		int length = drawingPanel.getWord().length;
-		char[] newWord = new char[length];
+		char[] resetWord = new char[length];
 		for (int i = 0; i < length; i++)
-			newWord[i] = '-';
+			resetWord[i] = '-';
 		drawingPanel.setWrongLetterCount(controller.getDifficulty());
-		drawingPanel.setWord(newWord);
+		drawingPanel.setWord(resetWord);
 		drawingPanel.setWin(false);
-		controller.setEncodedWord(newWord);
+		controller.setEncodedWord(resetWord);
 	}
 }
 
