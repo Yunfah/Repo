@@ -1,6 +1,5 @@
 package client;
 
-import com.sun.java.swing.action.NewAction;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -175,7 +174,7 @@ public class ViewerGame extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			reset();
-			// GÖR DET HÄR 
+			// GÖR DET HÄR
 		}
 	}
 
