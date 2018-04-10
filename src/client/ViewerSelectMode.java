@@ -44,8 +44,8 @@ public class ViewerSelectMode extends JPanel {
 		btnSingle.setBounds(450, 50, 300, 100);
 		btnMulti.setBounds(450, 200, 300, 100);
 			
-		btnSingle.setFont(new Font ("Sans Serif", Font.PLAIN, 30));
-		btnMulti.setFont(new Font ("Sans Serif", Font.PLAIN, 30));
+		btnSingle.setFont(new Font ("Sans Serif", Font.BOLD, 30));
+		btnMulti.setFont(new Font ("Sans Serif", Font.BOLD, 30));
 		
 		btnSingle.addActionListener(listener);
 		btnMulti.addActionListener(listener);
