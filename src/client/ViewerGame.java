@@ -288,7 +288,7 @@ class DrawingPanel extends JPanel {
 
 	public DrawingPanel() {
 		setLayout(null);
-		setBorder(BorderFactory.createTitledBorder("Hang Man"));
+		setBorder(BorderFactory.createTitledBorder("Hangman"));
 		setBackground(Color.WHITE);
 	}
 
@@ -430,7 +430,7 @@ class DrawingPanel extends JPanel {
 	 * Draws the same amount of lines as letters in the word 
 	 * to guess.
 	 * @param g Graphics object to draw with.
-	 * @param length The amount of letters in the word.
+	 * @param word The amount of letters in the word.
 	 */
 	public void drawWordLines(Graphics g, char[] word) {
 		g.setColor(Color.BLACK);
