@@ -69,8 +69,10 @@ public class ViewerGame extends JPanel {
 		rbShowWord.setBounds(1040, 10, 150, 30);
 		rbShowWord.setSelected(true);
 		rbShowWord.setBackground(Color.PINK);
+		rbShowWord.setOpaque(true);
 		rbHideWord.setBounds(1040, 40, 150, 30);
 		rbHideWord.setBackground(Color.PINK);
+		rbHideWord.setOpaque(true);
 
 		drawingPanel.add(btnBack);
 		drawingPanel.add(btnSave);
