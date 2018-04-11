@@ -288,7 +288,7 @@ class DrawingPanel extends JPanel {
 
 	public DrawingPanel() {
 		setLayout(null);
-		setBorder(BorderFactory.createTitledBorder("Hang Man"));
+		setBorder(BorderFactory.createTitledBorder("Hangman"));
 		setBackground(Color.WHITE);
 	}
 
@@ -309,7 +309,7 @@ class DrawingPanel extends JPanel {
 		if (win) {
 			g.setFont(new Font("SansSerif", Font.BOLD, 50));
 			g.setColor(Color.CYAN);
-			g.drawString("Inte Bull läge", 500, 400);
+			g.drawString("You Win!", 500, 400);
 		} 	
 	} 
 
@@ -420,7 +420,7 @@ class DrawingPanel extends JPanel {
 
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
-			g.drawString("Bull läge", 600, 300);
+			g.drawString("You Lose. :(", 600, 300);
 		}
 		break;
 		}
@@ -430,7 +430,7 @@ class DrawingPanel extends JPanel {
 	 * Draws the same amount of lines as letters in the word 
 	 * to guess.
 	 * @param g Graphics object to draw with.
-	 * @param length The amount of letters in the word.
+	 * @param word The amount of letters in the word.
 	 */
 	public void drawWordLines(Graphics g, char[] word) {
 		g.setColor(Color.BLACK);

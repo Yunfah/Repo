@@ -20,7 +20,7 @@ public class PlaySound {
 		File file = new File("files/duel.wav");
 		sound =  Applet.newAudioClip(file.toURI().toURL());
 	} catch(MalformedURLException e) {}
-	sound.loop();
+	sound.play();
 
 	}
 	public void stopLoop() {
