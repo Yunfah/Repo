@@ -70,6 +70,7 @@ public class ViewerSelectMode extends JPanel {
 			if (e.getSource() == btnSingle) {
 				continueListener.nextPanel();
 				controller.setMode(Controller.SINGLE_PLAYER);
+				System.out.println("singleplayer chosen");
 			} else if (e.getSource() == btnMulti) {
 				controller.setMode(Controller.MULTIPLAYER);
 				continueListener.nextPanelMP();
