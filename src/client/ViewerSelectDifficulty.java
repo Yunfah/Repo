@@ -185,6 +185,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 
 	public void mouseClicked(MouseEvent e) {}
 	
+	//wohoo
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Test of difficulty window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
