@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -49,20 +50,22 @@ public class ServerUI extends JFrame {
 		panel.add(lblCurrentPort);
 		
 		JLabel lblServer = new JLabel("Server IP:");
-		lblServer.setBounds(alignementX, 120, 100, 30);
+		lblServer.setBounds(alignementX, 130, 100, 30);
 		lblServer.setFont(fontLabels);
 		panel.add(lblServer);
+		
+		lblCurrentIP.setBounds(alignementX, 170, 150, 30);
+		lblCurrentIP.setFont(fontLabels);
+		panel.add(lblCurrentIP);
 		
 		btnConfirm.setBounds(alignementX+200, 55, 100, 30);
 		btnConfirm.addActionListener(listener);
 		panel.add(btnConfirm);
 		
-		
-		
 		return panel;
 	}
 	
-	private String getIP() {
+	public String getIP() {
 		try {
 			InetAddress localIP = InetAddress.getLocalHost();
 			return localIP.getHostAddress();
@@ -78,21 +81,25 @@ public class ServerUI extends JFrame {
 			int port = (Integer.parseInt(tfPort.getText()));
 			
 			//Check if port is available
-			try (Socket portTest = new Socket("localhost", port)) {	//port unavailable
+			try (Socket portTest = new Socket( "localhost", port)) {	//port unavailable
 				tfPort.setText("");
 				System.out.println(portTest);
 				JOptionPane.showMessageDialog(null, "Port unavailable");
-			} catch (IOException e1) {	//Port is available
+			} catch (IOException e1) {									//Port is available
 				tfPort.setEnabled(false);
 				lblCurrentPort.setText(lblCurrentPort.getText() + port);
+				
+				JLabel lbl = new JLabel("Server running...");
+				lbl.setBounds(200, 100, 250, 50);
+				lbl.setFont(new Font("SansSerif", Font.BOLD, 30));
+				lbl.setForeground(Color.RED);
+				panel.add(lbl);
+				panel.repaint();
+				
 				Server server = new Server(port);
-			}
-			
-		}
-		
-	}
-	
-	public static void main(String[] args) {
-		ServerUI test = new ServerUI();
+				
+				
+			}	
+		}	
 	}
 }
