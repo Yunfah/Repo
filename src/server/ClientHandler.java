@@ -20,7 +20,7 @@ public class ClientHandler extends Thread {
 		this.oos = oos;
 		this.username = username;
 	}
-	
+	 
 	public String getUsername() {
 		return username;
 	}
