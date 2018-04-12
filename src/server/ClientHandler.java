@@ -38,7 +38,7 @@ public class ClientHandler extends Thread {
 		try {
 			oos.writeObject(list);
 			oos.flush();
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 	}
