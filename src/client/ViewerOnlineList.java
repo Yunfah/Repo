@@ -6,8 +6,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.*;
+
+import server.ClientHandler;
 
 public class ViewerOnlineList extends JPanel {
 	private ContinueListener continueListener;
@@ -18,6 +21,7 @@ public class ViewerOnlineList extends JPanel {
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
 	private ButtonGroup bg = new ButtonGroup();
+	private JPanel pnlOnlineList;
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -53,11 +57,11 @@ public class ViewerOnlineList extends JPanel {
 		main.setBackground(Color.DARK_GRAY);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 
-		JPanel onlineList = new JPanel();
-		onlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
+		pnlOnlineList = new JPanel();
+		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
 													// make it only do as many as needed.
 
-		JScrollPane scroll = new JScrollPane(onlineList);
+		JScrollPane scroll = new JScrollPane(pnlOnlineList);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(100, 50, 400, 500);
@@ -65,15 +69,6 @@ public class ViewerOnlineList extends JPanel {
 
 		btnInvite.setBounds(800, 400, 200, 100);
 		btnInvite.setFont(btnFont);
-
-		for (int i = 0; i < 99; i++) { // Change value to onlinelist.size so that it can only show as many as needed
-
-			JRadioButton btn = new JRadioButton("FIX USERNAME HERE");// Change so that the server can read how many buttons it needs.
-			btn.setSize(new Dimension(400, 60));
-			bg.add(btn);
-			onlineList.add(btn);
-
-		}
 		
 		lblSettings.setBounds(650, 20, 400, 100);
 		lblSettings.setFont(btnFont);
@@ -84,9 +79,18 @@ public class ViewerOnlineList extends JPanel {
 		main.add(btnInvite);
 		main.add(scroll);
 
-
 		return main;
 	} 
+	
+	public void updateOnlineList(ArrayList<ClientHandler> onlineList) {
+		pnlOnlineList.removeAll();
+		for (int i = 0; i < onlineList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
+			JRadioButton btn = new JRadioButton("FIX USERNAME HERE");// Change so that the server can read how many buttons it needs.
+			btn.setSize(new Dimension(400, 60));
+			bg.add(btn);
+			pnlOnlineList.add(btn);
+		}
+	}
 	
 	public void setGameModeText(String text) {
 		lblSettings.setText("Game Mode: " + text );

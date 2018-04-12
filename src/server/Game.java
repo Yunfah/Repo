@@ -14,7 +14,10 @@ public class Game {
 	private Controller controllerP2;
 	
 	public Game(ClientHandler player1, ClientHandler player2) {
-		
+		this.player1 = player1;
+		this.player2 = player2;
 	}
+	
+	
 
 }

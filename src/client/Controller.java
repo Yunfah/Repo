@@ -230,6 +230,6 @@ public class Controller {
 	}
 	
 	public void updateOnline(ArrayList<ClientHandler> onlineList) {
-//		viewerOnlineList.updateOnline(onlineList);
+		viewerOnlineList.updateOnline(onlineList);
 	}
 }

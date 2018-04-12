@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import server.ClientHandler;
+
 /**
  * Represents a player with a connection to a server.
  *
@@ -42,7 +44,8 @@ public class Client extends Thread {
 			while(true) {
 				Object input = ois.readObject();
 				if (input instanceof ArrayList) {
-					
+					ArrayList<ClientHandler> list = (ArrayList<ClientHandler>)input;
+					controller.updateOnline(list);
 				}
 
 			}

@@ -29,7 +29,8 @@ public class Server implements Runnable {
 	public void logout(ClientHandler ch) {
 		System.out.println(ch.getUsername() + " wants to disconnect.");
 		clientList.remove(ch);
-		
+		ch = null; //needed?
+		sendClientList();
 	}
 	
 	private void sendClientList() {
@@ -53,8 +54,6 @@ public class Server implements Runnable {
 				clientList.add(new ClientHandler(socket, ois, oos, this, username));
 				
 				sendClientList();
-				
-				
 				
 			} catch (IOException e) {
 				e.printStackTrace();
