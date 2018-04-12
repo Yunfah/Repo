@@ -16,6 +16,8 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import server.ClientHandler;
+
 public class Controller {
 	private ViewerGame viewerGame;
 	private ViewerUsername viewerUsername;
@@ -223,11 +225,11 @@ public class Controller {
 		}
 	}
 	
-	public void connect(Client client) {
-		
+	public void connect(String username, String ip, int port) {
+		new Client(username, ip, port);
 	}
 	
-	public static void main(String[] args) {
-		
+	public void updateOnline(ArrayList<ClientHandler> onlineList) {
+//		viewerOnlineList.updateOnline(onlineList);
 	}
 }

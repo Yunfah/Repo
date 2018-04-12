@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Represents a player with a connection to a server.
@@ -25,11 +26,11 @@ public class Client extends Thread {
 		} catch (IOException e) {}
 		start();
 	}
-	
+
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -37,7 +38,20 @@ public class Client extends Thread {
 	public void run() {
 
 		try {
-			oos.writeUTF(username);
-		} catch (IOException e) {}
+			oos.writeObject(username);
+			while(true) {
+				Object input = ois.readObject();
+				if (input instanceof ArrayList) {
+					
+				}
+
+			}
+		} catch (IOException e) {
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 	
 	}
+
 }
+

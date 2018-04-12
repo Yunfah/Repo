@@ -16,31 +16,51 @@ public class Server implements Runnable {
 	private ServerSocket serverSocket;
 	private ArrayList<ClientHandler> clientList = new ArrayList<ClientHandler>();
 	private ArrayList<Game> gameList = new ArrayList<Game>();
+	private int port;
 	
 	public Server(int port) {
+		this.port = port;
 		try {
 			serverSocket = new ServerSocket(port);
 			server.start();
 		} catch (IOException e) {}
 	}
+	
+	public void logout(ClientHandler ch) {
+		System.out.println(ch.getUsername() + " wants to disconnect.");
+		clientList.remove(ch);
+		
+	}
+	
+	private void sendClientList() {
+		for (ClientHandler ch : clientList) {
+			ch.sendClientList(clientList);
+		}
+	}
+	
 	@Override
 	public void run() {
-		System.out.println("Server is running...");
+		System.out.println("Server is running on port " + port + "...");
 		while (true) {
 			try {
 				Socket socket = serverSocket.accept();
 				ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 				ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 				
-				System.out.println(ois.readUTF());
-				clientList.add(new ClientHandler(socket, ois, oos));
+				String username = (String)ois.readObject();
+				System.out.println(username + " connected.");
+
+				clientList.add(new ClientHandler(socket, ois, oos, this, username));
+				
+				sendClientList();
+				
 				
 				
 			} catch (IOException e) {
 				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
-		}
-		
+		}	
 	}
-
 }

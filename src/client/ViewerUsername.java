@@ -26,7 +26,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	private JLabel image = new JLabel();
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnNext = new JButton("Continue");
-	private JTextField txt = new JTextField();
+	private JTextField txtField = new JTextField();
 	private Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 	private Font titleFont = new Font("SansSerif", Font.BOLD, 55);
 	private Font subtitleFont = new Font("SansSerif", Font.BOLD, 25);
@@ -59,9 +59,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		name.setForeground(Color.WHITE);
 		name.setHorizontalAlignment(JLabel.CENTER);
 
-		txt.setBounds(425, 350, 350, 75);
-		txt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		txt.setHorizontalAlignment(JLabel.CENTER);
+		txtField.setBounds(425, 350, 350, 75);
+		txtField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		txtField.setHorizontalAlignment(JLabel.CENTER);
 
 		btnNext.setBounds(825, 350, 200, 75);
 		btnNext.setFont(btnFont);
@@ -72,7 +72,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		image.setBounds(500, 475 ,400,300);
 		image.setIcon(icon);
 
-		txt.getDocument().addDocumentListener(this);
+		txtField.getDocument().addDocumentListener(this);
 		btnBack.addMouseListener(this);
 
 		add(image);
@@ -80,7 +80,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		add(subtitle);
 		add(btnBack);
 		add(name);
-		add(txt);
+		add(txtField);
 		add(btnNext);
 	}
 
@@ -93,22 +93,42 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	}
 
 	public void checkLogIn() {
-		String username = txt.getText();
+		String username = txtField.getText();
 		if(username.length() > 0) {
 			btnNext.setEnabled(true);
-		}else {
+		} else {
 			btnNext.setEnabled(false);
 		}
 	}
 
 	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
+<<<<<<< HEAD
+			String ip;
+			do {
+				ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+			} while (ip.length() <= 7);
 			
-			String ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
-			int port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
-			Client client = new Client (txt.getText(), ip, port);
-			//Skickar iväg klienten till servern
-			controller.connect(client);
+			int port;
+			do {
+				port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+			} while (port < 1 || port > 65536);
+			
+			controller.connect(txtField.getText(), ip, port);
+=======
+//			String ip;
+//			do {
+//				ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+//			} while (ip.length() <= 7);
+//			int port;
+//			do {
+//				port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+//			} while (port < 1 || port > 65536);
+//			
+//			Client client = new Client (txtField.getText(), ip, port);
+//			//Skickar iväg klienten till servern
+//			controller.connect(client);
+>>>>>>> 804b294d1185e4f287a623a042f69f87e8308b25
 
 			continueListener.nextPanelMP();
 		} else if(e.getSource()==btnBack) {
@@ -146,7 +166,6 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		checkLogIn();
 	}
 
-
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Test of username window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,5 +175,4 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);	
 	}
-
 }
