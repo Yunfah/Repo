@@ -14,11 +14,10 @@ public class ViewerOnlineList extends JPanel {
 	private Controller controller;
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
 	private JLabel lblOnline = new JLabel("Online");
-	private JLabel lblSettings = new JLabel();	//Should show what gamemode the player has chosen.
+	private JLabel lblSettings = new JLabel("");	//Should show what gamemode the player has chosen.
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
 	private ButtonGroup bg = new ButtonGroup();
-
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -48,10 +47,10 @@ public class ViewerOnlineList extends JPanel {
 	}
 
 	private JPanel mainPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
+		JPanel main = new JPanel();
+		main.setLayout(null);
 
-		panel.setBackground(Color.DARK_GRAY);
+		main.setBackground(Color.DARK_GRAY);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 
 		JPanel onlineList = new JPanel();
@@ -76,20 +75,25 @@ public class ViewerOnlineList extends JPanel {
 
 		}
 		
-		lblSettings.setBounds(650, 20, 200, 100);
+		lblSettings.setBounds(650, 20, 400, 100);
 		lblSettings.setFont(btnFont);
 		lblSettings.setForeground(Color.WHITE);
-		
-		panel.add(lblSettings);
-		panel.add(btnInvite);
-		panel.add(scroll);
+
+		getGameModeText();
+		main.add(lblSettings);
+		main.add(btnInvite);
+		main.add(scroll);
 
 
-		return panel;
+		return main;
 	} 
 	
 	public void setGameModeText(String text) {
 		lblSettings.setText("Game Mode: " + text );
+	}
+	
+	public String getGameModeText() {
+		return lblSettings.getText();
 	}
 
 	public void setController(Controller controller) {

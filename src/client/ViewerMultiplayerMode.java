@@ -20,7 +20,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	private ContinueListener continueListener;
 	private ButtonListener listener = new ButtonListener();
 	private Controller controller;
-	private ViewerOnlineList onlineList = new ViewerOnlineList();
+	private ViewerOnlineList onlineList;
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
 	private JButton btnG1 = new JButton("Turnbased Co-op");
 	private JButton btnG2 = new JButton("1 Writes, 1 Guesses");
@@ -34,6 +34,9 @@ public class ViewerMultiplayerMode extends JPanel {
 		add(titlePanel(), BorderLayout.NORTH);
 		add(buttonPanel(), BorderLayout.CENTER);
 		
+		btnG1.addActionListener(listener);
+		btnG2.addActionListener(listener);
+		btnG3.addActionListener(listener);
 		btnBack.addMouseListener(new BackListener());
 		btnBack.addActionListener(listener);
 	}
@@ -89,12 +92,18 @@ public class ViewerMultiplayerMode extends JPanel {
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnG1) {
+				
+				continueListener.nextPanelMP();
 				onlineList.setGameModeText("Turnbased Co-op");
 				//Set game mode to turn based co-op.
 			} else if (e.getSource() == btnG2) {
+				
+				continueListener.nextPanelMP();
 				onlineList.setGameModeText("1 Writes, 1 Guesses");
 				//set game mode to 1 writes, 1 guesses (prompt player to enter a word).
 			} else if (e.getSource() == btnG3) {
+				
+				continueListener.nextPanelMP();
 				onlineList.setGameModeText("1v1");
 				//set game mode to 1v1 (both players get the same word.
 			} else if(e.getSource() == btnBack) {
