@@ -3,7 +3,9 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.*;
 
@@ -16,6 +18,7 @@ public class ViewerOnlineList extends JPanel {
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
 	private JPanel pnlOnlineList = new JPanel();
+	private ButtonGroup bg = new ButtonGroup();
 
 
 	public ViewerOnlineList() {
@@ -48,23 +51,36 @@ public class ViewerOnlineList extends JPanel {
 	private JPanel mainPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		
+
 		panel.setBackground(Color.DARK_GRAY);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 
 		JPanel onlineList = new JPanel();
-		onlineList.setBounds(100, 50, 400, 500);
-		
-//		JScrollPane scroll = new JScrollPane(onlineList);
-//		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		scroll.setBounds(100, 50, 400, 500);
+		onlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
+													// make it only do as many as needed.
+
+		JScrollPane scroll = new JScrollPane(onlineList);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(100, 50, 400, 500);
+
 
 		btnInvite.setBounds(800, 400, 200, 100);
 		btnInvite.setFont(btnFont);
 
+		for (int i = 0; i < 99; i++) { // Change value to onlinelist.size so that it can only show as many as needed
+
+			JRadioButton btn = new JRadioButton("FIX USERNAME HERE");// Change so that the server can read how many buttons it needs.
+			btn.setSize(new Dimension(400, 60));
+			bg.add(btn);
+			onlineList.add(btn);
+
+		}
+
 		panel.add(btnInvite);
-		panel.add(onlineList);
+		panel.add(scroll);
+
+
 		return panel;
 	}
 
@@ -77,6 +93,7 @@ public class ViewerOnlineList extends JPanel {
 	}
 
 	public static void main(String[] args) {
+
 		JFrame frame = new JFrame("Test of online list");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(new ViewerOnlineList());
@@ -86,22 +103,4 @@ public class ViewerOnlineList extends JPanel {
 		frame.setVisible(true);
 	}
 
-//		public static void main(String... args) {
-//	        JFrame frame = new JFrame();
-//	        JPanel panel = new JPanel();
-//	        for (int i = 0; i < 10; i++) {
-//	            panel.add(new JButton("Hello-" + i));
-//	        }
-//	        JScrollPane scrollPane = new JScrollPane(panel);
-//	        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//	        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-//	        scrollPane.setBounds(50, 50, 400, 80);
-//	        JPanel contentPane = new JPanel(null);
-//	        contentPane.setPreferredSize(new Dimension(500, 400));
-//	        contentPane.add(scrollPane);
-//	        frame.setContentPane(contentPane);
-//	        frame.pack();
-//	        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//	        frame.setVisible(true);
-//	    }
 }
