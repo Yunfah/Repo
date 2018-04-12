@@ -1,6 +1,10 @@
 package client;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.io.File;
+import java.net.MalformedURLException;
 
 import javax.swing.*;
 
@@ -16,6 +20,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	private ViewerUsername userName = new ViewerUsername(); //Change to username instead of userName
 	private ViewerMultiplayerMode multiplayerMode = new ViewerMultiplayerMode();
 	private ViewerOnlineList onlineList = new ViewerOnlineList();
+	private AudioClip sound;
 
 	public StartGame(Controller controller) {
 		this.controller = controller;
@@ -30,7 +35,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
-		new PlaySound().playElevatorLoop();
+		elevator();
 	}
 
 	private void setupCards() {
@@ -134,6 +139,14 @@ public class StartGame extends JFrame implements ContinueListener {
 			currentCard = "cardOnlineList";
 		}
 		cardLayout.show(cards, currentCard);
+	}
+
+	public void elevator() {
+		try{
+			File file = new File("files/elevator.wav");
+			sound =  Applet.newAudioClip(file.toURI().toURL());
+		} catch (MalformedURLException e) {}
+		sound.loop();
 	}
 	
 	public static void main(String[] args) {

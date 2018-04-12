@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import server.ClientHandler;
 
@@ -28,11 +27,11 @@ public class Client extends Thread {
 		} catch (IOException e) {}
 		start();
 	}
-
+	
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-
+	
 	public String getUsername() {
 		return username;
 	}
@@ -40,6 +39,7 @@ public class Client extends Thread {
 	public void run() {
 
 		try {
+<<<<<<< HEAD
 			oos.writeObject(username);
 			while(true) {
 				Object input = ois.readObject();
@@ -54,7 +54,9 @@ public class Client extends Thread {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} 	
+=======
+			oos.writeUTF(username);
+		} catch (IOException e) {}
+>>>>>>> 55d16538fabbec0d8b34613fb6475ef1520d2142
 	}
-
 }
-

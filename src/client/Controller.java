@@ -218,7 +218,7 @@ public class Controller {
 			this.difficulty = DARK_SOULS;
 			viewerGame.setDifficulty(DARK_SOULS);
 		} else if (difficulty == XTREME) {
-			this.difficulty = XTREME;
+			this.difficulty = XTREME; 
 			viewerGame.setDifficulty(XTREME);
 		} else {
 			System.out.println("Somehow an invalid difficulty was entered.");
