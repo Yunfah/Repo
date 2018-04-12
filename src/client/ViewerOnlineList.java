@@ -14,10 +14,9 @@ public class ViewerOnlineList extends JPanel {
 	private Controller controller;
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
 	private JLabel lblOnline = new JLabel("Online");
-	private JLabel lblSettings;	//Should show what gamemode the player has chosen.
+	private JLabel lblSettings = new JLabel();	//Should show what gamemode the player has chosen.
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
-	private JPanel pnlOnlineList = new JPanel();
 	private ButtonGroup bg = new ButtonGroup();
 
 
@@ -76,12 +75,21 @@ public class ViewerOnlineList extends JPanel {
 			onlineList.add(btn);
 
 		}
-
+		
+		lblSettings.setBounds(650, 20, 200, 100);
+		lblSettings.setFont(btnFont);
+		lblSettings.setForeground(Color.WHITE);
+		
+		panel.add(lblSettings);
 		panel.add(btnInvite);
 		panel.add(scroll);
 
 
 		return panel;
+	} 
+	
+	public void setGameModeText(String text) {
+		lblSettings.setText("Game Mode: " + text );
 	}
 
 	public void setController(Controller controller) {
