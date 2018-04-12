@@ -31,6 +31,8 @@ public class Server implements Runnable {
 				Socket socket = serverSocket.accept();
 				ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 				ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+				
+				System.out.println(ois.readUTF());
 				clientList.add(new ClientHandler(socket, ois, oos));
 				
 				

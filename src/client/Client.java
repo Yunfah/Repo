@@ -35,9 +35,9 @@ public class Client extends Thread {
 	}
 
 	public void run() {
-		Client client = null;
+
 		try {
-			oos.writeObject(client);
+			oos.writeUTF(username);
 		} catch (IOException e) {}
 	}
 }
