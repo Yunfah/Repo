@@ -32,6 +32,12 @@ public class Server implements Runnable {
 		
 	}
 	
+	private void sendClientList() {
+		for (ClientHandler ch : clientList) {
+			ch.sendClientList(clientList);
+		}
+	}
+	
 	@Override
 	public void run() {
 		System.out.println("Server is running on port " + port + "...");
@@ -44,9 +50,11 @@ public class Server implements Runnable {
 				String username = (String)ois.readObject();
 				System.out.println(username + " connected.");
 
-				clientList.add(new ClientHandler(socket, ois, oos, username));
+				clientList.add(new ClientHandler(socket, ois, oos, this, username));
 				
-				//Skicka ut lista på alla anslutna
+				sendClientList();
+				
+				
 				
 			} catch (IOException e) {
 				e.printStackTrace();
