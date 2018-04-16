@@ -114,22 +114,6 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			} while (port < 1 || port > 65536);
 			
 			controller.connect(txtField.getText(), ip, port);
-<<<<<<< HEAD
-=======
-
-//			String ip;
-//			do {
-//				ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
-//			} while (ip.length() <= 7);
-//			int port;
-//			do {
-//				port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
-//			} while (port < 1 || port > 65536);
-//			
-//			Client client = new Client (txtField.getText(), ip, port);
-//			//Skickar iväg klienten till servern
-//			controller.connect(client);
->>>>>>> 55d16538fabbec0d8b34613fb6475ef1520d2142
 
 			continueListener.nextPanelMP();
 		} else if(e.getSource()==btnBack) {
