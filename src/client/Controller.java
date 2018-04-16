@@ -224,7 +224,7 @@ public class Controller {
 			System.out.println("Somehow an invalid difficulty was entered.");
 		}
 	}
-	
+	 
 	public void connect(String username, String ip, int port) {
 		new Client(username, ip, port);
 	}
