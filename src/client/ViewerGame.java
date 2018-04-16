@@ -1,7 +1,11 @@
 package client;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +21,8 @@ public class ViewerGame extends JPanel {
 	private ButtonGroup rbGroup = new ButtonGroup();
 	private JRadioButton rbShowWord = new JRadioButton("Show word on loss");
 	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
+	private AudioClip pop;
+	private boolean popBool;
 	
 	private boolean[] buttonEnabled = new boolean[26];
 
@@ -138,7 +144,8 @@ public class ViewerGame extends JPanel {
 			int indexOfLetter = letterButtons.indexOf(e.getSource());
 			buttonEnabled[indexOfLetter] = false;
 			btnSave.setEnabled(true);
-			controller.checkLetter(e.getActionCommand().charAt(0));			
+			controller.checkLetter(e.getActionCommand().charAt(0));
+			pop();
 			
 			if (drawingPanel.getWrongLetterCount() == 10) {
 				for(JButton btn : letterButtons)
@@ -278,6 +285,19 @@ public class ViewerGame extends JPanel {
 		drawingPanel.setWrongLetterCount(controller.getDifficulty());
 		drawingPanel.setWin(false);
 	}
+	public void pop() {
+		if (!popBool) {
+			try {
+				File file = new File("files/pop.wav");
+				pop = Applet.newAudioClip(file.toURI().toURL());
+			} catch (MalformedURLException e) {
+			}
+			popBool = true;
+			pop.play();
+		} else {
+			pop.play();
+		}
+	}
 }
 
 class DrawingPanel extends JPanel {
@@ -285,6 +305,10 @@ class DrawingPanel extends JPanel {
 	private char[] word;
 	private String category;
 	private boolean win = false;	//Represents if the word has been completely guessed or not
+	private boolean winBool;
+	private boolean loseBool;
+	private AudioClip winSound;
+	private AudioClip loseSound;
 
 	public DrawingPanel() {
 		setLayout(null);
@@ -310,6 +334,7 @@ class DrawingPanel extends JPanel {
 			g.setFont(new Font("SansSerif", Font.BOLD, 50));
 			g.setColor(Color.CYAN);
 			g.drawString("You Win!", 500, 400);
+			win();
 		} 	
 	} 
 
@@ -420,7 +445,8 @@ class DrawingPanel extends JPanel {
 
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
-			g.drawString("You Lose. :(", 600, 300);
+			g.drawString("You Lose :(", 600, 300);
+			lose();
 		}
 		break;
 		}
@@ -526,5 +552,33 @@ class DrawingPanel extends JPanel {
 	public void incrementWrongLetterCount() {
 		wrongLetterCount++;
 		repaint();
+	}
+
+	public void win() {
+		if (!winBool) {
+			try {
+				File file = new File("files/win.wav");
+				winSound = Applet.newAudioClip(file.toURI().toURL());
+			} catch (MalformedURLException e) {
+			}
+			winBool = true;
+			winSound.play();
+		} else {
+			winSound.play();
+		}
+	}
+
+	public void lose() {
+		if (!loseBool) {
+			try {
+				File file = new File("files/lose.wav");
+				loseSound = Applet.newAudioClip(file.toURI().toURL());
+			} catch (MalformedURLException e) {
+			}
+			loseBool = true;
+			loseSound.play();
+		} else {
+			loseSound.play();
+		}
 	}
 }

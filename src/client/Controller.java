@@ -16,6 +16,8 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import server.ClientHandler;
+
 public class Controller {
 	private ViewerGame viewerGame;
 	private ViewerUsername viewerUsername;
@@ -216,18 +218,18 @@ public class Controller {
 			this.difficulty = DARK_SOULS;
 			viewerGame.setDifficulty(DARK_SOULS);
 		} else if (difficulty == XTREME) {
-			this.difficulty = XTREME;
+			this.difficulty = XTREME; 
 			viewerGame.setDifficulty(XTREME);
 		} else {
 			System.out.println("Somehow an invalid difficulty was entered.");
 		}
 	}
 	
-	public void connect(Client client) {
-		
+	public void connect(String username, String ip, int port) {
+		new Client(username, ip, port);
 	}
 	
-	public static void main(String[] args) {
-		
+	public void updateOnline(ArrayList<ClientHandler> onlineList) {
+		viewerOnlineList.updateOnline(onlineList);
 	}
 }

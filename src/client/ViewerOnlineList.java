@@ -3,20 +3,25 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.*;
+
+import server.ClientHandler;
 
 public class ViewerOnlineList extends JPanel {
 	private ContinueListener continueListener;
 	private Controller controller;
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
 	private JLabel lblOnline = new JLabel("Online");
-	private JLabel lblSettings;	//Should show what gamemode the player has chosen.
+	private JLabel lblSettings = new JLabel("");	//Should show what gamemode the player has chosen.
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
-	private JPanel pnlOnlineList = new JPanel();
-
+	private ButtonGroup bg = new ButtonGroup();
+	private JPanel pnlOnlineList;
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -46,26 +51,53 @@ public class ViewerOnlineList extends JPanel {
 	}
 
 	private JPanel mainPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		
-		panel.setBackground(Color.DARK_GRAY);
+		JPanel main = new JPanel();
+		main.setLayout(null);
+
+		main.setBackground(Color.DARK_GRAY);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
 
-		JPanel onlineList = new JPanel();
-		onlineList.setBounds(100, 50, 400, 500);
-		
-//		JScrollPane scroll = new JScrollPane(onlineList);
-//		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		scroll.setBounds(100, 50, 400, 500);
+		pnlOnlineList = new JPanel();
+		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
+													// make it only do as many as needed.
+
+		JScrollPane scroll = new JScrollPane(pnlOnlineList);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(100, 50, 400, 500);
+
 
 		btnInvite.setBounds(800, 400, 200, 100);
 		btnInvite.setFont(btnFont);
+		
+		lblSettings.setBounds(650, 20, 400, 100);
+		lblSettings.setFont(btnFont);
+		lblSettings.setForeground(Color.WHITE);
 
-		panel.add(btnInvite);
-		panel.add(onlineList);
-		return panel;
+		getGameModeText();
+		main.add(lblSettings);
+		main.add(btnInvite);
+		main.add(scroll);
+
+		return main;
+	} 
+	
+	public void updateOnlineList(ArrayList<ClientHandler> onlineList) {
+		pnlOnlineList.removeAll();
+		for (int i = 0; i < onlineList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
+			JRadioButton btn = new JRadioButton("FIX USERNAME HERE");// Change so that the server can read how many buttons it needs.
+			btn.setSize(new Dimension(400, 60));
+			bg.add(btn);
+			pnlOnlineList.add(btn);
+		}
+	}
+	
+	public void setGameModeText(String text) {
+		lblSettings.setText("Game Mode: " + text );
+	}
+	
+	public String getGameModeText() {
+		return lblSettings.getText();
 	}
 
 	public void setController(Controller controller) {
@@ -77,6 +109,7 @@ public class ViewerOnlineList extends JPanel {
 	}
 
 	public static void main(String[] args) {
+
 		JFrame frame = new JFrame("Test of online list");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(new ViewerOnlineList());
@@ -86,22 +119,4 @@ public class ViewerOnlineList extends JPanel {
 		frame.setVisible(true);
 	}
 
-//		public static void main(String... args) {
-//	        JFrame frame = new JFrame();
-//	        JPanel panel = new JPanel();
-//	        for (int i = 0; i < 10; i++) {
-//	            panel.add(new JButton("Hello-" + i));
-//	        }
-//	        JScrollPane scrollPane = new JScrollPane(panel);
-//	        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//	        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-//	        scrollPane.setBounds(50, 50, 400, 80);
-//	        JPanel contentPane = new JPanel(null);
-//	        contentPane.setPreferredSize(new Dimension(500, 400));
-//	        contentPane.add(scrollPane);
-//	        frame.setContentPane(contentPane);
-//	        frame.pack();
-//	        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//	        frame.setVisible(true);
-//	    }
 }
