@@ -42,8 +42,6 @@ public class Client extends Thread {
 		try {
 
 			oos.writeObject(username);
-=======
-<<<<<<< HEAD
 			oos.writeObject(username);
 			while(true) {
 				Object input = ois.readObject();
@@ -60,7 +58,6 @@ public class Client extends Thread {
 		} 	
 
 			oos.writeUTF(username);
->>>>>>> 77f91e2a1a125ca836767611196ec4dc935149f1
 		} catch (IOException e) {}
 	}
 }

@@ -107,7 +107,6 @@ public class ViewerOnlineList extends JPanel {
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
-	
 
 	public static void main(String[] args) {
 
