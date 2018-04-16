@@ -30,6 +30,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		setLayout(new BorderLayout());
 		add(titlePanel(), BorderLayout.NORTH);
 		add(mainPanel(), BorderLayout.CENTER);
+		btnBack.addMouseListener(this);
 	}
 
 	private JPanel titlePanel() {
