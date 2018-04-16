@@ -64,15 +64,16 @@ public class StartGame extends JFrame implements ContinueListener {
 		JPanel cardUserName = new JPanel(); //Change to username instead of userName
 		cardUserName.add(userName); //Change to username instead of userName
 		
-		multiplayerMode.setController(controller);
-		multiplayerMode.setListener(this);
-		JPanel cardMultiplayer = new JPanel();
-		cardMultiplayer.add(multiplayerMode);
-		
 		onlineList.setController(controller);
 		onlineList.setListener(this);
 		JPanel cardOnlineList = new JPanel();
 		cardOnlineList.add(onlineList);
+		
+		multiplayerMode.setController(controller);
+		multiplayerMode.setViewerOnlineList(onlineList);
+		multiplayerMode.setListener(this);
+		JPanel cardMultiplayer = new JPanel();
+		cardMultiplayer.add(multiplayerMode);
 		
 		controller.setViewerGame(game);
 		controller.setViewerUsername(userName); //Change to username instead of userName
