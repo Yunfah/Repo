@@ -24,6 +24,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private JButton btnInvite = new JButton("Invite");
 	private ButtonGroup bg = new ButtonGroup();
 	private JPanel pnlOnlineList;
+	private ArrayList<String> testList = new ArrayList<String>();
+	
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -84,6 +86,17 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 		return main;
 	} 
+	
+	public void updateNameList(String username) {
+		pnlOnlineList.removeAll();
+		testList.add(username);
+		for (int i = 0; i < testList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
+			JRadioButton btn = new JRadioButton(username);// Change so that the server can read how many buttons it needs.
+			btn.setSize(new Dimension(400, 60));
+			bg.add(btn);
+			pnlOnlineList.add(btn);
+		}
+	}
 	
 	public void updateOnlineList(ArrayList<ClientHandler> onlineList) {
 		pnlOnlineList.removeAll();
