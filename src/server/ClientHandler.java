@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 import client.Client;
 
-public class ClientHandler extends Thread implements Serializable {
-	private static final long serialVersionUID = 1L;	//what are you?
+public class ClientHandler extends Thread {
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
