@@ -55,9 +55,12 @@ public class Client extends Thread {
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} 	
-
+			
+		} try {
 			oos.writeUTF(username);
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
