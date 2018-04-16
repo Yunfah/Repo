@@ -6,13 +6,15 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 import server.ClientHandler;
 
-public class ViewerOnlineList extends JPanel {
+public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ContinueListener continueListener;
 	private Controller controller;
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
@@ -107,6 +109,24 @@ public class ViewerOnlineList extends JPanel {
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
+	
+	public void mousePressed(MouseEvent e) {}
+
+	public void mouseReleased(MouseEvent e) {}
+
+	public void mouseEntered(MouseEvent e) {
+		if(e.getComponent()==btnBack) {
+			btnBack.setForeground(Color.RED);
+		}
+	}
+
+	public void mouseExited(MouseEvent e) {
+		if(e.getComponent()==btnBack) {
+			btnBack.setForeground(Color.WHITE);
+		}
+	}
+
+	public void mouseClicked(MouseEvent e) {}
 
 	public static void main(String[] args) {
 
