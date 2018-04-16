@@ -40,7 +40,6 @@ public class Client extends Thread {
 	public void run() {
 
 		try {
-
 			oos.writeObject(username);
 			oos.writeObject(username);
 			while(true) {
@@ -49,7 +48,6 @@ public class Client extends Thread {
 					ArrayList<ClientHandler> list = (ArrayList<ClientHandler>)input;
 					controller.updateOnline(list);
 				}
-
 			}
 		} catch (IOException e) {
 
@@ -59,7 +57,6 @@ public class Client extends Thread {
 		} try {
 			oos.writeUTF(username);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
