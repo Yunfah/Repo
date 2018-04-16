@@ -113,9 +113,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 				port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
 			} while (port < 1 || port > 65536);
 			
+			continueListener.nextPanelMP();
 			controller.connect(txtField.getText(), ip, port);
 
-			continueListener.nextPanelMP();
 		} else if(e.getSource()==btnBack) {
 			continueListener.goBackMP();
 		}
