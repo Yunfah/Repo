@@ -3,12 +3,14 @@ package server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
 import client.Client;
 
-public class ClientHandler extends Thread {
+public class ClientHandler extends Thread implements Serializable {
+	private static final long serialVersionUID = 1L;	//what are you?
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
