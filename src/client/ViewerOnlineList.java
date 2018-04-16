@@ -91,7 +91,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pnlOnlineList.removeAll();
 		testList.add(username);
 		for (int i = 0; i < testList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
-			JRadioButton btn = new JRadioButton(username);// Change so that the server can read how many buttons it needs.
+			JRadioButton btn = new JRadioButton(testList.get(i));// Change so that the server can read how many buttons it needs.
 			btn.setSize(new Dimension(400, 60));
 			bg.add(btn);
 			pnlOnlineList.add(btn);
