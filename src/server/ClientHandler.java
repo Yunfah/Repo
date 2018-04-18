@@ -3,8 +3,8 @@ package server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 import client.Client;
@@ -17,7 +17,7 @@ public class ClientHandler extends Thread {
 	private String username;
 	private Server server;
 	private boolean inGame = false;
-	
+
 	public ClientHandler(Socket socket, ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
 		this.socket = socket;
 		this.ois = ois;
@@ -25,11 +25,11 @@ public class ClientHandler extends Thread {
 		this.server = server;
 		this.username = username;
 	}
-	 
+
 	public String getUsername() {
 		return username;
 	}
-	
+
 	/**
 	 * Sends the current list of online clients to the client associated with this 
 	 * ClientHandler. 
@@ -43,11 +43,11 @@ public class ClientHandler extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void run() {
 		while (true) {
 			try {
-				
+
 			} catch (Exception e) {
 				server.logout(this);
 				break;

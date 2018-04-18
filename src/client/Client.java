@@ -3,11 +3,10 @@ package client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import server.ClientHandler;
+import javax.swing.JOptionPane;
 
 /**
  * Represents a player with a connection to a server.
@@ -41,6 +40,11 @@ public class Client extends Thread {
 	public void sendInvite(String username) {
 		
 	}
+	
+	public void receiveInvite(String username, String gamemode) {
+		JOptionPane.showConfirmDialog(null, username + " invited you to play " + gamemode
+				+ ". Accept?");
+	}
 
 	public void run() {
 
@@ -53,13 +57,13 @@ public class Client extends Thread {
 					ArrayList<String> list = (ArrayList<String>)input;
 					controller.updateOnline(list);
 				}
+				
 			} //end while
 			
 		} catch (IOException e) {
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			
 		} 
 	}
 }

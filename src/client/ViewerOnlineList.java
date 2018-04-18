@@ -3,7 +3,6 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,8 +12,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-
-import server.ClientHandler;
 
 public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ContinueListener continueListener;
@@ -28,14 +25,15 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private JPanel pnlOnlineList;
 	private ArrayList<String> testList = new ArrayList<String>();
 	private ArrayList<JRadioButton> rbList = new ArrayList<JRadioButton>();
-	
+	private ButtonListener listener = new ButtonListener();
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(new BorderLayout());
 		add(titlePanel(), BorderLayout.NORTH);
 		add(mainPanel(), BorderLayout.CENTER);
-		btnBack.addActionListener(new ButtonListener());
+		btnInvite.addActionListener(listener);
+		btnBack.addActionListener(listener);
 		btnBack.addMouseListener(this);
 	}
 
@@ -130,7 +128,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		continueListener = listener;
 	}
 	
-	
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -165,7 +162,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {}
 
 	public static void main(String[] args) {
-
 		JFrame frame = new JFrame("Test of online list");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(new ViewerOnlineList());
@@ -174,5 +170,4 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-
 }

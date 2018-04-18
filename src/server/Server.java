@@ -26,7 +26,7 @@ public class Server implements Runnable {
 		} catch (IOException e) {}
 	}
 	
-	public void sendInvite() {
+	public void sendInvite() { //take parameter for who to send an invite to
 		
 	}
 	
