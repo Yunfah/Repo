@@ -78,7 +78,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnInvite.setBounds(800, 400, 200, 100);
 		btnInvite.setFont(btnFont);
 		
-		lblSettings.setBounds(650, 20, 400, 100);
+		lblSettings.setBounds(600, 20, 400, 150);
 		lblSettings.setFont(btnFont);
 		lblSettings.setForeground(Color.WHITE);
 
