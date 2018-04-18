@@ -17,7 +17,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	private ViewerSelectDifficulty selectDifficulty = new ViewerSelectDifficulty();
 	private ViewerSelectCategory selectCategory = new ViewerSelectCategory();
 	private ViewerGame game = new ViewerGame();
-	private ViewerUsername username = new ViewerUsername(); //Change to username instead of userName
+	private ViewerUsername username = new ViewerUsername();
 	private ViewerMultiplayerMode multiplayerMode = new ViewerMultiplayerMode();
 	private ViewerOnlineList onlineList = new ViewerOnlineList();
 	private AudioClip sound;
@@ -59,10 +59,10 @@ public class StartGame extends JFrame implements ContinueListener {
 		JPanel cardGame = new JPanel();
 		cardGame.add(game);
 		
-		username.setController(controller); //Change to username instead of userName
-		username.setListener(this); //Change to username instead of userName
-		JPanel cardUserName = new JPanel(); //Change to username instead of userName
-		cardUserName.add(username); //Change to username instead of userName
+		username.setController(controller); 
+		username.setListener(this); 
+		JPanel cardUsername = new JPanel(); 
+		cardUsername.add(username); 
 		
 		onlineList.setController(controller);
 		onlineList.setListener(this);
@@ -76,7 +76,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		cardMultiplayer.add(multiplayerMode);
 		
 		controller.setViewerGame(game);
-		controller.setViewerUsername(username); //Change to username instead of userName
+		controller.setViewerUsername(username); 
 		controller.setViewerMultiplayerMode(multiplayerMode);
 		controller.setViewerOnlineList(onlineList);
 
@@ -84,7 +84,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		cards.add(cardDifficulty, "cardDifficulty");
 		cards.add(cardCategory, "cardCategory");
 		cards.add(cardGame, "cardGame");
-		cards.add(cardUserName, "cardUsername"); //Change to username instead of userName
+		cards.add(cardUsername, "cardUsername"); 
 		cards.add(cardMultiplayer, "cardMultiplayerMode");
 		cards.add(cardOnlineList, "cardOnlineList");
 	}
@@ -133,8 +133,8 @@ public class StartGame extends JFrame implements ContinueListener {
 	@Override
 	public void nextPanelMP() {
 		if (currentCard.equals("cardMode")) {
-			currentCard = "cardUserName"; //Change to username instead of userName
-		} else if (currentCard.equals("cardUsername")) { //Change to username instead of userName
+			currentCard = "cardUsername"; 
+		} else if (currentCard.equals("cardUsername")) { 
 			currentCard = "cardMultiplayerMode";
 		} else if (currentCard.equals("cardMultiplayerMode")) {
 			currentCard = "cardOnlineList";
