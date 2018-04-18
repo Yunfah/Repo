@@ -50,6 +50,7 @@ public class ClientHandler extends Thread {
 				
 			} catch (Exception e) {
 				server.logout(this);
+				break;
 			}
 		}
 	}
