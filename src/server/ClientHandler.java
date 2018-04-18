@@ -9,18 +9,16 @@ import java.util.ArrayList;
 
 import client.Client;
 
-public class ClientHandler extends Thread {
+public class ClientHandler extends Thread implements Serializable {
 	private Socket socket;
-	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	private Client client;
 	private String username;
 	private Server server;
 	private boolean inGame = false;
 	
-	public ClientHandler(Socket socket, ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
+	public ClientHandler(Socket socket, ObjectOutputStream oos, Server server, String username) {
 		this.socket = socket;
-		this.ois = ois;
 		this.oos = oos;
 		this.server = server;
 		this.username = username;
@@ -35,7 +33,7 @@ public class ClientHandler extends Thread {
 	 * ClientHandler. 
 	 * @param list
 	 */
-	public void sendClientList(ArrayList<ClientHandler> list) {
+	public void sendClientList(ArrayList<String> list) {
 		try {
 			oos.writeObject(list);
 			oos.flush();

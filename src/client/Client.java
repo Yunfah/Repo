@@ -3,6 +3,7 @@ package client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import server.ClientHandler;
  * Represents a player with a connection to a server.
  *
  */
-public class Client extends Thread {
+public class Client extends Thread implements Serializable {
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
@@ -41,11 +42,11 @@ public class Client extends Thread {
 
 		try {
 			oos.writeObject(username);
-			oos.writeObject(username);
+			
 			while(true) {
 				Object input = ois.readObject();
 				if (input instanceof ArrayList) {
-					ArrayList<ClientHandler> list = (ArrayList<ClientHandler>)input;
+					ArrayList<String> list = (ArrayList<String>)input;
 					controller.updateOnline(list);
 				}
 			}

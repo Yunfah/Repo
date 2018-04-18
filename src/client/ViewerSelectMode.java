@@ -74,21 +74,7 @@ public class ViewerSelectMode extends JPanel {
 			} else if (e.getSource() == btnMulti) {
 				controller.setMode(Controller.MULTIPLAYER);
 				continueListener.nextPanelMP();
-				System.out.println("multiplayer chosen");
 			}
-			
 		}
-		
 	}
-	
-	public static void main (String [] args) {
-		JFrame frame = new JFrame ("Hangman");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewerSelectMode()); 
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-		
-	}
-
 }

@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * Hosts multiplayer games of Hangman. Pairs clients together. 
  *
  */
-public class Server implements Runnable {
+public class Server implements Runnable, Serializable {
 	private Thread server = new Thread(this);
 	private ServerSocket serverSocket;
 	private ArrayList<ClientHandler> clientList = new ArrayList<ClientHandler>();
@@ -34,8 +35,13 @@ public class Server implements Runnable {
 	}
 	
 	private void sendClientList() {
+		ArrayList<String> usernameList = new ArrayList<String>();
 		for (ClientHandler ch : clientList) {
-			ch.sendClientList(clientList);
+			usernameList.add(ch.getUsername());
+		}
+		
+		for (ClientHandler ch : clientList) {
+			ch.sendClientList(usernameList);
 		}
 	}
 	
@@ -51,7 +57,7 @@ public class Server implements Runnable {
 				String username = (String)ois.readObject();
 				System.out.println(username + " connected.");
 
-				clientList.add(new ClientHandler(socket, ois, oos, this, username));
+				clientList.add(new ClientHandler(socket, oos, this, username));
 				
 				sendClientList();
 				

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ButtonGroup bg = new ButtonGroup();
 	private JPanel pnlOnlineList;
 	private ArrayList<String> testList = new ArrayList<String>();
+	private ArrayList<JRadioButton> rbList = new ArrayList<JRadioButton>();
 	
 
 	public ViewerOnlineList() {
@@ -64,13 +67,12 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 		pnlOnlineList = new JPanel();
 		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
-													// make it only do as many as needed.
-
+														// make it only do as many as needed.
+		
 		JScrollPane scroll = new JScrollPane(pnlOnlineList);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(100, 50, 400, 500);
-
 
 		btnInvite.setBounds(800, 400, 200, 100);
 		btnInvite.setFont(btnFont);
@@ -87,21 +89,23 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		return main;
 	} 
 	
+	//TEST METHOD
 	public void updateNameList(String username) {
 		pnlOnlineList.removeAll();
 		testList.add(username);
 		for (int i = 0; i < testList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
 			JRadioButton btn = new JRadioButton(testList.get(i));// Change so that the server can read how many buttons it needs.
 			btn.setSize(new Dimension(400, 60));
+			rbList.add(btn);
 			bg.add(btn);
 			pnlOnlineList.add(btn);
 		}
 	}
 	
-	public void updateOnlineList(ArrayList<ClientHandler> onlineList) {
+	public void updateOnlineList(ArrayList<String> onlineList) {
 		pnlOnlineList.removeAll();
 		for (int i = 0; i < onlineList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
-			JRadioButton btn = new JRadioButton("FIX USERNAME HERE");// Change so that the server can read how many buttons it needs.
+			JRadioButton btn = new JRadioButton(onlineList.get(i));// Change so that the server can read how many buttons it needs.
 			btn.setSize(new Dimension(400, 60));
 			bg.add(btn);
 			pnlOnlineList.add(btn);
@@ -109,7 +113,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	}
 	
 	public void setGameModeText(String text) {
-		lblSettings.setText("Game Mode: " + text );
+		lblSettings.setText("You chose: " + text );
 	}
 	
 	public String getGameModeText() {
@@ -124,22 +128,38 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		continueListener = listener;
 	}
 	
+	
+	private class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnBack) {
+				continueListener.goBackMP();
+				
+			} else if (e.getSource() == btnInvite) {
+				String selectedUser = "";
+				for (JRadioButton rb : rbList) {
+					if (rb.isSelected()) {
+						selectedUser = rb.getText();
+						break;
+					}
+					System.out.println(selectedUser + " was selected by " + controller.getClientUsername());
+				}
+			}	
+		}
+	}
+	
 	public void mousePressed(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
-
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
 		}
 	}
-
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
 		}
 	}
-
 	public void mouseClicked(MouseEvent e) {}
 
 	public static void main(String[] args) {

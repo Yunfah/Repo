@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import server.ClientHandler;
 
 public class Controller {
+	private Client client;
 	private ViewerGame viewerGame;
 	private ViewerUsername viewerUsername;
 	private ViewerMultiplayerMode viewerMultiplayer;
@@ -226,11 +227,15 @@ public class Controller {
 	}
 	 
 	public void connect(String username, String ip, int port) {
-		Client client = new Client(username, ip, port);
+		client = new Client(username, ip, port);
 		viewerOnlineList.updateNameList(client.getUsername());
 	}
 	
-	public void updateOnline(ArrayList<ClientHandler> onlineList) {
+	public String getClientUsername() {
+		return client.getUsername();
+	}
+	
+	public void updateOnline(ArrayList<String> onlineList) {
 		viewerOnlineList.updateOnlineList(onlineList);
 	}
 }
