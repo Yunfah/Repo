@@ -37,6 +37,10 @@ public class Client extends Thread {
 	public String getUsername() {
 		return username;
 	}
+	
+	public void sendInvite(String username) {
+		
+	}
 
 	public void run() {
 
