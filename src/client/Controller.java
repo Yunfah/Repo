@@ -228,6 +228,7 @@ public class Controller {
 	 
 	public void connect(String username, String ip, int port) {
 		client = new Client(username, ip, port);
+		client.setController(this);
 		viewerOnlineList.updateNameList(client.getUsername());
 	}
 	

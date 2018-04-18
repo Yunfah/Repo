@@ -13,7 +13,7 @@ import server.ClientHandler;
  * Represents a player with a connection to a server.
  *
  */
-public class Client extends Thread implements Serializable {
+public class Client extends Thread {
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
@@ -49,16 +49,13 @@ public class Client extends Thread implements Serializable {
 					ArrayList<String> list = (ArrayList<String>)input;
 					controller.updateOnline(list);
 				}
-			}
+			} //end while
+			
 		} catch (IOException e) {
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			
-		} try {
-			oos.writeUTF(username);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 }
