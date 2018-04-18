@@ -134,7 +134,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	public void nextPanelMP() {
 		if (currentCard.equals("cardMode")) {
 			currentCard = "cardUserName"; //Change to username instead of userName
-		} else if (currentCard.equals("cardUserName")) { //Change to username instead of userName
+		} else if (currentCard.equals("cardUsername")) { //Change to username instead of userName
 			currentCard = "cardMultiplayerMode";
 		} else if (currentCard.equals("cardMultiplayerMode")) {
 			currentCard = "cardOnlineList";
