@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import client.Client;
 
-public class ClientHandler extends Thread implements Serializable {
+public class ClientHandler extends Thread {
 	private Socket socket;
 	private ObjectOutputStream oos;
 	private Client client;
