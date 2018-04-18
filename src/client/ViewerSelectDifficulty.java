@@ -150,17 +150,24 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	}
 	
 	/**
-	 * Method which sets the 
+	 * Method which sets the listener to listen to changes in the frame
 	 * @param listener
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
 	
+	/**
+	 * Method which sets the controller
+	 * @param controller
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 	
+	/**
+	 * Method which listens to pressed buttons and perform actions related to this.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBack) {
 			continueListener.goBack();
@@ -186,7 +193,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 //			continueListener.skipToGame();
 		}
 	}
-		
+	
+	/**
+	 * The following methods belongs to MouseListener, and listens to 
+	 * then the mouse interacts with GUI components.
+	 */
 	public void mousePressed(MouseEvent e) {}
 
 	public void mouseReleased(MouseEvent e) {}
@@ -221,7 +232,6 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 
 	public void mouseClicked(MouseEvent e) {}
 	
-	//wohoo
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Test of difficulty window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
