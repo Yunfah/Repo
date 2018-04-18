@@ -19,6 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+/**
+ * 
+ * @author Jakob Kennerberg
+ *
+ */
 public class ViewerUsername extends JPanel implements ActionListener, MouseListener, DocumentListener {
 	private JLabel title = new JLabel("Please enter a username");
 	private JLabel subtitle = new JLabel("(will represent you during this online session)");

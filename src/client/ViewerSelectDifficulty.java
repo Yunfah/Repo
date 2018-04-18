@@ -10,6 +10,11 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.*;
 
+/**
+ * This class creates the panel for choosing difficulty in Hangman
+ * @author Jakob Kennerberg
+ *
+ */
 public class ViewerSelectDifficulty extends JPanel implements ActionListener, MouseListener {
 	private JLabel title = new JLabel("DIFFICULTY    ", SwingConstants.CENTER);
 	private JButton btnBack = new JButton("<-- BACK");
@@ -22,6 +27,9 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private ContinueListener continueListener;
 	private Controller controller;
 	
+	/**
+	 * Constructor
+	 */
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(null);
@@ -41,6 +49,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		add(bottomPanel());
 	}
 	
+	/**
+	 * Method which has the purpose to create the upper panel, including
+	 * the back button and title.
+	 * @returns the upper panel
+	 */
 	public JPanel titlePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setPreferredSize(new Dimension(1200, 200));
@@ -63,6 +76,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		return panel;
 	}
 	
+	/**
+	 * Method which has the purpose to create the central panel, including the difficulty
+	 * buttons.
+	 * @returns the middle panel
+	 */
 	public JPanel btnPanel() {
 		JPanel panel = new JPanel(null);
 		panel.setBounds(0, 200, 1200, 400);
@@ -83,6 +101,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		return panel;
 	}
 	
+	/**
+	 * Method which has the purpose to create the bottom panel, including the EE 
+	 * and load game buttons.
+	 * @returns the bottom panel
+	 */
 	public JPanel bottomPanel() {
 		JPanel panel = new JPanel(null);
 		panel.setBackground(Color.DARK_GRAY);
@@ -100,6 +123,10 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		return panel;
 	}
 	
+	/**
+	 * Method which has the purpose to make the EE button visible and 
+	 * to activate the EE.
+	 */
 	private void activateEE() {
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
 		btnEE.setFont(btnfont);
@@ -108,6 +135,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		eeActivated = true;
 	}
 	
+	/**
+	 * Method which has the purpose to create a random color for usage in
+	 * this class.
+	 * @returns the color
+	 */
 	public Color randomColor() {
 		float r = rand.nextFloat();
 		float g = rand.nextFloat();
@@ -116,7 +148,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		
 		return randomColor;
 	}
-
+	
+	/**
+	 * Method which sets the 
+	 * @param listener
+	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
