@@ -26,6 +26,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ArrayList<String> testList = new ArrayList<String>();
 	private ArrayList<JRadioButton> rbList = new ArrayList<JRadioButton>();
 	private ButtonListener listener = new ButtonListener();
+	private RadioButtonListener rbtnListener = new RadioButtonListener();
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -89,19 +90,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		return main;
 	} 
 	
-	//TEST METHOD
-	public void updateNameList(String username) {
-		pnlOnlineList.removeAll();
-		testList.add(username);
-		for (int i = 0; i < testList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
-			JRadioButton btn = new JRadioButton(testList.get(i));// Change so that the server can read how many buttons it needs.
-			btn.setSize(new Dimension(400, 60));
-			rbList.add(btn);
-			bg.add(btn);
-			pnlOnlineList.add(btn);
-		}
-	}
-	
 	public void updateOnlineList(ArrayList<String> onlineList) {
 		pnlOnlineList.removeAll();
 		pnlOnlineList.repaint();
@@ -109,6 +97,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			JRadioButton btn = new JRadioButton(onlineList.get(i));// Change so that the server can read how many buttons it needs.
 			btn.setSize(new Dimension(400, 60));
 			bg.add(btn);
+			btn.addActionListener(rbtnListener);
 			pnlOnlineList.add(btn);
 		}
 	}
@@ -146,6 +135,12 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 					System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
 				}
 			}	
+		}
+	}
+	
+	private class RadioButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			btnInvite.setEnabled(true);
 		}
 	}
 	
