@@ -73,7 +73,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(100, 50, 400, 500);
 
-		btnInvite.setBounds(800, 400, 200, 100);
+		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(btnFont);
 		
 		lblSettings.setBounds(600, 20, 500, 100);

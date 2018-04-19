@@ -24,6 +24,7 @@ public class ClientHandler extends Thread {
 		this.oos = oos;
 		this.server = server;
 		this.username = username;
+		start();
 	}
 
 	public String getUsername() {
@@ -47,7 +48,7 @@ public class ClientHandler extends Thread {
 	public void run() {
 		while (true) {
 			try {
-
+				ois.readObject();
 			} catch (Exception e) {
 				server.logout(this);
 				break;
