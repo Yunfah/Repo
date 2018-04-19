@@ -58,7 +58,9 @@ public class ClientHandler extends Thread {
 					break;
 					case "invite" : { //Send invite to chosen player. How to show chosen player?
 						String[] invite = ois.readUTF().split(",");
-						//server.sendInvite(username) <- servern hittar CH med usernamet och anropar dens receiveInvite. 
+						String username = invite[0];
+						String gamemode = invite[1];
+						server.sendInvite(username, gamemode); //<- servern hittar CH med usernamet och anropar dens receiveInvite. 
 					}
 					break;
 					case "accept" : int ble; //accept invite that was just received.
