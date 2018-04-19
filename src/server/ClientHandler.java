@@ -44,6 +44,11 @@ public class ClientHandler extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public void recieveInvite(String sender, String gamemode) {
+		//TODO:
+		client.receiveInvite(sender, gamemode);
+	}
 
 	public void run() {
 		while (true) {
