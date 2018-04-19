@@ -145,8 +145,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 					if (rb.isSelected()) {
 						selectedUser = rb.getText();
 						System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
+						break;
 					}
-					break;
 				}
 				inviteMessage(selectedUser);
 			}
@@ -173,13 +173,13 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	}
 	public void mouseClicked(MouseEvent e) {}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Test of online list");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewerOnlineList());
-		frame.pack();
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new JFrame("Test of online list");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.add(new ViewerOnlineList());
+//		frame.pack();
+//		frame.setResizable(false);
+//		frame.setLocationRelativeTo(null);
+//		frame.setVisible(true);
+//	}
 }
