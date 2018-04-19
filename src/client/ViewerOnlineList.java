@@ -27,6 +27,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ButtonListener listener = new ButtonListener();
 	private RadioButtonListener rbtnListener = new RadioButtonListener();
 	private String selectedPlayer;
+	private String gamemode;
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -115,6 +116,14 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public String getGameModeText() {
 		return lblSettings.getText();
 	}
+	
+	public void setGameMode(String gamemode) {
+		this.gamemode = gamemode;
+	}
+	
+	public String getGameMode() {
+		return gamemode;
+	}
 
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -149,6 +158,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 					}
 				}
 				inviteMessage(selectedUser);
+				controller.sendInvite(selectedUser, gamemode);
 			}
 		}
 	}

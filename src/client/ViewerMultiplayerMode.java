@@ -99,16 +99,19 @@ public class ViewerMultiplayerMode extends JPanel {
 				
 				continueListener.nextPanelMP();
 				viewerOnlineList.setGameModeText("Turnbased Co-op");
+				viewerOnlineList.setGameMode("co-op");
 				//Set game mode to turn based co-op.
 			} else if (e.getSource() == btnG2) {
 				
 				continueListener.nextPanelMP();
 				viewerOnlineList.setGameModeText("1 Writes, 1 Guesses");
+				viewerOnlineList.setGameMode("write-guess");
 				//set game mode to 1 writes, 1 guesses (prompt player to enter a word).
 			} else if (e.getSource() == btnG3) {
 				
 				continueListener.nextPanelMP();
 				viewerOnlineList.setGameModeText("1v1");
+				viewerOnlineList.setGameMode("1v1");
 				//set game mode to 1v1 (both players get the same word.
 			} else if(e.getSource() == btnBack) {
 				//Go back to username-screen. 
