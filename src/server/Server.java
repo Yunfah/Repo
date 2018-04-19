@@ -61,6 +61,11 @@ public class Server implements Runnable {
 				System.out.println(username + " connected.");
 
 				clientList.add(new ClientHandler(socket, ois, oos, this, username));
+				
+				System.out.println("Connected now: " );
+				for (ClientHandler ch : clientList)
+					System.out.print(ch.getUsername() + ", ");
+				
 				sendClientList();
 				
 			} catch (IOException e) {

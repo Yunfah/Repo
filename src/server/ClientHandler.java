@@ -52,6 +52,6 @@ public class ClientHandler extends Thread {
 				server.logout(this);
 				break;
 			}
-		}
+		} //end while
 	}
 }

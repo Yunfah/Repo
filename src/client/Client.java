@@ -19,6 +19,12 @@ public class Client extends Thread {
 	private Controller controller;
 	private String username;
 
+	/**
+	 * Constructor.
+	 * @param username The username that represents this client.
+	 * @param ip The ip address of the server that the client connects to.
+	 * @param port The port that the server listens on.
+	 */
 	public Client(String username, String ip, int port) {
 		this.username = username;
 		try {
@@ -29,10 +35,18 @@ public class Client extends Thread {
 		start();
 	}
 	
+	/**
+	 * Sets the controller for this client. 
+	 * @param controller
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUsername() {
 		return username;
 	}
