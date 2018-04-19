@@ -61,7 +61,7 @@ public class Client extends Thread {
 	
 	public void logout() {
 		try {
-			oos.writeObject("logout");
+			oos.writeUTF("logout");
 			oos.flush();
 		}catch (IOException e) {
 			System.out.println("Couldn´t log out");
