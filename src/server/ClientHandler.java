@@ -56,6 +56,11 @@ public class ClientHandler extends Thread {
 					switch (str) {
 					case "logout" : server.logout(this);
 					break;
+					case "invite" : int bla; //Send invite to chosen player. How to show chosen player?
+					break;
+					case "accept" : int ble; //accept invite that was just received.
+					break;
+					case "decline" : int b; //decline invite that was just received. 
 					}
 					
 				}
