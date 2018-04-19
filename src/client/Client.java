@@ -55,8 +55,14 @@ public class Client extends Thread {
 	 * 
 	 * @param username
 	 */
-	public void sendInvite(String username) {
-		
+	public void sendInvite(String username, String gamemode) {
+		try {
+			oos.writeUTF("invite");
+			oos.writeUTF(username + "," + gamemode);
+			oos.flush();
+		} catch (IOException e) {
+			System.out.println("Error sending invite.");
+		}
 	}
 	
 	public void logout() {

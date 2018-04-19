@@ -34,7 +34,7 @@ public class Server implements Runnable {
 	
 	public void logout(ClientHandler ch) {
 		System.out.println(ch.getUsername() + " wants to disconnect.");
-		clientList.remove(ch);
+		clientList.remove(ch.getUsername(), ch);
 		ch = null; //needed?
 		sendClientList();
 	}
