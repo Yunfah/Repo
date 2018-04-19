@@ -142,7 +142,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 						selectedUser = rb.getText();
 						break;
 					}
-					System.out.println(selectedUser + " was selected by " + controller.getClientUsername());
+					System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
 				}
 			}	
 		}
