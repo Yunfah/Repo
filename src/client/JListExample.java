@@ -37,8 +37,7 @@ public class JListExample extends JList {
 		JFrame frame = new JFrame();
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
-			private int counter = 1;
-			@Override
+			private int counter = 1; 
 			public void actionPerformed(ActionEvent e) {
 				users.addElement("AB "+counter++);
 			}			

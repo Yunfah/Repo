@@ -112,6 +112,7 @@ public class ViewerMultiplayerMode extends JPanel {
 				//set game mode to 1v1 (both players get the same word.
 			} else if(e.getSource() == btnBack) {
 				//Go back to username-screen. 
+				
 				continueListener.goBackMP();
 			}
 		}
