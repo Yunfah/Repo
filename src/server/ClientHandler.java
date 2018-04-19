@@ -48,7 +48,18 @@ public class ClientHandler extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				ois.readObject();
+				Object input = ois.readObject();
+				
+				if (input instanceof String) {
+					String str = (String)input;
+					
+					switch (str) {
+					case "logout" : server.logout(this);
+					break;
+					}
+					
+				}
+				
 			} catch (Exception e) {
 				server.logout(this);
 				break;
