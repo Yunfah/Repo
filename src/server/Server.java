@@ -28,7 +28,9 @@ public class Server implements Runnable {
 		} catch (IOException e) {}
 	}
 	
-	public void sendInvite() { //take parameter for who to send an invite to
+	public void sendInvite(String sender, String username, String gamemode) { //take parameter for who to send an invite to
+		ClientHandler user = clientList.get(username);
+		user.recieveInvite(sender);
 		
 	}
 	
