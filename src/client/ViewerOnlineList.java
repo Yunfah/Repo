@@ -144,10 +144,9 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				for (JRadioButton rb : rbList) {
 					if (rb.isSelected()) {
 						selectedUser = rb.getText();
-						//System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
-						//break;
+						System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
 					}
-					System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
+					break;
 				}
 				inviteMessage(selectedUser);
 			}
