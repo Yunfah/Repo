@@ -59,6 +59,15 @@ public class Client extends Thread {
 		
 	}
 	
+	public void logout() {
+		try {
+			oos.writeObject("logout");
+			oos.flush();
+		}catch (IOException e) {
+			System.out.println("Couldn´t log out");
+		}
+		
+	}
 	public void receiveInvite(String username, String gamemode) {
 		JOptionPane.showConfirmDialog(null, username + " invited you to play " + gamemode
 				+ ". Accept?");
