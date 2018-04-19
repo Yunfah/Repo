@@ -101,6 +101,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			JRadioButton btn = new JRadioButton(onlineList.get(i));// Change so that the server can read how many buttons it needs.
 			btn.setSize(new Dimension(400, 60));
 			bg.add(btn);
+			rbList.add(btn);
 			btn.addActionListener(rbtnListener);
 			pnlOnlineList.add(btn);
 		}
