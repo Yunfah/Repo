@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * Represents a player with a connection to a server.
@@ -76,8 +76,12 @@ public class Client extends Thread {
 
 	}
 	public void receiveInvite(String username, String gamemode) {
-		JOptionPane.showConfirmDialog(null, username + " invited you to play " + gamemode
-				+ ". Accept?");
+		String[] options = {"COME FORTH!", "Nay!"};
+		JPanel panel = new JPanel();
+		JLabel lbl = new JLabel(controller.getClient().getUsername() + " wishes to partake in a duel with thee!");
+		panel.add(lbl);
+		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
+				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 	}
 
 
