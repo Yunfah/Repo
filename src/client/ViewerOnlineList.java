@@ -124,10 +124,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		continueListener = listener;
 	}
 
-	public void inviteMessage() {
+	public void inviteMessage(String selectedPlayer) {
         String[] options = {"Cancel Invite"};
         JPanel panel = new JPanel();
-        JLabel lbl = new JLabel("Invite sent to player. Awaiting response...");
+        JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
         panel.add(lbl);
         int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
                 JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
@@ -149,7 +149,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 					}
 					System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
 				}
-				inviteMessage();
+				inviteMessage(selectedUser);
 			}
 		}
 	}
