@@ -23,7 +23,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private JButton btnInvite = new JButton("Invite");
 	private ButtonGroup bg = new ButtonGroup();
 	private JPanel pnlOnlineList;
-	private ArrayList<String> testList = new ArrayList<String>();
 	private ArrayList<JRadioButton> rbList = new ArrayList<JRadioButton>();
 	private ButtonListener listener = new ButtonListener();
 	private RadioButtonListener rbtnListener = new RadioButtonListener();
@@ -64,6 +63,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 		main.setBackground(Color.DARK_GRAY);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
+		
+		lblOnline.setBounds(100, 0, 100, 100);
+		lblOnline.setFont(btnFont);
+		lblOnline.setForeground(Color.GREEN);
 
 		pnlOnlineList = new JPanel();
 		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
@@ -72,7 +75,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		JScrollPane scroll = new JScrollPane(pnlOnlineList);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(100, 50, 400, 500);
+		scroll.setBounds(100, 70, 400, 500);
 		
 		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
@@ -83,6 +86,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		lblSettings.setForeground(Color.WHITE);
 
 		getGameModeText();
+		main.add(lblOnline);
 		main.add(lblSettings);
 		main.add(btnInvite);
 		main.add(scroll);
