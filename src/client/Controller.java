@@ -24,7 +24,7 @@ public class Controller {
 	private ViewerUsername viewerUsername;
 	private ViewerMultiplayerMode viewerMultiplayer;
 	private ViewerOnlineList viewerOnlineList;
-	private ArrayList<String> list = new ArrayList<String>();
+	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
 
 	private String wordToGuess = "";
 	private char[] encodedWord = null; 
@@ -168,15 +168,15 @@ public class Controller {
 	 */
 	public void setCategory(String filename, String category) {
 		Random rand = new Random();
-		list.clear();
+		listWordsFromCategory.clear();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
 			String word = br.readLine();
 			while(word != null) {
-				list.add(word);
+				listWordsFromCategory.add(word);
 				word = br.readLine();
 			}
-			int index = rand.nextInt(list.size());
-			setWordToGuess(list.get(index));	
+			int index = rand.nextInt(listWordsFromCategory.size());
+			setWordToGuess(listWordsFromCategory.get(index));	
 			viewerGame.setCategory(category);
 		} catch (IOException e ) {}
 	}
@@ -188,8 +188,8 @@ public class Controller {
 
 	public void resetCategoryWord() {
 		Random rand = new Random();
-		int index = rand.nextInt(list.size());
-		setWordToGuess(list.get(index));
+		int index = rand.nextInt(listWordsFromCategory.size());
+		setWordToGuess(listWordsFromCategory.get(index));
 
 	}
 	
