@@ -66,6 +66,7 @@ public class ClientHandler extends Thread {
 						String sender = invite[0];
 						String username = invite[1];
 						String gamemode = invite[2];
+						System.out.println("funkar");
 						server.sendInvite(sender, username, gamemode); //<- servern hittar CH med usernamet och anropar dens receiveInvite. 
 					}
 					break;
