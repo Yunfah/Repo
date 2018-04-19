@@ -20,7 +20,6 @@ public class ViewerMultiplayerMode extends JPanel {
 	private ContinueListener continueListener;
 	private ButtonListener listener = new ButtonListener();
 	private Controller controller;
-	private Client client;
 	private ViewerOnlineList viewerOnlineList;
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
 	private JButton btnG1 = new JButton("Turnbased Co-op");
@@ -113,7 +112,7 @@ public class ViewerMultiplayerMode extends JPanel {
 				//set game mode to 1v1 (both players get the same word.
 			} else if(e.getSource() == btnBack) {
 				//Go back to username-screen. 
-				client.logout();
+				controller.getClient().logout();
 				continueListener.goBackMP();
 			}
 		}
