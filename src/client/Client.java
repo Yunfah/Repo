@@ -44,13 +44,17 @@ public class Client extends Thread {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns this client's username.
+	 * @return This client's username. 
 	 */
 	public String getUsername() {
 		return username;
 	}
 	
+	/**
+	 * 
+	 * @param username
+	 */
 	public void sendInvite(String username) {
 		
 	}
