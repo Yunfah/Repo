@@ -232,8 +232,8 @@ public class Controller {
 		viewerOnlineList.updateNameList(client.getUsername());
 	}
 	
-	public String getClientUsername() {
-		return client.getUsername();
+	public Client getClient() {
+		return client;
 	}
 	
 	public void updateOnline(ArrayList<String> onlineList) {

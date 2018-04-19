@@ -64,6 +64,9 @@ public class Client extends Thread {
 				+ ". Accept?");
 	}
 
+	/**
+	 * 
+	 */
 	public void run() {
 
 		try {
