@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Hosts multiplayer games of Hangman. Pairs clients together. 
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 public class Server implements Runnable {
 	private Thread server = new Thread(this);
 	private ServerSocket serverSocket;
-	private ArrayList<ClientHandler> clientList = new ArrayList<ClientHandler>();
+	private HashMap<String, ClientHandler> clientList = new HashMap<String, ClientHandler>(); //The string is the client username
 	private ArrayList<Game> gameList = new ArrayList<Game>();
 	private int port;
 	
@@ -39,12 +41,12 @@ public class Server implements Runnable {
 	
 	private void sendClientList() {
 		ArrayList<String> usernameList = new ArrayList<String>();
-		for (ClientHandler ch : clientList) {
-			usernameList.add(ch.getUsername());
+		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {
+			usernameList.add(entry.getValue().getUsername());
 		}
 		
-		for (ClientHandler ch : clientList) {
-			ch.sendClientList(usernameList);
+		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {
+			entry.getValue().sendClientList(usernameList);
 		}
 	}
 	
@@ -60,11 +62,7 @@ public class Server implements Runnable {
 				String username = (String)ois.readObject();
 				System.out.println(username + " connected.");
 
-				clientList.add(new ClientHandler(socket, ois, oos, this, username));
-				
-				System.out.println("Connected now: " );
-				for (ClientHandler ch : clientList)
-					System.out.print(ch.getUsername() + ", ");
+				clientList.put(username, new ClientHandler(socket, ois, oos, this, username));
 				
 				sendClientList();
 				
