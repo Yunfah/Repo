@@ -56,7 +56,7 @@ public class Client extends Thread {
 	 * @param username
 	 */
 	public void sendInvite(String username) {
-		
+	
 	}
 	
 	public void logout() {
