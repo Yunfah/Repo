@@ -63,6 +63,7 @@ public class Client extends Thread {
 		JOptionPane.showConfirmDialog(null, username + " invited you to play " + gamemode
 				+ ". Accept?");
 	}
+	
 
 	public void run() {
 

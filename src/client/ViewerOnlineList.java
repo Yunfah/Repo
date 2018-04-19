@@ -72,7 +72,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(100, 50, 400, 500);
-
+		
+		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(btnFont);
 		
@@ -133,7 +134,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
 				continueListener.goBackMP();
-				
+
 			} else if (e.getSource() == btnInvite) {
 				String selectedUser = "";
 				for (JRadioButton rb : rbList) {
