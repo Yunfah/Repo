@@ -30,7 +30,7 @@ public class Server implements Runnable {
 	
 	public void sendInvite(String sender, String username, String gamemode) { //take parameter for who to send an invite to
 		ClientHandler user = clientList.get(username);
-		user.recieveInvite(sender);
+		user.recieveInvite(sender, gamemode);
 		
 	}
 	
