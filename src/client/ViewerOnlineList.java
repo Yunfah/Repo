@@ -26,6 +26,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ArrayList<JRadioButton> rbList = new ArrayList<JRadioButton>();
 	private ButtonListener listener = new ButtonListener();
 	private RadioButtonListener rbtnListener = new RadioButtonListener();
+	private String selectedPlayer;
 
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -121,7 +122,16 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
-	
+
+	public void inviteMessage() {
+        String[] options = {"Cancel Invite"};
+        JPanel panel = new JPanel();
+        JLabel lbl = new JLabel("Invite sent to player. Awaiting response...");
+        panel.add(lbl);
+        int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
+                JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+	}
+
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -138,7 +148,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 					}
 					System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
 				}
-			}	
+				inviteMessage();
+			}
 		}
 	}
 	
