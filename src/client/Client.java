@@ -34,7 +34,7 @@ public class Client extends Thread {
 		} catch (IOException e) {}
 		start();
 	}
-	
+
 	/**
 	 * Sets the controller for this client. 
 	 * @param controller
@@ -42,7 +42,7 @@ public class Client extends Thread {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-	
+
 	/**
 	 * Returns this client's username.
 	 * @return This client's username. 
@@ -50,12 +50,12 @@ public class Client extends Thread {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	/**
 	 * 
 	 * @param username
 	 */
-<<<<<<< HEAD
+
 	public void sendInvite(String username, String gamemode) {
 		try {
 			oos.writeUTF("invite");
@@ -64,10 +64,6 @@ public class Client extends Thread {
 		} catch (IOException e) {
 			System.out.println("Error sending invite.");
 		}
-=======
-	public void sendInvite(String username) {
-	
->>>>>>> aad27c7ae42767024c83bfdd3cea2924b0feca3c
 	}
 	
 	public void logout() {
@@ -77,13 +73,13 @@ public class Client extends Thread {
 		}catch (IOException e) {
 			System.out.println("Couldn´t log out");
 		}
-		
+
 	}
 	public void receiveInvite(String username, String gamemode) {
 		JOptionPane.showConfirmDialog(null, username + " invited you to play " + gamemode
 				+ ". Accept?");
 	}
-	
+
 
 	/**
 	 * 
@@ -92,16 +88,16 @@ public class Client extends Thread {
 
 		try {
 			oos.writeObject(username);
-			
+
 			while(true) {
 				Object input = ois.readObject();
 				if (input instanceof ArrayList) {
 					ArrayList<String> list = (ArrayList<String>)input;
 					controller.updateOnline(list);
 				}
-				
+
 			} //end while
-			
+
 		} catch (IOException e) {
 
 		} catch (ClassNotFoundException e) {
