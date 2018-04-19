@@ -236,7 +236,8 @@ public class Controller {
 	}
 	
 	public void sendInvite(String username, String gamemode) {
-		client.sendInvite(username, gamemode);
+		String sender = client.getUsername();
+		client.sendInvite(sender, username, gamemode);
 	}
 	
 	public void updateOnline(ArrayList<String> onlineList) {

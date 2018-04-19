@@ -56,10 +56,10 @@ public class Client extends Thread {
 	 * @param username
 	 */
 
-	public void sendInvite(String username, String gamemode) {
+	public void sendInvite(String sender, String username, String gamemode) {
 		try {
 			oos.writeUTF("invite");
-			oos.writeUTF(username + "," + gamemode);
+			oos.writeUTF(sender + "," + username + "," + gamemode);
 			oos.flush();
 		} catch (IOException e) {
 			System.out.println("Error sending invite.");
@@ -79,7 +79,6 @@ public class Client extends Thread {
 		JOptionPane.showConfirmDialog(null, username + " invited you to play " + gamemode
 				+ ". Accept?");
 	}
-
 
 	/**
 	 * 
