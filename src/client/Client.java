@@ -52,20 +52,54 @@ public class Client extends Thread {
 	}
 
 	/**
-	 * 
-	 * @param username
+	 * Sends a game invite for a certain game mode to a chosen client.
+	 * @param receiver The client that will receive the invite.
+	 * @param gameMode The game mode that an accepted invite will start.
 	 */
 
-	public void sendInvite(String sender, String username, String gamemode) {
+	public void sendInvite(String receiver, String gameMode) {
 		try {
 			oos.writeUTF("invite");
-			oos.writeUTF(sender + "," + username + "," + gamemode);
+			oos.writeUTF(username + "," + receiver + "," + gameMode);
 			oos.flush();
 		} catch (IOException e) {
 			System.out.println("Error sending invite.");
 		}
+	}	
+
+	/**
+	 * Opens an invite from sender for a certain game mode.
+	 * @param sender The sender of this invite.
+	 * @param gameMode The game mode that this invite will start if accepted. 
+	 */
+	public void receiveInvite(String sender, String gameMode) {
+		String[] options = {"COME FORTH!", "Nay!"};
+		JPanel panel = new JPanel();
+		JLabel lbl = new JLabel(sender + " wishes to partake in a duel with thee!");
+		panel.add(lbl);
+		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
+				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		
+		if (selectedOption == JOptionPane.NO_OPTION) {	//OBS!!! Nästa steg är att fixa accept/decline!!!
+			try {
+				oos.writeUTF("decline");
+				oos.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (true) {	//change true to if the invitation was accepted.
+			try {
+				oos.writeUTF("accept");
+				oos.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
+	/**
+	 * Sends a request to the server to be disconnected from it.
+	 */
 	public void logout() {
 		try {
 			oos.writeUTF("logout");
@@ -73,30 +107,28 @@ public class Client extends Thread {
 		}catch (IOException e) {
 			System.out.println("Couldn´t log out");
 		}
-
-	}
-	public void receiveInvite(String username, String gamemode) {
-		String[] options = {"COME FORTH!", "Nay!"};
-		JPanel panel = new JPanel();
-		JLabel lbl = new JLabel(controller.getClient().getUsername() + " wishes to partake in a duel with thee!");
-		panel.add(lbl);
-		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
-				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 	}
 
 	/**
-	 * 
+	 * Communicates with a server through a ClientHandler. 
 	 */
 	public void run() {
 
 		try {
 			oos.writeObject(username);
-
 			while(true) {
 				Object input = ois.readObject();
-				if (input instanceof ArrayList) {
+				if (input instanceof ArrayList) {	//If the input is an arraylist it can only be a list of online clients
 					ArrayList<String> list = (ArrayList<String>)input;
-					controller.updateOnline(list);
+					controller.updateOnline(list);	//
+				} else if (input instanceof String) {
+					String str = (String) input;
+					if (str.equals("invite")) {
+						String sender = ois.readUTF();
+						String gameMode = ois.readUTF();
+						receiveInvite(sender, gameMode);
+					}
+						
 				}
 
 			} //end while

@@ -13,6 +13,11 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+/**
+ * Panel that holds a list of all players currently connected to the server.
+ * Also allows players to choose a player from the online list to invite
+ * them to a game of hangman. 
+ */
 public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ContinueListener continueListener;
 	private Controller controller;
@@ -29,6 +34,9 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private String selectedPlayer;
 	private String gamemode;
 
+	/**
+	 * Constructor.
+	 */
 	public ViewerOnlineList() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(new BorderLayout());
@@ -39,6 +47,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnBack.addMouseListener(this);
 	}
 
+	/**
+	 * Sets up and returns the top panel holding the header and 
+	 * back button for this Viewer. 
+	 * @return JPanel to be used at the top of the window. 
+	 */
 	private JPanel titlePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -59,6 +72,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		return panel;
 	}
 
+	/**
+	 * Sets up and returns the panel containing the list of all currently connected
+	 * players and the invite button.
+	 * @return JPanel that holds the main functionality of this Viewer.
+	 */
 	private JPanel mainPanel() {
 		JPanel main = new JPanel();
 		main.setLayout(null);
@@ -96,6 +114,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		return main;
 	} 
 	
+	/**
+	 * Updates the list showing all currently connected players.
+	 * @param onlineList List containing the names of all the currently connected players.
+	 */
 	public void updateOnlineList(ArrayList<String> onlineList) {
 		pnlOnlineList.removeAll();
 		pnlOnlineList.repaint();
@@ -109,30 +131,59 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		}
 	}
 	
+	/**
+	 * Sets the text of the label that shows the chosen game mode.
+	 * @param text The name of the chosen game mode.
+	 */
 	public void setGameModeText(String text) {
 		lblSettings.setText("You chose: " + text );
 	}
 	
+	/**
+	 * Returns the name of the chosen game mode.
+	 * @return Name of the chosen game mode.
+	 */
 	public String getGameModeText() {
 		return lblSettings.getText();
 	}
 	
+	/**
+	 * Sets the String for the chosen game mode. 
+	 * @param gamemode The game mode that has been chosen. 
+	 */
 	public void setGameMode(String gamemode) {
 		this.gamemode = gamemode;
 	}
 	
+	/**
+	 * Returns the name of the chosen game mode.
+	 * @return The name of the chosen game mode.
+	 */
 	public String getGameMode() {
 		return gamemode;
 	}
 
+	/**
+	 * Sets the controller for this Viewer.
+	 * @param controller The controller to be used for this Viewer. 
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 
+	/**
+	 * 
+	 * @param listener
+	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
 
+	/**
+	 * Shows a dialog confirming that an invite has been sent to selectedPlayer
+	 * and that a response is being awaited.
+	 * @param selectedPlayer The player that was chosen for an invite.
+	 */
 	public void inviteMessage(String selectedPlayer) {
         String[] options = {"Cancel Invite"};
         JPanel panel = new JPanel();
@@ -149,20 +200,25 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				continueListener.goBackMP();
 
 			} else if (e.getSource() == btnInvite) {
-				String selectedUser = "";
 				for (JRadioButton rb : rbList) {
 					if (rb.isSelected()) {
-						selectedUser = rb.getText();
-						System.out.println(selectedUser + " was selected by " + controller.getClient().getUsername());
+						selectedPlayer = rb.getText();
+						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
 						break;
 					}
 				}
-				inviteMessage(selectedUser);
-				controller.sendInvite(selectedUser, gamemode);
+				inviteMessage(selectedPlayer);
+				controller.sendInvite(selectedPlayer, gamemode);
 			}
 		}
 	}
 	
+	/**
+	 * Enables the invite-button as soon as a player is chosen from 
+	 * the online list.
+	 * @author Jakob Kennerberg
+	 *
+	 */
 	private class RadioButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			btnInvite.setEnabled(true);

@@ -17,9 +17,13 @@ public class Server implements Runnable {
 	private Thread server = new Thread(this);
 	private ServerSocket serverSocket;
 	private HashMap<String, ClientHandler> clientList = new HashMap<String, ClientHandler>(); //The string is the client username
-	private ArrayList<Game> gameList = new ArrayList<Game>();
+	private ArrayList<Game> gameList = new ArrayList<Game>();	//should hold a list of all active games between clients at this time.
 	private int port;
 	
+	/**
+	 * Constructor.
+	 * @param port The port this server will listen on. 
+	 */
 	public Server(int port) {
 		this.port = port;
 		try {
@@ -28,10 +32,15 @@ public class Server implements Runnable {
 		} catch (IOException e) {}
 	}
 	
-	public void sendInvite(String sender, String username, String gamemode) { //take parameter for who to send an invite to
-		ClientHandler user = clientList.get(username);
-		user.recieveInvite(sender, gamemode);
-		
+	/**
+	 * Sends a game invite for game mode to receiver.
+	 * @param sender The client that sent the invite. 
+	 * @param receiver The client the invite is meant for. 
+	 * @param gameMode The game mode this invite will start if accepted.
+	 */
+	public void sendInvite(String sender, String receiver, String gameMode) { 
+		ClientHandler ch = clientList.get(receiver);
+		ch.recieveInvite(sender, gameMode);
 	}
 	
 	public void logout(ClientHandler ch) {

@@ -7,13 +7,10 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-import client.Client;
-
 public class ClientHandler extends Thread {
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
-	private Client client;
 	private String username;
 	private Server server;
 	private boolean inGame = false;
@@ -24,7 +21,7 @@ public class ClientHandler extends Thread {
 		this.oos = oos;
 		this.server = server;
 		this.username = username;
-		start();
+		this.start();
 	}
 
 	public String getUsername() {
@@ -45,11 +42,26 @@ public class ClientHandler extends Thread {
 		}
 	}
 	
-	public void recieveInvite(String sender, String gamemode) {
-		//TODO:
-		client.receiveInvite(sender, gamemode);
+	/**
+	 * This ClientHandler's Client receives an invite for gamemode from sender.
+	 * @param sender The sender of the invite.
+	 * @param gameMode The gamemode this invite will start if accepted. 
+	 */
+	public void recieveInvite(String sender, String gameMode) {
+		//TODO: Send an invite to this client from sender for gamemode
+		try {
+			oos.writeUTF("invite");
+			oos.writeUTF(sender);
+			oos.writeUTF(gameMode);
+			oos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * Listens for requests from this Client and handles them using the server.
+	 */
 	public void run() {
 		while (true) {
 			try {
@@ -61,20 +73,21 @@ public class ClientHandler extends Thread {
 					switch (str) {
 					case "logout" : server.logout(this);
 					break;
-					case "invite" : { //Send invite to chosen player. How to show chosen player?
+					case "invite" : { //Send invite to chosen player. 
 						String[] invite = ois.readUTF().split(",");
 						String sender = invite[0];
 						String username = invite[1];
-						String gamemode = invite[2];
-						System.out.println("funkar");
-						server.sendInvite(sender, username, gamemode); //<- servern hittar CH med usernamet och anropar dens receiveInvite. 
+						String gamMmode = invite[2];
+						System.out.println("invite funkar");
+						server.sendInvite(sender, username, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite(). 
 					}
 					break;
 					case "accept" : int ble; //accept invite that was just received.
 					break;
 					case "decline" : int b; //decline invite that was just received. 
-					}
+					break;
 					
+					} //end switch
 				}
 				
 			} catch (Exception e) {

@@ -237,7 +237,15 @@ public class Controller {
 	
 	public void sendInvite(String username, String gamemode) {
 		String sender = client.getUsername();
-		client.sendInvite(sender, username, gamemode);
+		client.sendInvite(username, gamemode);
+	}
+	
+	/**
+	 * Enables or disables this controller's Client's turn.
+	 * @param myTurn Set to true to enable the turn, and false to disable it.
+	 */
+	public void setTurn(boolean myTurn) {
+		viewerGame.setEnabled(myTurn); //TEST THIS!!!!!!!!!
 	}
 	
 	public void updateOnline(ArrayList<String> onlineList) {
