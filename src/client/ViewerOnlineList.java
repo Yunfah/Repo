@@ -191,7 +191,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		panel.add(lbl);
 		JFrame frame = new JFrame();
 		frame.add(panel);
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -203,15 +203,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				continueListener.goBackMP();
 
 			} else if (e.getSource() == btnInvite) {
-
-				for (JRadioButton rb : rbList) {
-					if (rb.isSelected()) {
-						selectedPlayer = rb.getText();
-						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
-
-						break;
-					}
-				}
 				inviteMessage(selectedPlayer);
 				controller.sendInvite(selectedPlayer, gamemode);
 				System.out.println("Heja");
