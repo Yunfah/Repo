@@ -236,7 +236,7 @@ public class Controller {
 	}
 	
 	public void sendInvite(String username, String gamemode) {
-		String sender = client.getUsername();
+		System.out.println("är jag här?");
 		client.sendInvite(username, gamemode);
 	}
 	

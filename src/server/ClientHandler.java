@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-public class ClientHandler extends Thread {
+public class ClientHandler implements Runnable {
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
@@ -21,7 +21,7 @@ public class ClientHandler extends Thread {
 		this.oos = oos;
 		this.server = server;
 		this.username = username;
-		this.start();
+		new Thread (this).start();
 	}
 
 	public String getUsername() {
@@ -63,13 +63,16 @@ public class ClientHandler extends Thread {
 	 * Listens for requests from this Client and handles them using the server.
 	 */
 	public void run() {
+		System.out.println("innan ttrue");
 		while (true) {
+			System.out.println("Efter ttrue");
 			try {
-				Object input = ois.readObject();
+				String input = ois.readUTF();
 				
-				if (input instanceof String) {
+//				if (input instanceof String) {
 					String str = (String)input;
 					
+					System.out.println(input + " was a string");
 					switch (str) {
 					case "invite" : { //Send invite to chosen player. 
 						System.out.println("trying to invite ");
@@ -78,10 +81,14 @@ public class ClientHandler extends Thread {
 						String receiver = invite[1];
 						String gamMmode = invite[2];
 						System.out.println("Requesting server to send invite to " + receiver);
-						server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite(). 
+						server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
+						break;
 					}
-					break;
-					case "logout" : server.logout(this);
+					
+					case "logout" :{
+						System.out.println("fake logggoot");
+						server.logout(this); 
+					}
 					break;
 					case "accept" : int ble; //accept invite that was just received.
 					break;
@@ -89,12 +96,14 @@ public class ClientHandler extends Thread {
 					break;
 					
 					} //end switch
-				}
+//				}
 				
 			} catch (Exception e) {
+				System.out.println("am i dis");
 				server.logout(this);
 				break;
 			}
 		} //end while
+		System.out.println("HEj elina ");
 	}
 }
