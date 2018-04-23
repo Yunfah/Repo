@@ -5,13 +5,14 @@ import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
-public class ViewerGame extends JPanel {
+public class ViewerGame extends JPanel implements Serializable {
 	private List<JButton> letterButtons = new ArrayList<>();
 	private DrawingPanel drawingPanel = new DrawingPanel();
 	private ContinueListener continueListener;
@@ -300,7 +301,7 @@ public class ViewerGame extends JPanel {
 	}
 }
 
-class DrawingPanel extends JPanel {
+class DrawingPanel extends JPanel implements Serializable {
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,10 +19,11 @@ import javax.swing.JPanel;
 
 import server.ClientHandler;
 
-public class Controller {
+public class Controller  {
 	private Client client;
 	private ViewerGame viewerGame;
 	private ViewerMultiplayerMode viewerMultiplayerMode;
+	private ViewerUsername viewerUsername;
 	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
 
@@ -40,6 +42,10 @@ public class Controller {
 
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
+	}
+	
+	public void setViewerUsername(ViewerUsername username) {
+		viewerUsername = username;
 	}
 
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
