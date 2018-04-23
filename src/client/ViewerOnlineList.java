@@ -200,12 +200,12 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				continueListener.goBackMP();
 
 			} else if (e.getSource() == btnInvite) {
-				for (JRadioButton rb : rbList) {
-					if (rb.isSelected()) {
-						selectedPlayer = rb.getText();
-						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
-					}
-				}
+//				for (JRadioButton rb : rbList) {
+//					if (rb.isSelected()) {
+//						selectedPlayer = rb.getText();
+//						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
+//					}
+//				}
 				inviteMessage(selectedPlayer);
 				System.out.println("Controller ska skicka invite");
 				controller.sendInvite(selectedPlayer, gamemode);
@@ -222,6 +222,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private class RadioButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			btnInvite.setEnabled(true);
+			try {
+				JRadioButton rb = (JRadioButton)e.getSource();
+			selectedPlayer = rb.getText();
+			} catch (Exception e1) {}
 		}
 	}
 	
