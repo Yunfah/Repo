@@ -27,7 +27,7 @@ public class Server implements Runnable {
 	public Server(int port) {
 		this.port = port;
 		try {
-			serverSocket = new ServerSocket(port);
+			serverSocket = new ServerSocket(port);	//BLABLABLA KOMMENTAR FÖR ATT PUSHA
 			server.start();
 		} catch (IOException e) {}
 	}

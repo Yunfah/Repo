@@ -176,7 +176,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param listener
 	 */
 	public void setListener(ContinueListener listener) {
-		continueListener = listener;
+		continueListener = listener; //BLABLABLAB KOMMENTAR FÖR ATT PUSHA
 	}
 
 	/**
