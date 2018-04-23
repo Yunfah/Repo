@@ -191,7 +191,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		panel.add(lbl);
 		JFrame frame = new JFrame();
 		frame.add(panel);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
