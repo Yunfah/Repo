@@ -62,6 +62,7 @@ public class Client extends Thread {
 			oos.writeUTF("invite");
 			oos.writeUTF(username + "," + receiver + "," + gameMode);
 			oos.flush();
+			System.out.println("Invite sent from client to clientHandler.");
 		} catch (IOException e) {
 			System.out.println("Error sending invite.");
 		}

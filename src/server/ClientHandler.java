@@ -74,12 +74,13 @@ public class ClientHandler extends Thread {
 					case "logout" : server.logout(this);
 					break;
 					case "invite" : { //Send invite to chosen player. 
+						System.out.println("trying to invite ");
 						String[] invite = ois.readUTF().split(",");
 						String sender = invite[0];
-						String username = invite[1];
+						String receiver = invite[1];
 						String gamMmode = invite[2];
-						System.out.println("invite funkar");
-						server.sendInvite(sender, username, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite(). 
+						System.out.println("Requesting server to send invite to " + receiver);
+						server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite(). 
 					}
 					break;
 					case "accept" : int ble; //accept invite that was just received.
