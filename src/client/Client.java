@@ -126,7 +126,7 @@ public class Client extends Thread {
 				if (input instanceof ArrayList) {	//If the input is an arraylist it can only be a list of online clients
 					ArrayList<String> list = (ArrayList<String>)input;
 					controller.updateOnline(list);	//
-				} else if (input instanceof String) {
+				} else {
 					String str = (String) input;
 					if (str.equals("invite")) {
 						String sender = ois.readUTF();

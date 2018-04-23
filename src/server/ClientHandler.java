@@ -79,9 +79,8 @@ public class ClientHandler implements Runnable {
 					String gamMmode = ois.readUTF();
 					System.out.println("Requesting server to send invite to " + receiver);
 					server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
-					break;
 				}
-
+				break;
 				case "logout" :{
 					System.out.println("fake logggoot");
 					server.logout(this); 
@@ -94,7 +93,7 @@ public class ClientHandler implements Runnable {
 
 				} //end switch				
 			} catch (Exception e) {
-				System.out.println("am i dis");
+				System.out.println("Exception in CH run method");
 				server.logout(this);
 				break;
 			}
