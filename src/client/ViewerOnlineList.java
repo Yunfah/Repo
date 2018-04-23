@@ -83,24 +83,24 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 		main.setBackground(Color.DARK_GRAY);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
-		
+
 		lblOnline.setBounds(100, 0, 200, 100);
 		lblOnline.setFont(btnFont);
 		lblOnline.setForeground(Color.GREEN);
 
 		pnlOnlineList = new JPanel();
 		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
-														// make it only do as many as needed.
-		
+		// make it only do as many as needed.
+
 		JScrollPane scroll = new JScrollPane(pnlOnlineList);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(100, 70, 400, 500);
-		
+
 		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(btnFont);
-		
+
 		lblSettings.setBounds(600, 20, 500, 100);
 		lblSettings.setFont(btnFont);
 		lblSettings.setForeground(Color.WHITE);
@@ -113,7 +113,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 		return main;
 	} 
-	
+
 	/**
 	 * Updates the list showing all currently connected players.
 	 * @param onlineList List containing the names of all the currently connected players.
@@ -130,7 +130,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			pnlOnlineList.add(btn);
 		}
 	}
-	
+
 	/**
 	 * Sets the text of the label that shows the chosen game mode.
 	 * @param text The name of the chosen game mode.
@@ -138,7 +138,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void setGameModeText(String text) {
 		lblSettings.setText("You chose: " + text );
 	}
-	
+
 	/**
 	 * Returns the name of the chosen game mode.
 	 * @return Name of the chosen game mode.
@@ -146,7 +146,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public String getGameModeText() {
 		return lblSettings.getText();
 	}
-	
+
 	/**
 	 * Sets the String for the chosen game mode. 
 	 * @param gamemode The game mode that has been chosen. 
@@ -154,7 +154,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void setGameMode(String gamemode) {
 		this.gamemode = gamemode;
 	}
-	
+
 	/**
 	 * Returns the name of the chosen game mode.
 	 * @return The name of the chosen game mode.
@@ -185,12 +185,12 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param selectedPlayer The player that was chosen for an invite.
 	 */
 	public void inviteMessage(String selectedPlayer) {
-        String[] options = {"Cancel Invite"};
-        JPanel panel = new JPanel();
-        JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
-        panel.add(lbl);
-        int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
-                JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		String[] options = {"Cancel Invite"};
+		JPanel panel = new JPanel();
+		JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
+		panel.add(lbl);
+		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
+				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -200,19 +200,24 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				continueListener.goBackMP();
 
 			} else if (e.getSource() == btnInvite) {
-//				for (JRadioButton rb : rbList) {
-//					if (rb.isSelected()) {
-//						selectedPlayer = rb.getText();
-//						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
-//					}
-//				}
+
+				for (JRadioButton rb : rbList) {
+					if (rb.isSelected()) {
+						selectedPlayer = rb.getText();
+						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
+
+						break;
+					}
+				}
 				inviteMessage(selectedPlayer);
-				System.out.println("Controller ska skicka invite");
 				controller.sendInvite(selectedPlayer, gamemode);
+				System.out.println("Heja");
 			}
 		}
 	}
-	
+
+
+
 	/**
 	 * Enables the invite-button as soon as a player is chosen from 
 	 * the online list.
@@ -224,11 +229,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setEnabled(true);
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
-			selectedPlayer = rb.getText();
+				selectedPlayer = rb.getText();
 			} catch (Exception e1) {}
 		}
 	}
-	
+
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {
@@ -242,14 +247,4 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		}
 	}
 	public void mouseClicked(MouseEvent e) {}
-
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame("Test of online list");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.add(new ViewerOnlineList());
-//		frame.pack();
-//		frame.setResizable(false);
-//		frame.setLocationRelativeTo(null);
-//		frame.setVisible(true);
-//	}
 }
