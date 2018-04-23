@@ -51,7 +51,7 @@ public class ClientHandler implements Runnable {
 		//TODO: Send an invite to this client from sender for gamemode
 		System.out.println("CH receiving invite");
 		try {
-			oos.writeUTF("invite");
+			oos.writeObject("invite");
 			oos.writeUTF(sender);
 			oos.writeUTF(gameMode);
 			oos.flush();
