@@ -204,6 +204,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 					if (rb.isSelected()) {
 						selectedPlayer = rb.getText();
 						System.out.println(selectedPlayer + " was selected by " + controller.getClient().getUsername());
+<<<<<<< HEAD
 						break;
 					}
 				}
@@ -212,6 +213,13 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				System.out.println("Heja");
 				inviteMessage(selectedPlayer);
 				controller.sendInvite(selectedPlayer, gamemode);
+=======
+					}
+				}
+				inviteMessage(selectedPlayer);
+				System.out.println("Controller ska skicka invite");
+				controller.sendInvite(selectedPlayer, gamemode);
+>>>>>>> f9aa4fb58e7f208190ba3896807e59463989b1c5
 			}
 		}
 	}
