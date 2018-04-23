@@ -80,14 +80,14 @@ public class Client extends Thread {
 		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
 				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 		
-		if (selectedOption == JOptionPane.NO_OPTION) {	//OBS!!! Nästa steg är att fixa accept/decline!!!
+		if (selectedOption == JOptionPane.NO_OPTION) {	
 			try {
 				oos.writeUTF("decline");
 				oos.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else if (true) {	//change true to if the invitation was accepted.
+		} else if (selectedOption == JOptionPane.YES_OPTION) {	
 			try {
 				oos.writeUTF("accept");
 				oos.flush();
@@ -96,6 +96,7 @@ public class Client extends Thread {
 			}
 		}
 	}
+	
 	
 	/**
 	 * Sends a request to the server to be disconnected from it.
