@@ -159,6 +159,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				}
 				inviteMessage(selectedUser);
 				controller.sendInvite(selectedUser, gamemode);
+				System.out.println("Heja");
 			}
 		}
 	}
