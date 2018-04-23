@@ -44,8 +44,12 @@ public class Controller  {
 		viewerGame = viewer;
 	}
 	
-	public void setViewerUsername(ViewerUsername username) {
-		viewerUsername = username;
+	public void setViewerUsername(ViewerUsername viewer) {
+		viewerUsername = viewer;
+	}
+	
+	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
+		viewerMultiplayerMode = viewer;
 	}
 
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
