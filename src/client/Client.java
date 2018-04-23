@@ -120,7 +120,7 @@ public class Client extends Thread {
 	public void run() {
 
 		try {
-			oos.writeObject(username);
+			oos.writeObject(username); 
 			while(true) {
 				Object input = ois.readObject();
 				if (input instanceof ArrayList) {	//If the input is an arraylist it can only be a list of online clients
