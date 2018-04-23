@@ -75,8 +75,7 @@ public class Client extends Thread {
 	 * @param sender The sender of this invite.
 	 * @param gameMode The game mode that this invite will start if accepted. 
 	 */
-	public void receiveInvite(String sender, String gameMode) {
-		
+	public void receiveInvite(String sender, String gameMode) {	
 		String[] options = {"COME FORTH!", "Nay!"};
 		JPanel panel = new JPanel();
 		JLabel lbl = new JLabel(sender + " wishes to partake in a duel with thee!");

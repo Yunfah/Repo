@@ -21,8 +21,7 @@ import server.ClientHandler;
 public class Controller {
 	private Client client;
 	private ViewerGame viewerGame;
-	private ViewerUsername viewerUsername;
-	private ViewerMultiplayerMode viewerMultiplayer;
+	private ViewerMultiplayerMode viewerMultiplayerMode;
 	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
 
@@ -41,14 +40,6 @@ public class Controller {
 
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
-	}
-
-	public void setViewerUsername(ViewerUsername viewer) {
-		viewerUsername = viewer;
-	}
-
-	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
-		viewerMultiplayer = viewer;
 	}
 
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
