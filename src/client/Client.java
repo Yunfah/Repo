@@ -3,7 +3,6 @@ package client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ import javax.swing.*;
  * Represents a player with a connection to a server.
  *
  */
-public class Client extends Thread implements Serializable{
+public class Client extends Thread {
 	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
