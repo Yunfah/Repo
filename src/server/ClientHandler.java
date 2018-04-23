@@ -49,11 +49,13 @@ public class ClientHandler implements Runnable {
 	 */
 	public void recieveInvite(String sender, String gameMode) {
 		//TODO: Send an invite to this client from sender for gamemode
+		System.out.println("CH receiving invite");
 		try {
 			oos.writeUTF("invite");
 			oos.writeUTF(sender);
 			oos.writeUTF(gameMode);
 			oos.flush();
+			System.out.println("Invite received");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

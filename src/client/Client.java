@@ -76,6 +76,7 @@ public class Client extends Thread {
 	 * @param gameMode The game mode that this invite will start if accepted. 
 	 */
 	public void receiveInvite(String sender, String gameMode) {
+		
 		String[] options = {"COME FORTH!", "Nay!"};
 		JPanel panel = new JPanel();
 		JLabel lbl = new JLabel(sender + " wishes to partake in a duel with thee!");
@@ -130,6 +131,7 @@ public class Client extends Thread {
 					if (str.equals("invite")) {
 						String sender = ois.readUTF();
 						String gameMode = ois.readUTF();
+						System.out.println("Client " + username + "invited to " + gameMode + " by " + sender);
 						receiveInvite(sender, gameMode);
 					}
 						

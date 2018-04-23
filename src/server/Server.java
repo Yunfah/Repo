@@ -39,6 +39,7 @@ public class Server implements Runnable {
 	 * @param gameMode The game mode this invite will start if accepted.
 	 */
 	public void sendInvite(String sender, String receiver, String gameMode) { 
+		System.out.println(sender + " asks " + receiver + " to play " + gameMode);
 		ClientHandler ch = clientList.get(receiver);
 		ch.recieveInvite(sender, gameMode);
 	}
