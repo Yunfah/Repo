@@ -28,6 +28,7 @@ public class Client extends Thread implements Serializable{
 	 */
 	public Client(String username, String ip, int port) {
 		this.username = username;
+		System.out.println("username set to " + username);
 		try {
 			socket = new Socket(ip, port);
 			oos = new ObjectOutputStream(socket.getOutputStream());
