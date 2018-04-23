@@ -31,6 +31,7 @@ public class Client extends Thread {
 		try {
 			socket = new Socket(ip, port);
 			oos = new ObjectOutputStream(socket.getOutputStream());
+			System.out.println("OOS skapad ");
 			ois = new ObjectInputStream(socket.getInputStream());
 		} catch (IOException e) {}
 		start();
