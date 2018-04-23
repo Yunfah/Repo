@@ -185,12 +185,15 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param selectedPlayer The player that was chosen for an invite.
 	 */
 	public void inviteMessage(String selectedPlayer) {
-		String[] options = {"Cancel Invite"};
+//		String[] options = {"Cancel Invite"};
 		JPanel panel = new JPanel();
 		JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
 		panel.add(lbl);
-		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
-				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		JFrame frame = new JFrame();
+		frame.add(panel);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -215,8 +218,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			}
 		}
 	}
-
-
 
 	/**
 	 * Enables the invite-button as soon as a player is chosen from 
