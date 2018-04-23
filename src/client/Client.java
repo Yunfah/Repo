@@ -64,7 +64,7 @@ public class Client extends Thread {
 			oos.flush();
 			System.out.println("Invite sent from client to clientHandler.");
 		} catch (IOException e) {
-			System.out.println("Error sending invite.");
+			System.out.println("Error sending invite from Client.");
 		}
 	}	
 

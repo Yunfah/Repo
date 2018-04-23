@@ -71,8 +71,6 @@ public class ClientHandler extends Thread {
 					String str = (String)input;
 					
 					switch (str) {
-					case "logout" : server.logout(this);
-					break;
 					case "invite" : { //Send invite to chosen player. 
 						System.out.println("trying to invite ");
 						String[] invite = ois.readUTF().split(",");
@@ -82,6 +80,8 @@ public class ClientHandler extends Thread {
 						System.out.println("Requesting server to send invite to " + receiver);
 						server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite(). 
 					}
+					break;
+					case "logout" : server.logout(this);
 					break;
 					case "accept" : int ble; //accept invite that was just received.
 					break;
