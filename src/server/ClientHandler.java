@@ -41,7 +41,7 @@ public class ClientHandler implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This ClientHandler's Client receives an invite for gamemode from sender.
 	 * @param sender The sender of the invite.
@@ -63,41 +63,34 @@ public class ClientHandler implements Runnable {
 	 * Listens for requests from this Client and handles them using the server.
 	 */
 	public void run() {
-		System.out.println("innan ttrue");
 		while (true) {
-			System.out.println("Efter ttrue");
 			try {
 				String input = ois.readUTF();
-				
-//				if (input instanceof String) {
-					String str = (String)input;
-					
-					System.out.println(input + " was a string");
-					switch (str) {
-					case "invite" : { //Send invite to chosen player. 
-						System.out.println("trying to invite ");
-						String[] invite = ois.readUTF().split(",");
-						String sender = invite[0];
-						String receiver = invite[1];
-						String gamMmode = invite[2];
-						System.out.println("Requesting server to send invite to " + receiver);
-						server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
-						break;
-					}
-					
-					case "logout" :{
-						System.out.println("fake logggoot");
-						server.logout(this); 
-					}
+				String str = (String)input;
+
+				System.out.println(input + " was a string");
+				switch (str) {
+				case "invite" : { //Send invite to chosen player. 
+					System.out.println("trying to invite ");
+					String sender = ois.readUTF();
+					String receiver = ois.readUTF();
+					String gamMmode = ois.readUTF();
+					System.out.println("Requesting server to send invite to " + receiver);
+					server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
 					break;
-					case "accept" : int ble; //accept invite that was just received.
-					break;
-					case "decline" : int b; //decline invite that was just received. 
-					break;
-					
-					} //end switch
-//				}
-				
+				}
+
+				case "logout" :{
+					System.out.println("fake logggoot");
+					server.logout(this); 
+				}
+				break;
+				case "accept" : int ble; //accept invite that was just received.
+				break;
+				case "decline" : int b; //decline invite that was just received. 
+				break;
+
+				} //end switch				
 			} catch (Exception e) {
 				System.out.println("am i dis");
 				server.logout(this);

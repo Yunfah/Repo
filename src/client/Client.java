@@ -60,7 +60,9 @@ public class Client extends Thread {
 	public void sendInvite(String receiver, String gameMode) {
 		try {
 			oos.writeUTF("invite");
-			oos.writeUTF(username + "," + receiver + "," + gameMode);
+			oos.writeUTF(username);	
+			oos.writeUTF(receiver);
+			oos.writeUTF(gameMode);
 			oos.flush();
 			System.out.println("Invite sent from client to clientHandler.");
 		} catch (IOException e) {
