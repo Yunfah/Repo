@@ -97,8 +97,6 @@ public class ServerUI extends JFrame {
 				panel.repaint();
 				
 				Server server = new Server(port);
-				
-				
 			}	
 		}	
 	}
