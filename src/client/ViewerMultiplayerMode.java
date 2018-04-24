@@ -134,14 +134,5 @@ public class ViewerMultiplayerMode extends JPanel {
 		public void mouseReleased(MouseEvent arg0) {}
 	}
 	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Test of Multiplayer window");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewerMultiplayerMode());
-		frame.pack();
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
 
 }

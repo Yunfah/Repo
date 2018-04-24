@@ -62,6 +62,13 @@ public class Server implements Runnable {
 		}
 	}
 	
+	public void createGame(String player1, String player2, String gameMode) {
+		ClientHandler p1 = clientList.get(player1);
+		ClientHandler p2 = clientList.get(player2);
+		gameList.add(new Game(p1, p2, gameMode)) ;
+		
+	}
+	
 	@Override
 	public void run() {
 		System.out.println("Server is running on port " + port + "...");

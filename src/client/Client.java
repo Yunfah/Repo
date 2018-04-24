@@ -95,6 +95,9 @@ public class Client extends Thread {
 		} else if (selectedOption == JOptionPane.YES_OPTION) {	
 			try {
 				oos.writeUTF("accept");
+				oos.writeUTF(sender);
+				oos.writeUTF(username);
+				oos.writeUTF(gameMode);
 				oos.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -134,6 +137,8 @@ public class Client extends Thread {
 						String gameMode = ois.readUTF();
 						System.out.println("Client " + username + "invited to " + gameMode + " by " + sender);
 						receiveInvite(sender, gameMode);
+					} else {
+						controller.setWordToGuess(ois.readUTF());
 					}
 						
 				}
