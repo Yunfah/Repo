@@ -1,5 +1,12 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Random;
+
 import client.Client;
 import client.Controller;
 
@@ -26,6 +33,27 @@ public class Game {
 	
 	public void setWinner() {
 		
+	}
+	
+	private void setWord(String word) {
+		if (word == null) {
+			ArrayList<String> arraylist = new ArrayList<String>();
+			Random rand = new Random();
+			
+			try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("files/Random.txt"),"UTF-8"))) {
+				String word2 = br.readLine();
+				while(word != null) {
+					arraylist.add(word2);
+					word2 = br.readLine();
+				}
+				int index = rand.nextInt(arraylist.size());
+				String str = arraylist.get(index);
+				
+				//viewerGame.setCategory(category);
+			} catch (IOException e ) {}
+		} else {
+			//TODO: set gameword to word (the parameter) 
+		}
 	}
 	
 	

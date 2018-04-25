@@ -60,6 +60,16 @@ public class ClientHandler implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setWordToGuess(String word) {
+		try {
+			oos.writeUTF(word);
+			oos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	/**
 	 * Listens for requests from this Client and handles them using the server.
@@ -86,7 +96,12 @@ public class ClientHandler implements Runnable {
 					server.logout(this); 
 				}
 				break;
-				case "accept" : int ble; //accept invite that was just received.
+				case "accept" : {
+					String p1 = ois.readUTF();
+					String p2 = ois.readUTF();
+					String gameMode = ois.readUTF();
+					server.createGame(p1, p2, gameMode);; //accept invite that was just received.
+				}
 				break;
 				case "decline" : int b; //decline invite that was just received. 
 				break;

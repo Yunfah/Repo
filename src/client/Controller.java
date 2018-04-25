@@ -58,7 +58,10 @@ public class Controller  {
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
-		//if multiplayer -> connect to server
+		if (mode == MULTIPLAYER) {
+			this.setDifficulty(EZ);
+			
+		}
 	}
 
 	/**
@@ -185,7 +188,12 @@ public class Controller  {
 	public void setWordToGuess(String word) {
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
+		if(modeChosen == MULTIPLAYER) {
+			viewerGame.setCategory("Multiplayer");
+		}
 	}
+	
+	
 
 	public void resetCategoryWord() {
 		Random rand = new Random();
