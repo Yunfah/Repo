@@ -20,6 +20,7 @@ public class Game {
 	private Controller controllerP1;	//Something to control turns etc. is needed.
 	private Controller controllerP2;	//Should these controllers come from CH? Then CH needs to know about client/controller (client sends its controller)
 	private String gameMode;
+	private String word;
 	
 	public Game(ClientHandler player1, ClientHandler player2, String gameMode) {
 		this.player1 = player1;
@@ -27,9 +28,12 @@ public class Game {
 		this.gameMode = gameMode;
 		//TODO: Set the word to guess?
 		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
-			
+			// word = what the sender of the invite chose.
 		} else {	//give both players the same random word... how?
-			
+			setRandomWord();
+			//send this.word to both clients
+			player1.setWordToGuess(word);
+			player2.setWordToGuess(word);
 		}
 	}
 	
@@ -41,8 +45,7 @@ public class Game {
 		
 	}
 	
-	private void setWord(String word) {
-		if (word == null) {
+	private void setRandomWord() {
 			ArrayList<String> arraylist = new ArrayList<String>();
 			Random rand = new Random();
 			
@@ -53,13 +56,8 @@ public class Game {
 					word2 = br.readLine();
 				}
 				int index = rand.nextInt(arraylist.size());
-				String str = arraylist.get(index);
-				
-				//viewerGame.setCategory(category);
+				this.word = arraylist.get(index);
 			} catch (IOException e ) {}
-		} else {
-			//TODO: set gameword to word (the parameter) 
-		}
 	}
 	
 	

@@ -128,6 +128,7 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "test" : int ignore; //test method
+				break;
 				} //end switch		
 				
 			} catch (Exception e) {
