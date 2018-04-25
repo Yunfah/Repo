@@ -26,6 +26,7 @@ public class Controller  {
 	private ViewerUsername viewerUsername;
 	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
+	private ContinueListener continueListener;
 
 	private String wordToGuess = "";
 	private char[] encodedWord = null; 
@@ -108,6 +109,7 @@ public class Controller  {
 			encodedWord[i] = wordToGuess.charAt(i);
 		}
 		viewerGame.setWord(encodedWord);
+		continueListener.skipToGame();
 	}
 	
 	/**
