@@ -85,9 +85,10 @@ public class Client extends Thread {
 		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
 				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 		
-		if (selectedOption == JOptionPane.NO_OPTION) {	
+		if (selectedOption == JOptionPane.NO_OPTION) {
 			try {
 				oos.writeUTF("decline");
+				oos.writeUTF(sender);
 				oos.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -137,10 +138,12 @@ public class Client extends Thread {
 						String gameMode = ois.readUTF();
 						System.out.println("Client " + username + "invited to " + gameMode + " by " + sender);
 						receiveInvite(sender, gameMode);
+					} else if (str.equals("reject")) {
+						System.out.println("Invite decline");
+						JOptionPane.showMessageDialog(null, "Invite was declined");
 					} else {
 						controller.setWordToGuess(ois.readUTF());
-					}
-						
+					}	
 				}
 
 			} //end while

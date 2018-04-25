@@ -49,7 +49,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void recieveInvite(String sender, String gameMode) {
 		//TODO: Send an invite to this client from sender for gamemode
-		System.out.println("CH receiving invite");
+		System.out.println(username + " receiving invite");
 		try {
 			oos.writeObject("invite");
 			oos.writeUTF(sender);
@@ -61,6 +61,24 @@ public class ClientHandler implements Runnable {
 		}
 	}
 	
+	/**
+	 * This method is called by the server when another client rejects the invite
+	 * sent by this client.
+	 */
+	public void reject() {
+		System.out.println(username + " is being rejected."); 
+		try {
+			oos.writeObject("reject");
+		} catch (IOException e) {
+			System.out.println("Error in rejection");
+		}
+	}
+	
+	public void startGame() {
+		//TODO: Here?
+	}
+	
+	//Should somehow set the word to guess in this client's game window (ViewerGame)
 	public void setWordToGuess(String word) {
 		try {
 			oos.writeUTF(word);
@@ -68,7 +86,6 @@ public class ClientHandler implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
@@ -78,10 +95,9 @@ public class ClientHandler implements Runnable {
 		while (true) {
 			try {
 				String input = ois.readUTF();
-				String str = (String)input;
 
 				System.out.println(input + " was a string");
-				switch (str) {
+				switch (input) {
 				case "invite" : { //Send invite to chosen player. 
 					System.out.println("trying to invite ");
 					String sender = ois.readUTF();
@@ -91,22 +107,29 @@ public class ClientHandler implements Runnable {
 					server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
 				}
 				break;
-				case "logout" :{
+				case "logout" : {
 					System.out.println("fake logggoot");
 					server.logout(this); 
 				}
 				break;
-				case "accept" : {
+				case "accept" : {	//this client accpets an invite
 					String p1 = ois.readUTF();
 					String p2 = ois.readUTF();
 					String gameMode = ois.readUTF();
-					server.createGame(p1, p2, gameMode);; //accept invite that was just received.
+					inGame = true;
+					server.createGame(p1, p2, gameMode); //accept invite that was just received.
 				}
 				break;
-				case "decline" : int b; //decline invite that was just received. 
+				case "decline" : { //this client declines an invite.
+					System.out.println("Reading sender...");
+					String sender = ois.readUTF();
+					System.out.println("Sender: " + sender + ". Declining...");
+					server.declineInviteFrom(sender);
+				}
 				break;
-
-				} //end switch				
+				case "test" : int ignore; //test method
+				} //end switch		
+				
 			} catch (Exception e) {
 				System.out.println("Exception in CH run method");
 				server.logout(this);

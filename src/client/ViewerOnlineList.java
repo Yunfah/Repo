@@ -24,6 +24,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
 	private JLabel lblOnline = new JLabel("Online");
 	private JLabel lblSettings = new JLabel("");	//Should show what gamemode the player has chosen.
+	private JLabel lblUsername = new JLabel("");
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
 	private ButtonGroup bg = new ButtonGroup();
@@ -82,10 +83,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		main.setLayout(null);
 
 		main.setBackground(Color.DARK_GRAY);
-		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
+		Font font = new Font("SansSerif", Font.BOLD, 30);
 
 		lblOnline.setBounds(100, 0, 200, 100);
-		lblOnline.setFont(btnFont);
+		lblOnline.setFont(font);
 		lblOnline.setForeground(Color.GREEN);
 
 		pnlOnlineList = new JPanel();
@@ -99,15 +100,20 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
-		btnInvite.setFont(btnFont);
+		btnInvite.setFont(font);
 
-		lblSettings.setBounds(600, 20, 500, 100);
-		lblSettings.setFont(btnFont);
+		lblSettings.setBounds(600, 20, 500, 50);
+		lblSettings.setFont(font);
 		lblSettings.setForeground(Color.WHITE);
+		
+		lblUsername.setBounds(600, 70, 400, 50);
+		lblUsername.setFont(font);
+		lblUsername.setForeground(Color.CYAN);
 
 		getGameModeText();
 		main.add(lblOnline);
 		main.add(lblSettings);
+		main.add(lblUsername);
 		main.add(btnInvite);
 		main.add(scroll);
 
@@ -161,6 +167,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 */
 	public String getGameMode() {
 		return gamemode;
+	}
+	
+	public void setUsername(String username) {
+		lblUsername.setText(username);
 	}
 
 	/**

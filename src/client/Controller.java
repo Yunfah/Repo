@@ -238,6 +238,7 @@ public class Controller  {
 	public void connect(String username, String ip, int port) {
 		client = new Client(username, ip, port);
 		client.setController(this);
+		viewerOnlineList.setUsername("Your name: " + username);
 	}
 	
 	public Client getClient() {

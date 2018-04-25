@@ -65,8 +65,13 @@ public class Server implements Runnable {
 	public void createGame(String player1, String player2, String gameMode) {
 		ClientHandler p1 = clientList.get(player1);
 		ClientHandler p2 = clientList.get(player2);
-		gameList.add(new Game(p1, p2, gameMode)) ;
-		
+		gameList.add(new Game(p1, p2, gameMode));	
+	}
+	
+	public void declineInviteFrom(String sender) {
+		System.out.println("Going to reject " + sender);
+		ClientHandler senderOfInvite = clientList.get(sender);
+		senderOfInvite.reject();
 	}
 	
 	@Override

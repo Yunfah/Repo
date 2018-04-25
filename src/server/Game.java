@@ -25,6 +25,12 @@ public class Game {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.gameMode = gameMode;
+		//TODO: Set the word to guess?
+		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
+			
+		} else {	//give both players the same random word... how?
+			
+		}
 	}
 	
 	public void changeTurns() {
