@@ -117,17 +117,17 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "accept" : {	//this client accpets an invite
+					System.out.println(username + " accepted invite.");
 					String p1 = ois.readUTF();
 					String p2 = ois.readUTF();
 					String gameMode = ois.readUTF();
 					inGame = true;
+					System.out.println("Asking server to accept...");
 					server.createGame(p1, p2, gameMode); //accept invite that was just received.
 				}
 				break;
 				case "decline" : { //this client declines an invite.
-					System.out.println("Reading sender...");
 					String sender = ois.readUTF();
-					System.out.println("Sender: " + sender + ". Declining...");
 					server.declineInviteFrom(sender);
 				}
 				break;

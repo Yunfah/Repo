@@ -10,14 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import server.ClientHandler;
 
 public class Controller  {
 	private Client client;
