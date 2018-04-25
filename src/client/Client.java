@@ -80,7 +80,7 @@ public class Client extends Thread {
 	public void receiveInvite(String sender, String gameMode) {	
 		String[] options = {"COME FORTH!", "Nay!"};
 		JPanel panel = new JPanel();
-		JLabel lbl = new JLabel(sender + " wishes to partake in a duel with thee!");
+		JLabel lbl = new JLabel(sender + " wishes to partake in a duel with thee!/nGamemode: " + gameMode);
 		panel.add(lbl);
 		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
 				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
