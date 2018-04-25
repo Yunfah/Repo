@@ -27,6 +27,10 @@ public class ClientHandler implements Runnable {
 	public String getUsername() {
 		return username;
 	}
+	
+	public boolean isInGame() {
+		return inGame;
+	}
 
 	/**
 	 * Sends the current list of online clients to the client associated with this 
@@ -137,6 +141,6 @@ public class ClientHandler implements Runnable {
 				break;
 			}
 		} //end while
-		System.out.println("HEj elina ");
+		System.out.println("End of CH while loop");
 	}
 }

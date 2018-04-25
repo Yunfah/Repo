@@ -89,14 +89,18 @@ public class Controller  {
 	 * Checks if all letters of the word have been guessed. If so,
 	 * sets up a victory message in the game window. 
 	 */
-	private void checkWin() {
+	private void checkWin() { 
 		int correctLetters = 0;
 		for (int i = 0; i < encodedWord.length; i++) {
 			if (encodedWord[i] != '-')
 				correctLetters++;
 		}
-		if (correctLetters == wordToGuess.length()) 
+		if (correctLetters == wordToGuess.length()) {
 			viewerGame.setWin(true);
+			if (modeChosen == MULTIPLAYER) {
+				//meddela motklient om att man vunnit.
+			}
+		}
 	}
 	
 	/**
@@ -191,6 +195,7 @@ public class Controller  {
 		if(modeChosen == MULTIPLAYER) {
 			viewerGame.setCategory("Multiplayer");
 		}
+		
 	}
 	
 	
