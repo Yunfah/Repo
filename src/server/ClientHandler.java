@@ -156,7 +156,7 @@ public class ClientHandler implements Runnable {
 				case "test" : int ignore; //test method
 				break;
 				} //end switch		
-				
+			System.out.println("End of switch in CH");	
 			} catch (Exception e) {
 				System.out.println("Exception in CH run method");
 				server.logout(this);
