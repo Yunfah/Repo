@@ -7,6 +7,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+/**
+ * Thread that handles requests on the server side for a client.
+ * Acts as a middle man between client and server. 
+ *
+ */
 public class ClientHandler implements Runnable {
 	private Socket socket;
 	private ObjectInputStream ois;
@@ -15,6 +20,14 @@ public class ClientHandler implements Runnable {
 	private Server server;
 	private boolean inGame = false;
 
+	/**
+	 * Constructor.
+	 * @param socket
+	 * @param ois ObjectInputStream with which to read from the client.
+	 * @param oos ObjectOutputStream with which to write to the client.
+	 * @param server The server that created this ClientHandler. Server to communicate with.
+	 * @param username The username of the client. 
+	 */
 	public ClientHandler(Socket socket, ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
 		this.socket = socket;
 		this.ois = ois;
@@ -24,10 +37,19 @@ public class ClientHandler implements Runnable {
 		new Thread (this).start();
 	}
 
+	/**
+	 * Returns the username of this ClientHandler's client.
+	 * @return Username of the client. 
+	 */
 	public String getUsername() {
 		return username;
 	}
 	
+	/**
+	 * Returns true if this ClientHandler's client is currently in 
+	 * a game of hangman.
+	 * @return If this client is already in a game or not. 
+	 */
 	public boolean isInGame() {
 		return inGame;
 	}
@@ -134,7 +156,7 @@ public class ClientHandler implements Runnable {
 				case "test" : int ignore; //test method
 				break;
 				} //end switch		
-				
+			System.out.println("End of switch in CH");	
 			} catch (Exception e) {
 				System.out.println("Exception in CH run method");
 				server.logout(this);
