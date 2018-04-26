@@ -185,6 +185,12 @@ public class Controller  {
 		} catch (IOException e ) {}
 	}
 	
+	/**
+	 * Sets the word to guess to uppercase plus puts it into setEncodedWordFromString.
+	 * If the gamemode is set to multiplayer, put the heading in setCategory to "Multiplayer"
+	 * @param word word that is supposed to guess.
+	 */
+	
 	public void setWordToGuess(String word) {
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
@@ -194,7 +200,9 @@ public class Controller  {
 		
 	}
 	
-	
+	/**
+	 * Resets the word the user chose, gets another one from the list of categories. 
+	 */
 
 	public void resetCategoryWord() {
 		Random rand = new Random();
@@ -202,6 +210,11 @@ public class Controller  {
 		setWordToGuess(listWordsFromCategory.get(index));
 
 	}
+	
+	/**
+	 * Hides the word that got chosen. 
+	 * @param word word to guess. 
+	 */
 	
 	private void setEncodedWordFromString(String word) {
 		word.toUpperCase();
@@ -217,9 +230,19 @@ public class Controller  {
 		viewerGame.setWord(encodedWord);
 	}
 	
+	/**
+	 * Gets difficulty between, Ez, Dark Souls, Xtreme
+	 * @return difficulty
+	 */
+	
 	public int getDifficulty() {
 		return difficulty;
 	}
+	
+	/**
+	 * Sets the difficulty from Ez, Dark Souls, Xtreme
+	 * @param difficulty difficulty Ez, Dark Souls, Xtreme
+	 */
 
 	public void setDifficulty(int difficulty) {
 		if (difficulty == EZ) {
@@ -236,19 +259,36 @@ public class Controller  {
 		}
 	}
 	 
+	/**
+	 * Connects the user to the server.
+	 * @param username their username;
+	 * @param ip the ip they connect to;
+	 * @param port the port they connect to;
+	 */
 	public void connect(String username, String ip, int port) {
 		client = new Client(username, ip, port);
 		client.setController(this);
 		viewerOnlineList.setUsername("Your name: " + username);
 	}
 	
+	/**
+	 * Gets the client (user)
+	 * @return the client(user) returned.
+	 */
+	
 	public Client getClient() {
 		return client;
 	}
 	
-	public void sendInvite(String username, String gamemode) {
-		System.out.println("är jag här?");
-		client.sendInvite(username, gamemode);
+	/**
+	 * Sends out initation to another user.
+	 * @param reciever the username of the reciever;
+	 * @param gamemode the gamemode they are currently in;
+	 */
+	
+	public void sendInvite(String reciever, String gamemode) {
+		System.out.println("Send invite");
+		client.sendInvite(reciever, gamemode);
 	}
 	
 	/**
@@ -258,6 +298,11 @@ public class Controller  {
 	public void setTurn(boolean myTurn) {
 		viewerGame.setEnabled(myTurn); //TEST THIS!!!!!!!!!
 	}
+	
+	/**
+	 * Updates the onlineList with its users.
+	 * @param onlineList The list of all the users online.
+	 */
 	
 	public void updateOnline(ArrayList<String> onlineList) {
 		viewerOnlineList.updateOnlineList(onlineList);
