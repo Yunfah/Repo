@@ -12,8 +12,7 @@ import javax.swing.*;
 
 
 /**
- * Lets the player choose another online player from a list
- * so that they can play together.
+ * Lets a player chose which gamemode they want to play in multiplayer 
  *
  */
 public class ViewerMultiplayerMode extends JPanel {
@@ -28,6 +27,9 @@ public class ViewerMultiplayerMode extends JPanel {
 	private JButton btnBack = new JButton("<-- Back");
 	
 	
+	/**
+	 * Sets up all the panel for multiplayer mode list
+	 */
 	public ViewerMultiplayerMode() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(new BorderLayout());
@@ -41,6 +43,10 @@ public class ViewerMultiplayerMode extends JPanel {
 		btnBack.addActionListener(listener);
 	}
 	
+	/**
+	 * Sets up the top panel 
+	 * @return returns the panel
+	 */
 	private JPanel titlePanel() {
 		JPanel panel = new JPanel (new BorderLayout());
 		panel.setPreferredSize(new Dimension(1200, 200));
@@ -62,6 +68,10 @@ public class ViewerMultiplayerMode extends JPanel {
 		return panel;
 	}
 	
+	/**
+	 * Sets up the buttons for the panel
+	 * @return returns a panel with buttons.
+	 */
 	private JPanel buttonPanel() {
 		JPanel panel = new JPanel (null);
 		panel.setBackground(Color.DARK_GRAY);
@@ -93,6 +103,11 @@ public class ViewerMultiplayerMode extends JPanel {
 		continueListener = listener;
 	}
 	
+	/**
+	 * A private class for the buttonlistener. 
+	 * @author yun
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnG1) {
@@ -122,6 +137,11 @@ public class ViewerMultiplayerMode extends JPanel {
 		}
 	}
 	
+	/**
+	 * A private class for the back button so that when you hover, it will turn red. 
+	 * @author yun
+	 *
+	 */
 	private class BackListener implements MouseListener {
 		public void mouseClicked(MouseEvent arg0) {}
 		public void mouseEntered(MouseEvent arg0) {
