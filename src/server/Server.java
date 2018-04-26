@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 /**
- * Hosts multiplayer games of Hangman. Pairs clients together. 
+ * Hosts multiplayer games of hangman. Keeps track of currently connected
+ * clients, and clients that are currently in a game of hangman. Also
+ * pairs clients together. 
  *
  */
 public class Server implements Runnable {
@@ -33,7 +35,8 @@ public class Server implements Runnable {
 	}
 	
 	/**
-	 * Sends a game invite for game mode to receiver.
+	 * Sends a game invite for game mode to receiver. If the receiver is already
+	 * in a game, the invite is declined. 
 	 * @param sender The client that sent the invite. 
 	 * @param receiver The client the invite is meant for. 
 	 * @param gameMode The game mode this invite will start if accepted.
@@ -41,9 +44,18 @@ public class Server implements Runnable {
 	public void sendInvite(String sender, String receiver, String gameMode) { 
 		System.out.println(sender + " asks " + receiver + " to play " + gameMode);
 		ClientHandler ch = clientList.get(receiver);
-		ch.recieveInvite(sender, gameMode);
+		if (!ch.isInGame()) {
+			ch.recieveInvite(sender, gameMode);
+		} else {
+			ClientHandler chSender = clientList.get(sender);
+			chSender.reject();
+		}
 	}
 	
+	/**
+	 * Disconnects the given ClientHandler from this server.
+	 * @param ch ClientHandler to be disconnected.
+	 */
 	public void logout(ClientHandler ch) {
 		System.out.println(ch.getUsername() + " wants to disconnect.");
 		clientList.remove(ch.getUsername(), ch);
@@ -51,29 +63,47 @@ public class Server implements Runnable {
 		sendClientList();
 	}
 	
+	/**
+	 * Sends a list of all currently online clients to every 
+	 * connected client. 
+	 */
 	private void sendClientList() {
 		ArrayList<String> usernameList = new ArrayList<String>();
-		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {
+		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {	//Creates list with the usernames of connected clients.
 			usernameList.add(entry.getValue().getUsername());
 		}
 		
-		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {
+		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {	//Sends the username list to all connected clients. 
 			entry.getValue().sendClientList(usernameList);
 		}
 	}
 	
+	/**
+	 * Creates a game of hangman in the given game mode, and with the given
+	 * players (clients).
+	 * @param player1 One of the players. The player that sent the invite.
+	 * @param player2 The other player. The player that received the invite.
+	 * @param gameMode The game mode that this game will use the rules of. 
+	 */
 	public void createGame(String player1, String player2, String gameMode) {
 		ClientHandler p1 = clientList.get(player1);
 		ClientHandler p2 = clientList.get(player2);
 		gameList.add(new Game(p1, p2, gameMode));	
 	}
 	
+	/**
+	 * Sends a message to the given sender that their invite was declined.
+	 * @param sender The sender of the declined invite.
+	 */
 	public void declineInviteFrom(String sender) {
 		System.out.println("Going to reject " + sender);
 		ClientHandler senderOfInvite = clientList.get(sender);
 		senderOfInvite.reject();
 	}
 	
+	/**
+	 * Listens to connections from clients and creates ClientHandlers for them.
+	 */
 	@Override
 	public void run() {
 		System.out.println("Server is running on port " + port + "...");

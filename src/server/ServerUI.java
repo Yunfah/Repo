@@ -12,6 +12,13 @@ import java.net.UnknownHostException;
 
 import javax.swing.*;
 
+/**
+ * UI class for the server. Displays the ip of the server and
+ * allows the choice of port to be made before starting the server.
+ * Starts the server when the port has been chosen. 
+ * @author Elina Kock
+ *
+ */
 public class ServerUI extends JFrame {
 	private JTextField tfPort = new JTextField();
 	private JLabel lblCurrentIP = new JLabel(getIP());
@@ -20,6 +27,9 @@ public class ServerUI extends JFrame {
 	private JPanel panel = new JPanel();
 	private Listener listener = new Listener();
 	
+	/**
+	 * Constructor.
+	 */
 	public ServerUI() {
 		setSize(new Dimension(400, 300));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,6 +39,10 @@ public class ServerUI extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Sets up the graphical components of this server UI.
+	 * @return JPanel with all the components of this server UI.
+	 */
 	private JPanel setupUI() {
 		panel.setPreferredSize(new Dimension(500,250));
 		panel.setLayout(null);
@@ -65,6 +79,11 @@ public class ServerUI extends JFrame {
 		return panel;
 	}
 	
+	/**
+	 * Returns the ip of the machine that is currently running this
+	 * program.
+	 * @return The IP address of this machine.
+	 */
 	public String getIP() {
 		try {
 			InetAddress localIP = InetAddress.getLocalHost();
@@ -75,6 +94,11 @@ public class ServerUI extends JFrame {
 		return "Failed to resolve IP";
 	}
 	
+	/**
+	 * Listens on the button for confirming the chosen port.
+	 * Shows an error message if the port is already in use.
+	 *
+	 */
 	private class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			

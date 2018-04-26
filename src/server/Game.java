@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-import client.Client;
 import client.Controller;
 
 /**
@@ -21,7 +20,13 @@ public class Game {
 	private Controller controllerP2;	//Should these controllers come from CH? Then CH needs to know about client/controller (client sends its controller)
 	private String gameMode;
 	private String word;
-	
+
+	/**
+	 * Constructor.
+	 * @param player1 A player of this game of hangman. The player that invited the other player.
+	 * @param player2 A player of this game of hangman. The player that was invited to play.
+	 * @param gameMode The game mode of this game of hangman.
+	 */
 	public Game(ClientHandler player1, ClientHandler player2, String gameMode) {
 		this.player1 = player1;
 		this.player2 = player2;
@@ -36,29 +41,30 @@ public class Game {
 			player2.setWordToGuess(word);
 		}
 	}
-	
+
 	public void changeTurns() {
-		
+
 	}
-	
+
 	public void setWinner() {
-		
+
 	}
-	
+
+	/**
+	 * Sets up a random word that is to be guessed in this game.
+	 */
 	private void setRandomWord() {
-			ArrayList<String> arraylist = new ArrayList<String>();
-			Random rand = new Random();
-			
-			try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("files/Random.txt"),"UTF-8"))) {
-				String word2 = br.readLine();
-				while(word != null) {
-					arraylist.add(word2);
-					word2 = br.readLine();
-				}
-				int index = rand.nextInt(arraylist.size());
-				this.word = arraylist.get(index);
-			} catch (IOException e ) {}
+		ArrayList<String> arraylist = new ArrayList<String>();
+		Random rand = new Random();
+
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("files/Random.txt"),"UTF-8"))) {
+			String word2 = br.readLine();
+			while(word != null) {
+				arraylist.add(word2);
+				word2 = br.readLine();
+			}
+			int index = rand.nextInt(arraylist.size());
+			this.word = arraylist.get(index);
+		} catch (IOException e ) {}
 	}
-	
-	
 }
