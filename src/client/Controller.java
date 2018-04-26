@@ -50,12 +50,16 @@ public class Controller  {
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
 		viewerOnlineList = viewer; 
 	}
+	
+	public void setListener(ContinueListener continueListener) {
+		this.continueListener = continueListener;
+	}
 
 	public void setMode(int mode) {
 		this.modeChosen = mode;
 		if (mode == MULTIPLAYER) {
 			this.setDifficulty(EZ);
-			
+			continueListener.skipToGame();
 		}
 	}
 
@@ -93,7 +97,7 @@ public class Controller  {
 		if (correctLetters == wordToGuess.length()) {
 			viewerGame.setWin(true);
 			if (modeChosen == MULTIPLAYER) {
-				//meddela motklient om att man vunnit.
+				//client.win(); //win() should tell CH to tell the other client(player) that this client won
 			}
 		}
 	}
@@ -196,6 +200,7 @@ public class Controller  {
 		setEncodedWordFromString(wordToGuess);
 		if(modeChosen == MULTIPLAYER) {
 			viewerGame.setCategory("Multiplayer");
+			
 		}
 		
 	}

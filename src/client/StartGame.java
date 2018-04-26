@@ -24,6 +24,7 @@ public class StartGame extends JFrame implements ContinueListener {
 
 	public StartGame(Controller controller) {
 		this.controller = controller;
+		controller.setListener(this);
 		setSize(new Dimension(1200, 800));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
