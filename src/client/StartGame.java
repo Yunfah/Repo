@@ -7,6 +7,11 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import javax.swing.*;
+/**
+ * The Class that starts whe whole application 
+ * @author yun
+ *
+ */
 
 public class StartGame extends JFrame implements ContinueListener {
 	CardLayout cardLayout = new CardLayout();
@@ -38,6 +43,10 @@ public class StartGame extends JFrame implements ContinueListener {
 		this.pack();
 		//elevator();
 	}
+	
+	/**
+	 * Sets up all the "cards" where cards are all the viewer panels.
+	 */
 
 	private void setupCards() {
 		selectMode.setController(controller);
@@ -90,6 +99,9 @@ public class StartGame extends JFrame implements ContinueListener {
 		cards.add(cardOnlineList, "cardOnlineList");
 	}
 
+	/**
+	 * Method used to go to the next panel for singleplayer.
+	 */
 	@Override
 	public void nextPanel() {
 		if (currentCard.equals("cardMode")) {
@@ -102,11 +114,17 @@ public class StartGame extends JFrame implements ContinueListener {
 		cardLayout.show(cards, currentCard);
 	}
 	
+	/**
+	 * method used for Xtreme game mode. If its used, it goes directly to the game. 
+	 */
 	@Override
 	public void skipToGame() {
 		cardLayout.show(cards, "cardGame");
 	}
 
+	/**
+	 * The goback function for singleplayer (goes back to the previous panel)
+	 */
 	@Override
 	public void goBack() {
 		if (currentCard.equals("cardGame")) {
@@ -118,7 +136,10 @@ public class StartGame extends JFrame implements ContinueListener {
 		}
 		cardLayout.show(cards, currentCard);
 	}
-
+	
+	/**
+	 * The goback function for multiplayer (goes back to the previous panel)
+	 */
 	@Override
 	public void goBackMP() { 
 		if (currentCard.equals("cardOnlineList")) {
@@ -130,6 +151,10 @@ public class StartGame extends JFrame implements ContinueListener {
 		}
 		cardLayout.show(cards, currentCard);
 	}
+	
+	/**
+	 * The function to go to the next panel in  multiplayer 
+	 */
 
 	@Override
 	public void nextPanelMP() {
@@ -143,6 +168,9 @@ public class StartGame extends JFrame implements ContinueListener {
 		cardLayout.show(cards, currentCard);
 	}
 
+	/**
+	 * Music 
+	 */
 	public void elevator() {
 		try{
 			File file = new File("files/elevator.wav");
