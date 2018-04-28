@@ -59,7 +59,6 @@ public class Controller  {
 		this.modeChosen = mode;
 		if (mode == MULTIPLAYER) {
 			this.setDifficulty(EZ);
-			continueListener.skipToGame();
 		}
 	}
 
@@ -111,7 +110,6 @@ public class Controller  {
 			encodedWord[i] = wordToGuess.charAt(i);
 		}
 		viewerGame.setWord(encodedWord);
-		continueListener.skipToGame();
 	}
 	
 	/**
@@ -146,9 +144,7 @@ public class Controller  {
 			WordProgress progress = (WordProgress)ois.readObject();
 			String word = progress.getWordToGuess();
 			char[] encoded = progress.getWordProgress();
-			int mistakes = progress.getWrongLetterCount();
-			
-			
+			int mistakes = progress.getWrongLetterCount();		
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found while loading.");
@@ -192,17 +188,17 @@ public class Controller  {
 	/**
 	 * Sets the word to guess to uppercase plus puts it into setEncodedWordFromString.
 	 * If the gamemode is set to multiplayer, put the heading in setCategory to "Multiplayer"
-	 * @param word word that is supposed to guess.
+	 * @param word Word that is supposed to guess.
 	 */
-	
 	public void setWordToGuess(String word) {
+		System.out.println("Controller: word to guess: " + word);
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
 		if(modeChosen == MULTIPLAYER) {
+			System.out.println("In controller -> in setWordToGuess -> in if");
 			viewerGame.setCategory("Multiplayer");
-			
+			continueListener.skipToGame();
 		}
-		
 	}
 	
 	/**

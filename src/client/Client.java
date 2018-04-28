@@ -27,11 +27,9 @@ public class Client extends Thread {
 	 */
 	public Client(String username, String ip, int port) {
 		this.username = username;
-		System.out.println("username set to " + username);
 		try {
 			socket = new Socket(ip, port);
 			oos = new ObjectOutputStream(socket.getOutputStream());
-			System.out.println("OOS skapad ");
 			ois = new ObjectInputStream(socket.getInputStream());
 		} catch (IOException e) {}
 		start();
@@ -137,12 +135,12 @@ public class Client extends Thread {
 					if (str.equals("invite")) {
 						String sender = ois.readUTF();
 						String gameMode = ois.readUTF();
-						System.out.println("Client " + username + "invited to " + gameMode + " by " + sender);
+						System.out.println("Client " + username + " invited to " + gameMode + " by " + sender);
 						receiveInvite(sender, gameMode);
 					} else if (str.equals("reject")) {
 						System.out.println("Invite decline");
 						JOptionPane.showMessageDialog(null, "Invite was declined");
-					} else {
+					} else if (str.equals("word")) {
 						controller.setWordToGuess(ois.readUTF());
 					}	
 				}

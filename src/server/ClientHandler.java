@@ -1,5 +1,6 @@
 package server;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -74,7 +75,6 @@ public class ClientHandler implements Runnable {
 	 * @param gameMode The gamemode this invite will start if accepted. 
 	 */
 	public void recieveInvite(String sender, String gameMode) {
-		//TODO: Send an invite to this client from sender for gamemode
 		System.out.println(username + " receiving invite");
 		try {
 			oos.writeObject("invite");
@@ -107,6 +107,7 @@ public class ClientHandler implements Runnable {
 	//Should somehow set the word to guess in this client's game window (ViewerGame)
 	public void setWordToGuess(String word) {
 		try {
+			oos.writeUTF("word");
 			oos.writeUTF(word);
 			oos.flush();
 		} catch (IOException e) {
@@ -158,8 +159,9 @@ public class ClientHandler implements Runnable {
 				} //end switch		
 				System.out.println("End of switch in CH");	
 			} catch (Exception e) {
-				if (e instanceof SocketException) {
+				if (e instanceof SocketException || e instanceof EOFException) {
 					server.logout(this);
+					break;
 				} else {
 					System.out.println("Exception in CH run method: " + e);
 					e.printStackTrace();

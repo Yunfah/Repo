@@ -33,14 +33,14 @@ public class Game {
 		this.player2 = player2;
 		this.gameMode = gameMode;
 		//TODO: Set the word to guess?
-		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
+//		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
 			// word = what the sender of the invite chose.
-		} else {	//give both players the same random word... how?
+//		} else {
 			setRandomWord();
-			//send this.word to both clients
+			System.out.println("Sending " + word + " to clients.");
 			player1.setWordToGuess(word);
 			player2.setWordToGuess(word);
-		}
+//		}
 	}
 
 	public void changeTurns() {
@@ -62,7 +62,6 @@ public class Game {
 			String word = br.readLine();
 			while(word != null) {
 				list.add(word);
-				System.out.println(word + " added to list.");
 				word = br.readLine();
 			}
 			
