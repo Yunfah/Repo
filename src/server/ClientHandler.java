@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	/**
 	 * Returns true if this ClientHandler's client is currently in 
 	 * a game of hangman.
@@ -86,7 +86,7 @@ public class ClientHandler implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method is called by the server when another client rejects the invite
 	 * sent by this client.
@@ -99,11 +99,11 @@ public class ClientHandler implements Runnable {
 			System.out.println("Error in rejection");
 		}
 	}
-	
+
 	public void startGame() {
 		//TODO: Here?
 	}
-	
+
 	//Should somehow set the word to guess in this client's game window (ViewerGame)
 	public void setWordToGuess(String word) {
 		try {
@@ -156,11 +156,16 @@ public class ClientHandler implements Runnable {
 				case "test" : int ignore; //test method
 				break;
 				} //end switch		
-			System.out.println("End of switch in CH");	
+				System.out.println("End of switch in CH");	
 			} catch (Exception e) {
-				System.out.println("Exception in CH run method");
-				server.logout(this);
-				break;
+				if (e instanceof SocketException) {
+					server.logout(this);
+				} else {
+					System.out.println("Exception in CH run method: " + e);
+					e.printStackTrace();
+					break;
+				}
+
 			}
 		} //end while
 		System.out.println("End of CH while loop");

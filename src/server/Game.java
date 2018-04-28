@@ -28,6 +28,7 @@ public class Game {
 	 * @param gameMode The game mode of this game of hangman.
 	 */
 	public Game(ClientHandler player1, ClientHandler player2, String gameMode) {
+		System.out.println("Going to create game. In Game instance...");
 		this.player1 = player1;
 		this.player2 = player2;
 		this.gameMode = gameMode;
@@ -54,17 +55,20 @@ public class Game {
 	 * Sets up a random word that is to be guessed in this game.
 	 */
 	private void setRandomWord() {
-		ArrayList<String> arraylist = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<String>();
 		Random rand = new Random();
 
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("files/Random.txt"),"UTF-8"))) {
-			String word2 = br.readLine();
+			String word = br.readLine();
 			while(word != null) {
-				arraylist.add(word2);
-				word2 = br.readLine();
+				list.add(word);
+				System.out.println(word + " added to list.");
+				word = br.readLine();
 			}
-			int index = rand.nextInt(arraylist.size());
-			this.word = arraylist.get(index);
+			
+			System.out.println("arraylist size: " + list.size());
+			int index = rand.nextInt(list.size());
+			this.word = list.get(index);
 		} catch (IOException e ) {}
 	}
 }
