@@ -24,7 +24,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
 	private AudioClip pop;
 	private boolean popBool;
-	
 	private boolean[] buttonEnabled = new boolean[26];
 
 	public ViewerGame() {
@@ -214,7 +213,10 @@ public class ViewerGame extends JPanel implements Serializable {
 			}
 		}
 	}
-
+	
+	public boolean[] getButtonsPressed() {
+		return buttonEnabled;
+	}
 
 	/**
 	 * Sets the current progress of the word to guess.

@@ -189,8 +189,8 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			activateEE();
 		}
 		if(e.getSource()==btnLoadGame) {
-//			controller.loadSaveFile(0);
-//			continueListener.skipToGame();
+			controller.loadSaveFile();
+			continueListener.skipToGame();
 		}
 	}
 	

@@ -38,11 +38,11 @@ public class Controller  {
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
 	}
-	
+
 	public void setViewerUsername(ViewerUsername viewer) {
 		viewerUsername = viewer;
 	}
-	
+
 	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
 		viewerMultiplayerMode = viewer;
 	}
@@ -50,7 +50,7 @@ public class Controller  {
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
 		viewerOnlineList = viewer; 
 	}
-	
+
 	public void setListener(ContinueListener continueListener) {
 		this.continueListener = continueListener;
 	}
@@ -100,7 +100,7 @@ public class Controller  {
 			}
 		}
 	}
-	
+
 	/**
 	 * Sets the word to as if it has been completely guessed
 	 * and shows it in the game window.
@@ -111,28 +111,30 @@ public class Controller  {
 		}
 		viewerGame.setWord(encodedWord);
 	}
-	
+
 	/**
 	 * Saves the current progress. Only one save file
 	 * may exist at a time.
 	 */
 	public void saveGameProgress() {	//TEST THIS METHOD PLEASE
 		int wrongGuesses = viewerGame.getWrongLetterCount();
-		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses);
-		 
+		boolean[] buttonsPressed = viewerGame.getButtonsPressed();
+		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses, buttonsPressed);
+
 		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
-				new FileOutputStream("files/SaveFile.dat", false)))) {
-			
+				new FileOutputStream("files/SaveFile.dat")))) {
+
+			System.out.println("Saving " + newSave.toString());
 			oos.writeObject(newSave);
 			oos.flush();
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found while saving.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Loads the latest save file and sets up a game from it.
 	 */
@@ -140,11 +142,17 @@ public class Controller  {
 		//Load savefile and set up a single player game from it.
 		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(
 				new FileInputStream("files/SaveFile.dat")))) {
-			
+
 			WordProgress progress = (WordProgress)ois.readObject();
 			String word = progress.getWordToGuess();
 			char[] encoded = progress.getWordProgress();
 			int mistakes = progress.getWrongLetterCount();		
+
+			setWordToGuess(word);
+			setEncodedWord(encoded);
+			setDifficulty(mistakes);
+			
+			System.out.println(progress.toString());
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found while loading.");
@@ -184,11 +192,11 @@ public class Controller  {
 			viewerGame.setCategory(category);
 		} catch (IOException e ) {}
 	}
-	
+
 	/**
-	 * Sets the word to guess to uppercase plus puts it into setEncodedWordFromString.
-	 * If the gamemode is set to multiplayer, put the heading in setCategory to "Multiplayer"
-	 * @param word Word that is supposed to guess.
+	 * Sets the word that has to be guessed to the given String. If multiplayer
+	 * is the chosen mode, the name of the category is also set to "Multiplayer". 
+	 * @param word The word that will have to be guessed during this game.
 	 */
 	public void setWordToGuess(String word) {
 		System.out.println("Controller: word to guess: " + word);
@@ -200,23 +208,12 @@ public class Controller  {
 			continueListener.skipToGame();
 		}
 	}
-	
-	/**
-	 * Resets the word the user chose, gets another one from the list of categories. 
-	 */
 
-	public void resetCategoryWord() {
-		Random rand = new Random();
-		int index = rand.nextInt(listWordsFromCategory.size());
-		setWordToGuess(listWordsFromCategory.get(index));
-
-	}
-	
 	/**
-	 * Hides the word that got chosen. 
-	 * @param word word to guess. 
+	 * Makes a char array the length of the word that has to be guessed and sets
+	 * all non-guessed letters to '-'. 
+	 * @param word The word to encode into a char array. 
 	 */
-	
 	private void setEncodedWordFromString(String word) {
 		word.toUpperCase();
 		encodedWord = new char[word.length()];
@@ -232,19 +229,27 @@ public class Controller  {
 	}
 	
 	/**
-	 * Gets difficulty between, Ez, Dark Souls, Xtreme
-	 * @return difficulty
+	 * Resets the word the user chose, gets another one from the list of words. 
 	 */
-	
+	public void resetCategoryWord() {
+		Random rand = new Random();
+		int index = rand.nextInt(listWordsFromCategory.size());
+		setWordToGuess(listWordsFromCategory.get(index));
+	}
+
+	/**
+	 * Returns the chosen difficulty as an int that is the handicap ("wrong guesses") the
+	 * player starts with. 
+	 * @return difficulty Amount of "wrong guesses" the game starts with in this difficulty. 
+	 */
 	public int getDifficulty() {
 		return difficulty;
 	}
-	
-	/**
-	 * Sets the difficulty from Ez, Dark Souls, Xtreme
-	 * @param difficulty difficulty Ez, Dark Souls, Xtreme
-	 */
 
+	/**
+	 * Sets the difficulty of this game.
+	 * @param difficulty The difficulty that will be used during this round. 
+	 */
 	public void setDifficulty(int difficulty) {
 		if (difficulty == EZ) {
 			this.difficulty = EZ;
@@ -255,56 +260,54 @@ public class Controller  {
 		} else if (difficulty == XTREME) {
 			this.difficulty = XTREME; 
 			viewerGame.setDifficulty(XTREME);
-		} else {
-			System.out.println("Somehow an invalid difficulty was entered.");
+		} else {	//saved game loaded
+			viewerGame.setDifficulty(difficulty);
 		}
 	}
-	 
+
 	/**
 	 * Connects the user to the server.
-	 * @param username their username;
-	 * @param ip the ip they connect to;
-	 * @param port the port they connect to;
+	 * @param username their username.
+	 * @param ip the ip they connect to.
+	 * @param port the port they connect to.
 	 */
 	public void connect(String username, String ip, int port) {
 		client = new Client(username, ip, port);
 		client.setController(this);
 		viewerOnlineList.setUsername("Your name: " + username);
 	}
-	
+
 	/**
-	 * Gets the client (user)
-	 * @return the client(user) returned.
+	 * Returns the Client object of this Controller.
+	 * @return The Client(user) returned.
 	 */
-	
+
 	public Client getClient() {
 		return client;
 	}
-	
+
 	/**
-	 * Sends out initation to another user.
-	 * @param reciever the username of the reciever;
-	 * @param gamemode the gamemode they are currently in;
+	 * Sends an invitation to another user.
+	 * @param reciever the username of the reciever.
+	 * @param gamemode the name of the current gamemode.
 	 */
-	
 	public void sendInvite(String reciever, String gamemode) {
 		System.out.println("Send invite");
 		client.sendInvite(reciever, gamemode);
 	}
-	
+
 	/**
 	 * Enables or disables this controller's Client's turn.
-	 * @param myTurn Set to true to enable the turn, and false to disable it.
+	 * @param myTurn Set to true to enable turn, and false to disable it.
 	 */
 	public void setTurn(boolean myTurn) {
 		viewerGame.setEnabled(myTurn); //TEST THIS!!!!!!!!!
 	}
-	
+
 	/**
 	 * Updates the onlineList with its users.
 	 * @param onlineList The list of all the users online.
 	 */
-	
 	public void updateOnline(ArrayList<String> onlineList) {
 		viewerOnlineList.updateOnlineList(onlineList);
 	}

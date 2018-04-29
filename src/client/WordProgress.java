@@ -6,11 +6,13 @@ public class WordProgress implements Serializable {
 	private String wordToGuess;
 	private char[] wordProgress;
 	private int wrongLetterCount;
+	private boolean[] lettersGuessed;
 
-	public WordProgress(String wordToGuess, char[] progress, int wrongGuesses) {
+	public WordProgress(String wordToGuess, char[] progress, int wrongGuesses, boolean[] lettersGuessed) {
 		this.wordToGuess = wordToGuess;
 		wordProgress = progress;
 		wrongLetterCount = wrongGuesses;
+		this.lettersGuessed = lettersGuessed;
 	}
 
 	public String getWordToGuess() {
@@ -23,6 +25,10 @@ public class WordProgress implements Serializable {
 
 	public char[] getWordProgress() {
 		return wordProgress;
+	}
+	
+	public boolean[] getLettersGuessed() {
+		return lettersGuessed;
 	}
 
 	public void setWordProgress(char[] wordProgress) {
@@ -44,12 +50,5 @@ public class WordProgress implements Serializable {
 		}
 		String str = "Word:"+wordToGuess + ",progress:" + progress + ",Mistakes:" + wrongLetterCount;
 		return str;
-	}
-	
-	public static void main(String[] args) {
-		char[] testProgress = {'-', 'e', '-'};
-		WordProgress test = new WordProgress("Hej", testProgress, 1);
-		
-		System.out.println(test);
 	}
 }
