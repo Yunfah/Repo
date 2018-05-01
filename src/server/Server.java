@@ -102,7 +102,8 @@ public class Server implements Runnable {
 	}
 	
 	public void sendGuess(char letterGuessed, String receiverOfGuess) {
-		
+		ClientHandler ch = clientList.get(receiverOfGuess);
+		//ch.receiveGuess(letterGuessed);
 	}
 
 	/**

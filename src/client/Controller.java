@@ -59,7 +59,12 @@ public class Controller  {
 		this.modeChosen = mode;
 		if (mode == MULTIPLAYER) {
 			this.setDifficulty(EZ);
+			viewerGame.disableSpecialButtons();
 		}
+	}
+	
+	public int getMode() {
+		return modeChosen;
 	}
 
 	/**

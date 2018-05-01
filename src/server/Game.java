@@ -16,8 +16,7 @@ import client.Controller;
 public class Game {
 	private ClientHandler player1;
 	private ClientHandler player2;
-	private Controller controllerP1;	//Something to control turns etc. is needed.
-	private Controller controllerP2;	//Should these controllers come from CH? Then CH needs to know about client/controller (client sends its controller)
+	private boolean player1Turn; //true if it is the turn of player1, false if it is player2.
 	private String gameMode;
 	private String word;
 
@@ -32,22 +31,17 @@ public class Game {
 		this.player1 = player1;
 		this.player2 = player2;
 		this.gameMode = gameMode;
-		//TODO: Set the word to guess?
 		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
-//			word = what the sender of the invite chose.
+			word = player1.setCustomWord();
 		} else {
 			setRandomWord();
 			System.out.println("Sending " + word + " to clients.");
-			player1.setWordToGuess(word);
-			player2.setWordToGuess(word);
 		}
+		player1.setWordToGuess(word);
+		player2.setWordToGuess(word);
 	}
 
 	public void changeTurns() {
-
-	}
-
-	public void setWinner() {
 
 	}
 

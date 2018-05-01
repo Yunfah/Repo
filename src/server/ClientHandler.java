@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
  * Thread that handles requests on the server side for a client.
  * Acts as a middle man between client and server. 
@@ -98,6 +100,16 @@ public class ClientHandler implements Runnable {
 		} catch (IOException e) {
 			System.out.println("Error in rejection");
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String setCustomWord() {
+		String word = JOptionPane.showInputDialog("Choose a word for your opponent to guess");
+		//Possible error-handling for later
+		return word;
 	}
 
 	/**

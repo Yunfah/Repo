@@ -19,6 +19,8 @@ public class ViewerGame extends JPanel implements Serializable {
 	private Controller controller;
 	private JButton btnBack = new JButton("<-- BACK");
 	private JButton btnSave = new JButton("Save");
+	private JButton reset = new JButton(new ResetAction("Reset", KeyEvent.VK_R));
+	private JButton newWord = new JButton(new NewWordAction("New Word", KeyEvent.VK_N));
 	private ButtonGroup rbGroup = new ButtonGroup();
 	private JRadioButton rbShowWord = new JRadioButton("Show word on loss");
 	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
@@ -44,10 +46,9 @@ public class ViewerGame extends JPanel implements Serializable {
 		setupTopOptions();
 		// JPanel to hold non-letter JButtons
 		JPanel specialBtnsPanel = new JPanel(new GridLayout(1, 0, 3, 3));
-		specialBtnsPanel.add(new JButton(new ResetAction("Reset", KeyEvent.VK_R)));
-		specialBtnsPanel.add(new JButton(new NewWordAction("New Word", KeyEvent.VK_N)));
-		specialBtnsPanel.add(new JButton(new ExitAction("Exit", KeyEvent.VK_X)));
-
+		specialBtnsPanel.add(reset);
+		specialBtnsPanel.add(newWord);
+		specialBtnsPanel.add( new JButton(new ExitAction("Exit", KeyEvent.VK_X)));
 
 		// JPanel to hold non-drawing JPanels. It uses BoxLayout
 		JPanel bottomPanel = new JPanel();
@@ -124,6 +125,11 @@ public class ViewerGame extends JPanel implements Serializable {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
+	
+	public void disableSpecialButtons() {
+		reset.setEnabled(false);
+		newWord.setEnabled(false);
+	}
 
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -184,7 +190,6 @@ public class ViewerGame extends JPanel implements Serializable {
 				button.setEnabled(true);
 			}
 			resetNewWord();
-			// GÖR DET HÄR
 		}
 	}
 
@@ -257,12 +262,6 @@ public class ViewerGame extends JPanel implements Serializable {
 		drawingPanel.setWin(win);	
 	}
 
-	public int displayLife () {
-		// TODO: display life count in the GUI
-		// Method to show how many tries the player have left. Should show in the window. 		
-		return 0;
-	}
-
 	/**
 	 * Resets all progress for the current word. Restarts
 	 * the game with the same settings and same word.
@@ -303,7 +302,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 }
 
-class DrawingPanel extends JPanel implements Serializable {
+class DrawingPanel extends JPanel {
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;
