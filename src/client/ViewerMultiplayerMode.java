@@ -23,7 +23,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
 	private JButton btnG1 = new JButton("Turnbased Co-op");
 	private JButton btnG2 = new JButton("1 Writes, 1 Guesses");
-	private JButton btnG3 = new JButton("1v1");
+	private JButton btnG3 = new JButton("1v1"); 
 	private JButton btnBack = new JButton("<-- Back");
 	
 	
@@ -106,7 +106,6 @@ public class ViewerMultiplayerMode extends JPanel {
 	/**
 	 * A private class for the buttonlistener. 
 	 * @author yun
-	 *
 	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {

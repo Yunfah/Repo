@@ -109,12 +109,17 @@ public class Client extends Thread {
 		if (win) {
 			try {
 				oos.writeObject("win");
-				oos.writeBoolean(win);
+				oos.writeBoolean(true);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(true) from " + username);
 			}
 		} else {
-			
+			try {
+				oos.writeObject("win");
+				oos.writeBoolean(false);
+			} catch (IOException e) {
+				System.out.println("Error while sending win(false) from " + username);
+			}
 		}
 	}
 	

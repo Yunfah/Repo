@@ -463,7 +463,7 @@ class DrawingPanel extends JPanel implements Serializable {
 	 */
 	public void drawWordLines(Graphics g, char[] word) {
 		g.setColor(Color.BLACK);
-		int x1 = 550;
+		int x1 = 520;
 		int x2 = x1+30;
 		int y = 500;
 
@@ -489,7 +489,7 @@ class DrawingPanel extends JPanel implements Serializable {
 	 */
 	public void drawWord(Graphics g, char[] word) {
 		g.setFont(new Font("SansSerif", Font.BOLD, 30));
-		int x = 555;
+		int x = 525;
 		int y = 490;
 		for (int i = 0; i < word.length; i++) {
 			if (word[i] == '-') {

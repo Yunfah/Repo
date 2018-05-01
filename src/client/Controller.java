@@ -199,12 +199,10 @@ public class Controller  {
 	 * @param word The word that will have to be guessed during this game.
 	 */
 	public void setWordToGuess(String word) {
-		System.out.println("Controller: word to guess: " + word);
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
 		if(modeChosen == MULTIPLAYER) {
-			System.out.println("In controller -> in setWordToGuess -> in if");
-			viewerGame.setCategory("Multiplayer");
+			viewerGame.setCategory(viewerOnlineList.getGameMode());
 			continueListener.skipToGame();
 		}
 	}
@@ -223,7 +221,6 @@ public class Controller  {
 			} else {
 				encodedWord[i] = '-';
 			}
-			System.out.print(encodedWord[i]);
 		}
 		viewerGame.setWord(encodedWord);
 	}
