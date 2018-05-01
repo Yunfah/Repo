@@ -107,7 +107,7 @@ public class ClientHandler implements Runnable {
 	//Should somehow set the word to guess in this client's game window (ViewerGame)
 	public void setWordToGuess(String word) {
 		try {
-			oos.writeUTF("word");
+			oos.writeObject("word");
 			oos.writeUTF(word);
 			oos.flush();
 		} catch (IOException e) {
