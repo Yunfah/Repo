@@ -74,6 +74,10 @@ public class Controller  {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
 					encodedWord[i] = letter;
+					//if co-op -> skicka bokstaven till motspelaren
+					if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op") {
+						//client.sendLetterGuessed(letter);
+					}
 				}
 			}
 		} else {
@@ -278,7 +282,6 @@ public class Controller  {
 	 * Returns the Client object of this Controller.
 	 * @return The Client(user) returned.
 	 */
-
 	public Client getClient() {
 		return client;
 	}

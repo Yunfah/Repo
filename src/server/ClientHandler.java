@@ -169,6 +169,12 @@ public class ClientHandler implements Runnable {
 					server.victoryMessage(receiver, win);
 				}
 				break;
+				case "guess" : {
+					char letterGuessed = ois.readChar();
+					String opponent = ois.readUTF();
+					server.sendGuess(letterGuessed, opponent);
+				}
+				break;
 				} //end switch		
 				System.out.println("End of switch in CH");	
 			} catch (Exception e) {

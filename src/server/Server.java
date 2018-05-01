@@ -96,11 +96,13 @@ public class Server implements Runnable {
 	 * @param gameMode The game mode that this game will use the rules of. 
 	 */
 	public void createGame(String player1, String player2, String gameMode) {
-		System.out.println("Server creating game...");
 		ClientHandler p1 = clientList.get(player1);
 		ClientHandler p2 = clientList.get(player2);	
-		//KODEN KOMMER HIT SEN FÅR VI EXCEPTION
 		gameList.add(new Game(p1, p2, gameMode));
+	}
+	
+	public void sendGuess(char letterGuessed, String receiverOfGuess) {
+		
 	}
 
 	/**

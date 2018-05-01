@@ -129,6 +129,20 @@ public class Client extends Thread {
 	}
 	
 	/**
+	 * 
+	 * @param letter
+	 */
+	public void guessLetter(char letter) {
+		try {
+			oos.writeObject("guess");
+			oos.writeChar(letter);
+			oos.writeUTF(opponent);
+		} catch (IOException e) {
+			
+		}
+	}
+	
+	/**
 	 * Sends a request to the server to be disconnected from it.
 	 */
 	public void logout() {
