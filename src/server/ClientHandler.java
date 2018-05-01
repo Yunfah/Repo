@@ -104,13 +104,16 @@ public class ClientHandler implements Runnable {
 		//TODO: Here?
 	}
 
-	//Should somehow set the word to guess in this client's game window (ViewerGame)
+	/**
+	 * 
+	 * @param word
+	 */
 	public void setWordToGuess(String word) {
 		try {
 			oos.writeObject("word");
 			oos.writeUTF(word);
 			oos.flush();
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 	}
@@ -154,7 +157,11 @@ public class ClientHandler implements Runnable {
 					server.declineInviteFrom(sender);
 				}
 				break;
-				case "test" : int ignore; //test method
+				case "win" : { //
+					boolean win = ois.readBoolean();
+					String receiver = ois.readUTF();
+					server.victoryMessage(receiver, win);
+				}
 				break;
 				} //end switch		
 				System.out.println("End of switch in CH");	
@@ -167,7 +174,6 @@ public class ClientHandler implements Runnable {
 					e.printStackTrace();
 					break;
 				}
-
 			}
 		} //end while
 		System.out.println("End of CH while loop");

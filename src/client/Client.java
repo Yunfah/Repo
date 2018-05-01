@@ -18,6 +18,7 @@ public class Client extends Thread {
 	private ObjectOutputStream oos;
 	private Controller controller;
 	private String username;
+	private String opponent;
 
 	/**
 	 * Constructor.
@@ -59,6 +60,7 @@ public class Client extends Thread {
 
 	public void sendInvite(String receiver, String gameMode) {
 		try {
+			opponent = receiver;
 			oos.writeUTF("invite");
 			oos.writeUTF(username);	
 			oos.writeUTF(receiver);
@@ -94,6 +96,7 @@ public class Client extends Thread {
 			}
 		} else if (selectedOption == JOptionPane.YES_OPTION) {	
 			try {
+				opponent = sender;
 				oos.writeUTF("accept");
 				oos.writeUTF(sender);
 				oos.writeUTF(username);
@@ -110,6 +113,7 @@ public class Client extends Thread {
 			try {
 				oos.writeObject("win");
 				oos.writeBoolean(true);
+				oos.writeUTF(opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(true) from " + username);
 			}
@@ -117,6 +121,7 @@ public class Client extends Thread {
 			try {
 				oos.writeObject("win");
 				oos.writeBoolean(false);
+				oos.writeUTF(opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(false) from " + username);
 			}

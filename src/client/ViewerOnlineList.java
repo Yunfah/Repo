@@ -25,7 +25,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private JLabel lblOnline = new JLabel("Online");
 	private JLabel lblSettings = new JLabel("");	//Should show what gamemode the player has chosen.
 	private JLabel lblUsername = new JLabel("");
-	private JButton btnBack = new JButton("<-- Back"); 
+	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
 	private ButtonGroup bg = new ButtonGroup();
 	private JPanel pnlOnlineList;

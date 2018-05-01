@@ -52,6 +52,11 @@ public class Server implements Runnable {
 		}
 	}
 	
+	public void victoryMessage(String receiver, boolean senderIsWinner) {
+		ClientHandler ch = clientList.get(receiver);
+		//Meddela motspelaren att den andra vann
+	}
+	
 	/**
 	 * Disconnects the given ClientHandler from this server.
 	 * @param ch ClientHandler to be disconnected.
