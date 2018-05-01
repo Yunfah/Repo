@@ -30,7 +30,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		setPreferredSize(new Dimension(1200, 800));
 		JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));
 		letterButtonPanel.setBorder(BorderFactory.createTitledBorder("Letters"));
-		ButtonListener buttonListener = new ButtonListener();
+		ButtonListener buttonListener = new ButtonListener(); 
 		int counter = 0;
 		for (char c = 'A'; c <= 'Z'; c++) {
 			String text = String.valueOf(c);

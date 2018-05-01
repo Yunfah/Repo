@@ -105,6 +105,18 @@ public class Client extends Thread {
 		}
 	}
 	
+	public void win(boolean win) {
+		if (win) {
+			try {
+				oos.writeObject("win");
+				oos.writeBoolean(win);
+			} catch (IOException e) {
+				System.out.println("Error while sending win(true) from " + username);
+			}
+		} else {
+			
+		}
+	}
 	
 	/**
 	 * Sends a request to the server to be disconnected from it.
@@ -126,6 +138,7 @@ public class Client extends Thread {
 		try {
 			oos.writeObject(username); 
 			while(true) {
+				System.out.println("Client " + username + " waiting to read object...");
 				Object input = ois.readObject();
 				if (input instanceof ArrayList) {	//If the input is an arraylist it can only be a list of online clients
 					ArrayList<String> list = (ArrayList<String>)input;
@@ -144,7 +157,6 @@ public class Client extends Thread {
 						controller.setWordToGuess(ois.readUTF());
 					}	
 				}
-
 			} //end while
 
 		} catch (IOException e) {

@@ -96,7 +96,7 @@ public class Controller  {
 		if (correctLetters == wordToGuess.length()) {
 			viewerGame.setWin(true);
 			if (modeChosen == MULTIPLAYER) {
-				//client.win(); //win() should tell CH to tell the other client(player) that this client won
+				client.win(true); //win() should tell CH to tell the other client(player) that this client won
 			}
 		}
 	}
