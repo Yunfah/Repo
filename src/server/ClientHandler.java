@@ -100,13 +100,19 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
-	public void startGame() {
-		//TODO: Here?
+	/**
+	 * 
+	 * @param message
+	 */
+	public void receiveVictoryMessage(String message) {	//NOT DONE
+		//Ta emot meddelande om att motspelaren lyckades/misslyckades först. 
+		//Omöjliggör vidare gissningar.
+		//Fråga om man vill spela en ny runda med samma spelare. 
 	}
 
 	/**
-	 * 
-	 * @param word
+	 * Sets up the word that has to be guessed for this Client. 
+	 * @param word The word that has to be guessed.
 	 */
 	public void setWordToGuess(String word) {
 		try {

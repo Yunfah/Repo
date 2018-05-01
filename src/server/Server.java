@@ -21,7 +21,7 @@ public class Server implements Runnable {
 	private HashMap<String, ClientHandler> clientList = new HashMap<String, ClientHandler>(); //The string is the client username
 	private ArrayList<Game> gameList = new ArrayList<Game>();	//should hold a list of all active games between clients at this time.
 	private int port;
-	
+
 	/**
 	 * Constructor.
 	 * @param port The port this server will listen on. 
@@ -33,7 +33,7 @@ public class Server implements Runnable {
 			server.start();
 		} catch (IOException e) {}
 	}
-	
+
 	/**
 	 * Sends a game invite for game mode to receiver. If the receiver is already
 	 * in a game, the invite is declined. 
@@ -51,12 +51,17 @@ public class Server implements Runnable {
 			chSender.reject();
 		}
 	}
-	
-	public void victoryMessage(String receiver, boolean senderIsWinner) {
+
+	public void victoryMessage(String receiver, boolean senderIsWinner) {	//NOT DONE
 		ClientHandler ch = clientList.get(receiver);
-		//Meddela motspelaren att den andra vann
+		
+		if (senderIsWinner) {
+			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word. Play again?");
+		} else {
+			ch.receiveVictoryMessage("Your opponent failed at guessing the word. You may keep trying.");
+		}
 	}
-	
+
 	/**
 	 * Disconnects the given ClientHandler from this server.
 	 * @param ch ClientHandler to be disconnected.
@@ -67,7 +72,7 @@ public class Server implements Runnable {
 		ch = null; //needed?
 		sendClientList();
 	}
-	
+
 	/**
 	 * Sends a list of all currently online clients to every 
 	 * connected client. 
@@ -77,12 +82,12 @@ public class Server implements Runnable {
 		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {	//Creates list with the usernames of connected clients.
 			usernameList.add(entry.getValue().getUsername());
 		}
-		
+
 		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {	//Sends the username list to all connected clients. 
 			entry.getValue().sendClientList(usernameList);
 		}
 	}
-	
+
 	/**
 	 * Creates a game of hangman in the given game mode, and with the given
 	 * players (clients).
@@ -97,7 +102,7 @@ public class Server implements Runnable {
 		//KODEN KOMMER HIT SEN FÅR VI EXCEPTION
 		gameList.add(new Game(p1, p2, gameMode));
 	}
-	
+
 	/**
 	 * Sends a message to the given sender that their invite was declined.
 	 * @param sender The sender of the declined invite.
@@ -107,7 +112,7 @@ public class Server implements Runnable {
 		ClientHandler senderOfInvite = clientList.get(sender);
 		senderOfInvite.reject();
 	}
-	
+
 	/**
 	 * Listens to connections from clients and creates ClientHandlers for them.
 	 */
@@ -119,14 +124,14 @@ public class Server implements Runnable {
 				Socket socket = serverSocket.accept();
 				ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 				ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-				
+
 				String username = (String)ois.readObject();
 				System.out.println(username + " connected.");
 
 				clientList.put(username, new ClientHandler(socket, ois, oos, this, username));
-				
+
 				sendClientList();
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {

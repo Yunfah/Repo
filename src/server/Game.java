@@ -33,14 +33,14 @@ public class Game {
 		this.player2 = player2;
 		this.gameMode = gameMode;
 		//TODO: Set the word to guess?
-//		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
-			// word = what the sender of the invite chose.
-//		} else {
+		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
+//			word = what the sender of the invite chose.
+		} else {
 			setRandomWord();
 			System.out.println("Sending " + word + " to clients.");
 			player1.setWordToGuess(word);
 			player2.setWordToGuess(word);
-//		}
+		}
 	}
 
 	public void changeTurns() {
@@ -60,11 +60,11 @@ public class Game {
 
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("files/Random.txt"),"UTF-8"))) {
 			String word = br.readLine();
-			while(word != null) {
+			while(word != null) { 
 				list.add(word);
 				word = br.readLine();
 			}
-			
+
 			System.out.println("arraylist size: " + list.size());
 			int index = rand.nextInt(list.size());
 			this.word = list.get(index);

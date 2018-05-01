@@ -108,7 +108,7 @@ public class Client extends Thread {
 		}
 	}
 	
-	public void win(boolean win) {
+	public void win(boolean win) {	//DONE?
 		if (win) {
 			try {
 				oos.writeObject("win");
