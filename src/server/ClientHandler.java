@@ -175,6 +175,7 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "win" : { //Sends to receiver whether this client won or failed
+					System.out.println("Read win in CH switch");
 					boolean win = ois.readBoolean();
 					String receiver = ois.readUTF();
 					System.out.println("Sending " + win + " to " + receiver);

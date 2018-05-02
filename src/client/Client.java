@@ -113,7 +113,7 @@ public class Client extends Thread {
 	public void win(boolean win) {	//DONE?
 		if (win) {
 			try {
-				oos.writeObject("win");
+				oos.writeUTF("win");
 				oos.writeBoolean(true);
 				System.out.println("true win sent to " + opponent);
 				oos.writeUTF(opponent);
