@@ -117,17 +117,18 @@ public class ClientHandler implements Runnable {
 	 * @param message
 	 */
 	public void receiveVictoryMessage(String message) {	//NOT DONE
-		System.out.println(message); 
+		JOptionPane.showMessageDialog(null, message); 
 	}
 
 	/**
 	 * Sets up the word that has to be guessed for this Client. 
 	 * @param word The word that has to be guessed.
 	 */
-	public void setWordToGuess(String word) {
+	public void setWordToGuess(String word, String gameMode) {
 		try {
 			oos.writeObject("word");
 			oos.writeUTF(word);
+			oos.writeUTF(gameMode);
 			oos.flush();
 		} catch (IOException e) { 
 			e.printStackTrace();
@@ -176,6 +177,7 @@ public class ClientHandler implements Runnable {
 				case "win" : { //Sends to receiver whether this client won or failed
 					boolean win = ois.readBoolean();
 					String receiver = ois.readUTF();
+					System.out.println("Sending " + win + " to " + receiver);
 					server.victoryMessage(receiver, win);
 				}
 				break;

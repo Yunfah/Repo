@@ -96,13 +96,14 @@ public class Client extends Thread {
 			}
 		} else if (selectedOption == JOptionPane.YES_OPTION) {	
 			try {
+				controller.getViewerGame().setCategory(gameMode);
 				opponent = sender;
 				oos.writeUTF("accept");
 				oos.writeUTF(sender);
 				oos.writeUTF(username);
 				oos.writeUTF(gameMode);
 				oos.flush();
-				controller.getViewerGame().setCategory(gameMode);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -114,6 +115,7 @@ public class Client extends Thread {
 			try {
 				oos.writeObject("win");
 				oos.writeBoolean(true);
+				System.out.println("true win sent to " + opponent);
 				oos.writeUTF(opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(true) from " + username);
@@ -122,6 +124,7 @@ public class Client extends Thread {
 			try {
 				oos.writeObject("win");
 				oos.writeBoolean(false);
+				System.out.println("false win sent to " + opponent);
 				oos.writeUTF(opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(false) from " + username);
@@ -179,7 +182,9 @@ public class Client extends Thread {
 						System.out.println("Invite decline");
 						JOptionPane.showMessageDialog(null, "Invite was declined");
 					} else if (str.equals("word")) {
-						controller.setWordToGuess(ois.readUTF());
+						String word = ois.readUTF();
+						String gameMode = ois.readUTF();
+						controller.setWordToGuess(word, gameMode);
 					}	
 				}
 			} //end while

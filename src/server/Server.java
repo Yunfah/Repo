@@ -54,7 +54,7 @@ public class Server implements Runnable {
 
 	public void victoryMessage(String receiver, boolean senderIsWinner) {	//NOT DONE
 		ClientHandler ch = clientList.get(receiver);
-		
+		System.out.println("In server victory message");
 		if (senderIsWinner) {
 			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word. Play again?");
 		} else {

@@ -37,7 +37,7 @@ public class Controller  {
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
 	}
-	
+
 	public ViewerGame getViewerGame() {
 		return viewerGame;
 	}
@@ -61,7 +61,7 @@ public class Controller  {
 			viewerGame.disableSpecialButtons();
 		}
 	}
-	
+
 	public int getMode() {
 		return modeChosen;
 	}
@@ -102,10 +102,10 @@ public class Controller  {
 				correctLetters++;
 		}
 		if (correctLetters == wordToGuess.length()) {
-			viewerGame.setWin(true);
 			if (modeChosen == MULTIPLAYER) {
 				client.win(true); //win() should tell CH to tell the other client(player) that this client won
 			}
+			viewerGame.setWin(true);
 		}
 	}
 
@@ -156,12 +156,12 @@ public class Controller  {
 			char[] encoded = progress.getWordProgress();
 			int mistakes = progress.getWrongLetterCount();		
 
-			setWordToGuess(word);
+			setWordToGuess(word, null);
 			setEncodedWord(encoded);
 			setDifficulty(mistakes);
-			
+
 			System.out.println(progress.toString());
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found while loading.");
 		} catch (IOException e) {
@@ -196,7 +196,7 @@ public class Controller  {
 				word = br.readLine();
 			}
 			int index = rand.nextInt(listWordsFromCategory.size());
-			setWordToGuess(listWordsFromCategory.get(index));	
+			setWordToGuess(listWordsFromCategory.get(index), null);	
 			viewerGame.setCategory(category);
 		} catch (IOException e ) {}
 	}
@@ -206,11 +206,11 @@ public class Controller  {
 	 * is the chosen mode, the name of the category is also set to "Multiplayer". 
 	 * @param word The word that will have to be guessed during this game.
 	 */
-	public void setWordToGuess(String word) {
+	public void setWordToGuess(String word, String gameMode) {
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
 		if(modeChosen == MULTIPLAYER) {
-			viewerGame.setCategory(viewerOnlineList.getGameMode());
+			viewerGame.setCategory(gameMode);
 			continueListener.skipToGame();
 		}
 	}
@@ -232,14 +232,14 @@ public class Controller  {
 		}
 		viewerGame.setWord(encodedWord);
 	}
-	
+
 	/**
 	 * Resets the word the user chose, gets another one from the list of words. 
 	 */
 	public void resetCategoryWord() {
 		Random rand = new Random();
 		int index = rand.nextInt(listWordsFromCategory.size());
-		setWordToGuess(listWordsFromCategory.get(index));
+		setWordToGuess(listWordsFromCategory.get(index), null);
 	}
 
 	/**
