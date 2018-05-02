@@ -17,7 +17,6 @@ public class Controller  {
 	private Client client;
 	private ViewerGame viewerGame;
 	private ViewerMultiplayerMode viewerMultiplayerMode;
-	private ViewerUsername viewerUsername;
 	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
 	private ContinueListener continueListener;
@@ -37,10 +36,6 @@ public class Controller  {
 
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
-	}
-
-	public void setViewerUsername(ViewerUsername viewer) {
-		viewerUsername = viewer;
 	}
 
 	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
