@@ -119,8 +119,8 @@ public class Client extends Thread {
 			try {
 				oos.writeUTF("win");
 				oos.writeBoolean(true);
-				System.out.println("true win sent to " + opponent);
 				oos.writeUTF(opponent);
+				System.out.println("true win sent to " + opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(true) from " + username);
 			}

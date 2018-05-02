@@ -150,6 +150,7 @@ public class ClientHandler implements Runnable {
 					System.out.println("Requesting server to send invite to " + receiver);
 					server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
 				}
+				System.out.println("invite skipped");
 				break;
 				case "logout" : {
 					server.logout(this); 
@@ -161,7 +162,6 @@ public class ClientHandler implements Runnable {
 					String p2 = ois.readUTF();	//accepter of invite
 					String gameMode = ois.readUTF();
 					inGame = true;
-					System.out.println("Asking server to accept...");
 					server.createGame(p1, p2, gameMode); //accept invite that was just received.
 				}
 				break;
@@ -169,6 +169,7 @@ public class ClientHandler implements Runnable {
 					String sender = ois.readUTF();
 					server.declineInviteFrom(sender);
 				}
+				
 				break;
 				case "win" : { //Sends to receiver whether this client won or failed
 					System.out.println("Read win in CH switch");
@@ -177,6 +178,7 @@ public class ClientHandler implements Runnable {
 					System.out.println("Sending " + win + " to " + receiver);
 					server.victoryMessage(receiver, win);
 				}
+				System.out.println("win skipped");
 				break;
 				case "guess" : {
 					char letterGuessed = ois.readChar();
