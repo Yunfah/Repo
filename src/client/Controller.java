@@ -37,6 +37,10 @@ public class Controller  {
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
 	}
+	
+	public ViewerGame getViewerGame() {
+		return viewerGame;
+	}
 
 	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
 		viewerMultiplayerMode = viewer;

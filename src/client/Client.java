@@ -102,6 +102,7 @@ public class Client extends Thread {
 				oos.writeUTF(username);
 				oos.writeUTF(gameMode);
 				oos.flush();
+				controller.getViewerGame().setCategory(gameMode);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -117,9 +117,7 @@ public class ClientHandler implements Runnable {
 	 * @param message
 	 */
 	public void receiveVictoryMessage(String message) {	//NOT DONE
-		//Ta emot meddelande om att motspelaren lyckades/misslyckades först. 
-		//Omöjliggör vidare gissningar.
-		//Fråga om man vill spela en ny runda med samma spelare. 
+		System.out.println(message); 
 	}
 
 	/**
@@ -175,7 +173,7 @@ public class ClientHandler implements Runnable {
 					server.declineInviteFrom(sender);
 				}
 				break;
-				case "win" : { //
+				case "win" : { //Sends to receiver whether this client won or failed
 					boolean win = ois.readBoolean();
 					String receiver = ois.readUTF();
 					server.victoryMessage(receiver, win);
