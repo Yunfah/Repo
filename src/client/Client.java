@@ -85,7 +85,7 @@ public class Client extends Thread {
 		panel.add(lbl);
 		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
 				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
-		
+
 		if (selectedOption == JOptionPane.NO_OPTION) {
 			try {
 				oos.writeUTF("decline");
@@ -99,17 +99,21 @@ public class Client extends Thread {
 				controller.getViewerGame().setCategory(gameMode);
 				opponent = sender;
 				oos.writeUTF("accept");
-				oos.writeUTF(sender);
-				oos.writeUTF(username);
+				oos.writeUTF(sender);	//player1
+				oos.writeUTF(username);	//player2
 				oos.writeUTF(gameMode);
 				oos.flush();
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @param win
+	 */
 	public void win(boolean win) {	//DONE?
 		if (win) {
 			try {
@@ -122,7 +126,7 @@ public class Client extends Thread {
 			}
 		} else {
 			try {
-				oos.writeObject("win");
+				oos.writeUTF("win");
 				oos.writeBoolean(false);
 				System.out.println("false win sent to " + opponent);
 				oos.writeUTF(opponent);
@@ -131,7 +135,7 @@ public class Client extends Thread {
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param letter
@@ -142,10 +146,10 @@ public class Client extends Thread {
 			oos.writeChar(letter);
 			oos.writeUTF(opponent);
 		} catch (IOException e) {
-			
+
 		}
 	}
-	
+
 	/**
 	 * Sends a request to the server to be disconnected from it.
 	 */

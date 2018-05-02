@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  *
  */
 public class ClientHandler implements Runnable {
-	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	private String username;
@@ -25,14 +24,12 @@ public class ClientHandler implements Runnable {
 
 	/**
 	 * Constructor.
-	 * @param socket
 	 * @param ois ObjectInputStream with which to read from the client.
 	 * @param oos ObjectOutputStream with which to write to the client.
 	 * @param server The server that created this ClientHandler. Server to communicate with.
 	 * @param username The username of the client. 
 	 */
-	public ClientHandler(Socket socket, ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
-		this.socket = socket;
+	public ClientHandler (ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
 		this.ois = ois;
 		this.oos = oos;
 		this.server = server;
@@ -113,8 +110,9 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
-	 * 
-	 * @param message
+	 * Shows a message saying that the opponent has either succeeded or failed
+	 * in guessing the word. 
+	 * @param message A message saying whether the opponent has succeeded or failed. 
 	 */
 	public void receiveVictoryMessage(String message) {	//NOT DONE
 		JOptionPane.showMessageDialog(null, message); 
@@ -146,7 +144,6 @@ public class ClientHandler implements Runnable {
 				System.out.println(input + " was a string");
 				switch (input) {
 				case "invite" : { //Send invite to chosen player. 
-					System.out.println("trying to invite ");
 					String sender = ois.readUTF();
 					String receiver = ois.readUTF();
 					String gamMmode = ois.readUTF();
@@ -155,14 +152,13 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "logout" : {
-					System.out.println("fake logggoot");
 					server.logout(this); 
 				}
 				break;
-				case "accept" : {	//this client accpets an invite
+				case "accept" : {	//this client accepts an invite
 					System.out.println(username + " accepted invite.");
-					String p1 = ois.readUTF();
-					String p2 = ois.readUTF();
+					String p1 = ois.readUTF();	//sender of invite
+					String p2 = ois.readUTF();	//accepter of invite
 					String gameMode = ois.readUTF();
 					inGame = true;
 					System.out.println("Asking server to accept...");

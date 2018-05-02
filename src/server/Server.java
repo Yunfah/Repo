@@ -96,11 +96,16 @@ public class Server implements Runnable {
 	 * @param gameMode The game mode that this game will use the rules of. 
 	 */
 	public void createGame(String player1, String player2, String gameMode) {
-		ClientHandler p1 = clientList.get(player1);
-		ClientHandler p2 = clientList.get(player2);	
+		ClientHandler p1 = clientList.get(player1);	//sender of invite
+		ClientHandler p2 = clientList.get(player2);	//Accepter of invite
 		gameList.add(new Game(p1, p2, gameMode));
 	}
 	
+	/**
+	 * 
+	 * @param letterGuessed
+	 * @param receiverOfGuess
+	 */
 	public void sendGuess(char letterGuessed, String receiverOfGuess) {
 		ClientHandler ch = clientList.get(receiverOfGuess);
 		//ch.receiveGuess(letterGuessed);
@@ -131,7 +136,7 @@ public class Server implements Runnable {
 				String username = (String)ois.readObject();
 				System.out.println(username + " connected.");
 
-				clientList.put(username, new ClientHandler(socket, ois, oos, this, username));
+				clientList.put(username, new ClientHandler(ois, oos, this, username));
 
 				sendClientList();
 
