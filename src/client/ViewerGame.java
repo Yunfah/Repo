@@ -333,6 +333,7 @@ class DrawingPanel extends JPanel {
 		drawWord(g, word);
 
 		if (win) {
+			win = false;
 			g.setFont(new Font("SansSerif", Font.BOLD, 50));
 			g.setColor(Color.CYAN);
 			g.drawString("You Win!", 500, 400);
@@ -571,6 +572,7 @@ class DrawingPanel extends JPanel {
 	}
 
 	public void lose() {
+		this.wrongLetterCount++;
 		if (!loseBool) {
 			try {
 				File file = new File("files/lose.wav");
