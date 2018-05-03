@@ -37,8 +37,8 @@ public class Game {
 			setRandomWord();
 			System.out.println("Sending " + word + " to clients.");
 		}
-		player1.setWordToGuess(word);
-		player2.setWordToGuess(word);
+		player1.setWordToGuess(word, gameMode);
+		player2.setWordToGuess(word, gameMode);
 	}
 
 	public void changeTurns() {

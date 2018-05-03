@@ -85,7 +85,7 @@ public class Client extends Thread {
 		panel.add(lbl);
 		int selectedOption = JOptionPane.showOptionDialog(null, panel, "Hangman",
 				JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
-		
+
 		if (selectedOption == JOptionPane.NO_OPTION) {
 			try {
 				oos.writeUTF("decline");
@@ -96,39 +96,46 @@ public class Client extends Thread {
 			}
 		} else if (selectedOption == JOptionPane.YES_OPTION) {	
 			try {
+				controller.getViewerGame().setCategory(gameMode);
 				opponent = sender;
 				oos.writeUTF("accept");
-				oos.writeUTF(sender);
-				oos.writeUTF(username);
+				oos.writeUTF(sender);	//player1
+				oos.writeUTF(username);	//player2
 				oos.writeUTF(gameMode);
 				oos.flush();
-				controller.getViewerGame().setCategory(gameMode);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @param win
+	 */
 	public void win(boolean win) {	//DONE?
 		if (win) {
 			try {
-				oos.writeObject("win");
+				oos.writeUTF("win");
 				oos.writeBoolean(true);
 				oos.writeUTF(opponent);
+				System.out.println("true win sent to " + opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(true) from " + username);
 			}
 		} else {
 			try {
-				oos.writeObject("win");
+				oos.writeUTF("win");
 				oos.writeBoolean(false);
+				System.out.println("false win sent to " + opponent);
 				oos.writeUTF(opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(false) from " + username);
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param letter
@@ -139,10 +146,10 @@ public class Client extends Thread {
 			oos.writeChar(letter);
 			oos.writeUTF(opponent);
 		} catch (IOException e) {
-			
+
 		}
 	}
-	
+
 	/**
 	 * Sends a request to the server to be disconnected from it.
 	 */
@@ -179,7 +186,9 @@ public class Client extends Thread {
 						System.out.println("Invite decline");
 						JOptionPane.showMessageDialog(null, "Invite was declined");
 					} else if (str.equals("word")) {
-						controller.setWordToGuess(ois.readUTF());
+						String word = ois.readUTF();
+						String gameMode = ois.readUTF();
+						controller.setWordToGuess(word, gameMode);
 					}	
 				}
 			} //end while

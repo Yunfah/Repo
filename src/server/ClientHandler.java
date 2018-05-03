@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  *
  */
 public class ClientHandler implements Runnable {
-	private Socket socket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	private String username;
@@ -25,14 +24,12 @@ public class ClientHandler implements Runnable {
 
 	/**
 	 * Constructor.
-	 * @param socket
 	 * @param ois ObjectInputStream with which to read from the client.
 	 * @param oos ObjectOutputStream with which to write to the client.
 	 * @param server The server that created this ClientHandler. Server to communicate with.
 	 * @param username The username of the client. 
 	 */
-	public ClientHandler(Socket socket, ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
-		this.socket = socket;
+	public ClientHandler (ObjectInputStream ois, ObjectOutputStream oos, Server server, String username) {
 		this.ois = ois;
 		this.oos = oos;
 		this.server = server;
@@ -113,21 +110,23 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
-	 * 
-	 * @param message
+	 * Shows a message saying that the opponent has either succeeded or failed
+	 * in guessing the word. 
+	 * @param message A message saying whether the opponent has succeeded or failed. 
 	 */
 	public void receiveVictoryMessage(String message) {	//NOT DONE
-		System.out.println(message); 
+		JOptionPane.showMessageDialog(null, message); 
 	}
 
 	/**
 	 * Sets up the word that has to be guessed for this Client. 
 	 * @param word The word that has to be guessed.
 	 */
-	public void setWordToGuess(String word) {
+	public void setWordToGuess(String word, String gameMode) {
 		try {
 			oos.writeObject("word");
 			oos.writeUTF(word);
+			oos.writeUTF(gameMode);
 			oos.flush();
 		} catch (IOException e) { 
 			e.printStackTrace();
@@ -145,26 +144,24 @@ public class ClientHandler implements Runnable {
 				System.out.println(input + " was a string");
 				switch (input) {
 				case "invite" : { //Send invite to chosen player. 
-					System.out.println("trying to invite ");
 					String sender = ois.readUTF();
 					String receiver = ois.readUTF();
 					String gamMmode = ois.readUTF();
 					System.out.println("Requesting server to send invite to " + receiver);
 					server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
 				}
+				System.out.println("invite skipped");
 				break;
 				case "logout" : {
-					System.out.println("fake logggoot");
 					server.logout(this); 
 				}
 				break;
-				case "accept" : {	//this client accpets an invite
+				case "accept" : {	//this client accepts an invite
 					System.out.println(username + " accepted invite.");
-					String p1 = ois.readUTF();
-					String p2 = ois.readUTF();
+					String p1 = ois.readUTF();	//sender of invite
+					String p2 = ois.readUTF();	//accepter of invite
 					String gameMode = ois.readUTF();
 					inGame = true;
-					System.out.println("Asking server to accept...");
 					server.createGame(p1, p2, gameMode); //accept invite that was just received.
 				}
 				break;
@@ -172,12 +169,16 @@ public class ClientHandler implements Runnable {
 					String sender = ois.readUTF();
 					server.declineInviteFrom(sender);
 				}
+				
 				break;
 				case "win" : { //Sends to receiver whether this client won or failed
+					System.out.println("Read win in CH switch");
 					boolean win = ois.readBoolean();
 					String receiver = ois.readUTF();
+					System.out.println("Sending " + win + " to " + receiver);
 					server.victoryMessage(receiver, win);
 				}
+				System.out.println("win skipped");
 				break;
 				case "guess" : {
 					char letterGuessed = ois.readChar();
