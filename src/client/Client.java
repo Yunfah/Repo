@@ -197,6 +197,7 @@ public class Client extends Thread {
 					} else if (str.equals("victoryMessage")) {
 						boolean opponentWin = ois.readBoolean();
 						//TODO: 
+					    controller.getViewerOnlineList().closePendingInviteMessage();
 					}
 				}
 			} //end while
