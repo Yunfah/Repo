@@ -119,6 +119,7 @@ public class Server implements Runnable {
 	public void declineInviteFrom(String sender) {
 		System.out.println("Going to reject " + sender);
 		ClientHandler senderOfInvite = clientList.get(sender);
+		senderOfInvite.closePendingInviteWindow();
 		senderOfInvite.reject();
 	}
 
