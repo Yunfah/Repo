@@ -34,6 +34,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private RadioButtonListener rbtnListener = new RadioButtonListener();
 	private String selectedPlayer;
 	private String gamemode;
+	JFrame pendingInviteFrame = new JFrame();
 
 	/**
 	 * Constructor.
@@ -190,11 +191,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		JPanel panel = new JPanel();
 		JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
 		panel.add(lbl);
-		JFrame frame = new JFrame();
-		frame.add(panel);
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
+		pendingInviteFrame.add(panel);
+		pendingInviteFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		pendingInviteFrame.pack();
+		pendingInviteFrame.setVisible(true);
+
 	}
 
 	private class ButtonListener implements ActionListener {

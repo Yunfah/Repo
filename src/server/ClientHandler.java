@@ -133,6 +133,15 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
+	public void closePendingInviteWindow() {
+		try {
+			oos.writeObject("closePendingInvite");
+			oos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Listens for requests from this Client and handles them using the server.
 	 */

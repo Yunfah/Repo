@@ -191,7 +191,9 @@ public class Client extends Thread {
 						String word = ois.readUTF();
 						String gameMode = ois.readUTF();
 						controller.setWordToGuess(word, gameMode);
-					}	
+					} else if (str.equals("closePendingInvite")) {
+
+					}
 				}
 			} //end while
 
