@@ -137,10 +137,6 @@ public class Client extends Thread {
 			}
 		}
 	}
-	
-	public void receiveVictoryMessage(String message, boolean victory) {
-		
-	}
 
 	/**
 	 * Tells the server that this client guessed the given character for
@@ -198,6 +194,9 @@ public class Client extends Thread {
 						controller.setWordToGuess(word, gameMode);
 					} else if (str.equals("closePendingInvite")) {
 
+					} else if (str.equals("victoryMessage")) {
+						boolean opponentWin = ois.readBoolean();
+						//TODO: 
 					}
 				}
 			} //end while

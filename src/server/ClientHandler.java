@@ -116,7 +116,14 @@ public class ClientHandler implements Runnable {
 	 */
 	public void receiveVictoryMessage(String message, boolean victory) {	//NOT DONE
 		System.out.println(message);
-		//TODO:
+		try { 
+			oos.writeObject("victoryMessage");
+			oos.writeBoolean(victory);
+			oos.flush();
+			//TODO:
+		} catch (IOException e) {
+			
+		}
 	}
 
 	/**
