@@ -104,7 +104,6 @@ nvidia
 intel
 amd
 razer
-h&m
 yves rocher
 calvin klein
 ferrari
@@ -174,7 +173,6 @@ red bull
 fujitsu
 siemens
 nokia
-dolce & gabbana
 versace
 maybelline
 clinique
