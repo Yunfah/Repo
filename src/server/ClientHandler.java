@@ -169,7 +169,6 @@ public class ClientHandler implements Runnable {
 					System.out.println("Requesting server to send invite to " + receiver);
 					server.sendInvite(sender, receiver, gameMode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
 				}
-				System.out.println("invite skipped");
 				break;
 				case "logout" : {
 					server.logout(this); 
@@ -196,7 +195,6 @@ public class ClientHandler implements Runnable {
 					System.out.println("Sending " + win + " to " + receiver);
 					server.victoryMessage(receiver, win);
 				}
-				System.out.println("win skipped");
 				break;
 				case "guess" : {
 					char letterGuessed = ois.readChar();
