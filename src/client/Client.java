@@ -110,8 +110,9 @@ public class Client extends Thread {
 	}
 
 	/**
-	 * 
-	 * @param win
+	 * Tells the server that this client either succeeded or failed 
+	 * in guessing the word.
+	 * @param win If this client succeeded or failed in guessing the word.
 	 */
 	public void win(boolean win) {	//DONE?
 		if (win) {
@@ -136,10 +137,15 @@ public class Client extends Thread {
 			}
 		}
 	}
+	
+	public void receiveVictoryMessage(String message, boolean victory) {
+		
+	}
 
 	/**
-	 * 
-	 * @param letter
+	 * Tells the server that this client guessed the given character for
+	 * the word that has to be guessed. 
+	 * @param letter The letter that the client guessed. 
 	 */
 	public void guessLetter(char letter) {
 		try {
@@ -168,7 +174,6 @@ public class Client extends Thread {
 	 * Communicates with a server through a ClientHandler. 
 	 */
 	public void run() {
-
 		try {
 			oos.writeObject(username); 
 			while(true) {

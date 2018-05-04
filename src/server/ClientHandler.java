@@ -114,8 +114,9 @@ public class ClientHandler implements Runnable {
 	 * in guessing the word. 
 	 * @param message A message saying whether the opponent has succeeded or failed. 
 	 */
-	public void receiveVictoryMessage(String message) {	//NOT DONE
-		System.out.println(message); 
+	public void receiveVictoryMessage(String message, boolean victory) {	//NOT DONE
+		System.out.println(message);
+		//TODO:
 	}
 
 	/**
@@ -146,9 +147,9 @@ public class ClientHandler implements Runnable {
 				case "invite" : { //Send invite to chosen player. 
 					String sender = ois.readUTF();
 					String receiver = ois.readUTF();
-					String gamMmode = ois.readUTF();
+					String gameMode = ois.readUTF();
 					System.out.println("Requesting server to send invite to " + receiver);
-					server.sendInvite(sender, receiver, gamMmode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
+					server.sendInvite(sender, receiver, gameMode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
 				}
 				System.out.println("invite skipped");
 				break;

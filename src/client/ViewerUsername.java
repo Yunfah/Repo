@@ -108,7 +108,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
-			String ip = "";
+			String ip = "0";
 			do {
 				try {
 					ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
@@ -121,9 +121,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			do {
 				try {
 					port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
-				} catch (Exception e2) {
+				} catch (NumberFormatException e2) {
 					port = 1;
-				}
+				} catch (NullPointerException e3) {}
 			} while (port < 1024 || port > 65536);
 			
 			continueListener.nextPanelMP();
@@ -162,15 +162,5 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	public void changedUpdate(DocumentEvent e) {
 		checkLogIn();
-	}
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Test of username window");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewerUsername());
-		frame.pack();
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);	
 	}
 }
