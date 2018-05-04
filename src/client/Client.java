@@ -153,6 +153,15 @@ public class Client extends Thread {
 
 		}
 	}
+	
+	public void leaveGame() {
+		try {
+			oos.writeUTF("leaveGame");
+			oos.flush();
+		} catch (IOException e) {
+			
+		}
+	}
 
 	/**
 	 * Sends a request to the server to be disconnected from it.

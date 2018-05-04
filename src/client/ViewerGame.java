@@ -139,6 +139,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
+				controller.getClient().leaveGame();
 				reset();
 				continueListener.goBack();
 			} else if (e.getSource() == btnSave) {

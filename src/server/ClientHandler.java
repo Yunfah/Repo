@@ -4,10 +4,8 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -200,6 +198,10 @@ public class ClientHandler implements Runnable {
 					char letterGuessed = ois.readChar();
 					String opponent = ois.readUTF();
 					server.sendGuess(letterGuessed, opponent);
+				}
+				break;
+				case "leaveGame" : {
+					inGame = false;
 				}
 				break;
 				} //end switch		
