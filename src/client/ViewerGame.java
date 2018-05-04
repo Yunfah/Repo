@@ -159,6 +159,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			pop();
 			
 			if (drawingPanel.getWrongLetterCount() == 10) {
+				controller.getClient().win(false);
 				for(JButton btn : letterButtons)
 					btn.setEnabled(false);
 				btnSave.setEnabled(false);
@@ -553,6 +554,10 @@ class DrawingPanel extends JPanel {
 		return wrongLetterCount;
 	}
 
+	/**
+	 * Sets if this game has been won or not.
+	 * @param win If this game has been won.
+	 */
 	public void setWin(boolean win) {
 		this.win = win;
 	}
@@ -562,6 +567,9 @@ class DrawingPanel extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Plays a victory sound.
+	 */
 	public void win() {
 		if (!winBool) {
 			try {
@@ -576,6 +584,9 @@ class DrawingPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Plays a losing sound.
+	 */
 	public void lose() {
 		this.wrongLetterCount++;
 		if (!loseBool) {

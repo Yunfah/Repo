@@ -108,14 +108,22 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
-			String ip;
+			String ip = "";
 			do {
-				ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+				try {
+					ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+				} catch (NullPointerException e1) {
+					ip = "0";
+				}
 			} while (ip.length() <= 7);
 			
-			int port;
+			int port = 1;
 			do {
-				port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+				try {
+					port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+				} catch (Exception e2) {
+					port = 1;
+				}
 			} while (port < 1024 || port > 65536);
 			
 			continueListener.nextPanelMP();

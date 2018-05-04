@@ -115,7 +115,7 @@ public class ClientHandler implements Runnable {
 	 * @param message A message saying whether the opponent has succeeded or failed. 
 	 */
 	public void receiveVictoryMessage(String message) {	//NOT DONE
-		JOptionPane.showMessageDialog(null, message); 
+		System.out.println(message); 
 	}
 
 	/**
