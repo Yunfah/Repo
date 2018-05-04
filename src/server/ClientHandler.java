@@ -94,6 +94,7 @@ public class ClientHandler implements Runnable {
 		System.out.println(username + " is being rejected."); 
 		try {
 			oos.writeObject("reject");
+			oos.flush();
 		} catch (IOException e) {
 			System.out.println("Error in rejection");
 		}
