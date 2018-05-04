@@ -50,6 +50,10 @@ public class Controller  {
 		viewerOnlineList = viewer; 
 	}
 
+	public ViewerOnlineList getViewerOnlineList() {
+		return viewerOnlineList;
+	}
+
 	public void setListener(ContinueListener continueListener) {
 		this.continueListener = continueListener;
 	}

@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -196,6 +193,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pendingInviteFrame.pack();
 		pendingInviteFrame.setVisible(true);
 
+	}
+
+	public void closePendingInviteMessage() {
+		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
 
 	private class ButtonListener implements ActionListener {
