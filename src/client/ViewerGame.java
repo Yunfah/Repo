@@ -26,7 +26,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
 	private AudioClip pop;
 	private boolean popBool;
-	private boolean[] buttonEnabled = new boolean[26];
+	private boolean[] buttonEnabled = new boolean[26];	//when a letter has been pressed its corresponding index in this array becomes false.
 
 	public ViewerGame() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -169,6 +169,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private class ResetAction extends AbstractAction {
 		public ResetAction(String name, int mnemonic) {
 			super(name);
@@ -183,6 +184,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			reset();
 		}
 	}
+	@SuppressWarnings("serial")
 	private class NewWordAction extends AbstractAction {
 		public NewWordAction(String name, int mnemonic) {
 			super(name);
@@ -198,6 +200,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private class ExitAction extends AbstractAction {
 		public ExitAction(String name, int mnemonic) {
 			super(name);
@@ -212,6 +215,10 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 	
+	/**
+	 * Enables or disables this player's turn.
+	 * @param myTurn Set to true to enable this player's turn, and false to disable. 
+	 */
 	public void setTurn(boolean myTurn) {
 		if (myTurn == true) {
 			for (int i = 0; i < buttonEnabled.length; i++) {
@@ -222,8 +229,14 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 	
+	/**
+	 * Returns a boolean array representing which buttons of the alphabet
+	 * have been pressed. 
+	 * @return
+	 */
 	public boolean[] getButtonsPressed() {
 		return buttonEnabled;
+		//TODO: kommentera
 	}
 
 	/**
