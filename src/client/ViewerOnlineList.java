@@ -192,6 +192,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pendingInviteFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		pendingInviteFrame.pack();
 		pendingInviteFrame.setVisible(true);
+		pendingInviteFrame.setLocationRelativeTo(null);
 
 	}
 
