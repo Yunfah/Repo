@@ -60,6 +60,8 @@ public class Controller  {
 			this.setDifficulty(EZ);
 			viewerGame.disableSpecialButtons();
 		}
+		else
+			viewerGame.enableSpecialButtons();
 	}
 
 	public int getMode() {

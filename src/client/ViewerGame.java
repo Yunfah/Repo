@@ -131,6 +131,11 @@ public class ViewerGame extends JPanel implements Serializable {
 		newWord.setEnabled(false);
 	}
 
+	public void enableSpecialButtons() {
+		reset.setEnabled(true);
+		newWord.setEnabled(true);
+	}
+
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
