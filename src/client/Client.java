@@ -103,7 +103,6 @@ public class Client extends Thread {
 				oos.writeUTF(username);	//player2
 				oos.writeUTF(gameMode);
 				oos.flush();
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -120,6 +119,7 @@ public class Client extends Thread {
 				oos.writeUTF("win");
 				oos.writeBoolean(true);
 				oos.writeUTF(opponent);
+				oos.flush();
 				System.out.println("true win sent to " + opponent);
 			} catch (IOException e) {
 				System.out.println("Error while sending win(true) from " + username);
@@ -130,6 +130,7 @@ public class Client extends Thread {
 				oos.writeBoolean(false);
 				System.out.println("false win sent to " + opponent);
 				oos.writeUTF(opponent);
+				oos.flush();
 			} catch (IOException e) {
 				System.out.println("Error while sending win(false) from " + username);
 			}
@@ -145,6 +146,7 @@ public class Client extends Thread {
 			oos.writeObject("guess");
 			oos.writeChar(letter);
 			oos.writeUTF(opponent);
+			oos.flush();
 		} catch (IOException e) {
 
 		}

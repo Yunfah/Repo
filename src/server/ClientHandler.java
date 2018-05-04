@@ -169,7 +169,6 @@ public class ClientHandler implements Runnable {
 					String sender = ois.readUTF();
 					server.declineInviteFrom(sender);
 				}
-				
 				break;
 				case "win" : { //Sends to receiver whether this client won or failed
 					System.out.println("Read win in CH switch");
