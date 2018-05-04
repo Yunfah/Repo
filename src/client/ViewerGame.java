@@ -26,7 +26,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	private JRadioButton rbHideWord = new JRadioButton("Hide word on loss");
 	private AudioClip pop;
 	private boolean popBool;
-	private boolean[] buttonEnabled = new boolean[26];
+	private boolean[] buttonEnabled = new boolean[26];	//when a letter has been pressed its corresponding index in this array becomes false.
 
 	public ViewerGame() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -234,11 +234,12 @@ public class ViewerGame extends JPanel implements Serializable {
 	
 	/**
 	 * Returns a boolean array representing which buttons of the alphabet
-	 * have been 
+	 * have been pressed. 
 	 * @return
 	 */
 	public boolean[] getButtonsPressed() {
 		return buttonEnabled;
+		//TODO: kommentera
 	}
 
 	/**

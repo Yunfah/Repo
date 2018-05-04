@@ -119,6 +119,7 @@ public class ClientHandler implements Runnable {
 		System.out.println(message);
 		try { 
 			oos.writeObject("victoryMessage");
+			oos.writeUTF(message);
 			oos.writeBoolean(victory);
 			oos.flush();
 			//TODO:
