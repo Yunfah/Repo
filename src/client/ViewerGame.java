@@ -161,7 +161,8 @@ public class ViewerGame extends JPanel implements Serializable {
 			pop();
 			
 			if (drawingPanel.getWrongLetterCount() == 10) {
-				controller.getClient().win(false);
+				if (controller.getMode() == Controller.MULTIPLAYER)
+					controller.getClient().win(false);
 				disableAllLetters();
 				btnSave.setEnabled(false);
 				if (rbShowWord.isSelected())
