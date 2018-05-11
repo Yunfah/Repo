@@ -41,7 +41,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
-		elevator();
+		//elevator();
 	}
 	
 	/**
@@ -181,10 +181,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 	
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new StartGame(new Controller());
-			}	
-		});
+		SwingUtilities.invokeLater(() -> new StartGame(new Controller()));
 	}
 }
