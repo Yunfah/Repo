@@ -126,11 +126,17 @@ public class ViewerGame extends JPanel implements Serializable {
 		this.controller = controller;
 	}
 	
+	/**
+	 * Disables the reset and new word-buttons.
+	 */
 	public void disableSpecialButtons() {
 		reset.setEnabled(false);
 		newWord.setEnabled(false);
 	}
 
+	/**
+	 * Enables the reset and new word-buttons.
+	 */
 	public void enableSpecialButtons() {
 		reset.setEnabled(true);
 		newWord.setEnabled(true);
@@ -161,14 +167,13 @@ public class ViewerGame extends JPanel implements Serializable {
 			pop();
 			
 			if (drawingPanel.getWrongLetterCount() == 10) {		//if player has been hung
+				disableAllLetters();
 				if (controller.getMode() == Controller.MULTIPLAYER) {
 					controller.getClient().win(false);
 					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the game mode chooser.");
 					continueListener.goBackMP();
-					reset();
-				}
-					
-				disableAllLetters();
+					enableAllLetters();
+				}	
 				btnSave.setEnabled(false);
 				if (rbShowWord.isSelected())
 					controller.setWordGuessed();
@@ -302,6 +307,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		drawingPanel.setWin(false);
 		controller.setEncodedWord(resetWord);
 	}
+	
 	public void resetNewWord() {
 		enableAllLetters();
 		btnSave.setEnabled(false);
@@ -309,6 +315,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		drawingPanel.setWrongLetterCount(controller.getDifficulty());
 		drawingPanel.setWin(false);
 	}
+	
 	public void pop() {
 		if (!popBool) {
 			try {
@@ -323,17 +330,23 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	/**
+	 * Disables all letter buttons in this game window. 
+	 */
 	public void disableAllLetters() {
 		for (JButton btn : letterButtons)
 			btn.setEnabled(false);
 	}
 
+	/**
+	 * Enables all the letter buttons in this game window. 
+	 */
 	public void enableAllLetters() {
 		for (JButton btn : letterButtons)
 			btn.setEnabled(true);
 	}
 
-	public void enableSpecificLetter (boolean [] buttonEnabled) {
+	public void enableSpecificLetters(boolean [] buttonEnabled) {
 		for (int i = 0; i < buttonEnabled.length; i++)
 			letterButtons.get(i).setEnabled(buttonEnabled[i]);
 	}
