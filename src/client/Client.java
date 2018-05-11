@@ -135,6 +135,7 @@ public class Client extends Thread {
 			} catch (IOException e) {
 				System.out.println("Error while sending win(false) from " + username);
 			}
+			this.leaveGame();
 		}
 	}
 

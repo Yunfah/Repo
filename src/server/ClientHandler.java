@@ -208,7 +208,7 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "setWord" : {
-					
+					//TODO: set custom word for write-guess
 				}
 				} //end switch		
 				System.out.println("End of switch in CH");	

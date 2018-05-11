@@ -165,6 +165,7 @@ public class ViewerGame extends JPanel implements Serializable {
 					controller.getClient().win(false);
 					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the game mode chooser.");
 					continueListener.goBackMP();
+					reset();
 				}
 					
 				disableAllLetters();
