@@ -145,7 +145,7 @@ public class Client extends Thread {
 	 */
 	public void guessLetter(char letter) {
 		try {
-			oos.writeObject("guess");
+			oos.writeUTF("guess");
 			oos.writeChar(letter);
 			oos.writeUTF(opponent);
 			oos.flush();

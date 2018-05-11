@@ -92,7 +92,7 @@ public class Controller  {
 					encodedWord[i] = letter;
 					//if co-op -> skicka bokstaven till motspelaren
 					if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op") {
-						//client.sendLetterGuessed(letter);
+						client.guessLetter(letter);
 					}
 				}
 			}
