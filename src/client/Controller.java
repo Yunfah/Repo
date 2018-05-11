@@ -86,14 +86,13 @@ public class Controller  {
 	 */
 	public void checkLetter(char letter) {
 		String s = String.valueOf(letter);	//String representation of the char parameter
+		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && ) {
+			client.guessLetter(letter);
+		}
 		if (wordToGuess.contains(s)) {
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
 					encodedWord[i] = letter;
-					//if co-op -> skicka bokstaven till motspelaren
-					if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op") {
-						client.guessLetter(letter);
-					}
 				}
 			}
 		} else {
@@ -101,6 +100,10 @@ public class Controller  {
 		}
 		viewerGame.setWord(encodedWord);
 		checkWin();
+	}
+	
+	public void pimpGuessedButton(char guessedLetter) {
+		
 	}
 
 	/**

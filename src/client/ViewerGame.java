@@ -353,6 +353,8 @@ public class ViewerGame extends JPanel implements Serializable {
 		for (int i = 0; i < buttonEnabled.length; i++)
 			letterButtons.get(i).setEnabled(buttonEnabled[i]);
 	}
+	
+	public void 
 }
 
 class DrawingPanel extends JPanel {

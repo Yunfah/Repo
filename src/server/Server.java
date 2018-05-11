@@ -20,7 +20,6 @@ public class Server implements Runnable {
 	private ServerSocket serverSocket;
 	private HashMap<String, ClientHandler> clientList = new HashMap<String, ClientHandler>(); //The string is the client username
 	private ArrayList<Game> gameList = new ArrayList<Game>();	//should hold a list of all active games between clients at this time.
-	private HashMap<ClientHandler, Game> gameListHM = new HashMap<ClientHandler, Game>();
 	private int port;
 
 	/**
@@ -30,7 +29,7 @@ public class Server implements Runnable {
 	public Server(int port) {
 		this.port = port;
 		try {
-			serverSocket = new ServerSocket(port);	
+			serverSocket = new ServerSocket(port);	//BLABLABLA KOMMENTAR FÖR ATT PUSHA
 			server.start();
 		} catch (IOException e) {}
 	}
@@ -57,11 +56,10 @@ public class Server implements Runnable {
 		ClientHandler ch = clientList.get(receiver);
 		System.out.println("In server victory message");
 		if (senderIsWinner) {
-			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word. The match is over.", true);
+			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word.", true);
 		} else {
-			ch.receiveVictoryMessage("Your opponent failed at guessing the word. The match is over.", false);
+			ch.receiveVictoryMessage("Your opponent failed at guessing the word. You may keep trying.", false);
 		}
-		//remove these players' game from list? Is a list of active games even needed? Maybe HashMap<player1, game> instead?
 	}
 
 	/**
@@ -101,8 +99,7 @@ public class Server implements Runnable {
 		ClientHandler p1 = clientList.get(player1);	//sender of invite
 		ClientHandler p2 = clientList.get(player2);	//Accepter of invite
 		p1.closePendingInviteWindow();
-		//gameList.add(new Game(p1, p2, gameMode)); 
-		gameListHM.put(p1, new Game(p1, p2, gameMode));
+		gameList.add(new Game(p1, p2, gameMode));
 	}
 	
 	/**
@@ -112,7 +109,7 @@ public class Server implements Runnable {
 	 */
 	public void sendGuess(char letterGuessed, String receiverOfGuess) {
 		ClientHandler ch = clientList.get(receiverOfGuess);
-		//ch.receiveGuess(letterGuessed);
+		ch.receiveGuess(letterGuessed);
 	}
 
 	/**

@@ -152,6 +152,15 @@ public class ClientHandler implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void receiveGuess(char letterGuessed) {
+		try {
+			oos.writeObject(letterGuessed);
+			oos.flush();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Listens for requests from this Client and handles them using the server.
