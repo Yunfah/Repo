@@ -20,6 +20,7 @@ public class Server implements Runnable {
 	private ServerSocket serverSocket;
 	private HashMap<String, ClientHandler> clientList = new HashMap<String, ClientHandler>(); //The string is the client username
 	private ArrayList<Game> gameList = new ArrayList<Game>();	//should hold a list of all active games between clients at this time.
+	private HashMap<ClientHandler, Game> gameListHM = new HashMap<ClientHandler, Game>();
 	private int port;
 
 	/**
@@ -100,7 +101,8 @@ public class Server implements Runnable {
 		ClientHandler p1 = clientList.get(player1);	//sender of invite
 		ClientHandler p2 = clientList.get(player2);	//Accepter of invite
 		p1.closePendingInviteWindow();
-		gameList.add(new Game(p1, p2, gameMode));
+		//gameList.add(new Game(p1, p2, gameMode)); 
+		gameListHM.put(p1, new Game(p1, p2, gameMode));
 	}
 	
 	/**
