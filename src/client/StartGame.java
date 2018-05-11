@@ -147,7 +147,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	 	} else if (currentCard.equals("cardMultiplayerMode")) {
 			currentCard = "cardMode";
 		} else if (currentCard.equals("cardUsername")) { 
-			currentCard = "cardGame"; // before it said cardMode ?????
+			currentCard = "cardMode"; // it said cardMode because you go from username screen to single/multiplayer-choice screen
 		} else if (currentCard.equals("cardGame")) {
 			currentCard = "cardOnlineList";
 		}
