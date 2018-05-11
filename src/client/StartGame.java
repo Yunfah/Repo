@@ -114,11 +114,12 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 	
 	/**
-	 * method used for Xtreme game mode. If its used, it goes directly to the game. 
+	 * Skips directly to the game window. 
 	 */
 	@Override
 	public void skipToGame() {
-		cardLayout.show(cards, "cardGame");
+		currentCard = "cardGame";
+		cardLayout.show(cards, currentCard);
 	}
 
 	/**

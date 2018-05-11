@@ -175,7 +175,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param listener
 	 */
 	public void setListener(ContinueListener listener) {
-		continueListener = listener; //BLABLABLAB KOMMENTAR FÖR ATT PUSHA
+		continueListener = listener; 
 	}
 
 	/**
@@ -184,7 +184,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param selectedPlayer The player that was chosen for an invite.
 	 */
 	public void inviteMessage(String selectedPlayer) {
-//		String[] options = {"Cancel Invite"};
 		JPanel panel = new JPanel();
 		JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
 		panel.add(lbl);
@@ -193,7 +192,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pendingInviteFrame.pack();
 		pendingInviteFrame.setVisible(true);
 		pendingInviteFrame.setLocationRelativeTo(null);
-
 	}
 
 	public void closePendingInviteMessage() {
@@ -209,7 +207,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			} else if (e.getSource() == btnInvite) {
 				inviteMessage(selectedPlayer);
 				controller.sendInvite(selectedPlayer, gamemode);
-				System.out.println("Heja");
 			}
 		}
 	}

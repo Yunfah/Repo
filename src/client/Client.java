@@ -57,7 +57,6 @@ public class Client extends Thread {
 	 * @param receiver The client that will receive the invite.
 	 * @param gameMode The game mode that an accepted invite will start.
 	 */
-
 	public void sendInvite(String receiver, String gameMode) {
 		try {
 			opponent = receiver;
