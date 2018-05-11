@@ -29,7 +29,7 @@ public class Server implements Runnable {
 	public Server(int port) {
 		this.port = port;
 		try {
-			serverSocket = new ServerSocket(port);	//BLABLABLA KOMMENTAR FÖR ATT PUSHA
+			serverSocket = new ServerSocket(port);	
 			server.start();
 		} catch (IOException e) {}
 	}
@@ -56,10 +56,11 @@ public class Server implements Runnable {
 		ClientHandler ch = clientList.get(receiver);
 		System.out.println("In server victory message");
 		if (senderIsWinner) {
-			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word.", true);
+			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word. The match is over.", true);
 		} else {
-			ch.receiveVictoryMessage("Your opponent failed at guessing the word. You may keep trying.", false);
+			ch.receiveVictoryMessage("Your opponent failed at guessing the word. The match is over.", false);
 		}
+		//remove these players' game from list? Is a list of active games even needed? Maybe HashMap<player1, game> instead?
 	}
 
 	/**

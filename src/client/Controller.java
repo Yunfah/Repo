@@ -228,6 +228,7 @@ public class Controller  {
 			viewerGame.enableAllLetters();
 			viewerGame.setDifficulty(EZ);
 			continueListener.skipToGame();
+			
 		}
 	}
 
@@ -321,7 +322,7 @@ public class Controller  {
 	 * @param myTurn Set to true to enable turn, and false to disable it.
 	 */
 	public void setTurn(boolean myTurn) {
-		viewerGame.setEnabled(myTurn); //TEST THIS!!!!!!!!!
+		viewerGame.setEnabled(myTurn); //TODO: TEST THIS!!!!!!!!!
 	}
 
 	/**
