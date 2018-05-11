@@ -25,7 +25,7 @@ public class Controller  {
 
 	private String wordToGuess = "";
 	private char[] encodedWord = null; 
-	private boolean myTurn;
+	private boolean myTurn = true;
 
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;

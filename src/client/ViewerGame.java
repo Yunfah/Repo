@@ -363,6 +363,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 		for(int i = 0; i < letterButtons.size(); i++) {
 			if(letterButtons.get(i).getText().equals(button)) {
+				letterButtons.get(i).setEnabled(false);
 				letterButtons.get(i).setBackground(color);
 				letterButtons.get(i).setOpaque(true);
 				letterButtons.get(i).setBorderPainted(false);
