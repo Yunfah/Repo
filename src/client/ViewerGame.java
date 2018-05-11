@@ -355,7 +355,18 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 	
 	public void toneButton(String button, boolean isCorrect) {
-		
+		Color color;
+		if(isCorrect == true) {
+			color = Color.GREEN;
+		} else {
+			color = Color.RED;
+		}
+		for(int i = 0; i < letterButtons.size(); i++) {
+			if(letterButtons.get(i).getText() == button) {
+				letterButtons.get(i).setEnabled(false);
+				letterButtons.get(i).setBackground(color);
+			}
+		}
 	}
 }
 
