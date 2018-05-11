@@ -197,10 +197,15 @@ public class Client extends Thread {
 					} else if (str.equals("reject")) {
 						System.out.println("Invite decline");
 						JOptionPane.showMessageDialog(null, "Invite was declined");
-					} else if (str.equals("word")) {
+					} else if (str.equals("wordToGuess")) {	//Sets the word that has to be guessed
 						String word = ois.readUTF();
 						String gameMode = ois.readUTF();
 						controller.setWordToGuess(word, gameMode);
+					} else if (str.equals("chooseWord")) {
+						String word = JOptionPane.showInputDialog("Choose a word for your opponent to guess\n(include nothing but letters or spaces):");
+						oos.writeUTF("setWord");
+						oos.writeUTF(word);
+						oos.flush();
 					} else if (str.equals("closePendingInvite")) {
 						controller.getViewerOnlineList().closePendingInviteMessage();
 					} else if (str.equals("victoryMessage")) {
@@ -209,13 +214,11 @@ public class Client extends Thread {
 						if (opponentWin) {
 							controller.getViewerGame().disableAllLetters();
 						}
-					    
+					    controller.getListener().goBackMP();
 					}
 				}
 			} //end while
-
 		} catch (IOException e) {
-
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} 

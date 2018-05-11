@@ -122,7 +122,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 
 	/**
-	 * The goback function for singleplayer (goes back to the previous panel)
+	 * The go-back function for singleplayer (goes back to the previous panel)
 	 */
 	@Override
 	public void goBack() {
@@ -137,7 +137,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 	
 	/**
-	 * The goback function for multiplayer (goes back to the previous panel)
+	 * The go-back function for multiplayer (goes back to a previous panel)
 	 */
 	@Override
 	public void goBackMP() { 
@@ -147,6 +147,8 @@ public class StartGame extends JFrame implements ContinueListener {
 			currentCard = "cardMode";
 		} else if (currentCard.equals("cardUsername")) { 
 			currentCard = "cardMode";
+		} else if (currentCard.equals("cardGame")) {
+			currentCard = "cardOnlineList";
 		}
 		cardLayout.show(cards, currentCard);
 	}
@@ -154,7 +156,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * The function to go to the next panel in  multiplayer 
 	 */
-
 	@Override
 	public void nextPanelMP() {
 		if (currentCard.equals("cardMode")) {

@@ -32,7 +32,7 @@ public class Game {
 		this.player2 = player2;
 		this.gameMode = gameMode;
 		if (gameMode.equals("write-guess")) { //prompt sender of invite to set a word?
-			word = player1.setCustomWord();
+			player1.setCustomWord();	//-> CH -> client -> String till CH -> ?
 		} else {
 			setRandomWord();
 		}
@@ -45,7 +45,7 @@ public class Game {
 	 * 
 	 */
 	public void changeTurns() {
-
+		
 	}
 
 	/**

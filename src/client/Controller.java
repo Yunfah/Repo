@@ -13,6 +13,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 public class Controller  {
 	private Client client;
 	private ViewerGame viewerGame;
@@ -56,6 +58,10 @@ public class Controller  {
 
 	public void setListener(ContinueListener continueListener) {
 		this.continueListener = continueListener;
+	}
+	
+	public ContinueListener getListener() {
+		return continueListener;
 	}
 
 	public void setMode(int mode) {
@@ -108,10 +114,12 @@ public class Controller  {
 				correctLetters++;
 		}
 		if (correctLetters == wordToGuess.length()) {
+			viewerGame.setWin(true);
 			if (modeChosen == MULTIPLAYER) {
 				client.win(true); //win() should tell CH to tell the other client(player) that this client won
+				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the game mode chooser.");
+				continueListener.goBackMP();
 			}
-			viewerGame.setWin(true);
 		}
 	}
 

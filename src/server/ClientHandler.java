@@ -99,13 +99,17 @@ public class ClientHandler implements Runnable {
 	}
 	
 	/**
-	 * 
+	 * Prompts this client to choose a custom word for the opponent to guess.
 	 * @return
 	 */
-	public String setCustomWord() {
-		String word = JOptionPane.showInputDialog("Choose a word for your opponent to guess");
+	public void setCustomWord() {
+		try {
+			oos.writeObject("chooseWord");
+			oos.flush();
+		} catch (IOException e) {
+			
+		}
 		//Possible error-handling for later
-		return word;
 	}
 
 	/**
@@ -120,7 +124,6 @@ public class ClientHandler implements Runnable {
 			oos.writeUTF(message);
 			oos.writeBoolean(victory);
 			oos.flush();
-			//TODO:
 		} catch (IOException e) {
 			
 		}
@@ -132,7 +135,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void setWordToGuess(String word, String gameMode) {
 		try {
-			oos.writeObject("word");
+			oos.writeObject("wordToGuess");
 			oos.writeUTF(word);
 			oos.writeUTF(gameMode);
 			oos.flush();
@@ -204,6 +207,9 @@ public class ClientHandler implements Runnable {
 					inGame = false;
 				}
 				break;
+				case "setWord" : {
+					
+				}
 				} //end switch		
 				System.out.println("End of switch in CH");	
 			} catch (Exception e) {

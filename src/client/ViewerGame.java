@@ -160,9 +160,13 @@ public class ViewerGame extends JPanel implements Serializable {
 			controller.checkLetter(e.getActionCommand().charAt(0));
 			pop();
 			
-			if (drawingPanel.getWrongLetterCount() == 10) {
-				if (controller.getMode() == Controller.MULTIPLAYER)
+			if (drawingPanel.getWrongLetterCount() == 10) {		//if player has been hung
+				if (controller.getMode() == Controller.MULTIPLAYER) {
 					controller.getClient().win(false);
+					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the game mode chooser.");
+					continueListener.goBackMP();
+				}
+					
 				disableAllLetters();
 				btnSave.setEnabled(false);
 				if (rbShowWord.isSelected())
