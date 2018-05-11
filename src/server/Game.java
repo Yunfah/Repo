@@ -16,7 +16,7 @@ import client.Controller;
 public class Game {
 	private ClientHandler player1;
 	private ClientHandler player2;
-	private boolean player1Turn; //true if it is the turn of player1, false if it is player2.
+	private boolean player1Turn = true; //true if it is the turn of player1, false if it is player2.
 	private String gameMode;
 	private String word;
 
@@ -41,11 +41,17 @@ public class Game {
 		player2.setWordToGuess(word, gameMode);
 	}
 
-	/**
-	 * 
+	/** 
+	 * Switches whose turn it is to guess a letter.
 	 */
 	public void changeTurns() {
-		
+		if (player1Turn) {
+			player1Turn = false;
+		} else {
+			player1Turn = true;
+		}
+//		player1.myTurn(player1Turn);	//Should enable or disable the letters for player1
+//		player2.myTurn(!player1Turn);	//Should enable or disable the letters for player2
 	}
 
 	/**
