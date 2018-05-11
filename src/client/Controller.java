@@ -90,6 +90,7 @@ public class Controller  {
 		boolean correct = false;
 		if (wordToGuess.contains(s)) {
 			correct = true;
+			viewerGame.toneButton(s, true);
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
 					encodedWord[i] = letter;
@@ -97,6 +98,7 @@ public class Controller  {
 			}
 		} else {
 			viewerGame.incrementWrongLetterCount();
+			viewerGame.toneButton(s, false);
 		}
 		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
 			client.guessLetter(letter, correct);
