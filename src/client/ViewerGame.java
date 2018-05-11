@@ -295,7 +295,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * the game with the same settings and same word.
 	 */
 	public void reset() {
-		
 		enableAllLetters();
 		btnSave.setEnabled(false);
 		int length = drawingPanel.getWord().length;
@@ -346,11 +345,8 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * Enables all the letter buttons in this game window. 
 	 */
 	public void enableAllLetters() {
-		for (JButton btn : letterButtons) {
+		for (JButton btn : letterButtons)
 			btn.setEnabled(true);
-			btn.setBackground(null);
-			btn.setBorderPainted(true);
-		}
 	}
 
 	public void enableSpecificLetters(boolean [] buttonEnabled) {
