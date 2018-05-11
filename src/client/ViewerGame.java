@@ -170,9 +170,8 @@ public class ViewerGame extends JPanel implements Serializable {
 				disableAllLetters();
 				if (controller.getMode() == Controller.MULTIPLAYER) {
 					controller.getClient().win(false);
-					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the game mode chooser.");
+					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the online list.");
 					continueListener.goBackMP();
-					enableAllLetters();
 				}	
 				btnSave.setEnabled(false);
 				if (rbShowWord.isSelected())
@@ -308,6 +307,10 @@ public class ViewerGame extends JPanel implements Serializable {
 		controller.setEncodedWord(resetWord);
 	}
 	
+	/**
+	 * Resets all current progress. Starts the game over with a new word
+	 * and the same difficulty.
+	 */
 	public void resetNewWord() {
 		enableAllLetters();
 		btnSave.setEnabled(false);

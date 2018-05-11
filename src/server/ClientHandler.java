@@ -125,8 +125,8 @@ public class ClientHandler implements Runnable {
 			oos.writeBoolean(victory);
 			oos.flush();
 		} catch (IOException e) {
-			
 		}
+		inGame = false;
 	}
 
 	/**
@@ -186,6 +186,7 @@ public class ClientHandler implements Runnable {
 				break;
 				case "decline" : { //this client declines an invite.
 					String sender = ois.readUTF();
+					inGame = false;
 					server.declineInviteFrom(sender);
 				}
 				break;
@@ -193,6 +194,7 @@ public class ClientHandler implements Runnable {
 					System.out.println("Read win in CH switch");
 					boolean win = ois.readBoolean();
 					String receiver = ois.readUTF();
+					inGame = false;
 					System.out.println("Sending " + win + " to " + receiver);
 					server.victoryMessage(receiver, win);
 				}

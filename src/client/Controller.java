@@ -67,7 +67,7 @@ public class Controller  {
 	public void setMode(int mode) {
 		this.modeChosen = mode;
 		if (mode == MULTIPLAYER) {
-			this.setDifficulty(EZ);
+//			this.setDifficulty(EZ);
 			viewerGame.disableSpecialButtons();
 		}
 		else
@@ -225,6 +225,8 @@ public class Controller  {
 		setEncodedWordFromString(wordToGuess);
 		if(modeChosen == MULTIPLAYER) {
 			viewerGame.setCategory(gameMode);
+			viewerGame.enableAllLetters();
+			viewerGame.setDifficulty(EZ);
 			continueListener.skipToGame();
 		}
 	}
