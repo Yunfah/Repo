@@ -153,9 +153,10 @@ public class ClientHandler implements Runnable {
 		}
 	}
 	
-	public void receiveGuess(char letterGuessed) {
+	public void receiveGuess(char letterGuessed, boolean isCorrect) {
 		try {
 			oos.writeObject(letterGuessed);
+			oos.writeBoolean(isCorrect);
 			oos.flush();
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -209,9 +210,10 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "guess" : {
+					boolean isCorrect = ois.readBoolean();
 					char letterGuessed = ois.readChar();
 					String opponent = ois.readUTF();
-					server.sendGuess(letterGuessed, opponent);
+					server.sendGuess(letterGuessed, isCorrect, opponent);
 				}
 				break;
 				case "leaveGame" : {

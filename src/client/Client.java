@@ -143,9 +143,10 @@ public class Client extends Thread {
 	 * the word that has to be guessed. 
 	 * @param letter The letter that the client guessed. 
 	 */
-	public void guessLetter(char letter) {
+	public void guessLetter(char letter, boolean correct) {
 		try {
 			oos.writeUTF("guess");
+			oos.writeBoolean(correct);
 			oos.writeChar(letter);
 			oos.writeUTF(opponent);
 			oos.flush();
@@ -189,7 +190,8 @@ public class Client extends Thread {
 					controller.updateOnline(list);	//
 				}else if (input instanceof Character) {
 					char guessed = (Character)input;
-					controller.pimpGuessedButton(guessed);
+					boolean isCorrect = ois.readBoolean();
+					controller.pimpGuessedButton(guessed, isCorrect);
 				} else {
 					String str = (String) input;
 					if (str.equals("invite")) {

@@ -25,6 +25,7 @@ public class Controller  {
 
 	private String wordToGuess = "";
 	private char[] encodedWord = null; 
+	private boolean myTurn;
 
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
@@ -86,10 +87,9 @@ public class Controller  {
 	 */
 	public void checkLetter(char letter) {
 		String s = String.valueOf(letter);	//String representation of the char parameter
-		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && ) {
-			client.guessLetter(letter);
-		}
+		boolean correct = false;
 		if (wordToGuess.contains(s)) {
+			correct = true;
 			for (int i = 0; i < wordToGuess.length(); i++) {
 				if (wordToGuess.charAt(i) == letter) {
 					encodedWord[i] = letter;
@@ -98,12 +98,16 @@ public class Controller  {
 		} else {
 			viewerGame.incrementWrongLetterCount();
 		}
+		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
+			client.guessLetter(letter, correct);
+		}
 		viewerGame.setWord(encodedWord);
 		checkWin();
 	}
 	
-	public void pimpGuessedButton(char guessedLetter) {
-		
+	public void pimpGuessedButton(char guessedLetter, boolean isCorrect) {
+		String value = String.valueOf(guessedLetter);
+		viewerGame.toneButton(value, isCorrect);
 	}
 
 	/**
@@ -325,6 +329,7 @@ public class Controller  {
 	 * @param myTurn Set to true to enable turn, and false to disable it.
 	 */
 	public void setTurn(boolean myTurn) {
+		this.myTurn = myTurn;
 		viewerGame.setEnabled(myTurn); //TODO: TEST THIS!!!!!!!!!
 	}
 
