@@ -39,6 +39,10 @@ public class Game {
 		System.out.println("Sending " + word + " to clients.");
 		player1.setWordToGuess(word, gameMode);
 		player2.setWordToGuess(word, gameMode);
+		if (gameMode.equals("co-op")) {
+			player1.setTurn(true);
+			player2.setTurn(false);
+		}
 	}
 
 	/** 

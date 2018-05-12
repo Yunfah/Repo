@@ -61,7 +61,7 @@ public class Client extends Thread {
 		try {
 			opponent = receiver;
 			oos.writeUTF("invite");
-			oos.writeUTF(username);	
+			oos.writeUTF(username);		//sender of invite (this client)
 			oos.writeUTF(receiver);
 			oos.writeUTF(gameMode);
 			oos.flush();
@@ -140,8 +140,10 @@ public class Client extends Thread {
 
 	/**
 	 * Tells the server that this client guessed the given character for
-	 * the word that has to be guessed. 
+	 * the word that has to be guessed. Also tells the server whether
+	 * the guess was correct or incorrect.
 	 * @param letter The letter that the client guessed. 
+	 * @param correct Set to true if this guess was correct, otherwise false.
 	 */
 	public void guessLetter(char letter, boolean correct) {
 		try {
@@ -220,6 +222,9 @@ public class Client extends Thread {
 							controller.getViewerGame().disableAllLetters();
 						}
 					    controller.getListener().goBackMP();
+					} else if (str.equals("turn")) {
+						boolean myTurn = ois.readBoolean();
+						controller.setTurn(myTurn);
 					}
 				}
 			} //end while

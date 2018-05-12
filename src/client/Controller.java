@@ -68,7 +68,6 @@ public class Controller  {
 	public void setMode(int mode) {
 		this.modeChosen = mode;
 		if (mode == MULTIPLAYER) {
-//			this.setDifficulty(EZ);
 			viewerGame.disableSpecialButtons();
 		}
 		else
@@ -102,6 +101,7 @@ public class Controller  {
 		}
 		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
 			client.guessLetter(letter, correct);
+			myTurn = false;		//TODO: myTurn måste sättas till true igen någonstans!!!!
 		}
 		viewerGame.setWord(encodedWord);
 		checkWin();
@@ -226,7 +226,7 @@ public class Controller  {
 
 	/**
 	 * Sets the word that has to be guessed to the given String. If multiplayer
-	 * is the chosen mode, the name of the category is also set to "Multiplayer". 
+	 * is the chosen mode, the category header is also set to the chosen mode. 
 	 * @param word The word that will have to be guessed during this game.
 	 */
 	public void setWordToGuess(String word, String gameMode) {
@@ -237,7 +237,6 @@ public class Controller  {
 			viewerGame.enableAllLetters();
 			viewerGame.setDifficulty(EZ);
 			continueListener.skipToGame();
-			
 		}
 	}
 

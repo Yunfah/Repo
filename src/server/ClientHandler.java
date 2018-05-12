@@ -67,9 +67,9 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
-	 * This ClientHandler's Client receives an invite for gamemode from sender.
+	 * This ClientHandler's Client receives an invite for gameMode from sender.
 	 * @param sender The sender of the invite.
-	 * @param gameMode The gamemode this invite will start if accepted. 
+	 * @param gameMode The game mode this invite will start if accepted. 
 	 */
 	public void recieveInvite(String sender, String gameMode) {
 		System.out.println(username + " receiving invite");
@@ -110,6 +110,16 @@ public class ClientHandler implements Runnable {
 			
 		}
 		//Possible error-handling for later
+	}
+	
+	public void setTurn(boolean myTurn) {
+		try {
+			oos.writeObject("turn");
+			oos.writeBoolean(myTurn);
+			oos.flush();
+		} catch (IOException e) {
+			//TODO: metoden klar? 
+		}
 	}
 
 	/**
@@ -187,8 +197,8 @@ public class ClientHandler implements Runnable {
 				break;
 				case "accept" : {	//this client accepts an invite
 					System.out.println(username + " accepted invite.");
-					String p1 = ois.readUTF();	//sender of invite
-					String p2 = ois.readUTF();	//accepter of invite
+					String p1 = ois.readUTF();	//sender of invite. Player 1
+					String p2 = ois.readUTF();	//accepter of invite. Player 2
 					String gameMode = ois.readUTF();
 					inGame = true;
 					server.createGame(p1, p2, gameMode); //accept invite that was just received.
