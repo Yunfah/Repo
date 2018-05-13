@@ -163,7 +163,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			int indexOfLetter = letterButtons.indexOf(e.getSource());
 			buttonEnabled[indexOfLetter] = false;
 			btnSave.setEnabled(true);
-			controller.checkLetter(e.getActionCommand().charAt(0));
+			controller.checkLetter(e.getActionCommand().charAt(0));	//Should work if the letter is sent as a capital one
 			pop();
 			
 			if (drawingPanel.getWrongLetterCount() == 10) {		//if player has been hung
@@ -181,7 +181,6 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("serial")
 	private class ResetAction extends AbstractAction {
 		public ResetAction(String name, int mnemonic) {
 			super(name);
@@ -196,7 +195,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			reset();
 		}
 	}
-	@SuppressWarnings("serial")
+
 	private class NewWordAction extends AbstractAction {
 		public NewWordAction(String name, int mnemonic) {
 			super(name);
@@ -212,7 +211,6 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("serial")
 	private class ExitAction extends AbstractAction {
 		public ExitAction(String name, int mnemonic) {
 			super(name);
@@ -240,6 +238,11 @@ public class ViewerGame extends JPanel implements Serializable {
 		} else if (myTurn == false) {
 			disableAllLetters();
 		}
+	}
+	
+	public void addLetterGuessed(String letter) {
+		int index = 'Z' - 'A' + letter.charAt(0);
+		buttonEnabled[index] = false;
 	}
 	
 	/**
@@ -349,10 +352,6 @@ public class ViewerGame extends JPanel implements Serializable {
 			btn.setEnabled(true);
 	}
 
-	public void enableSpecificLetters(boolean [] buttonEnabled) {
-		for (int i = 0; i < buttonEnabled.length; i++)
-			letterButtons.get(i).setEnabled(buttonEnabled[i]);
-	}
 	
 	public void toneButton(String button, boolean isCorrect) {
 		Color color;

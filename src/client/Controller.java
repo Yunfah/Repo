@@ -99,9 +99,14 @@ public class Controller  {
 			viewerGame.incrementWrongLetterCount();
 			viewerGame.toneButton(s, false);
 		}
+		viewerGame.addLetterGuessed(s);
 		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
 			client.guessLetter(letter, correct);
 			myTurn = false;		//TODO: myTurn måste sättas till true igen någonstans!!!!
+			viewerGame.setTurn(false);
+		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
+			myTurn = true;	//räcker detta? 
+			viewerGame.setTurn(true);
 		}
 		viewerGame.setWord(encodedWord);
 		checkWin();
