@@ -1,12 +1,11 @@
 package client;
 
+import javafx.scene.input.KeyCode;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,7 +23,7 @@ import javax.swing.event.DocumentListener;
  * @author Jakob Kennerberg
  *
  */
-public class ViewerUsername extends JPanel implements ActionListener, MouseListener, DocumentListener {
+public class ViewerUsername extends JPanel implements ActionListener, MouseListener, DocumentListener, KeyListener {
 	private JLabel title = new JLabel("Please enter a username");
 	private JLabel subtitle = new JLabel("(will represent you during this online session)");
 	private JLabel name = new JLabel("Username:");
@@ -67,6 +66,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		txtField.setBounds(425, 350, 350, 75);
 		txtField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		txtField.setHorizontalAlignment(JLabel.CENTER);
+		txtField.addKeyListener(this);
 
 		btnNext.setBounds(825, 350, 200, 75);
 		btnNext.setFont(btnFont);
@@ -87,6 +87,8 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		add(name);
 		add(txtField);
 		add(btnNext);
+		addKeyListener(this);
+		setFocusable(true);
 	}
 
 	public void setListener(ContinueListener listener) {
@@ -162,5 +164,39 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	public void changedUpdate(DocumentEvent e) {
 		checkLogIn();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == 10) {
+			String ip = "0";
+			do {
+				try {
+					ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+				} catch (NullPointerException e1) {
+					ip = "0";
+				}
+			} while (ip.length() <= 7);
+
+			int port = 1;
+			do {
+				try {
+					port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+				} catch (NumberFormatException e2) {
+					port = 1;
+				} catch (NullPointerException e3) {}
+			} while (port < 1024 || port > 65536);
+
+			continueListener.nextPanelMP();
+			controller.connect(txtField.getText(), ip, port);
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+
 	}
 }
