@@ -241,7 +241,15 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 	
 	public void addLetterGuessed(String letter) {
-		int index = 'Z' - 'A' + letter.charAt(0);
+		letter.toUpperCase();
+		int index = 0;
+		char c = letter.charAt(0);
+		for (int i = 'A'; i<'A'+26; i++) {
+			if (i == c) {
+				break;
+			}
+			index++;
+		}
 		buttonEnabled[index] = false;
 	}
 	
