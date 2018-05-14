@@ -108,28 +108,32 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		}
 	}
 
+	public void connect() {
+		String ip = "0";
+		do {
+			try {
+				ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+			} catch (NullPointerException e1) {
+				ip = "0";
+			}
+		} while (ip.length() <= 7);
+
+		int port = 1;
+		do {
+			try {
+				port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
+			} catch (NumberFormatException e2) {
+				port = 1;
+			} catch (NullPointerException e3) {}
+		} while (port < 1024 || port > 65536);
+
+		continueListener.nextPanelMP();
+		controller.connect(txtField.getText(), ip, port);
+	}
+
 	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
-			String ip = "0";
-			do {
-				try {
-					ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
-				} catch (NullPointerException e1) {
-					ip = "0";
-				}
-			} while (ip.length() <= 7);
-			
-			int port = 1;
-			do {
-				try {
-					port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
-				} catch (NumberFormatException e2) {
-					port = 1;
-				} catch (NullPointerException e3) {}
-			} while (port < 1024 || port > 65536);
-			
-			continueListener.nextPanelMP();
-			controller.connect(txtField.getText(), ip, port);
+			connect();
 
 		} else if(e.getSource()==btnBack) {
 			continueListener.goBackMP();
@@ -172,26 +176,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
-			String ip = "0";
-			do {
-				try {
-					ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
-				} catch (NullPointerException e1) {
-					ip = "0";
-				}
-			} while (ip.length() <= 7);
-
-			int port = 1;
-			do {
-				try {
-					port = Integer.parseInt(JOptionPane.showInputDialog("What port do you want to connect to?"));
-				} catch (NumberFormatException e2) {
-					port = 1;
-				} catch (NullPointerException e3) {}
-			} while (port < 1024 || port > 65536);
-
-			continueListener.nextPanelMP();
-			controller.connect(txtField.getText(), ip, port);
+			connect();
 		}
 	}
 
