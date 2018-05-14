@@ -171,7 +171,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == 10) {
+		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			String ip = "0";
 			do {
 				try {
