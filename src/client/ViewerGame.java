@@ -249,12 +249,11 @@ public class ViewerGame extends JPanel implements Serializable {
 	public void addLetterGuessed(String letter) {
 		letter.toUpperCase();
 		int index = 0;
-		char c = letter.charAt(0);
-		for (int i = 'A'; i<'A'+26; i++) {
-			if (i == c) {
+		for (JButton btn : letterButtons) {
+			if (btn.getText().equals(letter)) {
+				index = letterButtons.indexOf(btn);
 				break;
 			}
-			index++;
 		}
 		buttonEnabled[index] = false;
 	}
