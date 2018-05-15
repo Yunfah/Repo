@@ -336,7 +336,7 @@ public class Controller  {
 	 */
 	public void setTurn(boolean myTurn) {
 		this.myTurn = myTurn;
-		viewerGame.setEnabled(myTurn); //TODO: TEST THIS!!!!!!!!!
+		viewerGame.setTurn(myTurn); //TODO: TEST THIS!!!!!!!!!
 	}
 
 	/**
