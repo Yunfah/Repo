@@ -194,6 +194,7 @@ public class Client extends Thread {
 					char guessed = (Character)input;
 					boolean isCorrect = ois.readBoolean();
 					controller.pimpGuessedButton(guessed, isCorrect);
+					controller.checkLetter(guessed);
 				} else {
 					String str = (String) input;
 					if (str.equals("invite")) {
