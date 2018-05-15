@@ -145,10 +145,13 @@ public class ViewerGame extends JPanel implements Serializable {
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
-				if (controller.getMode() == Controller.MULTIPLAYER)
-					controller.getClient().leaveGame();
 				reset();
-				continueListener.goBack();
+				if (controller.getMode() == Controller.MULTIPLAYER) {
+					controller.getClient().leaveGame();
+					continueListener.goBackMP();
+				} else {
+					continueListener.goBack();
+				}
 			} else if (e.getSource() == btnSave) {
 				controller.saveGameProgress();
 			}
