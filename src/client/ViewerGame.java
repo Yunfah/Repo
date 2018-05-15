@@ -191,6 +191,8 @@ public class ViewerGame extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			for (JButton button : letterButtons) {
 				button.setEnabled(true);
+				button.setBackground(null);
+				button.setBorderPainted(true);
 			}
 			reset();
 		}
@@ -206,6 +208,8 @@ public class ViewerGame extends JPanel implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 			for (JButton button : letterButtons) {
 				button.setEnabled(true);
+				button.setBackground(null);
+				button.setBorderPainted(true);
 			}
 			resetNewWord();
 		}
