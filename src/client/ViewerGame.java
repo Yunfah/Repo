@@ -192,11 +192,11 @@ public class ViewerGame extends JPanel implements Serializable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (JButton button : letterButtons) {
-				button.setEnabled(true);
-				button.setBackground(null);
-				button.setBorderPainted(true);
-			}
+//			for (JButton button : letterButtons) {
+//				button.setEnabled(true);
+//				button.setBackground(null);
+//				button.setBorderPainted(true);
+//			}
 			reset();
 		}
 	}
@@ -364,8 +364,11 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * Enables all the letter buttons in this game window. 
 	 */
 	public void enableAllLetters() {
-		for (JButton btn : letterButtons)
+		for (JButton btn : letterButtons) {
 			btn.setEnabled(true);
+			btn.setBackground(null);
+			btn.setBorderPainted(true);
+		}
 	}
 
 	
