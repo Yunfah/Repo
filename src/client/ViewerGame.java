@@ -226,7 +226,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			Component component = (Component) e.getSource();
 			Window win = SwingUtilities.getWindowAncestor(component);
 			win.dispose();
-			if(controller.getMode()==) {
+			if(controller.getMode()==Controller.MULTIPLAYER) {
 				controller.getClient().logout();
 			}
 		}
