@@ -70,6 +70,7 @@ public class ViewerGame extends JPanel implements Serializable {
 		btnBack.setBorderPainted(false);
 		btnSave.setBounds(935, 10, 100, 60); 
 		btnSave.setEnabled(false);
+		btnSave.setToolTipText("Feature Coming soon!");
 		btnSave.setFont(new Font("SansSerif", Font.BOLD, 20));
 		setupTopListeners();
 
