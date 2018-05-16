@@ -86,7 +86,6 @@ public class StartGame extends JFrame implements ContinueListener {
 		cardMultiplayer.add(multiplayerMode);
 		
 		controller.setViewerGame(game);
-		controller.setViewerMultiplayerMode(multiplayerMode);
 		controller.setViewerOnlineList(onlineList);
 
 		cards.add(cardMode, "cardMode");

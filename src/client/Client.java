@@ -157,6 +157,9 @@ public class Client extends Thread {
 		}
 	}
 	
+	/**
+	 * Requests the server to disconnect this client.
+	 */
 	public void leaveGame() {
 		try {
 			oos.writeUTF("leaveGame");

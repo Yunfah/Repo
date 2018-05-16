@@ -15,10 +15,15 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Handles the logic on the client-side for playing a game of hangman. 
+ * Handles guesses, wins, losses, and chosen game modes.
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow
+ *
+ */
 public class Controller  {
 	private Client client;
 	private ViewerGame viewerGame;
-	private ViewerMultiplayerMode viewerMultiplayerMode;
 	private ViewerOnlineList viewerOnlineList;
 	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
 	private ContinueListener continueListener;
@@ -37,34 +42,62 @@ public class Controller  {
 	public static final int DARK_SOULS = 4;
 	public static final int XTREME = 7;
 
+	/**
+	 * Sets the ViewerGame instance (the game panel) that this controller handles.
+	 * @param viewer The ViewerGame instance to be handled by this controller.
+	 */
 	public void setViewerGame(ViewerGame viewer) {
 		viewerGame = viewer;
 	}
 
+	/**
+	 * Returns the ViewerGame instance that is handled by this controller.
+	 * @return The ViewerGame handled by this controller.
+	 */
 	public ViewerGame getViewerGame() {
 		return viewerGame;
 	}
 
-	public void setViewerMultiplayerMode(ViewerMultiplayerMode viewer) {
-		viewerMultiplayerMode = viewer;
-	}
-
+	/**
+	 * Sets the ViewerOnlineList (panel for a list of online clients) that this 
+	 * controller uses.
+	 * @param viewer The ViewerOnlineList to be handled by this controller.
+	 */
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
 		viewerOnlineList = viewer; 
 	}
 
+	/**
+	 * Returns the ViewerOnlineList that this controller uses.
+	 * @return The ViewerOnlineList that this controller uses. 
+	 */
 	public ViewerOnlineList getViewerOnlineList() {
 		return viewerOnlineList;
 	}
 
+	/**
+	 * Sets the ContinueListener that this controller can use along with its
+	 * known viewers.
+	 * @param continueListener The ContinueListener that this controller will use.
+	 */
 	public void setListener(ContinueListener continueListener) {
 		this.continueListener = continueListener;
 	}
-	
+
+	/**
+	 * Returns the instance of the ContinueListener that this controller uses.
+	 * @return The ContinueListener that this controller uses. 
+	 */
 	public ContinueListener getListener() {
 		return continueListener;
 	}
 
+	/**
+	 * Sets an integer representation of whether the player has chosen single
+	 * or multiplayer. Disables the "reset" and "new word" buttons if mulitplayer
+	 * is chosen.
+	 * @param mode Set to Controller.SINGLEPLAYER (1) or Controller.MULTIPLAYER (2)
+	 */
 	public void setMode(int mode) {
 		this.modeChosen = mode;
 		if (mode == MULTIPLAYER) {
@@ -74,6 +107,10 @@ public class Controller  {
 			viewerGame.enableSpecialButtons();
 	}
 
+	/**
+	 * Returns an integer representation of 
+	 * @return
+	 */
 	public int getMode() {
 		return modeChosen;
 	}
@@ -111,7 +148,7 @@ public class Controller  {
 		viewerGame.setWord(encodedWord);
 		checkWin();
 	}
-	
+
 	public void pimpGuessedButton(char guessedLetter, boolean isCorrect) {
 		String value = String.valueOf(guessedLetter);
 		viewerGame.toneButton(value, isCorrect);
@@ -130,7 +167,9 @@ public class Controller  {
 		if (correctLetters == wordToGuess.length()) {
 			viewerGame.setWin(true);
 			if (modeChosen == MULTIPLAYER) {
-				client.win(true); //win() should tell CH to tell the other client(player) that this client won
+				if (!viewerOnlineList.getGameMode().equals("co-op"))
+					client.win(true); //win() should tell CH to tell the other client(player) that this client won
+				
 				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the game mode chooser.");
 				continueListener.goBackMP();
 			}
