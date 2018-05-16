@@ -16,7 +16,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 /**
- * 
+ * This class contains the frame used when selecting a username and logging in
+ * to the server
  * @author Jakob Kennerberg
  *
  */
@@ -34,6 +35,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	private ContinueListener continueListener;
 	private Controller controller;
 
+	/**
+	 * Constructor, creating the panel
+	 */
 	public ViewerUsername() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(null);
@@ -76,6 +80,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 		txtField.getDocument().addDocumentListener(this);
 		btnBack.addMouseListener(this);
+		btnNext.addMouseListener(this);
 
 		add(image);
 		add(title);
@@ -88,14 +93,26 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		setFocusable(true);
 	}
 
+	/**
+	 * Method which sets the listener to the frame
+	 * @param listener
+	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
 
+	/**
+	 * Method which sets the controller to the frame
+	 * @param controller
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 
+	/**
+	 * Method which has the purpose to control if the given username
+	 * meets the requirements to log in
+	 */
 	public void checkLogIn() {
 		String username = txtField.getText();
 		if(username.length() > 0) {
@@ -105,6 +122,11 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		}
 	}
 
+	/**
+	 * Method which has the purpose to show the log in dialogs as well as to control that the input
+	 * meets the requirements to log in. Shall give the controller the information it needs to connect
+	 * to the server
+	 */
 	public void connect() {
 		String ip = "0";
 		do {
@@ -128,6 +150,10 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		controller.connect(txtField.getText(), ip, port);
 	}
 
+	/**
+	 * Method which listens to the input made by clicking the buttons
+	 * and performs actions accordingly 
+	 */
 	public void actionPerformed(ActionEvent e) {	
 		if(e.getSource()==btnNext) {
 			connect();
@@ -137,6 +163,10 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		}
 	}
 
+	/**
+	 * Methods which listens to the input made by hovering over buttons and by stop 
+	 * doing so.
+	 */
 	public void mousePressed(MouseEvent e) {}
 
 	public void mouseReleased(MouseEvent e) {}
@@ -145,16 +175,25 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
 		}
+		if(e.getSource()==btnNext) {
+			btnNext.setForeground(Color.RED);
+		}
 	}
 
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
 		}
+		if(e.getSource()==btnNext) {
+			btnNext.setForeground(Color.BLACK);
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {}
 
+	/**
+	 * Methods which listens to input coming from the textfield
+	 */
 	public void insertUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
@@ -167,18 +206,16 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		checkLogIn();
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
+	/**
+	 * Methods which listens to input coming from the keyboard.
+	 */
+	public void keyTyped(KeyEvent e) {}
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			connect();
 		}
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-
-	}
+	
+	public void keyReleased(KeyEvent e) {}
 }

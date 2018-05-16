@@ -44,6 +44,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnInvite.addActionListener(listener);
 		btnBack.addActionListener(listener);
 		btnBack.addMouseListener(this);
+		btnInvite.addMouseListener(this);
 	}
 
 	/**
@@ -194,10 +195,48 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pendingInviteFrame.setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Method which closes the window shown when inviting someone
+	 */
 	public void closePendingInviteMessage() {
 		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
+	
+	/**
+	 * Methods which listens to the input made by hovering over buttons and
+	 * by stop doing so.
+	 * @param e
+	 */
+	public void mousePressed(MouseEvent e) {}
+	
+	public void mouseReleased(MouseEvent e) {}
+	
+	public void mouseEntered(MouseEvent e) {
+		if(e.getComponent()==btnBack) {
+			btnBack.setForeground(Color.RED);
+		}
+		if(e.getSource()==btnInvite) {
+			btnInvite.setForeground(Color.RED);
+		}
+	}
+	
+	public void mouseExited(MouseEvent e) {
+		if(e.getComponent()==btnBack) {
+			btnBack.setForeground(Color.WHITE);
+		}
+		if(e.getSource()==btnInvite) {
+			btnInvite.setForeground(Color.BLACK);
+		}
+	}
+	
+	public void mouseClicked(MouseEvent e) {}
 
+	/**
+	 * An inner class that listens to the input made by clicking on the buttons
+	 * and performs actions accordingly
+	 * @author Jakob Kennerberg
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -226,18 +265,4 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			} catch (Exception e1) {}
 		}
 	}
-
-	public void mousePressed(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {
-		if(e.getComponent()==btnBack) {
-			btnBack.setForeground(Color.RED);
-		}
-	}
-	public void mouseExited(MouseEvent e) {
-		if(e.getComponent()==btnBack) {
-			btnBack.setForeground(Color.WHITE);
-		}
-	}
-	public void mouseClicked(MouseEvent e) {}
 }
