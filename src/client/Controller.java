@@ -118,7 +118,8 @@ public class Controller  {
 	/**
 	 * Checks if the given letter exists in the word. If so,
 	 * shows the correctly guessed letter in all dedicated spots
-	 * in the game window.
+	 * in the game window. Also checks if the latest guess results in
+	 * a win, and switches the turns in multiplayer co-op mode.
 	 * @param letter The letter guessed.
 	 */
 	public void checkLetter(char letter) {
@@ -139,16 +140,22 @@ public class Controller  {
 		viewerGame.addLetterGuessed(s);
 		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
 			client.guessLetter(letter, correct);
-			myTurn = false;		//TODO: myTurn måste sättas till true igen någonstans!!!!
+			myTurn = false;	
 			viewerGame.setTurn(false);
 		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
-			myTurn = true;	//räcker detta? 
+			myTurn = true;
 			viewerGame.setTurn(true);
 		}
 		viewerGame.setWord(encodedWord);
 		checkWin();
 	}
 
+	/**
+	 * Changes the color of the button representing the guessed letter
+	 * to green if the guess was correct and to red if it was incorrect.
+	 * @param guessedLetter The guessed letter.
+	 * @param isCorrect If the guess was correct or not. 
+	 */
 	public void pimpGuessedButton(char guessedLetter, boolean isCorrect) {
 		String value = String.valueOf(guessedLetter);
 		viewerGame.toneButton(value, isCorrect);
@@ -156,7 +163,8 @@ public class Controller  {
 
 	/**
 	 * Checks if all letters of the word have been guessed. If so,
-	 * sets up a victory message in the game window. 
+	 * sends a victory message the game window and the opponent if 
+	 * in multiplayer mode.  
 	 */
 	private void checkWin() { 
 		int correctLetters = 0;
@@ -303,7 +311,8 @@ public class Controller  {
 	}
 
 	/**
-	 * Resets the word the user chose, gets another one from the list of words. 
+	 * Resets and replaces the current word with another one from the 
+	 * same category. 
 	 */
 	public void resetCategoryWord() {
 		Random rand = new Random();
@@ -375,7 +384,7 @@ public class Controller  {
 	 */
 	public void setTurn(boolean myTurn) {
 		this.myTurn = myTurn;
-		viewerGame.setTurn(myTurn); //TODO: TEST THIS!!!!!!!!!
+		viewerGame.setTurn(myTurn); 
 	}
 
 	/**
