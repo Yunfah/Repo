@@ -188,10 +188,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new StartGame(new Controller());
-			}
-		});
+		SwingUtilities.invokeLater(() -> new StartGame(new Controller()));
 	}
 }
