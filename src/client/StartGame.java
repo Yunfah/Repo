@@ -29,7 +29,7 @@ public class StartGame extends JFrame implements ContinueListener {
 
 	/**
 	 * Constructor
-	 * @param controller
+	 * @param controller, sets the controller
 	 */
 	public StartGame(Controller controller) {
 		this.controller = controller;
