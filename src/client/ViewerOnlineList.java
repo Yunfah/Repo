@@ -162,7 +162,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	
 	/**
 	 * Method which updates the panel with the username you have chosen.
-	 * @param username
+	 * @param username The username to be displayed
 	 */
 	public void setUsername(String username) {
 		lblUsername.setText(username);
@@ -178,10 +178,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+	 * @param listener The listener to be set
 	 */
 	public void setListener(ContinueListener listener) {
-		continueListener = listener; 
+		continueListener = listener;
 	}
 
 	/**
@@ -243,7 +243,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 *
 	 */
 	private class ButtonListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
 				continueListener.goBackMP();

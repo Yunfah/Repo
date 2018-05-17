@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.LinkedList;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
@@ -37,12 +35,11 @@ public class ViewerSelectMode extends JPanel {
 		
 		add(titlePanel(), BorderLayout.NORTH);
 		add(buttonPanel(), BorderLayout.CENTER);
-		
 	}
 	
 	/**
 	 * Method which creates the upper panel of the frame
-	 * @return
+	 * @return The upper panel
 	 */
 	private JPanel titlePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
@@ -59,7 +56,7 @@ public class ViewerSelectMode extends JPanel {
 	
 	/**
 	 * Method which creates the central and bottom panel of the frame
-	 * @return
+	 * @return The panel containing the buttons
 	 */
 	private JPanel buttonPanel() {
 		JPanel bPanel = new JPanel(null);
@@ -91,7 +88,7 @@ public class ViewerSelectMode extends JPanel {
 	
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+	 * @param listener The listener to be set
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -99,7 +96,7 @@ public class ViewerSelectMode extends JPanel {
 	
 	/**
 	 * Method which sets the controller to the frame
-	 * @param controller
+	 * @param controller The controller to be set
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
