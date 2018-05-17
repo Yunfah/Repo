@@ -166,7 +166,7 @@ public class Client extends Thread {
 			oos.flush();
 		} catch (IOException e) {
 			
-		}
+		} 
 	}
 
 	/**

@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 
 /**
@@ -83,6 +84,16 @@ public class ViewerMultiplayerMode extends JPanel {
 		btnG1.setFont(font);
 		btnG2.setFont(font);
 		btnG3.setFont(font);
+
+		btnG1.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnG1.setBackground(Color.white);
+		btnG1.setOpaque(true);
+		btnG2.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnG2.setBackground(Color.white);
+		btnG2.setOpaque(true);
+		btnG3.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnG3.setBackground(Color.white);
+		btnG3.setOpaque(true);
 		
 		panel.add(btnG1);
 		panel.add(btnG2);

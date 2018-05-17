@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 /**
  * This class creates the panel for choosing difficulty in Hangman
@@ -35,7 +37,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	public ViewerSelectDifficulty() {
 		setPreferredSize(new Dimension(1200, 800));
 		setLayout(null);
-		setBackground(Color.DARK_GRAY);
+		setBackground(Color.darkGray);
 		
 		btnBack.addMouseListener(this);
 		btnBack.addActionListener(this);
@@ -64,13 +66,13 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.setBounds(0, 0, 1200, 150);
 		Font titlefont = new Font("SansSerif", Font.PLAIN, 125);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
-		panel.setBackground(Color.DARK_GRAY);
+		panel.setBackground(Color.darkGray);
 		title.setFont(titlefont);
-		title.setForeground(Color.WHITE);
+		title.setForeground(Color.white);
 		title.setHorizontalAlignment(JLabel.CENTER);
 		btnBack.setPreferredSize(new Dimension(200, 100));
 		btnBack.setFont(btnfont);
-		btnBack.setForeground(Color.WHITE);
+		btnBack.setForeground(Color.white);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
 		
@@ -89,7 +91,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		JPanel panel = new JPanel(null);
 		panel.setBounds(0, 200, 1200, 400);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
-		panel.setBackground(Color.DARK_GRAY);
+		panel.setBackground(Color.darkGray);
 		btnEz.setBounds(450, 0, 300, 100);
 		btnDS.setBounds(450, 150, 300, 100);
 		btnEz.setFont(btnfont);
@@ -98,6 +100,12 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		btnDS.setForeground(Color.RED);
 		btnEz.setHorizontalAlignment(JButton.CENTER);
 		btnDS.setHorizontalAlignment(JButton.CENTER);
+		btnDS.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnEz.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnDS.setBackground(Color.white);
+		btnDS.setOpaque(true);
+		btnEz.setBackground(Color.white);
+		btnEz.setOpaque(true);
 		ezHelp.setBounds(800, 0, 350, 100);
 		dsHelp.setBounds(800, 150, 350, 100);
 		panel.add(dsHelp);
@@ -115,11 +123,13 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	 */
 	public JPanel bottomPanel() {
 		JPanel panel = new JPanel(null);
-		panel.setBackground(Color.DARK_GRAY);
+		panel.setBackground(Color.darkGray);
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
 		panel.setBounds(0, 600, 1200, 200);
 		btnLoadGame.setBounds(450, 50, 300, 100);
 		btnLoadGame.setFont(btnfont);
+		btnLoadGame.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnLoadGame.setOpaque(false);
 		btnLoadGame.setEnabled(false);
 		btnLoadGame.setToolTipText("Feature Coming soon!");
 		btnEE.setBounds(1050, 100, 150, 100);
@@ -224,12 +234,12 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			btnLoadGame.setForeground(Color.RED);
 		}
 		if(e.getComponent()==btnEz) {
-			ezHelp.setText("<html>Easy Difficulty<br/>Player gets 10 guesses");
+			ezHelp.setText("<html>Easy Difficulty<br/>Player gets 10 lifes");
 			ezHelp.setFont(helpfont);
 			ezHelp.setForeground(Color.GREEN);
 		}
 		if(e.getComponent()==btnDS) {
-			dsHelp.setText("<html>Hard Difficulty<br/>Player gets 6 guesses");
+			dsHelp.setText("<html>Hard Difficulty<br/>Player gets 6 lifes");
 			dsHelp.setFont(helpfont);
 			dsHelp.setForeground(Color.RED);
 		}
@@ -237,7 +247,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
-			btnBack.setForeground(Color.WHITE);
+			btnBack.setForeground(Color.white);
 		}
 		if(e.getComponent()==btnEE) {
 			if(eeActivated==true) {

@@ -7,11 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-import client.Controller;
-
 /**
  * Represents a round of hangman between two clients(players).
- *@author Elina Kock, Jakob Kennerberg
+ * @author Elina Kock, Jakob Kennerberg
  */
 public class Game {
 	private ClientHandler player1;
@@ -24,7 +22,7 @@ public class Game {
 	 * Constructor.
 	 * @param player1 A player of this game of hangman. The player that invited the other player.
 	 * @param player2 A player of this game of hangman. The player that was invited to play.
-	 * @param gameMode The game mode of this game of hangman.
+	 * @param gameMode The gamemode of this game of hangman.
 	 */
 	public Game(ClientHandler player1, ClientHandler player2, String gameMode) {
 		System.out.println("Going to create game. In Game instance...");

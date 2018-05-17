@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 /**
  * Panel that holds a list of all players currently connected to the server.
@@ -101,6 +102,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(font);
+		btnInvite.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
 		lblGameMode.setBounds(600, 20, 500, 50);
 		lblGameMode.setFont(font);
@@ -162,7 +164,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	
 	/**
 	 * Method which updates the panel with the username you have chosen.
+<<<<<<< HEAD
 	 * @param username The username of this client. 
+=======
+	 * @param username The username to be displayed
+>>>>>>> 60d0189bc4dfbffd8a7ef70a3f33fdbabcf6699d
 	 */
 	public void setUsername(String username) {
 		lblUsername.setText(username);
@@ -178,10 +184,14 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
+<<<<<<< HEAD
 	 * @param listener The ContinueListener that will control panel switching from this frame.
+=======
+	 * @param listener The listener to be set
+>>>>>>> 60d0189bc4dfbffd8a7ef70a3f33fdbabcf6699d
 	 */
 	public void setListener(ContinueListener listener) {
-		continueListener = listener; 
+		continueListener = listener;
 	}
 
 	/**
@@ -237,7 +247,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 *
 	 */
 	private class ButtonListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
 				continueListener.goBackMP();
@@ -258,6 +267,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private class RadioButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			btnInvite.setEnabled(true);
+			btnInvite.setBackground(Color.white);
+			btnInvite.setOpaque(true);
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
 				selectedPlayer = rb.getText();
