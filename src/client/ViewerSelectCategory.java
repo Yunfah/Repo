@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 /**
  * This class contains the frame for selecting the category of word
@@ -68,7 +69,19 @@ public class ViewerSelectCategory extends JPanel {
 		btnRandom.setFont(btnFont);
 		btnCities.setFont(btnFont);
 		btnAnimals.setFont(btnFont);
-		btnBrands.setFont(btnFont);	
+		btnBrands.setFont(btnFont);
+		btnRandom.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnRandom.setBackground(Color.white);
+		btnRandom.setOpaque(true);
+		btnCities.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnCities.setBackground(Color.white);
+		btnCities.setOpaque(true);
+		btnAnimals.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnAnimals.setBackground(Color.white);
+		btnAnimals.setOpaque(true);
+		btnBrands.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnBrands.setBackground(Color.white);
+		btnBrands.setOpaque(true);
 
 		panel.setBackground(Color.DARK_GRAY);
 		panel.add(btnRandom);

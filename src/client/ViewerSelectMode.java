@@ -45,9 +45,10 @@ public class ViewerSelectMode extends JPanel {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setPreferredSize(new Dimension(1200, 200));
 		Font titlefont = new Font("SansSerif", Font.PLAIN, 125);
-		panel.setBackground(Color.DARK_GRAY);
+		panel.setBackground(Color.darkGray);
+		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.red, Color.red));
 		lblHeader.setFont(titlefont);
-		lblHeader.setForeground(Color.WHITE);
+		lblHeader.setForeground(Color.white);
 
 		panel.add(lblHeader, BorderLayout.CENTER);
 		
@@ -60,22 +61,22 @@ public class ViewerSelectMode extends JPanel {
 	 */
 	private JPanel buttonPanel() {
 		JPanel bPanel = new JPanel(null);
-		bPanel.setBackground(Color.WHITE);
+		bPanel.setBackground(Color.white);
 				
 		btnSingle.setBounds(450, 50, 300, 100);
 		btnMulti.setBounds(450, 200, 300, 100);
 			
 		btnSingle.setFont(new Font ("Sans Serif", Font.BOLD, 30));
 		btnMulti.setFont(new Font ("Sans Serif", Font.BOLD, 30));
-		btnSingle.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.DARK_GRAY));
-		btnMulti.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.DARK_GRAY));
-		
+		btnSingle.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.darkGray));
+		btnMulti.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.darkGray));
+
 		btnSingle.addActionListener(listener);
 		btnMulti.addActionListener(listener);
 		btnSingle.addMouseListener(listener);
 		btnMulti.addMouseListener(listener);
 		
-		lblMulti.setBounds(825, 250, 350, 325);
+		lblMulti.setBounds(800, 250, 350, 325);
 		lblSingle.setBounds(75, 250, 330, 325);
 		
 		bPanel.add(lblMulti);

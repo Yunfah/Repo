@@ -45,7 +45,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
-		elevator();
+		//elevator();
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 /**
  * Panel that holds a list of all players currently connected to the server.
@@ -101,6 +102,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(font);
+		btnInvite.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
 		lblSettings.setBounds(600, 20, 500, 50);
 		lblSettings.setFont(font);
@@ -263,6 +265,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private class RadioButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			btnInvite.setEnabled(true);
+			btnInvite.setBackground(Color.white);
+			btnInvite.setOpaque(true);
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
 				selectedPlayer = rb.getText();
