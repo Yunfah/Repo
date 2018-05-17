@@ -128,6 +128,8 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.setBounds(0, 600, 1200, 200);
 		btnLoadGame.setBounds(450, 50, 300, 100);
 		btnLoadGame.setFont(btnfont);
+		btnLoadGame.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnLoadGame.setOpaque(false);
 		btnLoadGame.setEnabled(false);
 		btnLoadGame.setToolTipText("Feature Coming soon!");
 		btnEE.setBounds(1050, 100, 150, 100);
