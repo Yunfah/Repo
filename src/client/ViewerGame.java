@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 /**
  * This class represents the in game panel, showed when actually playing the game. Contains a drawing panel as 
@@ -84,6 +85,8 @@ public class ViewerGame extends JPanel implements Serializable {
 		btnBack.setBorderPainted(false);
 		btnSave.setBounds(935, 10, 100, 60); 
 		btnSave.setEnabled(false);
+		btnSave.setOpaque(false);
+		btnSave.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btnSave.setToolTipText("Feature Coming soon!");
 		btnSave.setFont(new Font("SansSerif", Font.BOLD, 20));
 		setupTopListeners();

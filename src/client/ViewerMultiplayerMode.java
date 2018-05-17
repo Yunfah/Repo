@@ -1,15 +1,12 @@
 package client;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+
 
 
 /**
@@ -22,10 +19,14 @@ public class ViewerMultiplayerMode extends JPanel {
 	private Controller controller;
 	private ViewerOnlineList viewerOnlineList;
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
+	private JLabel lblImage = new JLabel();
+	private Icon iconG1;
+	private Icon iconG2;
 	private JButton btnG1 = new JButton("Turnbased Co-op");
 	private JButton btnG2 = new JButton("1 Writes, 1 Guesses");
 	private JButton btnG3 = new JButton("1v1"); 
 	private JButton btnBack = new JButton("<-- Back");
+	private BackListener bListener = new BackListener();
 	
 	
 	/**
@@ -36,11 +37,17 @@ public class ViewerMultiplayerMode extends JPanel {
 		setLayout(new BorderLayout());
 		add(titlePanel(), BorderLayout.NORTH);
 		add(buttonPanel(), BorderLayout.CENTER);
+
+		iconG1 = scaleImage("files/helpstickmen.png");
+		iconG2 = scaleImage("files/fightingstickmen.png");
 		
 		btnG1.addActionListener(listener);
 		btnG2.addActionListener(listener);
 		btnG3.addActionListener(listener);
-		btnBack.addMouseListener(new BackListener());
+		btnBack.addMouseListener(bListener);
+		btnG1.addMouseListener(bListener);
+		btnG2.addMouseListener(bListener);
+		btnG3.addMouseListener(bListener);
 		btnBack.addActionListener(listener);
 	}
 	
@@ -75,11 +82,12 @@ public class ViewerMultiplayerMode extends JPanel {
 	 */
 	private JPanel buttonPanel() {
 		JPanel panel = new JPanel (null);
-		panel.setBackground(Color.DARK_GRAY);
+		panel.setBackground(Color.darkGray);
 		Font font = new Font("SansSerif", Font.PLAIN, 30);
 		btnG1.setBounds(450, 50, 300, 100);
 		btnG2.setBounds(450, 200, 300, 100);
 		btnG3.setBounds(450, 350, 300, 100);
+		lblImage.setBounds(75, 100, 300, 300 );
 		
 		btnG1.setFont(font);
 		btnG2.setFont(font);
@@ -90,11 +98,14 @@ public class ViewerMultiplayerMode extends JPanel {
 		btnG1.setOpaque(true);
 		btnG2.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btnG2.setBackground(Color.white);
-		btnG2.setOpaque(true);
+		btnG2.setOpaque(false);
+		btnG2.setEnabled(false);
+		btnG2.setToolTipText("Gamemode Coming soon!");
 		btnG3.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btnG3.setBackground(Color.white);
 		btnG3.setOpaque(true);
-		
+
+		panel.add(lblImage);
 		panel.add(btnG1);
 		panel.add(btnG2);
 		panel.add(btnG3);
@@ -124,6 +135,19 @@ public class ViewerMultiplayerMode extends JPanel {
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
+	}
+
+	/**
+	 * Method which scales a picture to the preferred size
+	 * @param filename The path to the picture
+	 * @return The scaled version of the picture
+	 */
+	public ImageIcon scaleImage(String filename) {
+		ImageIcon image = new ImageIcon(filename);
+		Image transImage = image.getImage();
+		Image scaledImage = transImage.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+		image = new ImageIcon(scaledImage);
+		return image;
 	}
 	
 	/**
@@ -156,22 +180,49 @@ public class ViewerMultiplayerMode extends JPanel {
 	}
 	
 	/**
-	 * A private class for the back button so that when you hover, it will turn red. 
+	 * A private class for the buttons so that when you hover, it will turn red. Does also
+	 * update the GUI with a informative picture.
 	 * @author Yun-Fah Chow
 	 */
 	private class BackListener implements MouseListener {
-		public void mouseClicked(MouseEvent arg0) {}
+		public void mouseClicked(MouseEvent e) {}
 		
-		public void mouseEntered(MouseEvent arg0) {
-			btnBack.setForeground(Color.RED);
+		public void mouseEntered(MouseEvent e) {
+			if(e.getSource()==btnBack) {
+				btnBack.setForeground(Color.RED);
+			}
+			if(e.getSource()==btnG1) {
+				btnG1.setForeground(Color.RED);
+				lblImage.setIcon(iconG1);
+			}
+			if(e.getSource()==btnG2) {
+				btnG2.setForeground(Color.RED);
+			}
+			if(e.getSource()==btnG3) {
+				btnG3.setForeground(Color.RED);
+				lblImage.setIcon(iconG2);
+			}
 		}
 		
-		public void mouseExited(MouseEvent arg0) {
-			btnBack.setForeground(Color.WHITE);
+		public void mouseExited(MouseEvent e) {
+			if(e.getSource()==btnBack) {
+				btnBack.setForeground(Color.white);
+			}
+			if(e.getSource()==btnG1) {
+				btnG1.setForeground(Color.black);
+				lblImage.setIcon(null);
+			}
+			if(e.getSource()==btnG2) {
+				btnG2.setForeground(Color.black);
+			}
+			if(e.getSource()==btnG3) {
+				btnG3.setForeground(Color.black);
+				lblImage.setIcon(null);
+			}
 		}
 		
-		public void mousePressed(MouseEvent arg0) {}
+		public void mousePressed(MouseEvent e) {}
 		
-		public void mouseReleased(MouseEvent arg0) {}
+		public void mouseReleased(MouseEvent e) {}
 	}
 }
