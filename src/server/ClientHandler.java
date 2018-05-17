@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.SocketException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  * Thread that handles requests on the server side for a client.
@@ -32,7 +31,7 @@ public class ClientHandler implements Runnable {
 		this.oos = oos;
 		this.server = server;
 		this.username = username;
-		new Thread (this).start();
+		new Thread(this).start();
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class ClientHandler implements Runnable {
 	/**
 	 * Sends the current list of online clients to the client associated with this 
 	 * ClientHandler. 
-	 * @param list
+	 * @param list A list of currently online clients. 
 	 */
 	public void sendClientList(ArrayList<String> list) {
 		try {
@@ -100,7 +99,6 @@ public class ClientHandler implements Runnable {
 	
 	/**
 	 * Prompts this client to choose a custom word for the opponent to guess.
-	 * @return
 	 */
 	public void setCustomWord() {
 		try {
@@ -115,7 +113,7 @@ public class ClientHandler implements Runnable {
 	/**
 	 * Method which sends the current players turn to the client. Used in the co-op
 	 * gamemode in multiplayer.
-	 * @param myTurn
+	 * @param myTurn True if it is this client's turn and false if it is not. 
 	 */
 	public void setTurn(boolean myTurn) {
 		try {
@@ -123,14 +121,14 @@ public class ClientHandler implements Runnable {
 			oos.writeBoolean(myTurn);
 			oos.flush();
 		} catch (IOException e) {
-			//TODO: metoden klar? 
 		}
 	}
 
 	/**
 	 * Shows a message saying that the opponent has either succeeded or failed
 	 * in guessing the word. 
-	 * @param message A message saying whether the opponent has succeeded or failed. 
+	 * @param message A message saying whether the opponent has succeeded or failed.
+	 * @param victory True if the opponent won, false if they lost 
 	 */
 	public void receiveVictoryMessage(String message, boolean victory) {	//NOT DONE
 		System.out.println(message);
@@ -147,6 +145,7 @@ public class ClientHandler implements Runnable {
 	/**
 	 * Sets up the word that has to be guessed for this Client. 
 	 * @param word The word that has to be guessed.
+	 * @param gameMode The game mode that was chosen. 
 	 */
 	public void setWordToGuess(String word, String gameMode) {
 		try {

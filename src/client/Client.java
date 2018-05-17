@@ -38,7 +38,7 @@ public class Client extends Thread {
 
 	/**
 	 * Sets the controller for this client. 
-	 * @param controller
+	 * @param controller The controller for this client.
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -113,7 +113,7 @@ public class Client extends Thread {
 	 * in guessing the word.
 	 * @param win If this client succeeded or failed in guessing the word.
 	 */
-	public void win(boolean win) {	//DONE?
+	public void win(boolean win) {	
 		if (win) {
 			try {
 				oos.writeUTF("win");
@@ -155,7 +155,7 @@ public class Client extends Thread {
 		} catch (IOException e) {
 
 		}
-	}
+	} 
 	
 	/**
 	 * Requests the server to disconnect this client.
@@ -166,7 +166,7 @@ public class Client extends Thread {
 			oos.flush();
 		} catch (IOException e) {
 			
-		}
+		} 
 	}
 
 	/**
