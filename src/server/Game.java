@@ -11,7 +11,7 @@ import client.Controller;
 
 /**
  * Represents a round of hangman between two clients(players).
- *
+ *@author Elina Kock, Jakob Kennerberg
  */
 public class Game {
 	private ClientHandler player1;
@@ -59,7 +59,7 @@ public class Game {
 	}
 
 	/**
-	 * Sets up a random word that is to be guessed in this game.
+	 * Sets up a random word that is to be guessed during this game.
 	 */
 	private void setRandomWord() {
 		ArrayList<String> list = new ArrayList<String>();

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 /**
  * Thread that handles requests on the server side for a client.
  * Acts as a middle man between client and server. 
- *
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow, Yamma Sarwari
  */
 public class ClientHandler implements Runnable {
 	private ObjectInputStream ois;
@@ -112,6 +112,11 @@ public class ClientHandler implements Runnable {
 		//Possible error-handling for later
 	}
 	
+	/**
+	 * Method which sends the current players turn to the client. Used in the co-op
+	 * gamemode in multiplayer.
+	 * @param myTurn
+	 */
 	public void setTurn(boolean myTurn) {
 		try {
 			oos.writeObject("turn");
@@ -154,6 +159,10 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
+	/**
+	 * Method which sends information to the client about closing down
+	 * the window shown when sending an invite.
+	 */
 	public void closePendingInviteWindow() {
 		try {
 			oos.writeObject("closePendingInvite");
@@ -163,6 +172,11 @@ public class ClientHandler implements Runnable {
 		}
 	}
 	
+	/**
+	 * Method which sends the letter guessed as well as if it is correct to the client. 
+	 * @param letterGuessed
+	 * @param isCorrect
+	 */
 	public void receiveGuess(char letterGuessed, boolean isCorrect) {
 		try {
 			oos.writeObject(letterGuessed);

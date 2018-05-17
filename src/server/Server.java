@@ -13,7 +13,7 @@ import java.util.Map.Entry;
  * Hosts multiplayer games of hangman. Keeps track of currently connected
  * clients, and clients that are currently in a game of hangman. Also
  * pairs clients together. 
- *
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow, Yamma Sarwari
  */
 public class Server implements Runnable {
 	private Thread server = new Thread(this);
@@ -52,6 +52,12 @@ public class Server implements Runnable {
 		}
 	}
 
+	/**
+	 * Method which sends a victory message to the winner of the game and informs the loser 
+	 * about it as well.
+	 * @param receiver
+	 * @param senderIsWinner
+	 */
 	public void victoryMessage(String receiver, boolean senderIsWinner) {	//NOT DONE
 		ClientHandler ch = clientList.get(receiver);
 		System.out.println("In server victory message");
@@ -103,7 +109,7 @@ public class Server implements Runnable {
 	}
 	
 	/**
-	 * 
+	 * Method which sends the letter which as been guessed to the opponent.
 	 * @param letterGuessed
 	 * @param receiverOfGuess
 	 */
