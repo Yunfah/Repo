@@ -10,7 +10,7 @@ import javax.swing.*;
 
 /**
  * Represents a player with a connection to a server.
- *
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow, Yamma Sarwari
  */
 public class Client extends Thread {
 	private Socket socket;

@@ -5,14 +5,14 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.io.File;
 import java.net.MalformedURLException;
-
 import javax.swing.*;
+
 /**
- * The Class that starts whe whole application 
- * @author yun
+ * This class is responible for starting the application and contains the logic for
+ * switching between panels
+ * @author Yun-Fah Chow
  *
  */
-
 public class StartGame extends JFrame implements ContinueListener {
 	CardLayout cardLayout = new CardLayout();
 	private JPanel cards = new JPanel(cardLayout);
@@ -27,6 +27,10 @@ public class StartGame extends JFrame implements ContinueListener {
 	private ViewerOnlineList onlineList = new ViewerOnlineList();
 	private AudioClip sound;
 
+	/**
+	 * Constructor
+	 * @param controller
+	 */
 	public StartGame(Controller controller) {
 		this.controller = controller;
 		controller.setListener(this);
@@ -45,7 +49,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 	
 	/**
-	 * Sets up all the "cards" where cards are all the viewer panels.
+	 * Method which sets up all the "cards", where cards are all the viewer panels.
 	 */
 
 	private void setupCards() {
