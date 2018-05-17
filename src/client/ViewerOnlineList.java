@@ -21,7 +21,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private Controller controller;
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
 	private JLabel lblOnline = new JLabel("Online");
-	private JLabel lblSettings = new JLabel("");	//Should show what gamemode the player has chosen.
+	private JLabel lblGameMode = new JLabel("");
 	private JLabel lblUsername = new JLabel("");
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
@@ -102,16 +102,16 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(font);
 
-		lblSettings.setBounds(600, 20, 500, 50);
-		lblSettings.setFont(font);
-		lblSettings.setForeground(Color.WHITE);
+		lblGameMode.setBounds(600, 20, 500, 50);
+		lblGameMode.setFont(font);
+		lblGameMode.setForeground(Color.WHITE);
 		
 		lblUsername.setBounds(600, 70, 400, 50);
 		lblUsername.setFont(font);
 		lblUsername.setForeground(Color.CYAN);
 
 		main.add(lblOnline);
-		main.add(lblSettings);
+		main.add(lblGameMode);
 		main.add(lblUsername);
 		main.add(btnInvite);
 		main.add(scroll);
@@ -141,7 +141,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param text The name of the chosen game mode.
 	 */
 	public void setGameModeText(String text) {
-		lblSettings.setText("You chose: " + text );
+		lblGameMode.setText("You chose: " + text );
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	
 	/**
 	 * Method which updates the panel with the username you have chosen.
-	 * @param username
+	 * @param username The username of this client. 
 	 */
 	public void setUsername(String username) {
 		lblUsername.setText(username);
@@ -178,7 +178,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+	 * @param listener The ContinueListener that will control panel switching from this frame.
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener; 
@@ -207,15 +207,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
-	/**
-	 * Methods which listens to the input made by hovering over buttons and
-	 * by stop doing so.
-	 * @param e
-	 */
+
+//	  Methods which listen to the input made by hovering over buttons and
+//	  by stopping to do so.
 	public void mousePressed(MouseEvent e) {}
-	
 	public void mouseReleased(MouseEvent e) {}
-	
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -224,7 +220,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.RED);
 		}
 	}
-	
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -233,7 +228,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.BLACK);
 		}
 	}
-	
 	public void mouseClicked(MouseEvent e) {}
 
 	/**
@@ -267,7 +261,9 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
 				selectedPlayer = rb.getText();
-			} catch (Exception e1) {}
+			} catch (Exception e1) {
+				e1.printStackTrace(); 	//TODO: test
+			}
 		}
 	}
 }
