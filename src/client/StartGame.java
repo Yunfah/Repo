@@ -10,7 +10,7 @@ import javax.swing.*;
 /**
  * This class is responible for starting the application and contains the logic for
  * switching between panels
- * @author Yun-Fah Chow
+ * @author Yun-Fah Chow, Elina Kock
  *
  */
 public class StartGame extends JFrame implements ContinueListener {
@@ -51,7 +51,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * Method which sets up all the "cards", where cards are all the viewer panels.
 	 */
-
 	private void setupCards() {
 		selectMode.setController(controller);
 		selectMode.setListener(this);
@@ -158,7 +157,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 	
 	/**
-	 * The function to go to the next panel in  multiplayer 
+	 * The function to go to the next panel in multiplayer 
 	 */
 	@Override
 	public void nextPanelMP() {
@@ -173,7 +172,8 @@ public class StartGame extends JFrame implements ContinueListener {
 	}
 
 	/**
-	 * Music 
+	 * Method which is responsible for playing the background music in
+	 * the application
 	 */
 	public void elevator() {
 		try{
@@ -183,6 +183,10 @@ public class StartGame extends JFrame implements ContinueListener {
 		sound.loop();
 	}
 	
+	/**
+	 * The main method of the application, summoning the frame. 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

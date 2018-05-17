@@ -12,6 +12,12 @@ import java.util.List;
 
 import javax.swing.*;
 
+/**
+ * This class represents the in game panel, showed when actually playing the game. Contains a drawing panel as 
+ * an inner class.
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow, Yamma Sarwari
+ *
+ */
 public class ViewerGame extends JPanel implements Serializable {
 	private List<JButton> letterButtons = new ArrayList<>();
 	private DrawingPanel drawingPanel = new DrawingPanel();
@@ -28,6 +34,11 @@ public class ViewerGame extends JPanel implements Serializable {
 	private boolean popBool;
 	private boolean[] buttonEnabled = new boolean[26];	//when a letter has been pressed its corresponding index in this array becomes false.
 
+	/**
+	 * Constructor, creating the buttons which is used when the player is guessing a letter as well 
+	 * as the option buttons placed in the bottom part of the frame
+	 * 
+	 */
 	public ViewerGame() {
 		setPreferredSize(new Dimension(1200, 800));
 		JPanel letterButtonPanel = new JPanel(new GridLayout(3, 0, 3, 3));
@@ -63,6 +74,9 @@ public class ViewerGame extends JPanel implements Serializable {
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Method setting up the upper part of the panel
+	 */
 	private void setupTopOptions() {	
 		btnBack.setBounds(10, 20, 200, 75);
 		btnBack.setBackground(Color.WHITE);
@@ -90,39 +104,59 @@ public class ViewerGame extends JPanel implements Serializable {
 		rbGroup.add(rbShowWord);
 	}
 
+	/**
+	 * Method which sets the listeners to the buttons, and handles the input made by hovering
+	 * over a button as well as by stop doing so
+	 */
 	private void setupTopListeners() {
 		BackSaveListener backSaveListener = new BackSaveListener();
 		btnBack.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent arg0) {}
+			
 			public void mouseEntered(MouseEvent arg0) {
 				btnBack.setForeground(Color.RED);
 			}
+			
 			public void mouseExited(MouseEvent arg0) {
 				btnBack.setForeground(Color.BLACK);
 			}
+			
 			public void mousePressed(MouseEvent arg0) {}
+			
 			public void mouseReleased(MouseEvent arg0) {}
 		});
 		btnBack.addActionListener(backSaveListener);
 
 		btnSave.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent arg0) {}
+			
 			public void mouseEntered(MouseEvent arg0) {
 				btnSave.setForeground(Color.GREEN);
 			}
+			
 			public void mouseExited(MouseEvent arg0) {
 				btnSave.setForeground(Color.BLACK);
 			}
+			
 			public void mousePressed(MouseEvent arg0) {}
+			
 			public void mouseReleased(MouseEvent arg0) {}
 		});
 		btnSave.addActionListener(backSaveListener);
 	}
 
+	/**
+	 * Method which sets the listener(interface) to the frame
+	 * @param listener
+	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
 
+	/**
+	 * Method which sets the controller to the frame
+	 * @param controller
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
@@ -143,6 +177,12 @@ public class ViewerGame extends JPanel implements Serializable {
 		newWord.setEnabled(true);
 	}
 
+	/**
+	 * Inner class which listens to the input made by clicking the back and save 
+	 * buttons and performs actions accordingly 
+	 * @author Elina Kock
+	 *
+	 */
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
@@ -159,10 +199,14 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	/**
+	 * Inner class which listens to the input made by clicking the letter buttons, and
+	 * performs actions accordingly.
+	 * @author Yamma Sarwari
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
-//			System.out.println("Button pressed: " + e.getActionCommand() +"\nWrong: " + drawingPanel.getWrongLetterCount());
 			((AbstractButton) e.getSource()).setEnabled(false);
 			int indexOfLetter = letterButtons.indexOf(e.getSource());
 			buttonEnabled[indexOfLetter] = false;
@@ -185,13 +229,17 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	/**
+	 * Inner class which listens to the reset button, and calls the reset method if clicked
+	 * @author Elina Kock
+	 *
+	 */
 	private class ResetAction extends AbstractAction {
 		public ResetAction(String name, int mnemonic) {
 			super(name);
 			putValue(MNEMONIC_KEY, mnemonic);
 		}
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 //			for (JButton button : letterButtons) {
 //				button.setEnabled(true);
@@ -202,13 +250,18 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	/**
+	 * Inner class which listens to the new word button, and calls the resetNewWord method when 
+	 * clicked.
+	 * @author Elina Kock
+	 *
+	 */
 	private class NewWordAction extends AbstractAction {
 		public NewWordAction(String name, int mnemonic) {
 			super(name);
 			putValue(MNEMONIC_KEY, mnemonic);
 		}
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			for (JButton button : letterButtons) {
 				button.setEnabled(true);
@@ -219,13 +272,17 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
+	/**
+	 * Inner class which listens to the exit button, and shuts down the system if clicked.
+	 * @author Jakob Kennerberg
+	 *
+	 */
 	private class ExitAction extends AbstractAction {
 		public ExitAction(String name, int mnemonic) {
 			super(name);
 			putValue(MNEMONIC_KEY, mnemonic);
 		}
-
-		@Override
+		
 		public void actionPerformed(ActionEvent e) {
 			Component component = (Component) e.getSource();
 			Window win = SwingUtilities.getWindowAncestor(component);
@@ -250,6 +307,12 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 	
+	//Används metoden?
+	/**
+	 * Method which disables the button matching the letter which 
+	 * has been guessed.
+	 * @param letter
+	 */
 	public void addLetterGuessed(String letter) {
 		letter.toUpperCase();
 		int index = 0;
@@ -269,7 +332,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	 */
 	public boolean[] getButtonsPressed() {
 		return buttonEnabled;
-		//TODO: kommentera
 	}
 
 	/**
@@ -288,6 +350,9 @@ public class ViewerGame extends JPanel implements Serializable {
 		drawingPanel.setCategory(category);
 	}
 
+	/**
+	 * Calls the incrementWrongLetterCount method in the drawing panel.
+	 */
 	public void incrementWrongLetterCount() {
 		drawingPanel.incrementWrongLetterCount();
 	}
@@ -300,10 +365,19 @@ public class ViewerGame extends JPanel implements Serializable {
 		return drawingPanel.getWrongLetterCount();
 	}
 
+	/**
+	 * Sets the difficulty to the drawing panel
+	 * @param difficulty
+	 */
 	public void setDifficulty(int difficulty) {
 		drawingPanel.setWrongLetterCount(difficulty);
 	}
 
+	/**
+	 * Called when a player win a game, disabling the letter buttons
+	 * and calls the setWin method in the drawing panel.
+	 * @param win
+	 */
 	public void setWin(boolean win) {
 		disableAllLetters();
 		btnSave.setEnabled(false);
@@ -339,6 +413,10 @@ public class ViewerGame extends JPanel implements Serializable {
 		drawingPanel.setWin(false);
 	}
 	
+	/**
+	 * Method responible for playing the pop sound played when a player
+	 * guesses a letter.
+	 */
 	public void pop() {
 		if (!popBool) {
 			try {
@@ -372,7 +450,12 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 
-	
+	/**
+	 * Method which color the buttons when guessed. Color depending on
+	 * correct guess or not.
+	 * @param button
+	 * @param isCorrect
+	 */
 	public void toneButton(String button, boolean isCorrect) {
 		Color color;
 		if(isCorrect == true) {
@@ -391,6 +474,12 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 }
 
+/**
+ * Inner class which is responible for the majority of the frame. The main purpose for this class
+ * is to draw the hangman.
+ * @author Elina Kock, Yamma Sarwari
+ *
+ */
 class DrawingPanel extends JPanel {
 	private int wrongLetterCount = -1;
 	private char[] word;
@@ -401,13 +490,19 @@ class DrawingPanel extends JPanel {
 	private AudioClip winSound;
 	private AudioClip loseSound;
 
+	/**
+	 * Constructor
+	 */
 	public DrawingPanel() {
 		setLayout(null);
 		setBorder(BorderFactory.createTitledBorder("Hangman"));
 		setBackground(Color.WHITE);
 	}
 
-	@Override
+	/**
+	 * Method which sets up the drawing metrics and paints the
+	 * category text in the upper parts of the panel.
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		((Graphics2D)g).setStroke(new BasicStroke(3));
@@ -444,12 +539,12 @@ class DrawingPanel extends JPanel {
 		case 1 : {
 			g.drawArc(100, 450, 200, 200, 0, 180);
 			g.drawLine(200, 450, 200, 100);
-		} //rita streck mitt upp fr�n halvcirkeln
+		} //rita streck mitt upp från halvcirkeln
 		break;
 		case 2 : {
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100); //rita streck till h�ger ut fr�n strecket i case 1.
+			g.drawLine(200, 450, 200, 100); //rita streck till höger ut från strecket i case 1.
 		}
 		break;
 		case 3 : {
@@ -457,14 +552,14 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
 			g.drawLine(200, 450, 200, 100);
-		}//rita snett streck mellan strecken fr�n case 1 & 2.
+		}//rita snett streck mellan strecken från case 1 & 2.
 		break;
 		case 4 : {
 			g.drawLine(400, 100, 400, 150);
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita litet streck ner fr�n strecket i case 2.
+			g.drawLine(200, 450, 200, 100);//rita litet streck ner från strecket i case 2.
 		}
 		break;
 		case 5 : {
@@ -494,7 +589,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);// rita v�nster arm.
+			g.drawLine(200, 450, 200, 100);// rita vänster arm.
 		}
 		break;
 		case 8 : {
@@ -506,7 +601,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
+			g.drawLine(200, 450, 200, 100);//rita höger arm.
 		}
 		break;
 		case 9 : {
@@ -519,7 +614,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita v�nster ben.
+			g.drawLine(200, 450, 200, 100);//rita vänster ben.
 		}
 		break;
 		case 10 : {
@@ -533,7 +628,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita h�ger arm.
+			g.drawLine(200, 450, 200, 100);//rita höger arm.
 
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
@@ -607,6 +702,10 @@ class DrawingPanel extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Returns the word to guess
+	 * @return
+	 */
 	public char[] getWord() {
 		return word;
 	}
@@ -633,6 +732,12 @@ class DrawingPanel extends JPanel {
 		}
 	}
 
+	//Inte säker på om det är det som wrongLetterCount gör
+	/**
+	 * Method returning the amount of wrong guesses available during
+	 * the game
+	 * @return
+	 */
 	public int getWrongLetterCount() {
 		return wrongLetterCount;
 	}
@@ -645,13 +750,17 @@ class DrawingPanel extends JPanel {
 		this.win = win;
 	}
 
+	/**
+	 * Method which is called when a player makes a wrong guess, and increments the
+	 * wrongLetterCount
+	 */
 	public void incrementWrongLetterCount() {
 		wrongLetterCount++;
 		repaint();
 	}
 
 	/**
-	 * Plays a victory sound.
+	 * Method responsible for playing a victory sound when a game is won.
 	 */
 	public void win() {
 		if (!winBool) {
@@ -668,7 +777,7 @@ class DrawingPanel extends JPanel {
 	}
 
 	/**
-	 * Plays a losing sound.
+	 * Method responsible for playing a losing sound when a game is lost.
 	 */
 	public void lose() {
 		this.wrongLetterCount++;

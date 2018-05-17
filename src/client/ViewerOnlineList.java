@@ -14,6 +14,7 @@ import javax.swing.*;
  * Panel that holds a list of all players currently connected to the server.
  * Also allows players to choose a player from the online list to invite
  * them to a game of hangman. 
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow
  */
 public class ViewerOnlineList extends JPanel implements MouseListener {
 	private ContinueListener continueListener;
@@ -159,6 +160,10 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		return gamemode;
 	}
 	
+	/**
+	 * Method which updates the panel with the username you have chosen.
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		lblUsername.setText(username);
 	}
@@ -172,7 +177,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	}
 
 	/**
-	 * 
+	 * Method which sets the listener(interface) to the frame
 	 * @param listener
 	 */
 	public void setListener(ContinueListener listener) {

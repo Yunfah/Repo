@@ -13,7 +13,6 @@ import javax.swing.*;
 /**
  * This class creates the panel for choosing difficulty in Hangman
  * @author Jakob Kennerberg
- *
  */
 public class ViewerSelectDifficulty extends JPanel implements ActionListener, MouseListener {
 	private JLabel title = new JLabel("DIFFICULTY    ", SwingConstants.CENTER);
@@ -29,7 +28,6 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private Random rand = new Random();
 	private ContinueListener continueListener;
 	private Controller controller;
-	
 	
 	/**
 	 * Constructor
@@ -147,7 +145,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	}
 	
 	/**
-	 * Method which has the purpose to create a random color for usage in
+	 * Method which has the purpose to create a random color for (secret)usage in
 	 * this class.
 	 * @returns the color
 	 */
@@ -161,7 +159,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	}
 	
 	/**
-	 * Method which sets the listener to listen to changes in the frame
+	 * Method which sets the listener(interface) to listen to changes in the frame
 	 * @param listener
 	 */
 	public void setListener(ContinueListener listener) {

@@ -4,7 +4,7 @@ package client;
  * 
  * This class contains an interface, which makes it possible to switch between 
  * panels in the applications
- * 
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow, Yamma Sarwari
  */
 public interface ContinueListener {
 	

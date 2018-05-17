@@ -106,7 +106,7 @@ public class ViewerSelectCategory extends JPanel {
 	}
 
 	/**
-	 * Method which sets the listener to the frame
+	 * Method which sets the listener(interface) to the frame
 	 * @param listener
 	 */
 	public void setListener(ContinueListener listener) {

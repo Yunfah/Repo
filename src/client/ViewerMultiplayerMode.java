@@ -12,8 +12,8 @@ import javax.swing.*;
 
 
 /**
- * Lets a player chose which gamemode they want to play in multiplayer 
- *
+ * This class contains the panel which lets a player choose which gamemode they want to play in multiplayer 
+ * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow
  */
 public class ViewerMultiplayerMode extends JPanel {
 	private ContinueListener continueListener;
@@ -28,7 +28,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	
 	
 	/**
-	 * Sets up all the panel for multiplayer mode list
+	 * Constructor, which sets up the panel for the multiplayer mode list.
 	 */
 	public ViewerMultiplayerMode() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -44,7 +44,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	}
 	
 	/**
-	 * Sets up the top panel 
+	 * Sets up the upper parts of the panel.
 	 * @return returns the panel
 	 */
 	private JPanel titlePanel() {
@@ -91,21 +91,33 @@ public class ViewerMultiplayerMode extends JPanel {
 		return panel;
 	}
 	
+	/**
+	 * Method which sets the controller to the frame.
+	 * @param controller
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 	
+	/**
+	 * Method which lets the class update the upcoming panel with information.
+	 * @param viewer
+	 */
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
 		this.viewerOnlineList = viewer;
 	}
 	
+	/**
+	 * Method which sets the listener(interface) to the frame.
+	 * @param listener
+	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
 	
 	/**
-	 * A private class for the buttonlistener. 
-	 * @author yun
+	 * A private class which listens to buttons being pressed.
+	 * @author Yun-Fah Chow
 	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -134,20 +146,21 @@ public class ViewerMultiplayerMode extends JPanel {
 	
 	/**
 	 * A private class for the back button so that when you hover, it will turn red. 
-	 * @author yun
-	 *
+	 * @author Yun-Fah Chow
 	 */
 	private class BackListener implements MouseListener {
 		public void mouseClicked(MouseEvent arg0) {}
+		
 		public void mouseEntered(MouseEvent arg0) {
 			btnBack.setForeground(Color.RED);
 		}
+		
 		public void mouseExited(MouseEvent arg0) {
 			btnBack.setForeground(Color.WHITE);
 		}
+		
 		public void mousePressed(MouseEvent arg0) {}
+		
 		public void mouseReleased(MouseEvent arg0) {}
 	}
-	
-
 }
