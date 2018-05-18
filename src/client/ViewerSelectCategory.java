@@ -142,19 +142,19 @@ public class ViewerSelectCategory extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Random.txt", "RANDOM");
+				controller.setCategoryWord("files/Random.txt", "RANDOM");
 				
 			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Cities.txt", "CITIES");
+				controller.setCategoryWord("files/Cities.txt", "CITIES");
 				
 			} else if (e.getSource() == btnAnimals) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Animals.txt", "ANIMALS");
+				controller.setCategoryWord("files/Animals.txt", "ANIMALS");
 				
 			} else if (e.getSource() == btnBrands) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Brands.txt", "BRANDS");
+				controller.setCategoryWord("files/Brands.txt", "BRANDS");
 				
 			} else if (e.getSource() == btnBack) {
 				continueListener.goBack();

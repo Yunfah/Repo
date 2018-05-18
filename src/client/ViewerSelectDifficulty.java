@@ -203,7 +203,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			if(eeActivated==true) {
 				continueListener.skipToGame();
 				controller.setDifficulty(Controller.XTREME);
-				controller.setCategory("files/Xtreme.txt", "XTREME");
+				controller.setCategoryWord("files/Xtreme.txt", "XTREME");
 			}
 			activateEE();
 		}

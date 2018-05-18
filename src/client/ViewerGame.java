@@ -150,7 +150,7 @@ public class ViewerGame extends JPanel implements Serializable {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+	 * @param listener The continueListener to control the flow to/from this fram
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -158,7 +158,7 @@ public class ViewerGame extends JPanel implements Serializable {
 
 	/**
 	 * Method which sets the controller to the frame
-	 * @param controller
+	 * @param controller The controller to manage this ViewerGame
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -205,7 +205,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	/**
 	 * Inner class which listens to the input made by clicking the letter buttons, and
 	 * performs actions accordingly.
-	 * @author Yamma Sarwari
+	 * @author Yamma Sarwari, Elina Kock
 	 *
 	 */
 	private class ButtonListener implements ActionListener {
@@ -234,7 +234,7 @@ public class ViewerGame extends JPanel implements Serializable {
 
 	/**
 	 * Inner class which listens to the reset button, and calls the reset method if clicked
-	 * @author Elina Kock
+	 * @author Yamma Sarwari, Elina Kock
 	 *
 	 */
 	private class ResetAction extends AbstractAction {
@@ -256,7 +256,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	/**
 	 * Inner class which listens to the new word button, and calls the resetNewWord method when 
 	 * clicked.
-	 * @author Elina Kock
+	 * @author Yamma Sarwari
 	 *
 	 */
 	private class NewWordAction extends AbstractAction {
@@ -310,11 +310,11 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 	
-	//Används metoden?
+	//Används metoden? - ja. Kanske den som fuckar co-op knapparna?
 	/**
 	 * Method which disables the button matching the letter which 
 	 * has been guessed.
-	 * @param letter
+	 * @param letter The letter that was last guessed
 	 */
 	public void addLetterGuessed(String letter) {
 		letter.toUpperCase();
@@ -331,7 +331,8 @@ public class ViewerGame extends JPanel implements Serializable {
 	/**
 	 * Returns a boolean array representing which buttons of the alphabet
 	 * have been pressed. 
-	 * @return
+	 * @return A boolean array representing which letters of the alphabet have been guessed. False indicates
+	 * that the letter is guessed, and true indicates that it still has not been guessed. 
 	 */
 	public boolean[] getButtonsPressed() {
 		return buttonEnabled;
@@ -370,18 +371,18 @@ public class ViewerGame extends JPanel implements Serializable {
 
 	/**
 	 * Sets the difficulty to the drawing panel
-	 * @param difficulty
+	 * @param difficulty The "handicap" this round starts with.
 	 */
 	public void setDifficulty(int difficulty) {
 		drawingPanel.setWrongLetterCount(difficulty);
 	}
 
 	/**
-	 * Called when a player win a game, disabling the letter buttons
+	 * Called when a player wins or loses a game, disabling the letter buttons
 	 * and calls the setWin method in the drawing panel.
-	 * @param win
+	 * @param win True if player has won, false if they have lost.
 	 */
-	public void setWin(boolean win) {
+	public void setResult(boolean win) {
 		disableAllLetters();
 		btnSave.setEnabled(false);
 		drawingPanel.setWin(win);	
@@ -417,7 +418,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 	
 	/**
-	 * Method responible for playing the pop sound played when a player
+	 * Method responsible for playing the pop sound played when a player
 	 * guesses a letter.
 	 */
 	public void pop() {
@@ -454,10 +455,10 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 
 	/**
-	 * Method which color the buttons when guessed. Color depending on
-	 * correct guess or not.
-	 * @param button
-	 * @param isCorrect
+	 * Method which colors the buttons when guessed. Color depends on
+	 * if the guess was correct or not.
+	 * @param button The buttons to be painted. 
+	 * @param isCorrect True if the guess was correct, false if it was incorrect. 
 	 */
 	public void toneButton(String button, boolean isCorrect) {
 		Color color;
@@ -537,17 +538,17 @@ class DrawingPanel extends JPanel {
 	public void paintNext(Graphics g, int wrongLetterCount) {
 		g.setColor(Color.BLACK);
 		switch (wrongLetterCount) {
-		case 0 : g.drawArc(100, 450, 200, 200, 0, 180); //rita halvcirkel (kulle)
+		case 0 : g.drawArc(100, 450, 200, 200, 0, 180); //draw initial half-circle ("hill")
 		break;
 		case 1 : {
 			g.drawArc(100, 450, 200, 200, 0, 180);
 			g.drawLine(200, 450, 200, 100);
-		} //rita streck mitt upp från halvcirkeln
+		} //Draw a line upward from the middle of the half-circle
 		break;
 		case 2 : {
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100); //rita streck till höger ut från strecket i case 1.
+			g.drawLine(200, 450, 200, 100); //Draw a line outwards to the right from the last line
 		}
 		break;
 		case 3 : {
@@ -555,14 +556,14 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
 			g.drawLine(200, 450, 200, 100);
-		}//rita snett streck mellan strecken från case 1 & 2.
+		}//draw a slanting line from the lines in case 1 & 2
 		break;
 		case 4 : {
 			g.drawLine(400, 100, 400, 150);
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita litet streck ner från strecket i case 2.
+			g.drawLine(200, 450, 200, 100);//Draw a small line downward from the very right of the line from case 2
 		}
 		break;
 		case 5 : {
@@ -571,7 +572,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita gubbens huvud.
+			g.drawLine(200, 450, 200, 100);//Draw the man's head
 		}
 		break;
 		case 6 : {
@@ -581,7 +582,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);// rita gubbens kropp.
+			g.drawLine(200, 450, 200, 100);//Draw the man's body
 		}
 		break; 
 		case 7 : {
@@ -592,7 +593,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);// rita vänster arm.
+			g.drawLine(200, 450, 200, 100);// Draw the left arm
 		}
 		break;
 		case 8 : {
@@ -604,7 +605,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita höger arm.
+			g.drawLine(200, 450, 200, 100);//Draw the right arm
 		}
 		break;
 		case 9 : {
@@ -617,7 +618,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita vänster ben.
+			g.drawLine(200, 450, 200, 100);//Draw the left leg
 		}
 		break;
 		case 10 : {
@@ -631,7 +632,7 @@ class DrawingPanel extends JPanel {
 			g.drawLine(200, 150, 250, 100);
 			g.drawLine(200, 100, 400, 100);
 			g.drawArc(100, 450, 200, 200, 0, 180);
-			g.drawLine(200, 450, 200, 100);//rita höger arm.
+			g.drawLine(200, 450, 200, 100);//Draw the right leg
 
 			g.setFont(new Font("SansSerif", Font.BOLD, 80));
 			g.setColor(Color.RED);
