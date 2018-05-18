@@ -29,7 +29,7 @@ public class Server implements Runnable {
 	public Server(int port) {
 		this.port = port;
 		try {
-			serverSocket = new ServerSocket(port);	//BLABLABLA KOMMENTAR FÖR ATT PUSHA
+			serverSocket = new ServerSocket(port);
 			server.start();
 		} catch (IOException e) {}
 	}
@@ -55,16 +55,16 @@ public class Server implements Runnable {
 	/**
 	 * Method which sends a victory message to the winner of the game and informs the loser 
 	 * about it as well.
-	 * @param receiver
-	 * @param senderIsWinner
+	 * @param receiver The receiver of the victory message.
+	 * @param senderIsWinner True if the sender of the message won, false if the sender failed.
 	 */
-	public void victoryMessage(String receiver, boolean senderIsWinner) {	//NOT DONE
+	public void victoryMessage(String receiver, boolean senderIsWinner) {
 		ClientHandler ch = clientList.get(receiver);
 		System.out.println("In server victory message");
 		if (senderIsWinner) {
 			ch.receiveVictoryMessage("Your opponent succeeded in guessing the word.", true);
 		} else {
-			ch.receiveVictoryMessage("Your opponent failed at guessing the word. You may keep trying.", false);
+			ch.receiveVictoryMessage("Your opponent failed at guessing the word. The round is over.", false);
 		}
 	}
 
@@ -109,9 +109,10 @@ public class Server implements Runnable {
 	}
 
 	/**
-	 * Method which sends the letter which as been guessed to the opponent.
-	 * @param letterGuessed
-	 * @param receiverOfGuess
+	 * Method which sends the letter which as been guessed to the opponent. This method should
+	 * be used in game modes co-op and 1 writes 1 guesses.
+	 * @param letterGuessed The letter that was guessed.
+	 * @param receiverOfGuess The receiver of the guess. 
 	 */
 	public void sendGuess(char letterGuessed, boolean isCorrect, String receiverOfGuess) {
 		ClientHandler ch = clientList.get(receiverOfGuess);

@@ -152,9 +152,7 @@ public class Client extends Thread {
 			oos.writeChar(letter);
 			oos.writeUTF(opponent);
 			oos.flush();
-		} catch (IOException e) {
-
-		}
+		} catch (IOException e) {}
 	} 
 	
 	/**
@@ -164,9 +162,7 @@ public class Client extends Thread {
 		try {
 			oos.writeUTF("leaveGame");
 			oos.flush();
-		} catch (IOException e) {
-			
-		} 
+		} catch (IOException e) {} 
 	}
 
 	/**

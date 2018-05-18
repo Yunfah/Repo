@@ -53,7 +53,6 @@ public class ViewerSelectCategory extends JPanel {
 
 	/**
 	 * Method which creates the panel containing all the category buttons
-	 * 
 	 * @return A JPanel with category-buttons
 	 */
 	private JPanel pnlButtons() {
