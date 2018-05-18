@@ -22,9 +22,9 @@ public class ViewerMultiplayerMode extends JPanel {
 	private Controller controller;
 	private ViewerOnlineList viewerOnlineList;
 	private JLabel lblHeader = new JLabel ("Game Mode    ", SwingConstants.CENTER);
-	private JButton btnG1 = new JButton("Turnbased Co-op");
-	private JButton btnG2 = new JButton("1 Writes, 1 Guesses");
-	private JButton btnG3 = new JButton("1v1"); 
+	private JButton btnCoOp = new JButton("Turnbased Co-op");
+	private JButton btn1W1G = new JButton("1 Writes, 1 Guesses");
+	private JButton btn1v1 = new JButton("1v1"); 
 	private JButton btnBack = new JButton("<-- Back");
 	
 	
@@ -37,9 +37,9 @@ public class ViewerMultiplayerMode extends JPanel {
 		add(titlePanel(), BorderLayout.NORTH);
 		add(buttonPanel(), BorderLayout.CENTER);
 		
-		btnG1.addActionListener(listener);
-		btnG2.addActionListener(listener);
-		btnG3.addActionListener(listener);
+		btnCoOp.addActionListener(listener);
+		btn1W1G.addActionListener(listener);
+		btn1v1.addActionListener(listener);
 		btnBack.addMouseListener(new BackListener());
 		btnBack.addActionListener(listener);
 	}
@@ -77,27 +77,27 @@ public class ViewerMultiplayerMode extends JPanel {
 		JPanel panel = new JPanel (null);
 		panel.setBackground(Color.DARK_GRAY);
 		Font font = new Font("SansSerif", Font.PLAIN, 30);
-		btnG1.setBounds(450, 50, 300, 100);
-		btnG2.setBounds(450, 200, 300, 100);
-		btnG3.setBounds(450, 350, 300, 100);
+		btnCoOp.setBounds(450, 50, 300, 100);
+		btn1W1G.setBounds(450, 200, 300, 100);
+		btn1v1.setBounds(450, 350, 300, 100);
 		
-		btnG1.setFont(font);
-		btnG2.setFont(font);
-		btnG3.setFont(font);
+		btnCoOp.setFont(font);
+		btn1W1G.setFont(font);
+		btn1v1.setFont(font);
 
-		btnG1.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
-		btnG1.setBackground(Color.white);
-		btnG1.setOpaque(true);
-		btnG2.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
-		btnG2.setBackground(Color.white);
-		btnG2.setOpaque(true);
-		btnG3.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
-		btnG3.setBackground(Color.white);
-		btnG3.setOpaque(true);
+		btnCoOp.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnCoOp.setBackground(Color.white);
+		btnCoOp.setOpaque(true);
+		btn1W1G.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btn1W1G.setBackground(Color.white);
+		btn1W1G.setOpaque(true);
+		btn1v1.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btn1v1.setBackground(Color.white);
+		btn1v1.setOpaque(true);
 		
-		panel.add(btnG1);
-		panel.add(btnG2);
-		panel.add(btnG3);
+		panel.add(btnCoOp);
+		panel.add(btn1W1G);
+		panel.add(btn1v1);
 		
 		return panel;
 	}
@@ -132,17 +132,17 @@ public class ViewerMultiplayerMode extends JPanel {
 	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == btnG1) {
+			if(e.getSource() == btnCoOp) {
 				continueListener.nextPanelMP();
 				viewerOnlineList.setGameModeText("Turnbased Co-op");
 				viewerOnlineList.setGameMode("co-op");
 				//Set game mode to turn based co-op.
-			} else if (e.getSource() == btnG2) {
+			} else if (e.getSource() == btn1W1G) {
 				continueListener.nextPanelMP();
 				viewerOnlineList.setGameModeText("1 Writes, 1 Guesses");
 				viewerOnlineList.setGameMode("write-guess");
 				//set game mode to 1 writes, 1 guesses (prompt player to enter a word).
-			} else if (e.getSource() == btnG3) {
+			} else if (e.getSource() == btn1v1) {
 				continueListener.nextPanelMP();
 				viewerOnlineList.setGameModeText("1v1");
 				viewerOnlineList.setGameMode("1v1");

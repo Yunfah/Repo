@@ -91,9 +91,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		lblOnline.setForeground(Color.GREEN);
 
 		pnlOnlineList = new JPanel();
-		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
-		// make it only do as many as needed.
-
+		pnlOnlineList.setLayout(new GridLayout(100,1)); 
+		
 		JScrollPane scroll = new JScrollPane(pnlOnlineList);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
