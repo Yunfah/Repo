@@ -168,15 +168,11 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			continueListener.goBackMP();
 		}
 	}
-
-	/**
-	 * Methods which listens to the input made by hovering over buttons and by stop 
-	 * doing so.
-	 */
+	
+	// Methods which listen to the input made by hovering over buttons and by stop 
+	//doing so.
 	public void mousePressed(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
-
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -185,7 +181,6 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setForeground(Color.RED);
 		}
 	}
-
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -194,12 +189,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setForeground(Color.BLACK);
 		}
 	}
-
 	public void mouseClicked(MouseEvent e) {}
-
-	/**
-	 * Methods which listens to input coming from the textfield
-	 */
+	
+	//Methods which listens to input coming from the textfield 
 	public void insertUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
@@ -212,16 +204,13 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		checkLogIn();
 	}
 
-	/**
-	 * Methods which listens to input coming from the keyboard.
-	 */
+	
+	//Methods which listens to input coming from the keyboard.
 	public void keyTyped(KeyEvent e) {}
-
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			connect();
 		}
 	}
-	
 	public void keyReleased(KeyEvent e) {}
 }

@@ -75,7 +75,7 @@ public class Server implements Runnable {
 	public void logout(ClientHandler ch) {
 		System.out.println(ch.getUsername() + " wants to disconnect.");
 		clientList.remove(ch.getUsername(), ch);
-		ch = null; //needed?
+		ch = null; 
 		sendClientList();
 	}
 
@@ -107,7 +107,7 @@ public class Server implements Runnable {
 		p1.closePendingInviteWindow();
 		gameList.add(new Game(p1, p2, gameMode));
 	}
-	
+
 	/**
 	 * Method which sends the letter which as been guessed to the opponent.
 	 * @param letterGuessed
