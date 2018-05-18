@@ -84,7 +84,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		main.setLayout(null);
 
 		main.setBackground(Color.DARK_GRAY);
-		Font font = new Font("SansSerif", Font.BOLD, 30);
+		Font font = new Font("SansSerif", Font.BOLD, 30); 
 
 		lblOnline.setBounds(100, 0, 200, 100);
 		lblOnline.setFont(font);
