@@ -96,6 +96,7 @@ public class Client extends Thread {
 		} else if (selectedOption == JOptionPane.YES_OPTION) {	
 			try {
 				controller.getViewerGame().setCategory(gameMode);
+				controller.setMPGameMode(gameMode);
 				opponent = sender;
 				oos.writeUTF("accept");
 				oos.writeUTF(sender);	//player1
