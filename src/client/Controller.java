@@ -116,7 +116,7 @@ public class Controller  {
 		return modeChosen;
 	}
 	
-	public void setMultiplaerGameMode(String gameMode) {
+	public void setMultiplayerGameMode(String gameMode) {
 		multiplayerGameMode = gameMode;
 	}
 

@@ -227,7 +227,7 @@ public class Client extends Thread {
 						boolean myTurn = ois.readBoolean();
 						controller.setTurn(myTurn);
 					} else if (str.equals("gameMode")) {
-						controller.setMultiplaerGameMode(ois.readUTF());
+						controller.setMultiplayerGameMode(ois.readUTF());
 					}
 				}
 			} //end while
