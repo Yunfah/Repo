@@ -3,12 +3,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.LinkedList;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -55,8 +53,7 @@ public class ViewerSelectCategory extends JPanel {
 
 	/**
 	 * Method which creates the panel containing all the category buttons
-	 * 
-	 * @return
+	 * @return A JPanel with category-buttons
 	 */
 	private JPanel pnlButtons() {
 		JPanel panel = new JPanel(null);
@@ -95,7 +92,7 @@ public class ViewerSelectCategory extends JPanel {
 	/**
 	 * Method which creates the upper panel, containing the title and 
 	 * back button
-	 * @return
+	 * @return A JPanel With a header and back-button
 	 */
 	private JPanel pnlNorth() {
 		JPanel panel = new JPanel();
@@ -120,7 +117,7 @@ public class ViewerSelectCategory extends JPanel {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+	 * @param listener The continueListener to control the flow from/to this frame
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -128,7 +125,7 @@ public class ViewerSelectCategory extends JPanel {
 
 	/**
 	 * Method which sets the controller to the frame
-	 * @param controller
+	 * @param controller The controller this frame will use
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -144,19 +141,19 @@ public class ViewerSelectCategory extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Random.txt", "RANDOM");
+				controller.setCategoryWord("files/Random.txt", "RANDOM");
 				
 			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Cities.txt", "CITIES");
+				controller.setCategoryWord("files/Cities.txt", "CITIES");
 				
 			} else if (e.getSource() == btnAnimals) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Animals.txt", "ANIMALS");
+				controller.setCategoryWord("files/Animals.txt", "ANIMALS");
 				
 			} else if (e.getSource() == btnBrands) {
 				continueListener.nextPanel();
-				controller.setCategory("files/Brands.txt", "BRANDS");
+				controller.setCategoryWord("files/Brands.txt", "BRANDS");
 				
 			} else if (e.getSource() == btnBack) {
 				continueListener.goBack();
@@ -171,9 +168,7 @@ public class ViewerSelectCategory extends JPanel {
 	 *
 	 */
 	private class BackListener implements MouseListener {
-		
 		public void mouseClicked(MouseEvent e) {}
-	
 		public void mouseEntered(MouseEvent e) {
 			if(e.getSource()==btnBack) {
 				btnBack.setForeground(Color.RED);
@@ -191,7 +186,6 @@ public class ViewerSelectCategory extends JPanel {
 				btnCities.setForeground(Color.RED);
 			}
 		}
-	
 		public void mouseExited(MouseEvent e) {
 			if(e.getSource()==btnBack) {
 				btnBack.setForeground(Color.WHITE);
@@ -211,18 +205,6 @@ public class ViewerSelectCategory extends JPanel {
 		}
 	
 		public void mousePressed(MouseEvent e) {}
-	
 		public void mouseReleased(MouseEvent e) {}
 	}
-
-//	//Test method for this viewer class
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame("Test of category window");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.add(new ViewerSelectCategory());
-//		frame.pack();
-//		frame.setResizable(false);
-//		frame.setLocationRelativeTo(null);
-//		frame.setVisible(true);
-//	}
 }

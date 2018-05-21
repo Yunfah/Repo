@@ -22,8 +22,8 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	private JLabel dsHelp = new JLabel("",  SwingConstants.CENTER);
 	private JButton btnBack = new JButton("<-- BACK");
 	private JButton btnEz = new JButton("EZ");
-	private JButton btnDS = new JButton("DARK SOULS");
-	private JButton btnEE = new JButton();
+	private JButton btnDarkSouls = new JButton("DARK SOULS");
+	private JButton btnXtreme = new JButton();
 	private JButton btnLoadGame = new JButton("Load latest saved game");
 	private Font helpfont = new Font("SansSerif", Font.BOLD, 20);
 	private boolean eeActivated = false;
@@ -42,13 +42,13 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		btnBack.addMouseListener(this);
 		btnBack.addActionListener(this);
 		btnEz.addActionListener(this);
-		btnDS.addActionListener(this);
+		btnDarkSouls.addActionListener(this);
 		btnEz.addMouseListener(this);
-		btnDS.addMouseListener(this);
+		btnDarkSouls.addMouseListener(this);
 		btnLoadGame.addActionListener(this);
 		btnLoadGame.addMouseListener(this);
-		btnEE.addActionListener(this);
-		btnEE.addMouseListener(this);
+		btnXtreme.addActionListener(this);
+		btnXtreme.addMouseListener(this);
 		
 		add(titlePanel());
 		add(btnPanel());
@@ -93,17 +93,17 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		Font btnfont = new Font("SansSerif", Font.BOLD, 30);
 		panel.setBackground(Color.darkGray);
 		btnEz.setBounds(450, 0, 300, 100);
-		btnDS.setBounds(450, 150, 300, 100);
+		btnDarkSouls.setBounds(450, 150, 300, 100);
 		btnEz.setFont(btnfont);
-		btnDS.setFont(btnfont);
+		btnDarkSouls.setFont(btnfont);
 		btnEz.setForeground(Color.GREEN);
-		btnDS.setForeground(Color.RED);
+		btnDarkSouls.setForeground(Color.RED);
 		btnEz.setHorizontalAlignment(JButton.CENTER);
-		btnDS.setHorizontalAlignment(JButton.CENTER);
-		btnDS.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnDarkSouls.setHorizontalAlignment(JButton.CENTER);
+		btnDarkSouls.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btnEz.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
-		btnDS.setBackground(Color.white);
-		btnDS.setOpaque(true);
+		btnDarkSouls.setBackground(Color.white);
+		btnDarkSouls.setOpaque(true);
 		btnEz.setBackground(Color.white);
 		btnEz.setOpaque(true);
 		ezHelp.setBounds(800, 0, 350, 100);
@@ -111,7 +111,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		panel.add(dsHelp);
 		panel.add(ezHelp);
 		panel.add(btnEz);
-		panel.add(btnDS);
+		panel.add(btnDarkSouls);
 		
 		return panel;
 	}
@@ -132,11 +132,11 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		btnLoadGame.setOpaque(false);
 		btnLoadGame.setEnabled(false);
 		btnLoadGame.setToolTipText("Feature Coming soon!");
-		btnEE.setBounds(1050, 100, 150, 100);
-		btnEE.setContentAreaFilled(false);
-		btnEE.setBorderPainted(false);
+		btnXtreme.setBounds(1050, 100, 150, 100);
+		btnXtreme.setContentAreaFilled(false);
+		btnXtreme.setBorderPainted(false);
 		
-		panel.add(btnEE);
+		panel.add(btnXtreme);
 		panel.add(btnLoadGame);
 		
 		return panel;
@@ -148,16 +148,16 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	 */
 	private void activateEE() {
 		Font btnfont = new Font("SansSerif", Font.BOLD, 20);
-		btnEE.setFont(btnfont);
-		btnEE.setText("Xtreme");
-		btnEE.setForeground(randomColor());
+		btnXtreme.setFont(btnfont);
+		btnXtreme.setText("Xtreme");
+		btnXtreme.setForeground(randomColor());
 		eeActivated = true;
 	}
 	
 	/**
 	 * Method which has the purpose to create a random color for (secret)usage in
 	 * this class.
-	 * @returns the color
+	 * @returns A random color
 	 */
 	public Color randomColor() {
 		float r = rand.nextFloat();
@@ -170,7 +170,7 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	
 	/**
 	 * Method which sets the listener(interface) to listen to changes in the frame
-	 * @param listener
+	 * @param listener The continueListener to control the flow from/to this frame
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -178,14 +178,14 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 	
 	/**
 	 * Method which sets the controller
-	 * @param controller
+	 * @param controller The controller to be used by this frame 
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 	
 	/**
-	 * Method which listens to pressed buttons and perform actions related to this.
+	 * Method which listens to pressed buttons and performs actions related to them.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBack) {
@@ -195,15 +195,15 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			continueListener.nextPanel();
 			controller.setDifficulty(Controller.EZ);
 		}
-		if(e.getSource()==btnDS) {
+		if(e.getSource()==btnDarkSouls) {
 			continueListener.nextPanel();
 			controller.setDifficulty(Controller.DARK_SOULS);
 		}
-		if(e.getSource()==btnEE) {
+		if(e.getSource()==btnXtreme) {
 			if(eeActivated==true) {
 				continueListener.skipToGame();
 				controller.setDifficulty(Controller.XTREME);
-				controller.setCategory("files/Xtreme.txt", "XTREME");
+				controller.setCategoryWord("files/Xtreme.txt", "XTREME");
 			}
 			activateEE();
 		}
@@ -212,34 +212,30 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			continueListener.skipToGame();
 		}
 	}
-	
-	/**
-	 * The following methods belongs to MouseListener, and listens to 
-	 * then the mouse interacts with GUI components.
-	 */
+
+	 //The following methods belong to MouseListener, and listens to 
+	 //then the mouse interactions with GUI components.
 	public void mousePressed(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
-
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
 		}
-		if(e.getComponent()==btnEE) {
+		if(e.getComponent()==btnXtreme) {
 			if(eeActivated==true) {
-				btnEE.setForeground(randomColor());
+				btnXtreme.setForeground(randomColor());
 			}
 		}
 		if(e.getComponent()==btnLoadGame) {
 			btnLoadGame.setForeground(Color.RED);
 		}
 		if(e.getComponent()==btnEz) {
-			ezHelp.setText("<html>Easy Difficulty<br/>Player gets 10 lifes");
+			ezHelp.setText("<html>Easy Difficulty<br/>Player gets 10 lives");
 			ezHelp.setFont(helpfont);
 			ezHelp.setForeground(Color.GREEN);
 		}
-		if(e.getComponent()==btnDS) {
-			dsHelp.setText("<html>Hard Difficulty<br/>Player gets 6 lifes");
+		if(e.getComponent()==btnDarkSouls) {
+			dsHelp.setText("<html>Hard Difficulty<br/>Player gets 6 lives");
 			dsHelp.setFont(helpfont);
 			dsHelp.setForeground(Color.RED);
 		}
@@ -249,9 +245,9 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.white);
 		}
-		if(e.getComponent()==btnEE) {
+		if(e.getComponent()==btnXtreme) {
 			if(eeActivated==true) {
-				btnEE.setForeground(randomColor());
+				btnXtreme.setForeground(randomColor());
 			}
 		}
 		if(e.getComponent()==btnLoadGame) {
@@ -260,20 +256,9 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		if(e.getComponent()==btnEz) {
 			ezHelp.setText(null);
 		}
-		if(e.getComponent()==btnDS) {
+		if(e.getComponent()==btnDarkSouls) {
 			dsHelp.setText(null);
 		}
 	}
-
 	public void mouseClicked(MouseEvent e) {}
-	
-//	public static void main(String[] args) {
-//		JFrame frame = new JFrame("Test of difficulty window");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.add(new ViewerSelectDifficulty());
-//		frame.pack();
-//		frame.setResizable(false);
-//		frame.setLocationRelativeTo(null);
-//		frame.setVisible(true);	
-//	}
 }

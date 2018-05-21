@@ -81,7 +81,6 @@ public class ServerUI extends JFrame {
 
 		panel.add(lblImage);
 
-		
 		lblCurrentIP.setBounds(alignementX, 170, 150, 30);
 		lblCurrentIP.setFont(fontLabels);
 		panel.add(lblCurrentIP);
