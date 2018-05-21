@@ -213,7 +213,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			((AbstractButton) e.getSource()).setEnabled(false);
 			int indexOfLetter = letterButtons.indexOf(e.getSource());
 			buttonEnabled[indexOfLetter] = false;
-			//btnSave.setEnabled(true);
+			btnSave.setEnabled(true);
 			controller.checkLetter(e.getActionCommand().charAt(0));	//Should work if the letter is sent as a capital one
 			pop();
 			
@@ -266,12 +266,11 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-//			for (JButton button : letterButtons) {
-//				button.setEnabled(true);
-//				button.setBackground(null);
-//				button.setBorderPainted(true);
-//			}
-			enableAllLetters();
+			for (JButton button : letterButtons) {
+				button.setEnabled(true);
+				button.setBackground(null);
+				button.setBorderPainted(true);
+			}
 			resetNewWord();
 		}
 	}
@@ -452,6 +451,9 @@ public class ViewerGame extends JPanel implements Serializable {
 			btn.setEnabled(true);
 			btn.setBackground(null);
 			btn.setBorderPainted(true);
+		}
+		for (int i = 0; i < buttonEnabled.length; i++) {
+			buttonEnabled[i] = true;
 		}
 	}
 
