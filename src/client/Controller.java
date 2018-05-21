@@ -270,7 +270,7 @@ public class Controller  {
 				if (!viewerOnlineList.getGameMode().equals("co-op"))
 					client.win(true); //win() should tell CH to tell the other client(player) that this client won
 
-				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the game mode chooser.");
+				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the multiplayer menu.");
 				continueListener.goBackMP();
 			}
 		}
