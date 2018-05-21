@@ -241,11 +241,11 @@ public class Controller  {
 			viewerGame.toneButton(s, false);
 		}
 		viewerGame.addLetterGuessed(s);
-		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
+		if (modeChosen == MULTIPLAYER && MPGameMode == "co-op" && myTurn == true) {
 			client.guessLetter(letter, correct);
 			myTurn = false;	
 			viewerGame.setTurn(false);
-		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
+		} else if (modeChosen == MULTIPLAYER && MPGameMode == "co-op" && !myTurn){
 			myTurn = true;
 			viewerGame.setTurn(true);
 		}
