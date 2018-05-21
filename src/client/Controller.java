@@ -35,6 +35,7 @@ public class Controller  {
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
 	public static final int MULTIPLAYER = 2;
+	private String multiplayerGameMode;
 
 	//Represents what handicap (difficulty) the player starts with
 	private int difficulty;
@@ -113,6 +114,10 @@ public class Controller  {
 	 */
 	public int getMode() {
 		return modeChosen;
+	}
+	
+	public void setMultiplaerGameMode(String gameMode) {
+		multiplayerGameMode = gameMode;
 	}
 
 	/**
@@ -240,11 +245,11 @@ public class Controller  {
 			viewerGame.toneButton(s, false);
 		}
 		viewerGame.addLetterGuessed(s);
-		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
+		if (modeChosen == MULTIPLAYER && multiplayerGameMode.equals("co-op") && myTurn == true) {
 			client.guessLetter(letter, correct);
 			myTurn = false;	
 			viewerGame.setTurn(false);
-		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
+		} else if (modeChosen == MULTIPLAYER && multiplayerGameMode.equals("co-op") && !myTurn){
 			myTurn = true;
 			viewerGame.setTurn(true);
 		}
