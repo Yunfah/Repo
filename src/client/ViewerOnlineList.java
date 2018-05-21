@@ -271,6 +271,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
 				selectedPlayer = rb.getText();
+				System.out.println("Vald: " + selectedPlayer);
 			} catch (Exception e1) {
 				e1.printStackTrace(); 	//TODO: test
 			}
