@@ -204,6 +204,7 @@ public class Client extends Thread {
 					} else if (str.equals("reject")) {
 						System.out.println("Invite decline");
 						JOptionPane.showMessageDialog(null, "Invite was declined");
+						controller.getViewerOnlineList().closePendingInviteMessage();
 					} else if (str.equals("wordToGuess")) {	//Sets the word that has to be guessed
 						String word = ois.readUTF();
 						String gameMode = ois.readUTF();
