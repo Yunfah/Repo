@@ -35,7 +35,6 @@ public class Controller  {
 	private int modeChosen;
 	public static final int SINGLE_PLAYER = 1;
 	public static final int MULTIPLAYER = 2;
-	private String MPGameMode;
 
 	//Represents what handicap (difficulty) the player starts with
 	private int difficulty;
@@ -110,7 +109,7 @@ public class Controller  {
 
 	/**
 	 * Returns an integer representation of 
-	 * @return 
+	 * @return
 	 */
 	public int getMode() {
 		return modeChosen;
@@ -241,11 +240,11 @@ public class Controller  {
 			viewerGame.toneButton(s, false);
 		}
 		viewerGame.addLetterGuessed(s);
-		if (modeChosen == MULTIPLAYER && MPGameMode == "co-op" && myTurn == true) {
+		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
 			client.guessLetter(letter, correct);
 			myTurn = false;	
 			viewerGame.setTurn(false);
-		} else if (modeChosen == MULTIPLAYER && MPGameMode == "co-op" && !myTurn){
+		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
 			myTurn = true;
 			viewerGame.setTurn(true);
 		}
@@ -336,11 +335,6 @@ public class Controller  {
 		client.sendInvite(reciever, gamemode);
 	}
 
-	public void setMPGameMode(String gameMode) {
-		this.MPGameMode = gameMode;
-		viewerOnlineList.setGameMode(gameMode);
-	}
-	
 	/**
 	 * Enables or disables this controller's Client's turn.
 	 * @param myTurn Set to true to enable turn, and false to disable it.
