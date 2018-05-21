@@ -185,8 +185,7 @@ public class Controller  {
 			viewerGame.setCategory(gameMode);
 			viewerGame.enableAllLetters();
 			viewerGame.setDifficulty(EZ);
-			continueListener.skipToGame();
-			
+			continueListener.skipToGame();	
 		}
 	}
 
