@@ -192,7 +192,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void setMultiplayerMode(String gameMode) {
 		try {
-			oos.writeUTF("gameMode");
+			oos.writeObject("gameMode");
 			oos.writeUTF(gameMode);
 			oos.flush();
 		}catch(IOException e) {
