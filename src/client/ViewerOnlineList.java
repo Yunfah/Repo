@@ -163,11 +163,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	
 	/**
 	 * Method which updates the panel with the username you have chosen.
-<<<<<<< HEAD
 	 * @param username The username of this client. 
-=======
-	 * @param username The username to be displayed
->>>>>>> 60d0189bc4dfbffd8a7ef70a3f33fdbabcf6699d
 	 */
 	public void setUsername(String username) {
 		lblUsername.setText(username);
@@ -183,11 +179,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-<<<<<<< HEAD
 	 * @param listener The ContinueListener that will control panel switching from this frame.
-=======
-	 * @param listener The listener to be set
->>>>>>> 60d0189bc4dfbffd8a7ef70a3f33fdbabcf6699d
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -198,7 +190,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * and that a response is being awaited.
 	 * @param selectedPlayer The player that was chosen for an invite.
 	 */
-	public void inviteMessage(String selectedPlayer) {
+	public void inviteMessage() {
 		JPanel panel = new JPanel();
 		JLabel lbl = new JLabel("Invite sent to " + selectedPlayer + ". Awaiting response...");
 		panel.add(lbl);
@@ -251,7 +243,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				continueListener.goBackMP();
 
 			} else if (e.getSource() == btnInvite) {
-				inviteMessage(selectedPlayer);
+				inviteMessage();
 				controller.sendInvite(selectedPlayer, gamemode);
 			}
 		}

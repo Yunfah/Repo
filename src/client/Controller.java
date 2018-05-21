@@ -179,7 +179,6 @@ public class Controller  {
 	 * @param word The word that will have to be guessed during this game.
 	 */
 	public void setWordToGuess(String word, String gameMode) {
-//		viewerGame.reset();			//testa om detta behövs?
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
 		if(modeChosen == MULTIPLAYER) {
