@@ -195,6 +195,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		JLabel lbl = new JLabel();
 		lbl.setText("Invite sent to " + selectedPlayer + ". Awaiting response...");
 		panel.add(lbl);
+		panel.repaint();
 		pendingInviteFrame.add(panel);
 		pendingInviteFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		pendingInviteFrame.pack();
