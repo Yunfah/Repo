@@ -187,6 +187,20 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
+	 * Method which sends the chosen gamemode to the client
+	 * @param gameMode The gamemode to set
+	 */
+	public void setMultiplayerMode(String gameMode) {
+		try {
+			oos.writeUTF("gameMode");
+			oos.writeUTF(gameMode);
+			oos.flush();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Listens for requests from this Client and handles them using the server.
 	 */
 	public void run() {
