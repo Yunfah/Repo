@@ -110,7 +110,8 @@ public class Controller  {
 
 	/**
 	 * Returns an integer representation of 
-	 * @return
+	 * @return Integer representation of the chosen game mode (single or 
+	 * multi-player). 1 for single player, 2 for multiplayer.
 	 */
 	public int getMode() {
 		return modeChosen;

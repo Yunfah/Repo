@@ -103,11 +103,11 @@ public class Server implements Runnable {
 	 */
 	public void createGame(String player1, String player2, String gameMode) {
 		ClientHandler p1 = clientList.get(player1);	//sender of invite
-		p1.setMultiplayerMode(gameMode);
 		ClientHandler p2 = clientList.get(player2);	//Accepter of invite
-		p2.setMultiplayerMode(gameMode);
 		p1.closePendingInviteWindow();
 		gameList.add(new Game(p1, p2, gameMode));
+		p1.setMultiplayerMode(gameMode);
+		p2.setMultiplayerMode(gameMode);
 	}
 
 	/**
