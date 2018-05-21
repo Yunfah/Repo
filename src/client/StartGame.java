@@ -8,8 +8,8 @@ import java.net.MalformedURLException;
 import javax.swing.*;
 
 /**
- * This class is responible for starting the application and contains the logic for
- * switching between panels
+ * This class is responsible for starting the application and contains the logic for
+ * switching between the panels
  * @author Yun-Fah Chow, Elina Kock
  *
  */
@@ -45,7 +45,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
-		elevator();
+		//elevator();
 	}
 	
 	/**
@@ -103,7 +103,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * Method used to go to the next panel for singleplayer.
 	 */
-	@Override
 	public void nextPanel() {
 		if (currentCard.equals("cardMode")) {
 			currentCard = "cardDifficulty";
@@ -118,7 +117,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * Skips directly to the game window. 
 	 */
-	@Override
 	public void skipToGame() {
 		currentCard = "cardGame";
 		cardLayout.show(cards, currentCard);
@@ -127,7 +125,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * The go-back function for singleplayer (goes back to the previous panel)
 	 */
-	@Override
 	public void goBack() {
 		if (currentCard.equals("cardGame")) {
 			currentCard = "cardCategory";
@@ -142,7 +139,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * The go-back function for multiplayer (goes back to a previous panel)
 	 */
-	@Override
 	public void goBackMP() { 
 		if (currentCard.equals("cardOnlineList")) {
 			currentCard = "cardMultiplayerMode";
@@ -159,7 +155,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	/**
 	 * The function to go to the next panel in multiplayer 
 	 */
-	@Override
 	public void nextPanelMP() {
 		if (currentCard.equals("cardMode")) {
 			currentCard = "cardUsername"; 
@@ -188,10 +183,6 @@ public class StartGame extends JFrame implements ContinueListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new StartGame(new Controller());
-			}
-		});
+		SwingUtilities.invokeLater(() -> new StartGame(new Controller()));
 	}
 }

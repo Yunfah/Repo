@@ -11,6 +11,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 /**
  * UI class for the server. Displays the ip of the server and
@@ -22,8 +24,10 @@ import javax.swing.*;
 public class ServerUI extends JFrame {
 	private JTextField tfPort = new JTextField();
 	private JLabel lblCurrentIP = new JLabel(getIP());
+	private JLabel lblImage = new JLabel();
 	private JLabel lblCurrentPort = new JLabel("Port: ");
 	private JButton btnConfirm = new JButton("Confirm");
+	private Icon icon;
 	private JPanel panel = new JPanel();
 	private Listener listener = new Listener();
 	
@@ -31,6 +35,7 @@ public class ServerUI extends JFrame {
 	 * Constructor.
 	 */
 	public ServerUI() {
+		super("Server");
 		setSize(new Dimension(400, 300));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -46,7 +51,8 @@ public class ServerUI extends JFrame {
 	private JPanel setupUI() {
 		panel.setPreferredSize(new Dimension(500,250));
 		panel.setLayout(null);
-		panel.setBackground(Color.GREEN);
+		panel.setBackground(Color.white);
+		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
 		Font fontLabels = new Font("SansSerif", Font.BOLD, 18);
 		
 		int alignementX = 50;
@@ -55,8 +61,11 @@ public class ServerUI extends JFrame {
 		lblListenPort.setBounds(alignementX, 20, 150, 30);
 		lblListenPort.setFont(fontLabels);
 		panel.add(lblListenPort);
+
+		icon = new ImageIcon("files/gears.gif");
 		
 		tfPort.setBounds(alignementX, 55, 150, 30);
+		tfPort.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
 		panel.add(tfPort);
 		
 		lblCurrentPort.setBounds(alignementX, 85, 100, 30);
@@ -67,12 +76,19 @@ public class ServerUI extends JFrame {
 		lblServer.setBounds(alignementX, 130, 100, 30);
 		lblServer.setFont(fontLabels);
 		panel.add(lblServer);
-		
+
+		lblImage.setBounds(345, 5, 150, 240);
+
+		panel.add(lblImage);
+
 		lblCurrentIP.setBounds(alignementX, 170, 150, 30);
 		lblCurrentIP.setFont(fontLabels);
 		panel.add(lblCurrentIP);
 		
 		btnConfirm.setBounds(alignementX+200, 55, 100, 30);
+		btnConfirm.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
+		btnConfirm.setBackground(Color.red);
+		btnConfirm.setOpaque(true);
 		btnConfirm.addActionListener(listener);
 		panel.add(btnConfirm);
 		
@@ -114,9 +130,11 @@ public class ServerUI extends JFrame {
 				lblCurrentPort.setText(lblCurrentPort.getText() + port);
 				
 				JLabel lbl = new JLabel("Server running...");
-				lbl.setBounds(200, 100, 250, 50);
-				lbl.setFont(new Font("SansSerif", Font.BOLD, 30));
+				lbl.setBounds(180, 100, 250, 50);
+				lbl.setFont(new Font("SansSerif", Font.BOLD, 25));
 				lbl.setForeground(Color.RED);
+				lblImage.setIcon(icon);
+				btnConfirm.setBackground(Color.green);
 				panel.add(lbl);
 				panel.repaint();
 				

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -46,6 +47,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		btnBack.setFont(btnFont);
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setContentAreaFilled(false);
+		btnBack.setOpaque(false);
 		btnBack.setBorderPainted(false);
 		btnBack.addActionListener(this);
 
@@ -71,6 +73,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 		btnNext.setBounds(825, 350, 200, 75);
 		btnNext.setFont(btnFont);
+		btnNext.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btnNext.setEnabled(false);
 		btnNext.addActionListener(this);
 		
@@ -95,7 +98,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+	 * @param listener The listener to be set
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
@@ -103,7 +106,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	/**
 	 * Method which sets the controller to the frame
-	 * @param controller
+	 * @param controller The controller to be set
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -117,8 +120,11 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		String username = txtField.getText();
 		if(username.length() > 0) {
 			btnNext.setEnabled(true);
+			btnNext.setBackground(Color.white);
+			btnNext.setOpaque(true);
 		} else {
 			btnNext.setEnabled(false);
+			btnNext.setOpaque(false);
 		}
 	}
 
@@ -162,15 +168,11 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			continueListener.goBackMP();
 		}
 	}
-
-	/**
-	 * Methods which listens to the input made by hovering over buttons and by stop 
-	 * doing so.
-	 */
+	
+	// Methods which listen to the input made by hovering over buttons and by stop 
+	//doing so.
 	public void mousePressed(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
-
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -179,7 +181,6 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setForeground(Color.RED);
 		}
 	}
-
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -188,12 +189,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setForeground(Color.BLACK);
 		}
 	}
-
 	public void mouseClicked(MouseEvent e) {}
-
-	/**
-	 * Methods which listens to input coming from the textfield
-	 */
+	
+	//Methods which listens to input coming from the textfield 
 	public void insertUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
@@ -206,16 +204,13 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		checkLogIn();
 	}
 
-	/**
-	 * Methods which listens to input coming from the keyboard.
-	 */
+	
+	//Methods which listens to input coming from the keyboard.
 	public void keyTyped(KeyEvent e) {}
-
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			connect();
 		}
 	}
-	
 	public void keyReleased(KeyEvent e) {}
 }

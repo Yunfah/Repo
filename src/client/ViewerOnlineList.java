@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 /**
  * Panel that holds a list of all players currently connected to the server.
@@ -21,7 +22,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private Controller controller;
 	private JLabel lblHeader = new JLabel("Choose a player     ", SwingConstants.CENTER);
 	private JLabel lblOnline = new JLabel("Online");
-	private JLabel lblSettings = new JLabel("");	//Should show what gamemode the player has chosen.
+	private JLabel lblGameMode = new JLabel("");
 	private JLabel lblUsername = new JLabel("");
 	private JButton btnBack = new JButton("<-- Back");
 	private JButton btnInvite = new JButton("Invite");
@@ -83,16 +84,15 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		main.setLayout(null);
 
 		main.setBackground(Color.DARK_GRAY);
-		Font font = new Font("SansSerif", Font.BOLD, 30);
+		Font font = new Font("SansSerif", Font.BOLD, 30); 
 
 		lblOnline.setBounds(100, 0, 200, 100);
 		lblOnline.setFont(font);
 		lblOnline.setForeground(Color.GREEN);
 
 		pnlOnlineList = new JPanel();
-		pnlOnlineList.setLayout(new GridLayout(100,1)); // Change from gridLayout to something better?? + change the values to onlinelist.size to
-		// make it only do as many as needed.
-
+		pnlOnlineList.setLayout(new GridLayout(100,1)); 
+		
 		JScrollPane scroll = new JScrollPane(pnlOnlineList);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -101,17 +101,18 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		btnInvite.setEnabled(false);
 		btnInvite.setBounds(750, 400, 200, 100);
 		btnInvite.setFont(font);
+		btnInvite.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
-		lblSettings.setBounds(600, 20, 500, 50);
-		lblSettings.setFont(font);
-		lblSettings.setForeground(Color.WHITE);
+		lblGameMode.setBounds(600, 20, 500, 50);
+		lblGameMode.setFont(font);
+		lblGameMode.setForeground(Color.WHITE);
 		
 		lblUsername.setBounds(600, 70, 400, 50);
 		lblUsername.setFont(font);
 		lblUsername.setForeground(Color.CYAN);
 
 		main.add(lblOnline);
-		main.add(lblSettings);
+		main.add(lblGameMode);
 		main.add(lblUsername);
 		main.add(btnInvite);
 		main.add(scroll);
@@ -141,7 +142,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * @param text The name of the chosen game mode.
 	 */
 	public void setGameModeText(String text) {
-		lblSettings.setText("You chose: " + text );
+		lblGameMode.setText("You chose: " + text );
 	}
 
 	/**
@@ -162,7 +163,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	
 	/**
 	 * Method which updates the panel with the username you have chosen.
-	 * @param username
+<<<<<<< HEAD
+	 * @param username The username of this client. 
+=======
+	 * @param username The username to be displayed
+>>>>>>> 60d0189bc4dfbffd8a7ef70a3f33fdbabcf6699d
 	 */
 	public void setUsername(String username) {
 		lblUsername.setText(username);
@@ -178,10 +183,14 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 
 	/**
 	 * Method which sets the listener(interface) to the frame
-	 * @param listener
+<<<<<<< HEAD
+	 * @param listener The ContinueListener that will control panel switching from this frame.
+=======
+	 * @param listener The listener to be set
+>>>>>>> 60d0189bc4dfbffd8a7ef70a3f33fdbabcf6699d
 	 */
 	public void setListener(ContinueListener listener) {
-		continueListener = listener; 
+		continueListener = listener;
 	}
 
 	/**
@@ -207,15 +216,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
-	/**
-	 * Methods which listens to the input made by hovering over buttons and
-	 * by stop doing so.
-	 * @param e
-	 */
+
+//	  Methods which listen to the input made by hovering over buttons and
+//	  by stopping to do so.
 	public void mousePressed(MouseEvent e) {}
-	
 	public void mouseReleased(MouseEvent e) {}
-	
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -224,7 +229,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.RED);
 		}
 	}
-	
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -233,7 +237,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.BLACK);
 		}
 	}
-	
 	public void mouseClicked(MouseEvent e) {}
 
 	/**
@@ -243,7 +246,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 *
 	 */
 	private class ButtonListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnBack) {
 				continueListener.goBackMP();
@@ -264,10 +266,14 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private class RadioButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			btnInvite.setEnabled(true);
+			btnInvite.setBackground(Color.white);
+			btnInvite.setOpaque(true);
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
 				selectedPlayer = rb.getText();
-			} catch (Exception e1) {}
+			} catch (Exception e1) {
+				e1.printStackTrace(); 	//TODO: test
+			}
 		}
 	}
 }

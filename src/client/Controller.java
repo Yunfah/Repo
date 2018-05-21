@@ -116,144 +116,31 @@ public class Controller  {
 	}
 
 	/**
-	 * Checks if the given letter exists in the word. If so,
-	 * shows the correctly guessed letter in all dedicated spots
-	 * in the game window. Also checks if the latest guess results in
-	 * a win, and switches the turns in multiplayer co-op mode.
-	 * @param letter The letter guessed.
+	 * Sets the difficulty of this game.
+	 * @param difficulty The difficulty that will be used during this round. 
 	 */
-	public void checkLetter(char letter) {
-		String s = String.valueOf(letter);	//String representation of the char parameter
-		boolean correct = false;
-		if (wordToGuess.contains(s)) {
-			correct = true;
-			viewerGame.toneButton(s, true);
-			for (int i = 0; i < wordToGuess.length(); i++) {
-				if (wordToGuess.charAt(i) == letter) {
-					encodedWord[i] = letter;
-				}
-			}
-		} else {
-			viewerGame.incrementWrongLetterCount();
-			viewerGame.toneButton(s, false);
-		}
-		viewerGame.addLetterGuessed(s);
-		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
-			client.guessLetter(letter, correct);
-			myTurn = false;	
-			viewerGame.setTurn(false);
-		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
-			myTurn = true;
-			viewerGame.setTurn(true);
-		}
-		viewerGame.setWord(encodedWord);
-		checkWin();
-	}
-
-	/**
-	 * Changes the color of the button representing the guessed letter
-	 * to green if the guess was correct and to red if it was incorrect.
-	 * @param guessedLetter The guessed letter.
-	 * @param isCorrect If the guess was correct or not. 
-	 */
-	public void pimpGuessedButton(char guessedLetter, boolean isCorrect) {
-		String value = String.valueOf(guessedLetter);
-		viewerGame.toneButton(value, isCorrect);
-	}
-
-	/**
-	 * Checks if all letters of the word have been guessed. If so,
-	 * sends a victory message the game window and the opponent if 
-	 * in multiplayer mode.  
-	 */
-	private void checkWin() { 
-		int correctLetters = 0;
-		for (int i = 0; i < encodedWord.length; i++) {
-			if (encodedWord[i] != '-')
-				correctLetters++;
-		}
-		if (correctLetters == wordToGuess.length()) {
-			viewerGame.setWin(true);
-			if (modeChosen == MULTIPLAYER) {
-				if (!viewerOnlineList.getGameMode().equals("co-op"))
-					client.win(true); //win() should tell CH to tell the other client(player) that this client won
-				
-				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the game mode chooser.");
-				continueListener.goBackMP();
-			}
+	public void setDifficulty(int difficulty) {
+		if (difficulty == EZ) {
+			this.difficulty = EZ;
+			viewerGame.setDifficulty(EZ);
+		} else if (difficulty == DARK_SOULS) {
+			this.difficulty = DARK_SOULS;
+			viewerGame.setDifficulty(DARK_SOULS);
+		} else if (difficulty == XTREME) {
+			this.difficulty = XTREME; 
+			viewerGame.setDifficulty(XTREME);
+		} else {	//saved game loaded
+			viewerGame.setDifficulty(difficulty);
 		}
 	}
 
 	/**
-	 * Sets the word to as if it has been completely guessed
-	 * and shows it in the game window.
+	 * Returns the chosen difficulty as an int that is the handicap ("wrong guesses") the
+	 * player starts with. 
+	 * @return difficulty Amount of "wrong guesses" the game starts with in this difficulty. 
 	 */
-	public void setWordGuessed() {
-		for (int i = 0; i < wordToGuess.length(); i++) {
-			encodedWord[i] = wordToGuess.charAt(i);
-		}
-		viewerGame.setWord(encodedWord);
-	}
-
-	/**
-	 * Saves the current progress. Only one save file
-	 * may exist at a time.
-	 */
-	public void saveGameProgress() {	//TEST THIS METHOD PLEASE
-		int wrongGuesses = viewerGame.getWrongLetterCount();
-		boolean[] buttonsPressed = viewerGame.getButtonsPressed();
-		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses, buttonsPressed);
-
-		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
-				new FileOutputStream("files/SaveFile.dat")))) {
-
-			System.out.println("Saving " + newSave.toString());
-			oos.writeObject(newSave);
-			oos.flush();
-
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found while saving.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Loads the latest save file and sets up a game from it.
-	 */
-	public void loadSaveFile() {	//TEST THIS METHOD PLEASE
-		//Load savefile and set up a single player game from it.
-		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(
-				new FileInputStream("files/SaveFile.dat")))) {
-
-			WordProgress progress = (WordProgress)ois.readObject();
-			String word = progress.getWordToGuess();
-			char[] encoded = progress.getWordProgress();
-			int mistakes = progress.getWrongLetterCount();		
-
-			setWordToGuess(word, null);
-			setEncodedWord(encoded);
-			setDifficulty(mistakes);
-
-			System.out.println(progress.toString());
-
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found while loading.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Sets the encoded word to the given encoded word. 
-	 * Should be used to change the progress of how much
-	 * has been guessed. 
-	 * @param encodedWord
-	 */
-	public void setEncodedWord(char[] encodedWord) {
-		this.encodedWord = encodedWord;
+	public int getDifficulty() {
+		return difficulty;
 	}
 
 	/**
@@ -261,7 +148,7 @@ public class Controller  {
 	 * @param filename The category-file to read a word from.
 	 * @param category The name of the category.
 	 */
-	public void setCategory(String filename, String category) {
+	public void setCategoryWord(String filename, String category) {
 		Random rand = new Random();
 		listWordsFromCategory.clear();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
@@ -274,6 +161,16 @@ public class Controller  {
 			setWordToGuess(listWordsFromCategory.get(index), null);	
 			viewerGame.setCategory(category);
 		} catch (IOException e ) {}
+	}
+
+	/**
+	 * Resets and replaces the current word with another one from the 
+	 * same category. 
+	 */
+	public void resetCategoryWord() {
+		Random rand = new Random();
+		int index = rand.nextInt(listWordsFromCategory.size());
+		setWordToGuess(listWordsFromCategory.get(index), null);
 	}
 
 	/**
@@ -311,41 +208,93 @@ public class Controller  {
 	}
 
 	/**
-	 * Resets and replaces the current word with another one from the 
-	 * same category. 
+	 * Sets the encoded word to the given encoded word. 
+	 * Should be used to change the progress of how much
+	 * has been guessed. 
+	 * @param encodedWord
 	 */
-	public void resetCategoryWord() {
-		Random rand = new Random();
-		int index = rand.nextInt(listWordsFromCategory.size());
-		setWordToGuess(listWordsFromCategory.get(index), null);
+	public void setEncodedWord(char[] encodedWord) {
+		this.encodedWord = encodedWord;
 	}
 
 	/**
-	 * Returns the chosen difficulty as an int that is the handicap ("wrong guesses") the
-	 * player starts with. 
-	 * @return difficulty Amount of "wrong guesses" the game starts with in this difficulty. 
+	 * Checks if the given letter exists in the word. If so,
+	 * shows the correctly guessed letter in all dedicated spots
+	 * in the game window. Also checks if the latest guess results in
+	 * a win, and switches the turns in multiplayer co-op mode.
+	 * @param letter The letter guessed.
 	 */
-	public int getDifficulty() {
-		return difficulty;
-	}
-
-	/**
-	 * Sets the difficulty of this game.
-	 * @param difficulty The difficulty that will be used during this round. 
-	 */
-	public void setDifficulty(int difficulty) {
-		if (difficulty == EZ) {
-			this.difficulty = EZ;
-			viewerGame.setDifficulty(EZ);
-		} else if (difficulty == DARK_SOULS) {
-			this.difficulty = DARK_SOULS;
-			viewerGame.setDifficulty(DARK_SOULS);
-		} else if (difficulty == XTREME) {
-			this.difficulty = XTREME; 
-			viewerGame.setDifficulty(XTREME);
-		} else {	//saved game loaded
-			viewerGame.setDifficulty(difficulty);
+	public void checkLetter(char letter) {
+		String s = String.valueOf(letter);	//String representation of the char parameter
+		boolean correct = false;
+		if (wordToGuess.contains(s)) {
+			correct = true;
+			viewerGame.toneButton(s, true);
+			for (int i = 0; i < wordToGuess.length(); i++) {
+				if (wordToGuess.charAt(i) == letter) {
+					encodedWord[i] = letter;
+				}
+			}
+		} else {
+			viewerGame.incrementWrongLetterCount();
+			viewerGame.toneButton(s, false);
 		}
+		viewerGame.addLetterGuessed(s);
+		if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && myTurn == true) {
+			client.guessLetter(letter, correct);
+			myTurn = false;	
+			viewerGame.setTurn(false);
+		} else if (modeChosen == MULTIPLAYER && viewerOnlineList.getGameMode() == "co-op" && !myTurn){
+			myTurn = true;
+			viewerGame.setTurn(true);
+		}
+		viewerGame.setWord(encodedWord);
+		checkWin();
+	}
+
+	/**
+	 * Checks if all letters of the word have been guessed. If so,
+	 * sends a victory message the game window and the opponent if 
+	 * in multiplayer mode.  
+	 */
+	private void checkWin() { 
+		int correctLetters = 0;
+		for (int i = 0; i < encodedWord.length; i++) {
+			if (encodedWord[i] != '-')
+				correctLetters++;
+		}
+		if (correctLetters == wordToGuess.length()) {
+			viewerGame.setResult(true);
+			if (modeChosen == MULTIPLAYER) {
+				if (!viewerOnlineList.getGameMode().equals("co-op"))
+					client.win(true); //win() should tell CH to tell the other client(player) that this client won
+
+				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the game mode chooser.");
+				continueListener.goBackMP();
+			}
+		}
+	}
+
+	/**
+	 * Changes the color of the button representing the guessed letter
+	 * to green if the guess was correct and to red if it was incorrect.
+	 * @param guessedLetter The guessed letter.
+	 * @param isCorrect If the guess was correct or not. 
+	 */
+	public void pimpGuessedButton(char guessedLetter, boolean isCorrect) {
+		String value = String.valueOf(guessedLetter);
+		viewerGame.toneButton(value, isCorrect);
+	}
+
+	/**
+	 * Sets the word to as if it has been completely guessed
+	 * and shows it in the game window.
+	 */
+	public void setWordGuessed() {
+		for (int i = 0; i < wordToGuess.length(); i++) {
+			encodedWord[i] = wordToGuess.charAt(i);
+		}
+		viewerGame.setWord(encodedWord);
 	}
 
 	/**
@@ -369,6 +318,14 @@ public class Controller  {
 	}
 
 	/**
+	 * Updates the onlineList with its users.
+	 * @param onlineList The list of all the users online.
+	 */
+	public void updateOnline(ArrayList<String> onlineList) {
+		viewerOnlineList.updateOnlineList(onlineList);
+	}
+
+	/**
 	 * Sends an invitation to another user.
 	 * @param reciever the username of the reciever.
 	 * @param gamemode the name of the current gamemode.
@@ -388,10 +345,53 @@ public class Controller  {
 	}
 
 	/**
-	 * Updates the onlineList with its users.
-	 * @param onlineList The list of all the users online.
+	 * Saves the current progress. Only one save file
+	 * may exist at a time.
 	 */
-	public void updateOnline(ArrayList<String> onlineList) {
-		viewerOnlineList.updateOnlineList(onlineList);
+	public void saveGameProgress() {	//Done?
+		int wrongGuesses = viewerGame.getWrongLetterCount();
+		boolean[] buttonsPressed = viewerGame.getButtonsPressed();
+		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses, buttonsPressed);
+
+		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(
+				new FileOutputStream("files/SaveFile.dat")))) {
+
+			System.out.println("Saving " + newSave.toString());
+			oos.writeObject(newSave);
+			oos.flush();
+
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found while saving.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Loads the latest save file and sets up a game from it.
+	 */
+	public void loadSaveFile() {	//NOT DONE
+		//Load savefile and set up a single player game from it.
+		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(
+				new FileInputStream("files/SaveFile.dat")))) {
+
+			WordProgress progress = (WordProgress)ois.readObject();
+			String word = progress.getWordToGuess();
+			char[] encoded = progress.getWordProgress();
+			int mistakes = progress.getWrongLetterCount();		
+
+			setWordToGuess(word, null);
+			setEncodedWord(encoded);
+			setDifficulty(mistakes);
+
+			System.out.println(progress.toString());
+
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found while loading.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
