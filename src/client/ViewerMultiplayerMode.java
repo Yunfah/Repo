@@ -107,6 +107,7 @@ public class ViewerMultiplayerMode extends JPanel {
 		btn1W1G.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btn1W1G.setBackground(Color.white);
 		btn1W1G.setOpaque(true);
+		btn1W1G.setEnabled(false);
 		btn1v1.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btn1v1.setBackground(Color.white);
 		btn1v1.setOpaque(true);
