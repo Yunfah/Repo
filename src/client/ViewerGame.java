@@ -304,7 +304,6 @@ public class ViewerGame extends JPanel implements Serializable {
 		}
 	}
 	
-	//Används metoden? - ja. Kanske den som fuckar co-op knapparna?
 	/**
 	 * Method which disables the button matching the letter which 
 	 * has been guessed.

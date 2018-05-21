@@ -196,7 +196,7 @@ public class Client extends Thread {
 					controller.checkLetter(guessed);
 				} else {
 					String str = (String) input;
-					if (str.equals("invite")) {
+					if (str.equals("invite")) {	//This client is invited 
 						String sender = ois.readUTF();
 						String gameMode = ois.readUTF();
 						System.out.println("Client " + username + " invited to " + gameMode + " by " + sender);
