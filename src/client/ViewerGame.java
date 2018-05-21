@@ -414,7 +414,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 	
 	/**
-	 * Method responible for playing the pop sound played when a player
+	 * Method responsible for playing the pop sound played when a player
 	 * guesses a letter.
 	 */
 	public void pop() {
