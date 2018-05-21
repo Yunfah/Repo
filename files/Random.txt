@@ -57,7 +57,7 @@ anteater
 octopus
 black widow
 panther
-tyrannosaurus rex
+t rex
 alligator
 peacock
 cock
@@ -178,16 +178,12 @@ maybelline
 clinique
 nyx
 isadora
-elisabeth arden
 esacada
 dkny
 koenigsegg
 audi
-yves saint laurent
 paco rabanne
 lumine
-daniel wellington
-peak performance
 burberry
 mulberry
 cos
