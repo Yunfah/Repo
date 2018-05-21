@@ -220,7 +220,7 @@ public class ViewerGame extends JPanel implements Serializable {
 				disableAllLetters();
 				if (controller.getMode() == Controller.MULTIPLAYER) {
 					controller.getClient().win(false);
-					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the online list.");
+					JOptionPane.showMessageDialog(null, "You have been hanged! Better luck next time.\nYou will be sent back to the multiplayer menu.");
 					continueListener.goBackMP();
 				}	
 				btnSave.setEnabled(false);
