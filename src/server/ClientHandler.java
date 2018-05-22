@@ -118,6 +118,7 @@ public class ClientHandler implements Runnable {
 			try {
 				oos.writeObject("opponentLeft");
 				oos.flush();
+				inGame = false;
 			} catch (IOException e) {
 			}
 		}
