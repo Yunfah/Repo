@@ -35,7 +35,6 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	private Font subtitleFont = new Font("SansSerif", Font.BOLD, 25);
 	private ContinueListener continueListener;
 	private Controller controller;
-	private boolean connection = false;
 
 	/**
 	 * Constructor, creating the panel
@@ -129,10 +128,6 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		}
 	}
 
-	public void setConnection() {
-		connection = true;
-	}
-
 	/**
 	 * Method which has the purpose to show the log in dialogs as well as to control that the input
 	 * meets the requirements to log in. Shall give the controller the information it needs to connect
@@ -159,11 +154,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		} while (port < 1024 || port > 65536);
 
 		controller.connect(txtField.getText(), ip, port);
-		if (connection == true) {
-			continueListener.nextPanelMP();
-		} else {
-			JOptionPane.showMessageDialog(null, "Error while connecting to server");
-		}
+		continueListener.nextPanelMP();
 	}
 
 	/**

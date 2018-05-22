@@ -347,7 +347,6 @@ public class Controller  {
 	 * @param onlineList The list of all the users online.
 	 */
 	public void updateOnline(ArrayList<String> onlineList) {
-		getViewerUsername().setConnection();
 		viewerOnlineList.updateOnlineList(onlineList);
 	}
 
