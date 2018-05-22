@@ -181,11 +181,11 @@ public class Client extends Thread {
 	}
 
 	/**
-	 * Communicates with a server through a ClientHandler. 
+	 * Communicates with a server through a ClientHandler.
 	 */
-	public void run() {
+	public void serverComm() {
 		try {
-			oos.writeObject(username); 
+			oos.writeObject(username);
 			while(true) {
 				System.out.println("Client " + username + " waiting to read object...");
 				Object input = ois.readObject();
@@ -199,7 +199,7 @@ public class Client extends Thread {
 					controller.checkLetter(guessed);
 				} else {
 					String str = (String) input;
-					if (str.equals("invite")) {	//This client is invited 
+					if (str.equals("invite")) {	//This client is invited
 						String sender = ois.readUTF();
 						String gameMode = ois.readUTF();
 						System.out.println("Client " + username + " invited to " + gameMode + " by " + sender);
@@ -225,7 +225,7 @@ public class Client extends Thread {
 						if (opponentWin) {
 							controller.getViewerGame().disableAllLetters();
 						}
-					    controller.getListener().goBackMP();
+						controller.getListener().goBackMP();
 					} else if (str.equals("turn")) {
 						boolean myTurn = ois.readBoolean();
 						controller.setTurn(myTurn);
@@ -239,6 +239,11 @@ public class Client extends Thread {
 		} catch (IOException e) {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} 
+		}
+	}
+
+
+	public void run() {
+		serverComm();
 	}
 }
