@@ -32,7 +32,9 @@ public class Client extends Thread {
 			socket = new Socket(ip, port);
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			ois = new ObjectInputStream(socket.getInputStream());
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			System.out.println("Det gick fel");
+		}
 		start();
 	}
 
@@ -191,7 +193,7 @@ public class Client extends Thread {
 				Object input = ois.readObject();
 				if (input instanceof ArrayList) {	//If the input is an arraylist it can only be a list of online clients
 					ArrayList<String> list = (ArrayList<String>)input;
-					controller.updateOnline(list);	//
+					controller.updateOnline(list);
 				}else if (input instanceof Character) {
 					char guessed = (Character)input;
 					boolean isCorrect = ois.readBoolean();

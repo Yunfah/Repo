@@ -35,6 +35,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	private Font subtitleFont = new Font("SansSerif", Font.BOLD, 25);
 	private ContinueListener continueListener;
 	private Controller controller;
+	private boolean connected = false;
 
 	/**
 	 * Constructor, creating the panel
@@ -152,8 +153,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			} catch (NullPointerException e3) {}
 		} while (port < 1024 || port > 65536);
 
-		continueListener.nextPanelMP();
 		controller.connect(txtField.getText(), ip, port);
+		while(connection != true)
+		continueListener.nextPanelMP();
 	}
 
 	/**
