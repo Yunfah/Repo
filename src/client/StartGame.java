@@ -90,6 +90,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		
 		controller.setViewerGame(game);
 		controller.setViewerOnlineList(onlineList);
+		controller.setViewerUsername(username);
 
 		cards.add(cardMode, "cardMode");
 		cards.add(cardDifficulty, "cardDifficulty");
