@@ -25,7 +25,6 @@ public class Controller  {
 	private Client client;
 	private ViewerGame viewerGame;
 	private ViewerOnlineList viewerOnlineList;
-	private ViewerUsername viewerUsername;
 	private ArrayList<String> listWordsFromCategory = new ArrayList<String>();
 	private ContinueListener continueListener;
 
@@ -75,24 +74,6 @@ public class Controller  {
 	 */
 	public ViewerOnlineList getViewerOnlineList() {
 		return viewerOnlineList;
-	}
-
-	/**
-	 * Sets the ViewerOnlineList (panel for a list of online clients) that this
-	 * controller uses.
-	 * @param viewer The ViewerOnlineList to be handled by this controller.
-	 */
-	public void setViewerUsername(ViewerUsername viewer) {
-		viewerUsername = viewer;
-	}
-
-
-	/**
-	 * Returns the ViewerUsername that this controller uses.
-	 * @return The ViewerUsername that this controller uses.
-	 */
-	public ViewerUsername getViewerUsername() {
-		return viewerUsername;
 	}
 
 	/**

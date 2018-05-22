@@ -114,10 +114,13 @@ public class ClientHandler implements Runnable {
 	 * Messages the client that the opponent has left
 	 */
 	public void sendLeaveMessage() {
-		try {
-			oos.writeObject("opponentLeft");
-			oos.flush();
-		}catch (IOException e) {}
+		if(inGame) {
+			try {
+				oos.writeObject("opponentLeft");
+				oos.flush();
+			} catch (IOException e) {
+			}
+		}
 	}
 	
 	/**
