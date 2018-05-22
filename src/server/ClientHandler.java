@@ -205,6 +205,7 @@ public class ClientHandler implements Runnable {
 	 * @param gameMode The gamemode to set
 	 */
 	public void setMultiplayerMode(String gameMode) {
+		inGame = true;
 		try {
 			oos.writeObject("gameMode");
 			oos.writeUTF(gameMode);
