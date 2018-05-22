@@ -118,7 +118,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	 */
 	public void checkLogIn() {
 		String username = txtField.getText();
-		if(username.length() > 0) {
+		if(username.trim().length() > 0) {
 			btnNext.setEnabled(true);
 			btnNext.setBackground(Color.white);
 			btnNext.setOpaque(true);
