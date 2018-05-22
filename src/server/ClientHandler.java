@@ -109,6 +109,16 @@ public class ClientHandler implements Runnable {
 		}
 		//Possible error-handling for later
 	}
+
+	/**
+	 * Messages the client that the opponent has left
+	 */
+	public void sendLeaveMessage() {
+		try {
+			oos.writeObject("opponentLeft");
+			oos.flush();
+		}catch (IOException e) {}
+	}
 	
 	/**
 	 * Method which sends the current players turn to the client. Used in the co-op
@@ -255,6 +265,7 @@ public class ClientHandler implements Runnable {
 				break;
 				case "leaveGame" : {
 					inGame = false;
+					server.messageOpponent(ois.readUTF());
 				}
 				break;
 				case "setWord" : {

@@ -163,6 +163,7 @@ public class Client extends Thread {
 	public void leaveGame() {
 		try {
 			oos.writeUTF("leaveGame");
+			oos.writeUTF(opponent);
 			oos.flush();
 		} catch (IOException e) {} 
 	}
@@ -230,6 +231,8 @@ public class Client extends Thread {
 						controller.setTurn(myTurn);
 					} else if (str.equals("gameMode")) {
 						controller.setMultiplayerGameMode(ois.readUTF());
+					} else if( str.equals("opponentLeft")) {
+						controller.opponentLeft();
 					}
 				}
 			} //end while

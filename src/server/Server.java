@@ -133,6 +133,15 @@ public class Server implements Runnable {
 	}
 
 	/**
+	 * Method which notifies the opponent that the client clienthandler calling this method has left the game
+	 * @param opponent The opponent who will be notifyied
+	 */
+	public void messageOpponent(String opponent) {
+		ClientHandler opponentToMessage = clientList.get(opponent);
+		opponentToMessage.sendLeaveMessage();
+	}
+
+	/**
 	 * Listens to connections from clients and creates ClientHandlers for them.
 	 */
 	@Override

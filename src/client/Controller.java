@@ -351,6 +351,13 @@ public class Controller  {
 	}
 
 	/**
+	 * Method which calls a method in ViewerGame, showing a message
+	 */
+	public void opponentLeft() {
+		viewerGame.opponentLeftMessage();
+	}
+
+	/**
 	 * Saves the current progress. Only one save file
 	 * may exist at a time.
 	 */

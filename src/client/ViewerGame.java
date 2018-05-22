@@ -451,6 +451,14 @@ public class ViewerGame extends JPanel implements Serializable {
 	}
 
 	/**
+	 * Method which shows a message in multiplayer when a opponent leaves the game
+	 */
+	public void opponentLeftMessage() {
+		JOptionPane.showMessageDialog(null, "Your opponent left, you will be sent back to the multiplayer menu");
+		continueListener.goBackMP();
+	}
+
+	/**
 	 * Method which colors the buttons when guessed. Color depends on
 	 * if the guess was correct or not.
 	 * @param button The buttons to be painted. 
