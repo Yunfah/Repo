@@ -156,7 +156,6 @@ public class Controller  {
 	 */
 	public void setCategoryWord(String filename, String category) {
 		Random rand = new Random();
-		viewerGame.reset();
 		listWordsFromCategory.clear();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"))) {
 			String word = br.readLine();
