@@ -286,6 +286,7 @@ public class ViewerGame extends JPanel implements Serializable {
 			win.dispose();
 			if(controller.getMode()==Controller.MULTIPLAYER) {
 				controller.getClient().logout();
+				controller.getClient().leaveGame();
 			}
 		}
 	}
