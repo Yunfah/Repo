@@ -106,6 +106,7 @@ public class ViewerMultiplayerMode extends JPanel {
 		btnCoOp.setOpaque(true);
 		btn1W1G.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btn1W1G.setEnabled(false);
+		btn1W1G.setToolTipText("Gamemode coming soon!");
 		btn1v1.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 		btn1v1.setBackground(Color.white);
 		btn1v1.setOpaque(true);
