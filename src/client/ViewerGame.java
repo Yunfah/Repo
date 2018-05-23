@@ -288,6 +288,7 @@ public class ViewerGame extends JPanel implements Serializable {
 				controller.getClient().logout();
 				controller.getClient().leaveGame();
 			}
+			System.exit(0);
 		}
 	}
 	
