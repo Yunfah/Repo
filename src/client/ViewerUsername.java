@@ -6,13 +6,7 @@ import java.awt.Font;
 import java.awt.event.*;
 import java.io.IOException;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -137,7 +131,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 		String ip = "0";
 		do {
 			try {
-				ip = JOptionPane.showInputDialog("What ip do you want to connect to?");
+				ip = JOptionPane.showInputDialog("What IP do you want to connect to?");
 			} catch (NullPointerException e1) {
 				ip = "0";
 			}
@@ -157,7 +151,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			controller.connect(txtField.getText(), ip, port);
 			continueListener.nextPanelMP();
 		}catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error while connecting to server. Please try again");
+			JOptionPane.showMessageDialog(null, "Error while connecting to server.\nPlease check that the correct IP and port has been entered and try again!");
 		}
 	}
 
