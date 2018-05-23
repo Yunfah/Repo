@@ -99,6 +99,10 @@ public class ServerUI extends JFrame implements KeyListener {
 		return panel;
 	}
 
+	/**
+	 * Method which starts the server. If the chosen port is already in use, an error message
+	 * will be displayed.
+	 */
 	public void startServer() {
 		int port = (Integer.parseInt(tfPort.getText()));
 
@@ -139,9 +143,12 @@ public class ServerUI extends JFrame implements KeyListener {
 		return "Failed to resolve IP";
 	}
 
-	public void keyTyped(KeyEvent e) {
-
-	}
+	/**
+	 * The following methods listens to the input made by the user using
+	 * the enter key.
+	 * @param e
+	 */
+	public void keyTyped(KeyEvent e) {}
 
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()== 10 || e.getKeyCode()== KeyEvent.VK_ENTER) {
@@ -153,13 +160,11 @@ public class ServerUI extends JFrame implements KeyListener {
 
 	/**
 	 * Listens on the button for confirming the chosen port.
-	 * Shows an error message if the port is already in use.
-	 *
+	 * Calls the startServer method when the button is pressed.
 	 */
 	private class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			startServer();
-
 		}	
 	}
 }
