@@ -68,6 +68,7 @@ public class ServerUI extends JFrame implements KeyListener {
 		
 		tfPort.setBounds(alignementX, 55, 150, 30);
 		tfPort.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
+		tfPort.addKeyListener(this);
 		panel.add(tfPort);
 		
 		lblCurrentPort.setBounds(alignementX, 85, 100, 30);
@@ -93,8 +94,8 @@ public class ServerUI extends JFrame implements KeyListener {
 		btnConfirm.setOpaque(true);
 		btnConfirm.addActionListener(listener);
 		panel.add(btnConfirm);
-		setFocusable(true);
 		addKeyListener(this);
+		setFocusable(true);
 		
 		return panel;
 	}
@@ -151,7 +152,7 @@ public class ServerUI extends JFrame implements KeyListener {
 	public void keyTyped(KeyEvent e) {}
 
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode()== 10 || e.getKeyCode()== KeyEvent.VK_ENTER) {
+		if (e.getKeyCode( )== 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			startServer();
 		}
 	}
