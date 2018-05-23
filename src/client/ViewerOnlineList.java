@@ -127,8 +127,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void updateOnlineList(ArrayList<String> onlineList) {
 		pnlOnlineList.removeAll();
 		pnlOnlineList.repaint();
-		for (int i = 0; i < onlineList.size(); i++) { // Change value to onlinelist.size so that it can only show as many as needed
-			JRadioButton btn = new JRadioButton(onlineList.get(i));// Change so that the server can read how many buttons it needs.
+		for (int i = 0; i < onlineList.size(); i++) {
+			JRadioButton btn = new JRadioButton(onlineList.get(i));
 			btn.setSize(new Dimension(400, 60));
 			bg.add(btn);
 			rbList.add(btn);
@@ -209,12 +209,17 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void closePendingInviteMessage() {
 		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
-	
 
-//	  Methods which listen to the input made by hovering over buttons and
-//	  by stopping to do so.
+
+	/**
+	 * Methods which listens to the mouse hovering over the buttons, changing
+	 * the color then it happens.
+	 * @param e
+	 */
 	public void mousePressed(MouseEvent e) {}
+
 	public void mouseReleased(MouseEvent e) {}
+
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -223,6 +228,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.RED);
 		}
 	}
+
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -231,6 +237,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.BLACK);
 		}
 	}
+
 	public void mouseClicked(MouseEvent e) {}
 
 	/**
@@ -267,7 +274,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				selectedPlayer = rb.getText();
 				System.out.println("Vald: " + selectedPlayer);
 			} catch (Exception e1) {
-				e1.printStackTrace(); 	//TODO: test
+				e1.printStackTrace();
 			}
 		}
 	}
