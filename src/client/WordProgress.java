@@ -30,7 +30,7 @@ public class WordProgress implements Serializable {
 
 	/**
 	 * Returns the word being guessed
-	 * @return
+	 * @return wordToGuess
 	 */
 	public String getWordToGuess() {
 		return wordToGuess;
@@ -46,7 +46,7 @@ public class WordProgress implements Serializable {
 
 	/**
 	 * Returns an array of the letters being guessed correctly
-	 * @return
+	 * @return wordProgress
 	 */
 	public char[] getWordProgress() {
 		return wordProgress;
@@ -54,7 +54,7 @@ public class WordProgress implements Serializable {
 	
 	/**
 	 * Returns an array of all the letter buttons being pressed during the game
-	 * @return
+	 * @return lettersGuessed
 	 */
 	public boolean[] getLettersGuessed() {
 		return lettersGuessed;
@@ -70,7 +70,7 @@ public class WordProgress implements Serializable {
 
 	/**
 	 * Returns the count of wrong guesses made during the game.
-	 * @return
+	 * @return wrongLetterCount
 	 */
 	public int getWrongLetterCount() {
 		return wrongLetterCount;

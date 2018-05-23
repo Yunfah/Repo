@@ -21,7 +21,6 @@ import javax.swing.event.DocumentListener;
  * This class contains the frame used when selecting a username and logging in
  * to the server
  * @author Jakob Kennerberg
- *
  */
 public class ViewerUsername extends JPanel implements ActionListener, MouseListener, DocumentListener, KeyListener {
 	private JLabel title = new JLabel("Please enter a username");
@@ -174,11 +173,16 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			continueListener.goBackMP();
 		}
 	}
-	
-	// Methods which listen to the input made by hovering over buttons and by stop 
-	//doing so.
+
+	/**
+	 * Methods which listens to when the mouse hover above a button, changing the
+	 * color when it does.
+	 * @param e
+	 */
 	public void mousePressed(MouseEvent e) {}
+
 	public void mouseReleased(MouseEvent e) {}
+
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -187,6 +191,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setForeground(Color.RED);
 		}
 	}
+
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -195,9 +200,12 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			btnNext.setForeground(Color.BLACK);
 		}
 	}
+
 	public void mouseClicked(MouseEvent e) {}
-	
-	//Methods which listen to input coming from the textfield 
+
+	/**
+	 * Methods which listen to input coming from the username textfield.
+	 */
 	public void insertUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
@@ -209,13 +217,17 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	public void changedUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
-	
-	//Methods which listen to input coming from the keyboard.
+
+	/**
+	 * Methods which listen to input coming from the keyboard.
+	 */
 	public void keyTyped(KeyEvent e) {}
+
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			connect();
 		}
 	}
+
 	public void keyReleased(KeyEvent e) {}
 }

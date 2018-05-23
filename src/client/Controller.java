@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
  * Handles the logic on the client-side for playing a game of hangman. 
  * Handles guesses, wins, losses, and chosen game modes.
  * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow
- *
  */
 public class Controller  {
 	private Client client;
@@ -37,7 +36,6 @@ public class Controller  {
 	public static final int MULTIPLAYER = 2;
 	private String multiplayerGameMode;
 
-	//Represents what handicap (difficulty) the player starts with
 	private int difficulty;
 	public static final int EZ = 0;
 	public static final int DARK_SOULS = 4;
@@ -217,7 +215,7 @@ public class Controller  {
 	 * Sets the encoded word to the given encoded word. 
 	 * Should be used to change the progress of how much
 	 * has been guessed. 
-	 * @param encodedWord
+	 * @param encodedWord The encoded word to be set
 	 */
 	public void setEncodedWord(char[] encodedWord) {
 		this.encodedWord = encodedWord;
@@ -362,7 +360,7 @@ public class Controller  {
 	 * Saves the current progress. Only one save file
 	 * may exist at a time.
 	 */
-	public void saveGameProgress() {	//Done?
+	public void saveGameProgress() {   //NOT DONE
 		int wrongGuesses = viewerGame.getWrongLetterCount();
 		boolean[] buttonsPressed = viewerGame.getButtonsPressed();
 		WordProgress newSave = new WordProgress(wordToGuess, encodedWord, wrongGuesses, buttonsPressed);
@@ -385,7 +383,6 @@ public class Controller  {
 	 * Loads the latest save file and sets up a game from it.
 	 */
 	public void loadSaveFile() {	//NOT DONE
-		//Load savefile and set up a single player game from it.
 		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(
 				new FileInputStream("files/SaveFile.dat")))) {
 

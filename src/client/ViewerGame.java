@@ -17,7 +17,6 @@ import javax.swing.border.BevelBorder;
  * This class represents the in game panel, showed when actually playing the game. Contains a drawing panel as 
  * an inner class.
  * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow, Yamma Sarwari
- *
  */
 public class ViewerGame extends JPanel implements Serializable {
 	private List<JButton> letterButtons = new ArrayList<>();
@@ -38,7 +37,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	/**
 	 * Constructor, creating the buttons which is used when the player is guessing a letter as well 
 	 * as the option buttons placed in the bottom part of the frame
-	 * 
 	 */
 	public ViewerGame() {
 		setPreferredSize(new Dimension(1200, 800));
@@ -50,8 +48,8 @@ public class ViewerGame extends JPanel implements Serializable {
 			String text = String.valueOf(c);
 			JButton button = new JButton(text);
 			button.addActionListener(buttonListener);
-			letterButtons.add(button); // add JButton to List<JButton>
-			letterButtonPanel.add(button);  // and add to GridLayout-using JPanel
+			letterButtons.add(button);
+			letterButtonPanel.add(button);
 			buttonEnabled[counter] = true;
 			counter++;
 		}	
@@ -184,7 +182,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * Inner class which listens to the input made by clicking the back and save 
 	 * buttons and performs actions accordingly 
 	 * @author Elina Kock
-	 *
 	 */
 	private class BackSaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -206,17 +203,16 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * Inner class which listens to the input made by clicking the letter buttons, and
 	 * performs actions accordingly.
 	 * @author Yamma Sarwari, Elina Kock
-	 *
 	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			((AbstractButton) e.getSource()).setEnabled(false);
 			int indexOfLetter = letterButtons.indexOf(e.getSource());
 			buttonEnabled[indexOfLetter] = false;
-			controller.checkLetter(e.getActionCommand().charAt(0));	//Should work if the letter is sent as a capital one
+			controller.checkLetter(e.getActionCommand().charAt(0));
 			pop();
 			
-			if (drawingPanel.getWrongLetterCount() == 10) {		//if player has been hung
+			if (drawingPanel.getWrongLetterCount() == 10) {	  //if player has been hung
 				disableAllLetters();
 				if (controller.getMode() == Controller.MULTIPLAYER) {
 					controller.getClient().win(false);
@@ -234,7 +230,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	/**
 	 * Inner class which listens to the reset button, and calls the reset method if clicked
 	 * @author Yamma Sarwari, Elina Kock
-	 *
 	 */
 	private class ResetAction extends AbstractAction {
 		public ResetAction(String name, int mnemonic) {
@@ -251,7 +246,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * Inner class which listens to the new word button, and calls the resetNewWord method when 
 	 * clicked.
 	 * @author Yamma Sarwari
-	 *
 	 */
 	private class NewWordAction extends AbstractAction {
 		public NewWordAction(String name, int mnemonic) {
@@ -272,7 +266,6 @@ public class ViewerGame extends JPanel implements Serializable {
 	/**
 	 * Inner class which listens to the exit button, and shuts down the system if clicked.
 	 * @author Jakob Kennerberg
-	 *
 	 */
 	private class ExitAction extends AbstractAction {
 		public ExitAction(String name, int mnemonic) {
@@ -489,13 +482,12 @@ public class ViewerGame extends JPanel implements Serializable {
  * Inner class which is responible for the majority of the frame. The main purpose for this class
  * is to draw the hangman.
  * @author Elina Kock, Yamma Sarwari
- *
  */
 class DrawingPanel extends JPanel {
 	private int wrongLetterCount = -1;
 	private char[] word;
 	private String category;
-	private boolean win = false;	//Represents if the word has been completely guessed or not
+	private boolean win = false;
 	private boolean winBool;
 	private boolean loseBool;
 	private AudioClip winSound;
@@ -679,8 +671,8 @@ class DrawingPanel extends JPanel {
 
 	/**
 	 * Draws the correctly guessed letters (the progress) of the word.
-	 * @param g
-	 * @param word
+	 * @param g Graphics object to draw with.
+	 * @param word The amount of letters in the word.
 	 */
 	public void drawWord(Graphics g, char[] word) {
 		g.setFont(new Font("SansSerif", Font.BOLD, 30));
@@ -715,7 +707,7 @@ class DrawingPanel extends JPanel {
 
 	/**
 	 * Returns the word to guess
-	 * @return
+	 * @return word An array containing the chars of the word
 	 */
 	public char[] getWord() {
 		return word;
@@ -743,11 +735,11 @@ class DrawingPanel extends JPanel {
 		}
 	}
 
-	//Inte säker på om det är det som wrongLetterCount gör
+
 	/**
 	 * Method returning the amount of wrong guesses available during
 	 * the game
-	 * @return
+	 * @return wrongLetterCount The amount of wrong guesses
 	 */
 	public int getWrongLetterCount() {
 		return wrongLetterCount;

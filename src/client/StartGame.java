@@ -11,7 +11,6 @@ import javax.swing.*;
  * This class is responsible for starting the application and contains the logic for
  * switching between the panels
  * @author Yun-Fah Chow, Elina Kock
- *
  */
 public class StartGame extends JFrame implements ContinueListener {
 	CardLayout cardLayout = new CardLayout();
@@ -45,7 +44,7 @@ public class StartGame extends JFrame implements ContinueListener {
 		getContentPane().add(cards);
 		setVisible(true);
 		this.pack();
-		//elevator();
+		elevator();
 	}
 	
 	/**
@@ -138,6 +137,8 @@ public class StartGame extends JFrame implements ContinueListener {
 	
 	/**
 	 * The go-back function for multiplayer (goes back to a previous panel)
+	 * When going back from the MultiplayerMode panel it is switched to the
+	 * main menu panel.
 	 */
 	public void goBackMP() { 
 		if (currentCard.equals("cardOnlineList")) {
@@ -145,7 +146,7 @@ public class StartGame extends JFrame implements ContinueListener {
 	 	} else if (currentCard.equals("cardMultiplayerMode")) {
 			currentCard = "cardMode";
 		} else if (currentCard.equals("cardUsername")) { 
-			currentCard = "cardMode"; // it said cardMode because you go from username screen to single/multiplayer-choice screen
+			currentCard = "cardMode";
 		} else if (currentCard.equals("cardGame")) {
 			currentCard = "cardMultiplayerMode";
 		}

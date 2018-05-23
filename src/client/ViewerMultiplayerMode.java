@@ -7,8 +7,6 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
-
-
 /**
  * This class contains the panel which lets a player choose which gamemode they want to play in multiplayer 
  * @author Elina Kock, Jakob Kennerberg, Yun-Fah Chow
@@ -191,7 +189,8 @@ public class ViewerMultiplayerMode extends JPanel {
 	 * @author Yun-Fah Chow
 	 */
 	private class BackListener implements MouseListener {
-		public void mouseClicked(MouseEvent e) {}		
+		public void mouseClicked(MouseEvent e) {}
+
 		public void mouseEntered(MouseEvent e) {
 			if(e.getSource()==btnBack) {
 				btnBack.setForeground(Color.RED);
@@ -207,7 +206,8 @@ public class ViewerMultiplayerMode extends JPanel {
 				btn1v1.setForeground(Color.RED);
 				lblImage.setIcon(iconG2);
 			}
-		}		
+		}
+
 		public void mouseExited(MouseEvent e) {
 			if(e.getSource()==btnBack) {
 				btnBack.setForeground(Color.white);
@@ -223,8 +223,10 @@ public class ViewerMultiplayerMode extends JPanel {
 				btn1v1.setForeground(Color.black);
 				lblImage.setIcon(null);
 			}
-		}		
+		}
+
 		public void mousePressed(MouseEvent e) {}
+
 		public void mouseReleased(MouseEvent e) {}
 	}
 }

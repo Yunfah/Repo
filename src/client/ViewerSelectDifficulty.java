@@ -213,10 +213,14 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 		}
 	}
 
-	 //The following methods belong to MouseListener, and listens to 
-	 //then the mouse interactions with GUI components.
+	/**
+	 * The following methods belong to MouseListener, and listens to
+	 * then the mouse interactions with GUI components.
+	 */
 	public void mousePressed(MouseEvent e) {}
+
 	public void mouseReleased(MouseEvent e) {}
+
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -260,5 +264,6 @@ public class ViewerSelectDifficulty extends JPanel implements ActionListener, Mo
 			dsHelp.setText(null);
 		}
 	}
+
 	public void mouseClicked(MouseEvent e) {}
 }

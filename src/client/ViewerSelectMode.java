@@ -11,7 +11,6 @@ import javax.swing.border.BevelBorder;
 /**
  * This class contains the first frame to show when starting the application
  * @author Jakob Kennerberg
- *
  */
 public class ViewerSelectMode extends JPanel {
 	private JLabel lblHeader = new JLabel("Hangman", SwingConstants.CENTER);
@@ -124,15 +123,16 @@ public class ViewerSelectMode extends JPanel {
 			}
 		}
 
+		/**
+		 * Methods which handles the actions of the buttons when hovered above and when
+		 * stop doing so.
+		 */
 		public void mouseClicked(MouseEvent e) {}
 
 		public void mousePressed(MouseEvent e) {}
 
 		public void mouseReleased(MouseEvent e) {}
-		
-		/**
-		 * Method which handles the actions of the buttons when hovered above
-		 */
+
 		public void mouseEntered(MouseEvent e) {
 			if(e.getSource()==btnSingle) {
 				btnSingle.setForeground(Color.RED);
@@ -144,10 +144,7 @@ public class ViewerSelectMode extends JPanel {
 				lblMulti.setIcon(icon);
 			}
 		}
-		
-		/**
-		 * Method which handles the actions of the button when not hovered above anymore
-		 */
+
 		public void mouseExited(MouseEvent e) {
 			if(e.getSource()==btnSingle) {
 				btnSingle.setForeground(Color.BLACK);

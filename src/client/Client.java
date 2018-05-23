@@ -154,8 +154,11 @@ public class Client extends Thread {
 			oos.writeUTF(opponent);
 			oos.flush();
 		} catch (IOException e) {}
-	} 
-	
+	}
+
+	/**
+	 * Tells the server that the round of co-op is done.
+	 */
 	public void finishCoOp() {
 		try {
 			oos.writeUTF("finishCoOp");
@@ -197,7 +200,7 @@ public class Client extends Thread {
 			while(true) {
 				System.out.println("Client " + username + " waiting to read object...");
 				Object input = ois.readObject();
-				if (input instanceof ArrayList) {	//If the input is an arraylist it can only be a list of online clients
+				if (input instanceof ArrayList) {
 					ArrayList<String> list = (ArrayList<String>)input;
 					controller.updateOnline(list);
 				}else if (input instanceof Character) {
@@ -243,13 +246,16 @@ public class Client extends Thread {
 						controller.opponentLeft();
 					}
 				}
-			} //end while
+			}
 		} catch (IOException e) {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * The run method, starting the serverComm method
+	 */
 	public void run() {
 		serverComm();
 	}

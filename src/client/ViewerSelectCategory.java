@@ -15,11 +15,10 @@ import javax.swing.border.BevelBorder;
  * This class contains the frame for selecting the category of word
  * being guessed in the game
  * @author Jakob Kennerberg
- *
  */
 public class ViewerSelectCategory extends JPanel {
 	private JButton btnRandom = new JButton("Random");
-	private JButton btnCities = new JButton("Cities"); //change button names when categories have been identified.
+	private JButton btnCities = new JButton("Cities");
 	private JButton btnAnimals = new JButton("Animals");
 	private JButton btnBrands = new JButton("Brands");
 	private JButton btnBack = new JButton("<-- BACK");
@@ -169,6 +168,7 @@ public class ViewerSelectCategory extends JPanel {
 	 */
 	private class BackListener implements MouseListener {
 		public void mouseClicked(MouseEvent e) {}
+
 		public void mouseEntered(MouseEvent e) {
 			if(e.getSource()==btnBack) {
 				btnBack.setForeground(Color.RED);
@@ -186,6 +186,7 @@ public class ViewerSelectCategory extends JPanel {
 				btnCities.setForeground(Color.RED);
 			}
 		}
+
 		public void mouseExited(MouseEvent e) {
 			if(e.getSource()==btnBack) {
 				btnBack.setForeground(Color.WHITE);
@@ -205,6 +206,7 @@ public class ViewerSelectCategory extends JPanel {
 		}
 	
 		public void mousePressed(MouseEvent e) {}
+
 		public void mouseReleased(MouseEvent e) {}
 	}
 }

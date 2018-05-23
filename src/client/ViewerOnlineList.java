@@ -253,7 +253,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	 * An inner class that listens to the input made by clicking on the buttons
 	 * and performs actions accordingly
 	 * @author Jakob Kennerberg
-	 *
 	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
