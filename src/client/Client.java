@@ -244,7 +244,6 @@ public class Client extends Thread {
 		}
 	}
 
-
 	public void run() {
 		serverComm();
 	}
