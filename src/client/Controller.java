@@ -272,10 +272,11 @@ public class Controller  {
 		if (correctLetters == wordToGuess.length()) {
 			viewerGame.setResult(true);
 			if (modeChosen == MULTIPLAYER) {
-				if (!viewerOnlineList.getGameMode().equals("co-op"))
+				if (!viewerOnlineList.getGameMode().equals("co-op")) {
 					client.win(true); //win() should tell CH to tell the other client(player) that this client won
-
+				}
 				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the multiplayer menu.");
+				client.leaveGame();
 				continueListener.goBackMP();
 			}
 		}
