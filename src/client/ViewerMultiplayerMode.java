@@ -120,7 +120,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	
 	/**
 	 * Method which sets the controller to the frame.
-	 * @param controller
+	 * @param controller The controller to handle logic from this frame
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
@@ -128,7 +128,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	
 	/**
 	 * Method which lets the class update the upcoming panel with information.
-	 * @param viewer
+	 * @param viewer The online list panel that needs to show the chosen game mode
 	 */
 	public void setViewerOnlineList(ViewerOnlineList viewer) {
 		this.viewerOnlineList = viewer;
@@ -136,7 +136,7 @@ public class ViewerMultiplayerMode extends JPanel {
 	
 	/**
 	 * Method which sets the listener(interface) to the frame.
-	 * @param listener
+	 * @param listener The continueListener to handle the flow of panels from this one
 	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;

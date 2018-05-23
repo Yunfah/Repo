@@ -144,7 +144,7 @@ public class ClientHandler implements Runnable {
 	 * @param message A message saying whether the opponent has succeeded or failed.
 	 * @param victory True if the opponent won, false if they lost 
 	 */
-	public void receiveVictoryMessage(String message, boolean victory) {	//NOT DONE
+	public void receiveVictoryMessage(String message, boolean victory) {
 		System.out.println(message);
 		try { 
 			oos.writeObject("victoryMessage");
@@ -173,8 +173,7 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
-	 * Method which sends information to the client about closing down
-	 * the window shown when sending an invite.
+	 * Method which tells this client to close its "invite pending" window.
 	 */
 	public void closePendingInviteWindow() {
 		try {
@@ -186,9 +185,9 @@ public class ClientHandler implements Runnable {
 	}
 	
 	/**
-	 * Method which sends the letter guessed as well as if it is correct to the client. 
-	 * @param letterGuessed
-	 * @param isCorrect
+	 * Method which sends the letter guessed and if it is correct to the client. 
+	 * @param letterGuessed The letter guessed
+	 * @param isCorrect True if the guess was correct, false if it was incorrect.
 	 */
 	public void receiveGuess(char letterGuessed, boolean isCorrect) {
 		try {
@@ -230,7 +229,7 @@ public class ClientHandler implements Runnable {
 					String receiver = ois.readUTF();
 					String gameMode = ois.readUTF();
 					System.out.println("Requesting server to send invite to " + receiver);
-					server.sendInvite(sender, receiver, gameMode); //<- servern hittar CH med usernamet och anropar dens receiveInvite().
+					server.sendInvite(sender, receiver, gameMode); 
 				}
 				break;
 				case "logout" : {

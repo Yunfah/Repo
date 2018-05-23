@@ -114,7 +114,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 
 	/**
 	 * Method which has the purpose to control if the given username
-	 * meets the requirements to log in
+	 * meets the requirements to log in.
 	 */
 	public void checkLogIn() {
 		String username = txtField.getText();
@@ -129,9 +129,9 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	}
 
 	/**
-	 * Method which has the purpose to show the log in dialogs as well as to control that the input
-	 * meets the requirements to log in. Shall give the controller the information it needs to connect
-	 * to the server
+	 * Method which prompts the user to enter an ip and a port to connect to.
+	 * Sends this information to the controller which connects this client to
+	 * the server on the entered ip and port.
 	 */
 	public void connect() {
 		String ip = "0";
@@ -192,7 +192,7 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	}
 	public void mouseClicked(MouseEvent e) {}
 	
-	//Methods which listens to input coming from the textfield 
+	//Methods which listen to input coming from the textfield 
 	public void insertUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
@@ -204,9 +204,8 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 	public void changedUpdate(DocumentEvent e) {
 		checkLogIn();
 	}
-
 	
-	//Methods which listens to input coming from the keyboard.
+	//Methods which listen to input coming from the keyboard.
 	public void keyTyped(KeyEvent e) {}
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 10 || e.getKeyCode() == KeyEvent.VK_ENTER) {
