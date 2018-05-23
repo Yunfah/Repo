@@ -100,6 +100,7 @@ public class ClientHandler implements Runnable {
 	
 	/**
 	 * Prompts this client to choose a custom word for the opponent to guess.
+	 * Method used in the one writes, one guesses gamemode.
 	 */
 	public void setCustomWord() {
 		try {
@@ -108,7 +109,6 @@ public class ClientHandler implements Runnable {
 		} catch (IOException e) {
 			
 		}
-		//Possible error-handling for later
 	}
 
 	/**
@@ -248,7 +248,7 @@ public class ClientHandler implements Runnable {
 					server.createGame(p1, p2, gameMode); //accept invite that was just received.
 				}
 				break;
-				case "decline" : { //this client declines an invite.
+				case "decline" : {
 					String sender = ois.readUTF();
 					server.declineInviteFrom(sender);
 				}
@@ -278,11 +278,11 @@ public class ClientHandler implements Runnable {
 					inGame = false;
 					System.out.println(username + " is ingame: " + inGame);
 				}
+				break;
 				case "setWord" : {
 					//TODO: set custom word for write-guess
 				}
-				} //end switch		
-				System.out.println("End of switch in CH");	
+				}
 			} catch (Exception e) {
 				if (e instanceof SocketException || e instanceof EOFException) {
 					server.logout(this);
@@ -293,7 +293,6 @@ public class ClientHandler implements Runnable {
 					break;
 				}
 			}
-		} //end while
-		System.out.println("End of CH while loop");
+		}
 	}
 }

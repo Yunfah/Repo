@@ -81,15 +81,17 @@ public class Server implements Runnable {
 
 	/**
 	 * Sends a list of all currently online clients to every 
-	 * connected client. 
+	 * connected client. The first loop creates a list of the usernames of
+	 * the connected clients while the second loop sends it to all connected
+	 * clients.
 	 */
 	private void sendClientList() {
 		ArrayList<String> usernameList = new ArrayList<String>();
-		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {	//Creates list with the usernames of connected clients.
+		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {
 			usernameList.add(entry.getValue().getUsername());
 		}
 
-		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {	//Sends the username list to all connected clients. 
+		for (Entry<String, ClientHandler> entry : clientList.entrySet()) {
 			entry.getValue().sendClientList(usernameList);
 		}
 	}
@@ -98,12 +100,12 @@ public class Server implements Runnable {
 	 * Creates a game of hangman in the given game mode, and with the given
 	 * players (clients).
 	 * @param player1 One of the players. The player that sent the invite.
-	 * @param player2 The other player. The player that received the invite.
+	 * @param player2 The other player. The player that received and accepted the invite.
 	 * @param gameMode The game mode that this game will use the rules of. 
 	 */
 	public void createGame(String player1, String player2, String gameMode) {
-		ClientHandler p1 = clientList.get(player1);	//sender of invite
-		ClientHandler p2 = clientList.get(player2);	//Accepter of invite
+		ClientHandler p1 = clientList.get(player1);
+		ClientHandler p2 = clientList.get(player2);
 		p1.closePendingInviteWindow();
 		gameList.add(new Game(p1, p2, gameMode));
 		p1.setMultiplayerMode(gameMode);
@@ -134,7 +136,7 @@ public class Server implements Runnable {
 
 	/**
 	 * Method which notifies the opponent that the client clienthandler calling this method has left the game
-	 * @param opponent The opponent who will be notifyied
+	 * @param opponent The opponent who will be notified
 	 */
 	public void messageOpponent(String opponent) {
 		ClientHandler opponentToMessage = clientList.get(opponent);
@@ -144,7 +146,6 @@ public class Server implements Runnable {
 	/**
 	 * Listens to connections from clients and creates ClientHandlers for them.
 	 */
-	@Override
 	public void run() {
 		System.out.println("Server is running on port " + port + "...");
 		while (true) {
