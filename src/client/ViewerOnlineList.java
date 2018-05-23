@@ -33,7 +33,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	private RadioButtonListener rbtnListener = new RadioButtonListener();
 	private String selectedPlayer;
 	private String gamemode;
-	JFrame pendingInviteFrame = new JFrame();
+	private JFrame pendingInviteFrame = new JFrame();
+	private JLabel lbl = new JLabel();
 
 	/**
 	 * Constructor.
@@ -117,6 +118,8 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 		main.add(btnInvite);
 		main.add(scroll);
 
+		initializeInviteMessage();
+
 		return main;
 	} 
 
@@ -134,6 +137,9 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			rbList.add(btn);
 			btn.addActionListener(rbtnListener);
 			pnlOnlineList.add(btn);
+			if(btn.getText().equals(controller.getClient().getUsername())) {
+				btn.setEnabled(false);
+			}
 		}
 	}
 
@@ -188,16 +194,21 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	/**
 	 * Shows a dialog confirming that an invite has been sent to selectedPlayer
 	 * and that a response is being awaited.
-	 * @param selectedPlayer The player that was chosen for an invite.
 	 */
-	public void inviteMessage() {
+	public void initializeInviteMessage() {
 		JPanel panel = new JPanel();
-		JLabel lbl = new JLabel();
-		lbl.setText("Invite sent to " + selectedPlayer + ". Awaiting response...");
 		panel.add(lbl);
-		panel.repaint();
 		pendingInviteFrame.add(panel);
 		pendingInviteFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		pendingInviteFrame.pack();
+	}
+
+	/**
+	 * Method which sets the text in the frame and makes it visible
+	 * @param txt The text to set
+	 */
+	public void setInviteMessage(String txt) {
+		lbl.setText(txt);
 		pendingInviteFrame.pack();
 		pendingInviteFrame.setVisible(true);
 		pendingInviteFrame.setLocationRelativeTo(null);
@@ -209,11 +220,15 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void closePendingInviteMessage() {
 		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
-	
-	//Methods which listen to the mouse hovering over the buttons, changing
-	//the color then it happens.
+
+	/**
+	 * Methods which listen to the mouse hovering over the buttons, changing
+	 * the color then it happens.
+	 */
 	public void mousePressed(MouseEvent e) {}
+
 	public void mouseReleased(MouseEvent e) {}
+
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -222,6 +237,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.RED);
 		}
 	}
+
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -230,6 +246,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.BLACK);
 		}
 	}
+
 	public void mouseClicked(MouseEvent e) {}
 
 	/**
@@ -244,7 +261,7 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 				continueListener.goBackMP();
 
 			} else if (e.getSource() == btnInvite) {
-				inviteMessage();
+				setInviteMessage("Invite sent to " + selectedPlayer + ". Awaiting response...");
 				controller.sendInvite(selectedPlayer, gamemode);
 			}
 		}
@@ -264,7 +281,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			try {
 				JRadioButton rb = (JRadioButton)e.getSource();
 				selectedPlayer = rb.getText();
-				System.out.println("Vald: " + selectedPlayer);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
