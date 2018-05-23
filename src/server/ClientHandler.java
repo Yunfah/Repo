@@ -274,6 +274,9 @@ public class ClientHandler implements Runnable {
 					server.messageOpponent(ois.readUTF());
 				}
 				break;
+				case "finishCoOp" : {
+					inGame = false;
+				}
 				case "setWord" : {
 					//TODO: set custom word for write-guess
 				}

@@ -159,6 +159,15 @@ public class Client extends Thread {
 		} catch (IOException e) {}
 	} 
 	
+	public void finishCoOp() {
+		try {
+			oos.writeUTF("finishCoOp");
+			oos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Requests the server to disconnect this client.
 	 */
