@@ -17,6 +17,7 @@ public class ClientHandler implements Runnable {
 	private ObjectOutputStream oos;
 	private String username;
 	private Server server;
+	private String gameMode;
 	private boolean inGame = false;
 
 	/**
@@ -206,6 +207,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void setMultiplayerMode(String gameMode) {
 		inGame = true;
+		this.gameMode = gameMode;
 		try {
 			oos.writeObject("gameMode");
 			oos.writeUTF(gameMode);
@@ -234,7 +236,7 @@ public class ClientHandler implements Runnable {
 				}
 				break;
 				case "logout" : {
-					server.logout(this); 
+					server.logout(this);
 				}
 				break;
 				case "accept" : {	//this client accepts an invite
