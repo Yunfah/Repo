@@ -147,6 +147,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void receiveVictoryMessage(String message, boolean victory) {
 		System.out.println(message);
+		inGame = false;
 		try { 
 			oos.writeObject("victoryMessage");
 			oos.writeUTF(message);
@@ -154,7 +155,6 @@ public class ClientHandler implements Runnable {
 			oos.flush();
 		} catch (IOException e) {
 		}
-		inGame = false;
 	}
 
 	/**
