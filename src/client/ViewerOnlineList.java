@@ -209,17 +209,11 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 	public void closePendingInviteMessage() {
 		pendingInviteFrame.dispatchEvent(new WindowEvent(pendingInviteFrame, WindowEvent.WINDOW_CLOSING));
 	}
-
-
-	/**
-	 * Methods which listens to the mouse hovering over the buttons, changing
-	 * the color then it happens.
-	 * @param e
-	 */
+	
+	//Methods which listen to the mouse hovering over the buttons, changing
+	//the color then it happens.
 	public void mousePressed(MouseEvent e) {}
-
 	public void mouseReleased(MouseEvent e) {}
-
 	public void mouseEntered(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.RED);
@@ -228,7 +222,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.RED);
 		}
 	}
-
 	public void mouseExited(MouseEvent e) {
 		if(e.getComponent()==btnBack) {
 			btnBack.setForeground(Color.WHITE);
@@ -237,7 +230,6 @@ public class ViewerOnlineList extends JPanel implements MouseListener {
 			btnInvite.setForeground(Color.BLACK);
 		}
 	}
-
 	public void mouseClicked(MouseEvent e) {}
 
 	/**
