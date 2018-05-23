@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -21,7 +23,7 @@ import javax.swing.border.Border;
  * @author Elina Kock
  *
  */
-public class ServerUI extends JFrame {
+public class ServerUI extends JFrame implements KeyListener {
 	private JTextField tfPort = new JTextField();
 	private JLabel lblCurrentIP = new JLabel(getIP());
 	private JLabel lblImage = new JLabel();
@@ -91,8 +93,35 @@ public class ServerUI extends JFrame {
 		btnConfirm.setOpaque(true);
 		btnConfirm.addActionListener(listener);
 		panel.add(btnConfirm);
+		setFocusable(true);
+		addKeyListener(this);
 		
 		return panel;
+	}
+
+	public void startServer() {
+		int port = (Integer.parseInt(tfPort.getText()));
+
+		//Check if port is available
+		try (Socket portTest = new Socket("localhost", port)) {    //port unavailable
+			tfPort.setText("");
+			System.out.println(portTest);
+			JOptionPane.showMessageDialog(null, "Port unavailable");
+		} catch (IOException e1) {                                    //Port is available
+			tfPort.setEnabled(false);
+			lblCurrentPort.setText(lblCurrentPort.getText() + port);
+
+			JLabel lbl = new JLabel("Server running...");
+			lbl.setBounds(180, 100, 250, 50);
+			lbl.setFont(new Font("SansSerif", Font.BOLD, 25));
+			lbl.setForeground(Color.RED);
+			lblImage.setIcon(icon);
+			btnConfirm.setBackground(Color.green);
+			panel.add(lbl);
+			panel.repaint();
+
+			Server server = new Server(port);
+		}
 	}
 	
 	/**
@@ -109,7 +138,19 @@ public class ServerUI extends JFrame {
 		}
 		return "Failed to resolve IP";
 	}
-	
+
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()== 10 || e.getKeyCode()== KeyEvent.VK_ENTER) {
+			startServer();
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {}
+
 	/**
 	 * Listens on the button for confirming the chosen port.
 	 * Shows an error message if the port is already in use.
@@ -117,29 +158,8 @@ public class ServerUI extends JFrame {
 	 */
 	private class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-			int port = (Integer.parseInt(tfPort.getText()));
-			
-			//Check if port is available
-			try (Socket portTest = new Socket( "localhost", port)) {	//port unavailable
-				tfPort.setText("");
-				System.out.println(portTest);
-				JOptionPane.showMessageDialog(null, "Port unavailable");
-			} catch (IOException e1) {									//Port is available
-				tfPort.setEnabled(false);
-				lblCurrentPort.setText(lblCurrentPort.getText() + port);
-				
-				JLabel lbl = new JLabel("Server running...");
-				lbl.setBounds(180, 100, 250, 50);
-				lbl.setFont(new Font("SansSerif", Font.BOLD, 25));
-				lbl.setForeground(Color.RED);
-				lblImage.setIcon(icon);
-				btnConfirm.setBackground(Color.green);
-				panel.add(lbl);
-				panel.repaint();
-				
-				Server server = new Server(port);
-			}	
+			startServer();
+
 		}	
 	}
 }
