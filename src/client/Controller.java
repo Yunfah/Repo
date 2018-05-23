@@ -310,7 +310,7 @@ public class Controller  {
 	 * @param ip the ip they connect to.
 	 * @param port the port they connect to.
 	 */
-	public void connect(String username, String ip, int port) {
+	public void connect(String username, String ip, int port) throws IOException {
 		client = new Client(username, ip, port);
 		client.setController(this);
 		viewerOnlineList.setUsername("Your name: " + username);

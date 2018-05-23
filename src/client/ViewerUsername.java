@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.*;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -153,8 +154,12 @@ public class ViewerUsername extends JPanel implements ActionListener, MouseListe
 			}
 		} while (port < 1024 || port > 65536);
 
-		controller.connect(txtField.getText(), ip, port);
-		continueListener.nextPanelMP();
+		try {
+			controller.connect(txtField.getText(), ip, port);
+			continueListener.nextPanelMP();
+		}catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error while connecting to server. Please try again");
+		}
 	}
 
 	/**

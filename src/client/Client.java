@@ -26,15 +26,12 @@ public class Client extends Thread {
 	 * @param ip The ip address of the server that the client connects to.
 	 * @param port The port that the server listens on.
 	 */
-	public Client(String username, String ip, int port) {
+	public Client(String username, String ip, int port) throws IOException {
 		this.username = username;
-		try {
-			socket = new Socket(ip, port);
-			oos = new ObjectOutputStream(socket.getOutputStream());
-			ois = new ObjectInputStream(socket.getInputStream());
-		} catch (IOException e) {
-			System.out.println("Det gick fel");
-		}
+		socket = new Socket(ip, port);
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		ois = new ObjectInputStream(socket.getInputStream());
+
 		start();
 	}
 
