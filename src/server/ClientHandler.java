@@ -276,6 +276,7 @@ public class ClientHandler implements Runnable {
 				break;
 				case "finishCoOp" : {
 					inGame = false;
+					System.out.println(username + " is ingame: " + inGame);
 				}
 				case "setWord" : {
 					//TODO: set custom word for write-guess
