@@ -21,19 +21,20 @@ public class Game {
 	 * @param gameMode The gamemode of this game of hangman.
 	 */
 	public Game(ClientHandler player1, ClientHandler player2, String gameMode) {
-		System.out.println("Going to create game. In Game instance...");
 		if (gameMode.equals("write-guess")) { 
 			player1.setCustomWord();	
 		} else {
 			setRandomWord();
 		}
+
+		System.out.println("Sending " + word + " to clients.");
+		player1.setWordToGuess(word, gameMode);
+		player2.setWordToGuess(word, gameMode);
+
 		if (gameMode.equals("co-op")) {
 			player1.setTurn(true);
 			player2.setTurn(false);
 		}
-		System.out.println("Sending " + word + " to clients.");
-		player1.setWordToGuess(word, gameMode);
-		player2.setWordToGuess(word, gameMode);
 	}
 
 	/**
