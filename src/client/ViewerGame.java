@@ -454,6 +454,7 @@ public class ViewerGame extends JPanel implements Serializable {
 	 * Method which shows a message in multiplayer when a opponent leaves the game
 	 */
 	public void opponentLeftMessage() {
+		drawingPanel.lose();
 		JOptionPane.showMessageDialog(null, "Your opponent left, you will be sent back to the multiplayer menu");
 		continueListener.goBackMP();
 	}
@@ -788,7 +789,6 @@ class DrawingPanel extends JPanel {
 	 * Method responsible for playing a losing sound when a game is lost.
 	 */
 	public void lose() {
-		this.wrongLetterCount++;
 		if (!loseBool) {
 			try {
 				File file = new File("files/lose.wav");
@@ -800,5 +800,6 @@ class DrawingPanel extends JPanel {
 		} else {
 			loseSound.play();
 		}
+		this.wrongLetterCount++;
 	}
 }

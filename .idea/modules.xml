@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Repo Hangman.iml" filepath="$PROJECT_DIR$/Repo Hangman.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Repo.iml" filepath="$PROJECT_DIR$/Repo.iml" />
     </modules>
   </component>
 </project>
