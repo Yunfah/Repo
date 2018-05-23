@@ -276,7 +276,7 @@ public class Controller  {
 					client.win(true); //win() should tell CH to tell the other client(player) that this client won
 				}
 				JOptionPane.showMessageDialog(null, "Congratulations, you won! You will be sent back \nto the multiplayer menu.");
-				client.leaveGame();
+				client.finishCoOp();
 				continueListener.goBackMP();
 			}
 		}
