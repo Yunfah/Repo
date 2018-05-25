@@ -185,9 +185,9 @@ public class Controller  {
 	public void setWordToGuess(String word, String gameMode) {
 		wordToGuess = word.toUpperCase();
 		setEncodedWordFromString(wordToGuess);
+		viewerGame.enableAllLetters();
 		if(modeChosen == MULTIPLAYER) {
 			viewerGame.setCategory(gameMode);
-			viewerGame.enableAllLetters();
 			viewerGame.setDifficulty(EZ);
 			continueListener.skipToGame();	
 		}
