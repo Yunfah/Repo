@@ -3,63 +3,96 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.LinkedList;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
+/**
+ * This class contains the frame for selecting the category of word
+ * being guessed in the game
+ * @author Jakob Kennerberg
+ */
 public class ViewerSelectCategory extends JPanel {
 	private JButton btnRandom = new JButton("Random");
-	private JButton btnCategory1 = new JButton("Cat. 1"); //change button names when categories have been identified.
-	private JButton btnCategory2 = new JButton("Cat. 2");
-	private JButton btnCategory3 = new JButton("Cat. 3");
+	private JButton btnCities = new JButton("Cities");
+	private JButton btnAnimals = new JButton("Animals");
+	private JButton btnBrands = new JButton("Brands");
 	private JButton btnBack = new JButton("<-- BACK");
-	
 	private JLabel lblCategory = new JLabel("CATEGORY    ", SwingConstants.CENTER);
-	
 	private ButtonListener listener = new ButtonListener();
+	private BackListener bListener = new BackListener();
 	private ContinueListener continueListener;
-	
+	private Controller controller;
+
+	/**
+	 * Constructor
+	 */
 	public ViewerSelectCategory() {
 		setPreferredSize(new Dimension(1200,800));
 		setLayout(new BorderLayout());
-		
+
 		add(pnlNorth(), BorderLayout.NORTH);
 		add(pnlButtons(), BorderLayout.CENTER);
-		
+
 		btnRandom.addActionListener(listener);
-		btnCategory1.addActionListener(listener);
-		btnCategory2.addActionListener(listener);
-		btnCategory3.addActionListener(listener);
-		btnBack.addMouseListener(new BackListener());
+		btnCities.addActionListener(listener);
+		btnAnimals.addActionListener(listener);
+		btnBrands.addActionListener(listener);
+		btnBack.addActionListener(listener);
+		btnBack.addMouseListener(bListener);
+		btnRandom.addMouseListener(bListener);
+		btnCities.addMouseListener(bListener);
+		btnAnimals.addMouseListener(bListener);
+		btnBrands.addMouseListener(bListener);
 	}
-	
+
+	/**
+	 * Method which creates the panel containing all the category buttons
+	 * @return A JPanel with category-buttons
+	 */
 	private JPanel pnlButtons() {
 		JPanel panel = new JPanel(null);
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
-		
+
 		btnRandom.setBounds(450, 50, 300, 100);
-		btnCategory1.setBounds(450, 200, 300, 100);
-		btnCategory2.setBounds(450, 350, 300, 100);
-		btnCategory3.setBounds(450, 500, 300, 100);
+		btnCities.setBounds(450, 200, 300, 100);
+		btnAnimals.setBounds(450, 350, 300, 100);
+		btnBrands.setBounds(450, 500, 300, 100);
 		btnRandom.setFont(btnFont);
-		btnCategory1.setFont(btnFont);
-		btnCategory2.setFont(btnFont);
-		btnCategory3.setFont(btnFont);	
-		
+		btnCities.setFont(btnFont);
+		btnAnimals.setFont(btnFont);
+		btnBrands.setFont(btnFont);
+		btnRandom.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnRandom.setBackground(Color.white);
+		btnRandom.setOpaque(true);
+		btnCities.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnCities.setBackground(Color.white);
+		btnCities.setOpaque(true);
+		btnAnimals.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnAnimals.setBackground(Color.white);
+		btnAnimals.setOpaque(true);
+		btnBrands.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+		btnBrands.setBackground(Color.white);
+		btnBrands.setOpaque(true);
+
 		panel.setBackground(Color.DARK_GRAY);
 		panel.add(btnRandom);
-		panel.add(btnCategory1);
-		panel.add(btnCategory2);
-		panel.add(btnCategory3);
-		
+		panel.add(btnCities);
+		panel.add(btnAnimals);
+		panel.add(btnBrands);
+
 		return panel;
 	}
-	
+
+	/**
+	 * Method which creates the upper panel, containing the title and 
+	 * back button
+	 * @return A JPanel With a header and back-button
+	 */
 	private JPanel pnlNorth() {
 		JPanel panel = new JPanel();
 		Font btnFont = new Font("SansSerif", Font.BOLD, 30);
@@ -68,67 +101,112 @@ public class ViewerSelectCategory extends JPanel {
 		panel.setLayout(new BorderLayout());
 		panel.add(lblCategory, BorderLayout.CENTER);
 		panel.add(btnBack, BorderLayout.WEST);
-		
+
 		btnBack.setFont(btnFont);
+		btnBack.setPreferredSize(new Dimension(200,100));
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
-		
+
 		lblCategory.setFont(new Font("SansSerif", Font.PLAIN, 125));
 		lblCategory.setForeground(Color.WHITE);
-		
+
 		return panel;
 	}
-	
+
+	/**
+	 * Method which sets the listener(interface) to the frame
+	 * @param listener The continueListener to control the flow from/to this frame
+	 */
 	public void setListener(ContinueListener listener) {
 		continueListener = listener;
 	}
-	
+
+	/**
+	 * Method which sets the controller to the frame
+	 * @param controller The controller this frame will use
+	 */
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+
+	/**
+	 * An inner class which listens to the input made by clicking on the buttons
+	 * and performs actions according to this.
+	 * @author Jakob Kennerberg
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnRandom) {
 				continueListener.nextPanel();
-				//Ge ett slumpvalt ord av alla ord som finns
-			} else if (e.getSource() == btnCategory1) {
+				controller.setCategoryWord("files/Random.txt", "RANDOM");
+				
+			} else if (e.getSource() == btnCities) {
 				continueListener.nextPanel();
-				//ge ett ord från denna kategori
-			} else if (e.getSource() == btnCategory2) {
+				controller.setCategoryWord("files/Cities.txt", "CITIES");
+				
+			} else if (e.getSource() == btnAnimals) {
 				continueListener.nextPanel();
-				//ge ett ord från denna kategori
-			} else if (e.getSource() == btnCategory3) {
+				controller.setCategoryWord("files/Animals.txt", "ANIMALS");
+				
+			} else if (e.getSource() == btnBrands) {
 				continueListener.nextPanel();
-				//ge ett ord från denna kategori
+				controller.setCategoryWord("files/Brands.txt", "BRANDS");
+				
 			} else if (e.getSource() == btnBack) {
 				continueListener.goBack();
 			}		
 		}
 	}
-	
-	private class BackListener implements MouseListener {
-		@Override
-		public void mouseClicked(MouseEvent arg0) {}
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			btnBack.setForeground(Color.RED);
-		}
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			btnBack.setForeground(Color.WHITE);
-		}
-		@Override
-		public void mousePressed(MouseEvent arg0) {}
-		@Override
-		public void mouseReleased(MouseEvent arg0) {}
-	}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Test of category window");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewerSelectCategory());
-		frame.pack();
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-		
+	/**
+	 * An inner class which listens to the input made by hovering over buttons
+	 * and stopping to do this.
+	 * @author Jakob Kennerberg
+	 *
+	 */
+	private class BackListener implements MouseListener {
+		public void mouseClicked(MouseEvent e) {}
+
+		public void mouseEntered(MouseEvent e) {
+			if(e.getSource()==btnBack) {
+				btnBack.setForeground(Color.RED);
+			}
+			if(e.getSource()==btnRandom) {
+				btnRandom.setForeground(Color.RED);
+			}
+			if(e.getSource()==btnAnimals) {
+				btnAnimals.setForeground(Color.RED);
+			}
+			if(e.getSource()==btnBrands) {
+				btnBrands.setForeground(Color.RED);
+			}
+			if(e.getSource()==btnCities) {
+				btnCities.setForeground(Color.RED);
+			}
+		}
+
+		public void mouseExited(MouseEvent e) {
+			if(e.getSource()==btnBack) {
+				btnBack.setForeground(Color.WHITE);
+			}
+			if(e.getSource()==btnRandom) {
+				btnRandom.setForeground(Color.BLACK);
+			}
+			if(e.getSource()==btnCities) {
+				btnCities.setForeground(Color.BLACK);
+			}
+			if(e.getSource()==btnAnimals) {
+				btnAnimals.setForeground(Color.BLACK);
+			}
+			if(e.getSource()==btnBrands) {
+				btnBrands.setForeground(Color.BLACK);
+			}
+		}
+	
+		public void mousePressed(MouseEvent e) {}
+
+		public void mouseReleased(MouseEvent e) {}
 	}
 }
